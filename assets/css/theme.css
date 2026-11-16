@@ -141,3 +141,11 @@ html.noctl .deck-footer .gotobtn{display:none}
 .goto .gitem.gsel{background:var(--maroonlight)}
 .goto .gnone{padding:14px 16px;color:var(--midgray)}
 .goto .ghint{font-size:12px;color:var(--midgray);padding:7px 16px;border-top:1px solid var(--rule);background:#FBFAF8}
+
+/* paper references on section dividers */
+.reveal section.divider .dpapers{position:absolute;left:84px;right:140px;bottom:176px;font-size:14px;line-height:1.38;color:rgba(255,255,255,.72);text-align:left}
+.reveal section.divider .dpapers .dph{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:5px;padding-top:9px;border-top:1px solid rgba(255,255,255,.28);display:inline-block;padding-right:28px}
+.reveal section.divider .dpapers p{margin:0 0 4px 0;padding-left:1.1em;text-indent:-1.1em}
+.reveal section.divider .dpapers p::before{content:"\25B8\00a0";color:rgba(255,255,255,.5)}
+.reveal section.divider .dpapers .dme{font-weight:600;color:#fff}
+.reveal section.divider .dpapers i{font-style:italic}
