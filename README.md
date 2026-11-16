@@ -7,7 +7,7 @@ Open the presentation: **https://hieutrungle.github.io/phd-defense/**
 - Arrow keys, Space, or the light **‹ ›** arrows at the screen edges: next / previous slide
 - **☰›** tab (left edge): contents bar with every part and slide, a search box, click to jump
 - **G**: go to any slide (type a number or words)
-- **F** or the ⛶ button (right edge): full screen, **Esc**: slide overview
+- **F** or the ⛶ button (bottom right): full screen, **Esc**: slide overview
 - Animations: hover to show play/pause and a step slider; **K** play/pause, **[** / **]** step
 
 Best viewed in Chrome or Edge. The site is fully static (reveal.js); no data is collected.
