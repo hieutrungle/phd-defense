@@ -34,7 +34,7 @@
 .reveal section h2.title .sub{font-weight:500}
 .reveal .chaptag{font-size:var(--fs-tiny);color:var(--midgray);margin-bottom:6px}
 /* ---------- footer (injected by deck.js) ---------- */
-.deck-footer{position:absolute;left:0;right:0;bottom:0;height:52px;z-index:30;pointer-events:none;font-family:"Fira Sans",sans-serif}
+.deck-footer{position:absolute;left:var(--fx,0);top:var(--fy,668px);width:1280px;height:52px;transform-origin:0 0;transform:scale(var(--ns,1));z-index:30;pointer-events:none;font-family:"Fira Sans",sans-serif}
 .deck-footer .rule{position:absolute;left:56px;right:56px;top:0;border-top:1px solid var(--rule)}
 .deck-footer .tamu{position:absolute;left:56px;top:12px;height:28px}
 .deck-footer .lab{position:absolute;right:56px;top:9px;height:34px}
@@ -130,7 +130,7 @@ html.noctl .reveal .animctl{display:none}
 html.noctl .deck-footer .gotobtn{display:none}
 .goto{position:fixed;inset:0;z-index:1000;background:rgba(30,20,20,.35);display:flex;align-items:flex-start;justify-content:center;padding-top:8vh;font-family:"Fira Sans",sans-serif}
 .goto[hidden]{display:none}
-.goto .gpanel{width:min(760px,92vw);max-height:80vh;display:flex;flex-direction:column;background:#fff;border-radius:10px;
+.goto .gpanel{width:min(760px,calc(92vw / var(--ns,1)));max-height:calc(80vh / var(--ns,1));transform:scale(var(--ns,1));transform-origin:top center;display:flex;flex-direction:column;background:#fff;border-radius:10px;
   box-shadow:0 10px 40px rgba(0,0,0,.3);overflow:hidden;border-top:5px solid var(--maroon)}
 .goto input{font:inherit;font-size:20px;padding:12px 16px;border:0;border-bottom:1px solid var(--rule);outline:none;color:var(--text)}
 .goto .glist{overflow-y:auto;padding:4px 0 6px 0}
@@ -151,24 +151,24 @@ html.noctl .deck-footer .gotobtn{display:none}
 .reveal section.divider .dpapers i{font-style:italic}
 
 /* ---- on-screen navigation (edge arrows, contents drawer); hidden in screenshots/PDF (html.noctl) and after 2.5 s without mouse movement */
-.navarrow{position:fixed;top:50%;transform:translateY(-50%);z-index:60;width:36px;height:36px;padding:0;border-radius:50%;border:1px solid rgba(80,0,0,.14);
+.navarrow{position:fixed;top:50%;transform:translateY(-50%);z-index:60;width:calc(36px*var(--ns,1));height:calc(36px*var(--ns,1));padding:0;border-radius:50%;border:1px solid rgba(80,0,0,.14);
   background:rgba(255,255,255,.6);color:rgba(80,0,0,.55);box-shadow:0 1px 5px rgba(0,0,0,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;
   opacity:.6;transition:opacity .45s,background .2s,color .2s}
-.navarrow.prev{left:6px} .navarrow.next{right:6px}
-.navarrow svg{width:20px;height:20px}
+.navarrow.prev{left:calc(6px*var(--ns,1))} .navarrow.next{right:calc(6px*var(--ns,1))}
+.navarrow svg{width:calc(20px*var(--ns,1));height:calc(20px*var(--ns,1))}
 .navarrow:hover{opacity:1;background:#fff;color:var(--maroon);border-color:rgba(80,0,0,.35)}
 .navarrow:disabled{opacity:.15;cursor:default}
 html.navdark .navarrow{background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.3);box-shadow:none}
 html.navdark .navarrow:hover{background:rgba(255,255,255,.25);color:#fff}
-.navtab{position:fixed;left:0;top:108px;z-index:60;height:34px;padding:0 5px 0 7px;border:1px solid rgba(80,0,0,.14);border-left:none;border-radius:0 19px 19px 0;
-  background:rgba(255,255,255,.7);color:rgba(80,0,0,.6);box-shadow:0 1px 5px rgba(0,0,0,.12);cursor:pointer;display:flex;align-items:center;gap:2px;opacity:.65;transition:opacity .45s,background .2s}
-.navtab .bars{display:flex;flex-direction:column;gap:3px;width:14px}.navtab .bars i{display:block;height:2px;border-radius:1px;background:currentColor}
-.navtab svg{width:15px;height:15px}
+.navtab{position:fixed;left:0;top:var(--ntop,108px);z-index:60;height:calc(34px*var(--ns,1));padding:0 calc(5px*var(--ns,1)) 0 calc(7px*var(--ns,1));border:1px solid rgba(80,0,0,.14);border-left:none;border-radius:0 calc(19px*var(--ns,1)) calc(19px*var(--ns,1)) 0;
+  background:rgba(255,255,255,.7);color:rgba(80,0,0,.6);box-shadow:0 1px 5px rgba(0,0,0,.12);cursor:pointer;display:flex;align-items:center;gap:calc(2px*var(--ns,1));opacity:.65;transition:opacity .45s,background .2s}
+.navtab .bars{display:flex;flex-direction:column;gap:calc(3px*var(--ns,1));width:calc(14px*var(--ns,1))}.navtab .bars i{display:block;height:calc(2px*var(--ns,1));border-radius:1px;background:currentColor}
+.navtab svg{width:calc(15px*var(--ns,1));height:calc(15px*var(--ns,1))}
 .navtab:hover{opacity:1;background:#fff;color:var(--maroon)}
 html.navdark .navtab{background:rgba(255,255,255,.14);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.3);box-shadow:none}
 html.navidle .navarrow,html.navidle .navtab{opacity:0;pointer-events:none}
 html.navopen .navtab{opacity:0;pointer-events:none}
-.navdrawer{position:fixed;left:0;top:0;bottom:0;width:340px;max-width:86vw;z-index:70;background:#fff;box-shadow:4px 0 22px rgba(0,0,0,.22);display:flex;flex-direction:column;
+.navdrawer{position:fixed;left:0;top:0;bottom:0;width:340px;max-width:86vw;zoom:var(--ns,1);z-index:70;background:#fff;box-shadow:4px 0 22px rgba(0,0,0,.22);display:flex;flex-direction:column;
   transform:translateX(-104%);transition:transform .28s ease;font-family:'Fira Sans',sans-serif}
 .navdrawer.open{transform:none}
 .navdrawer .ndh{display:flex;align-items:center;justify-content:space-between;padding:14px 12px 12px 18px;background:var(--maroon);color:#fff;font-size:18px;letter-spacing:.3px}

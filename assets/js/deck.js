@@ -155,7 +155,11 @@
     const wake=()=>{ document.documentElement.classList.remove('navidle'); clearTimeout(idleTimer);
       idleTimer=setTimeout(()=>{ if(!navDrawer.classList.contains('open')) document.documentElement.classList.add('navidle'); },2500); };
     ['mousemove','mousedown','touchstart'].forEach(ev=>document.addEventListener(ev,wake,{passive:true})); wake();
-    window.DeckNav={open:()=>toggleDrawer(true),close:()=>toggleDrawer(false),wake};
+    const fit=()=>{ const s=Math.min(4,Math.max(0.6,Reveal.getScale()||1)), r=document.querySelector('.reveal .slides').getBoundingClientRect(), st=document.documentElement.style;
+      st.setProperty('--ns',s.toFixed(3)); st.setProperty('--ntop',Math.max(4,Math.round(r.top+108*s))+'px');
+      st.setProperty('--fx',Math.round(r.left)+'px'); st.setProperty('--fy',Math.round(r.top+668*s)+'px'); };   // footer follows the slide box
+    fit(); Reveal.on('resize',fit); window.addEventListener('resize',()=>setTimeout(fit,60));
+    window.DeckNav={open:()=>toggleDrawer(true),close:()=>toggleDrawer(false),wake,fit};
   }
   function filterNav(q){ q=q.trim().toLowerCase(); const words=q.split(/\s+/).filter(Boolean), isNum=/^\d+$/.test(q);
     navDrawer.classList.toggle('searching',!!q);
