@@ -20,9 +20,6 @@
     f.innerHTML='<div class="rule"></div><img class="tamu" src="assets/img/logos/tamu-atm-box.png" alt="">'+
       '<div class="mid">H. T. Le &nbsp;|&nbsp; Spatial Intelligence for Smart Radio Environments</div><div class="num"></div>'+
       '<img class="lab" src="assets/img/logos/texas-wireless-2026.png" alt="">';
-    const g=document.createElement('button'); g.type='button'; g.className='gotobtn'; g.title='Go to slide (G)'; g.textContent='▦';
-    f.appendChild(g); g.addEventListener('click',e=>{e.stopPropagation(); openPicker();});
-    f.querySelector('.num').title='Go to slide (G)'; f.querySelector('.num').addEventListener('click',e=>{e.stopPropagation(); openPicker();});
     document.querySelector('.reveal').appendChild(f); return f;
   }
   function numberOf(slide){ // count non-divider slides up to and including this one
@@ -161,7 +158,13 @@
     ['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{ fsSync(); setTimeout(()=>window.DeckNav&&window.DeckNav.fit(),120); }));
     if(!(document.fullscreenEnabled||document.webkitFullscreenEnabled)) fsb.hidden=true;
     fsSync();
-    document.body.append(prev,next,tab,fsb,navDrawer);
+    // slide-overview toggle (same as Esc / O): thumbnails of all slides, click one to jump
+    const ovb=document.createElement('button'); ovb.className='navov';
+    ovb.innerHTML='<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><rect x="3.5" y="4.5" width="7" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="2.1"/><rect x="13.5" y="4.5" width="7" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="2.1"/><rect x="3.5" y="13.5" width="7" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="2.1"/><rect x="13.5" y="13.5" width="7" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="2.1"/></svg>';
+    const ovSync=()=>{ const on=Reveal.isOverview(); ovb.classList.toggle('on',on); ovb.title=on?'Close slide overview (Esc)':'Slide overview (O)'; ovb.setAttribute('aria-label',ovb.title); };
+    ovb.onclick=e=>{ e.stopPropagation(); toggleDrawer(false); Reveal.toggleOverview(); };
+    Reveal.on('overviewshown',ovSync); Reveal.on('overviewhidden',ovSync); ovSync();
+    document.body.append(prev,next,tab,ovb,fsb,navDrawer);
     const wake=()=>{ document.documentElement.classList.remove('navidle'); clearTimeout(idleTimer);
       idleTimer=setTimeout(()=>{ if(!navDrawer.classList.contains('open')) document.documentElement.classList.add('navidle'); },2500); };
     ['mousemove','mousedown','touchstart'].forEach(ev=>document.addEventListener(ev,wake,{passive:true})); wake();

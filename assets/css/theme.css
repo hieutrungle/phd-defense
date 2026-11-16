@@ -37,9 +37,9 @@
 .deck-footer{position:absolute;left:var(--fx,0);top:var(--fy,668px);width:1280px;height:52px;transform-origin:0 0;transform:scale(var(--ns,1));z-index:30;pointer-events:none;font-family:"Fira Sans",sans-serif}
 .deck-footer .rule{position:absolute;left:56px;right:56px;top:0;border-top:1px solid var(--rule)}
 .deck-footer .tamu{position:absolute;left:56px;top:12px;height:28px}
-.deck-footer .lab{position:absolute;right:56px;top:9px;height:34px}
+.deck-footer .lab{position:absolute;right:90px;top:9px;height:34px}
 .deck-footer .mid{position:absolute;left:0;right:0;top:16px;text-align:center;font-size:14px;color:var(--midgray)}
-.deck-footer .num{position:absolute;right:140px;top:17px;font-size:14px;color:var(--midgray)}
+.deck-footer .num{position:absolute;right:174px;top:17px;font-size:14px;color:var(--midgray)}
 .deck-footer.hidden{display:none}
 /* ---------- columns ---------- */
 .reveal .cols{display:grid;grid-template-columns:var(--cols,1fr 1fr);column-gap:36px;align-items:start}
@@ -123,11 +123,6 @@
 html.noctl .reveal .animctl{display:none}
 
 /* slide picker (Q&A navigation) */
-.deck-footer .num{pointer-events:auto;cursor:pointer}
-.deck-footer .gotobtn{pointer-events:auto;position:absolute;right:166px;top:13px;width:22px;height:22px;padding:0;border:1px solid var(--rule);
-  border-radius:4px;background:#fff;color:var(--midgray);font-size:13px;line-height:20px;cursor:pointer;opacity:.6}
-.deck-footer .gotobtn:hover{opacity:1;color:var(--maroon);border-color:var(--maroon)}
-html.noctl .deck-footer .gotobtn{display:none}
 .goto{position:fixed;inset:0;z-index:1000;background:rgba(30,20,20,.35);display:flex;align-items:flex-start;justify-content:center;padding-top:8vh;font-family:"Fira Sans",sans-serif}
 .goto[hidden]{display:none}
 .goto .gpanel{width:min(760px,calc(92vw / var(--ns,1)));max-height:calc(80vh / var(--ns,1));transform:scale(var(--ns,1));transform-origin:top center;display:flex;flex-direction:column;background:#fff;border-radius:10px;
@@ -198,14 +193,17 @@ html.noctl .navarrow,html.noctl .navtab,html.noctl .navdrawer{display:none}
 .navdrawer .ndnone{padding:14px 18px;color:var(--midgray);font-size:14px}
 
 /* full-screen button: bottom-right corner (right of the footer logo), round like the edge arrows; scales with the screen and fades with the other controls */
-.navfs{position:fixed;right:calc(9px*var(--ns,1));bottom:calc(10px*var(--ns,1));z-index:60;width:calc(32px*var(--ns,1));height:calc(32px*var(--ns,1));padding:0;
+.navfs,.navov{position:fixed;right:calc(9px*var(--ns,1));bottom:calc(10px*var(--ns,1));z-index:60;width:calc(32px*var(--ns,1));height:calc(32px*var(--ns,1));padding:0;
   border-radius:50%;border:1px solid rgba(80,0,0,.14);background:rgba(255,255,255,.6);color:rgba(80,0,0,.55);box-shadow:0 1px 5px rgba(0,0,0,.12);
   cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.6;transition:opacity .45s,background .2s,color .2s}
 .navfs[hidden]{display:none}
-.navfs svg{width:calc(17px*var(--ns,1));height:calc(17px*var(--ns,1))}
-.navfs:hover{opacity:1;background:#fff;color:var(--maroon);border-color:rgba(80,0,0,.35)}
-html.navdark .navfs{background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.3);box-shadow:none}
-html.navdark .navfs:hover{background:rgba(255,255,255,.25);color:#fff}
-html.navidle .navfs,html.navopen .navfs{opacity:0;pointer-events:none}
-html.noctl .navfs{display:none}
-@media print{.navfs{display:none}}
+.navfs svg,.navov svg{width:calc(17px*var(--ns,1));height:calc(17px*var(--ns,1))}
+.navfs:hover,.navov:hover{opacity:1;background:#fff;color:var(--maroon);border-color:rgba(80,0,0,.35)}
+html.navdark .navfs,html.navdark .navov{background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.3);box-shadow:none}
+html.navdark .navfs:hover,html.navdark .navov:hover{background:rgba(255,255,255,.25);color:#fff}
+html.navidle .navfs,html.navopen .navfs,html.navidle .navov,html.navopen .navov{opacity:0;pointer-events:none}
+html.noctl .navfs,html.noctl .navov{display:none}
+@media print{.navfs,.navov{display:none}}
+
+.navov{right:calc(47px*var(--ns,1))}
+.navov.on{opacity:1;background:var(--maroon);color:#fff;border-color:var(--maroon)}
