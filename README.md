@@ -4,7 +4,8 @@ Hieu T. Le, Texas A&M University, December 2026.
 
 Open the presentation: **https://hieutrungle.github.io/phd-defense/**
 
-- Arrow keys or Space: next / previous slide
+- Arrow keys, Space, or the light **‹ ›** arrows at the screen edges: next / previous slide
+- **☰›** tab (left edge): contents bar with every part and slide, a search box, click to jump
 - **G**: go to any slide (type a number or words)
 - **F**: full screen, **Esc**: slide overview
 - Animations: hover to show play/pause and a step slider; **K** play/pause, **[** / **]** step
@@ -58,5 +59,6 @@ pip install pillow && python tools/make_pdf.py      # defense_slides_html_backup
 2. Press **F** for full screen. Slides are designed at 1280×720 (16:9) and scale to the projector.
 3. Press **S** for the speaker view (current/next slide, notes with timing windows, timer). Allow pop-ups if the browser blocks it.
 4. → / Space next (fragments and animation steps first), ← back, **B** or **.** black screen; **G** jumps to any slide by number or words.
+5. The on-screen arrows and the contents tab appear when the mouse moves and fade out after 2.5 s, so they are invisible while you present with a clicker or the keyboard.
 
 Main talk: 70 timed slides, 44.25 min (Intro 14.75, Learning 15.75, Placement 13.75 min), followed by 17 backup slides.

@@ -149,3 +149,50 @@ html.noctl .deck-footer .gotobtn{display:none}
 .reveal section.divider .dpapers p::before{content:"\25B8\00a0";color:rgba(255,255,255,.5)}
 .reveal section.divider .dpapers .dme{font-weight:600;color:#fff}
 .reveal section.divider .dpapers i{font-style:italic}
+
+/* ---- on-screen navigation (edge arrows, contents drawer); hidden in screenshots/PDF (html.noctl) and after 2.5 s without mouse movement */
+.navarrow{position:fixed;top:50%;transform:translateY(-50%);z-index:60;width:36px;height:36px;padding:0;border-radius:50%;border:1px solid rgba(80,0,0,.14);
+  background:rgba(255,255,255,.6);color:rgba(80,0,0,.55);box-shadow:0 1px 5px rgba(0,0,0,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  opacity:.6;transition:opacity .45s,background .2s,color .2s}
+.navarrow.prev{left:6px} .navarrow.next{right:6px}
+.navarrow svg{width:20px;height:20px}
+.navarrow:hover{opacity:1;background:#fff;color:var(--maroon);border-color:rgba(80,0,0,.35)}
+.navarrow:disabled{opacity:.15;cursor:default}
+html.navdark .navarrow{background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.3);box-shadow:none}
+html.navdark .navarrow:hover{background:rgba(255,255,255,.25);color:#fff}
+.navtab{position:fixed;left:0;top:108px;z-index:60;height:34px;padding:0 5px 0 7px;border:1px solid rgba(80,0,0,.14);border-left:none;border-radius:0 19px 19px 0;
+  background:rgba(255,255,255,.7);color:rgba(80,0,0,.6);box-shadow:0 1px 5px rgba(0,0,0,.12);cursor:pointer;display:flex;align-items:center;gap:2px;opacity:.65;transition:opacity .45s,background .2s}
+.navtab .bars{display:flex;flex-direction:column;gap:3px;width:14px}.navtab .bars i{display:block;height:2px;border-radius:1px;background:currentColor}
+.navtab svg{width:15px;height:15px}
+.navtab:hover{opacity:1;background:#fff;color:var(--maroon)}
+html.navdark .navtab{background:rgba(255,255,255,.14);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.3);box-shadow:none}
+html.navidle .navarrow,html.navidle .navtab{opacity:0;pointer-events:none}
+html.navopen .navtab{opacity:0;pointer-events:none}
+.navdrawer{position:fixed;left:0;top:0;bottom:0;width:340px;max-width:86vw;z-index:70;background:#fff;box-shadow:4px 0 22px rgba(0,0,0,.22);display:flex;flex-direction:column;
+  transform:translateX(-104%);transition:transform .28s ease;font-family:'Fira Sans',sans-serif}
+.navdrawer.open{transform:none}
+.navdrawer .ndh{display:flex;align-items:center;justify-content:space-between;padding:14px 12px 12px 18px;background:var(--maroon);color:#fff;font-size:18px;letter-spacing:.3px}
+.navdrawer .ndx{background:none;border:none;color:#fff;opacity:.8;cursor:pointer;padding:2px;display:flex}.navdrawer .ndx:hover{opacity:1}
+.navdrawer .ndl{flex:1;overflow-y:auto;padding:6px 0 10px 0}
+.navdrawer .ndpt{display:flex;align-items:center;gap:10px;padding:9px 16px 7px 16px;font-size:15.5px;font-weight:600;color:var(--maroon);cursor:pointer;user-select:none}
+.navdrawer .ndpt:hover{background:var(--maroonlight)}
+.navdrawer .pn{min-width:22px;height:22px;border-radius:50%;background:var(--maroon);color:#fff;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center}
+.navdrawer .pn.o{background:#bbb}
+.navdrawer .pt{flex:1}.navdrawer .pc{font-weight:400;font-size:12.5px;color:var(--midgray)}
+.navdrawer .ndp.curp > .ndpt{background:var(--maroonlight)}
+.navdrawer .nds{display:none;padding:2px 0 6px 0}.navdrawer .ndp.open .nds{display:block}
+.navdrawer .ndi{display:flex;gap:10px;align-items:baseline;padding:4px 16px 4px 26px;font-size:14px;line-height:1.3;color:var(--text);cursor:pointer}
+.navdrawer .ndi .n{min-width:22px;text-align:right;color:var(--midgray);font-variant-numeric:tabular-nums;font-size:12.5px}
+.navdrawer .ndi:hover{background:#f4eeee}
+.navdrawer .ndi.cur{background:var(--maroonlight);box-shadow:inset 3px 0 0 var(--maroon)}.navdrawer .ndi.cur .t{font-weight:600;color:var(--maroon)}
+.navdrawer .ndf{padding:9px 16px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--midgray)}
+html.noctl .navarrow,html.noctl .navtab,html.noctl .navdrawer{display:none}
+@media print{.navarrow,.navtab,.navdrawer{display:none}}
+
+.navdrawer .ndsr{padding:10px 12px 8px 12px;border-bottom:1px solid var(--rule)}
+.navdrawer .ndsr input{width:100%;box-sizing:border-box;font:inherit;font-size:14.5px;padding:7px 10px 7px 30px;border:1px solid #cdbebe;border-radius:6px;outline:none;color:var(--text);
+  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5' fill='none' stroke='%23999' stroke-width='2.2'/%3E%3Cpath d='M15.5 15.5 L21 21' stroke='%23999' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 9px center}
+.navdrawer .ndsr input:focus{border-color:var(--maroon);box-shadow:0 0 0 2px rgba(80,0,0,.12)}
+.navdrawer .ndi.hide,.navdrawer .ndp.hide{display:none}
+.navdrawer .ndi.sel{background:#f4eeee;box-shadow:inset 3px 0 0 #c9a3a3}
+.navdrawer .ndnone{padding:14px 18px;color:var(--midgray);font-size:14px}

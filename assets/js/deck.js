@@ -113,6 +113,69 @@
   function jumpTo(i){ closePicker(); Reveal.slide(i,0); }
   window.DeckPicker={open:openPicker,close:closePicker};
 
+  // ---- on-screen navigation: light edge arrows + left contents drawer (auto-hide after mouse idle)
+  const CHEV=d=>`<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  let navDrawer=null, navTimer=0, idleTimer=0;
+  function buildNav(){
+    const prev=document.createElement('button'), next=document.createElement('button'), tab=document.createElement('button');
+    prev.className='navarrow prev'; prev.title='Previous (←)'; prev.innerHTML=CHEV('M15 5 L8 12 L15 19');
+    next.className='navarrow next'; next.title='Next (→)'; next.innerHTML=CHEV('M9 5 L16 12 L9 19');
+    tab.className='navtab'; tab.title='Contents'; tab.innerHTML='<span class="bars"><i></i><i></i><i></i></span>'+CHEV('M9 5 L16 12 L9 19');
+    prev.onclick=e=>{e.stopPropagation(); Reveal.prev();}; next.onclick=e=>{e.stopPropagation(); Reveal.next();};
+    tab.onclick=e=>{e.stopPropagation(); toggleDrawer(true);};
+    navDrawer=document.createElement('nav'); navDrawer.className='navdrawer';
+    // group slides by part (dividers start parts; title/outline form the opening)
+    const groups=[]; let g={title:'Opening',num:'',items:[]}; groups.push(g);
+    pickItems.forEach(it=>{ if(it.div){ const d=document.querySelectorAll('.reveal .slides > section')[it.i];
+        g={title:it.title,num:d.dataset.num||'',i:it.i,items:[]}; groups.push(g); } else g.items.push(it); });
+    const timed=document.querySelectorAll('.reveal .slides > section[data-min]').length;
+    navDrawer.innerHTML='<div class="ndh"><b>Contents</b><button class="ndx" title="Close">'+CHEV('M15 5 L8 12 L15 19')+'</button></div>'+
+      '<div class="ndsr"><input type="text" spellcheck="false" placeholder="Search slides: number or words"></div><div class="ndnone" hidden>No matching slide</div>'+
+      '<div class="ndl">'+groups.filter(g=>g.items.length).map((g,k)=>'<div class="ndp" data-k="'+k+'"><div class="ndpt">'+(g.num?'<span class="pn">'+g.num+'</span>':'<span class="pn o">•</span>')+
+      '<span class="pt">'+g.title.replace(/</g,'&lt;')+'</span><span class="pc">'+g.items.length+'</span></div><div class="nds">'+
+      g.items.map(it=>'<div class="ndi" data-i="'+it.i+'"><span class="n">'+it.num+'</span><span class="t">'+it.title.replace(/^Backup: /,'').replace(/</g,'&lt;')+'</span></div>').join('')+'</div></div>').join('')+'</div>'+
+      '<div class="ndf">'+timed+' slides + '+pickItems.filter(it=>!it.div&&it.part==='Backup').length+' backup &nbsp;·&nbsp; ↑ ↓ Enter &nbsp;·&nbsp; Esc: close</div>';
+    navDrawer.querySelectorAll('.ndi').forEach(el=>el.onclick=e=>{e.stopPropagation(); Reveal.slide(+el.dataset.i,0); toggleDrawer(false);});
+    navDrawer.querySelectorAll('.ndpt').forEach(el=>el.onclick=e=>{e.stopPropagation(); el.parentNode.classList.toggle('open');});
+    navDrawer.querySelector('.ndx').onclick=e=>{e.stopPropagation(); toggleDrawer(false);};
+    navDrawer.querySelectorAll('.ndi').forEach(el=>{ const p=el.closest('.ndp'); el.dataset.s=(el.textContent+' '+p.querySelector('.pt').textContent).toLowerCase(); el.dataset.num=el.querySelector('.n').textContent; });
+    const sInp=navDrawer.querySelector('.ndsr input');
+    sInp.addEventListener('input',()=>filterNav(sInp.value));
+    sInp.addEventListener('keydown',e=>{ const vis=[...navDrawer.querySelectorAll('.ndi:not(.hide)')]; let k=vis.findIndex(x=>x.classList.contains('sel'));
+      if(e.key==='ArrowDown'||e.key==='ArrowUp'){ k=e.key==='ArrowDown'?Math.min(vis.length-1,k+1):Math.max(0,k-1); vis.forEach((x,m)=>x.classList.toggle('sel',m===k)); if(vis[k]) vis[k].scrollIntoView({block:'nearest'}); e.preventDefault(); }
+      else if(e.key==='Enter'){ const t=vis[Math.max(0,k)]; if(t) t.click(); e.preventDefault(); }
+      else if(e.key==='Escape'){ if(sInp.value){ sInp.value=''; filterNav(''); } else toggleDrawer(false); e.preventDefault(); }
+      e.stopPropagation(); });
+    navDrawer.addEventListener('mouseleave',()=>{ clearTimeout(navTimer); if(document.activeElement===navDrawer.querySelector('.ndsr input')&&navDrawer.querySelector('.ndsr input').value) return; navTimer=setTimeout(()=>toggleDrawer(false),900); });
+    navDrawer.addEventListener('mouseenter',()=>clearTimeout(navTimer));
+    ['mousedown','click','wheel','touchstart'].forEach(ev=>navDrawer.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+    document.addEventListener('mousedown',e=>{ if(navDrawer.classList.contains('open')&&!navDrawer.contains(e.target)) toggleDrawer(false); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&navDrawer.classList.contains('open')&&e.target!==navDrawer.querySelector('.ndsr input')){ toggleDrawer(false); e.stopPropagation(); } },true);
+    document.body.append(prev,next,tab,navDrawer);
+    const wake=()=>{ document.documentElement.classList.remove('navidle'); clearTimeout(idleTimer);
+      idleTimer=setTimeout(()=>{ if(!navDrawer.classList.contains('open')) document.documentElement.classList.add('navidle'); },2500); };
+    ['mousemove','mousedown','touchstart'].forEach(ev=>document.addEventListener(ev,wake,{passive:true})); wake();
+    window.DeckNav={open:()=>toggleDrawer(true),close:()=>toggleDrawer(false),wake};
+  }
+  function filterNav(q){ q=q.trim().toLowerCase(); const words=q.split(/\s+/).filter(Boolean), isNum=/^\d+$/.test(q);
+    navDrawer.classList.toggle('searching',!!q);
+    navDrawer.querySelectorAll('.ndi').forEach(el=>{ const ok=!q||(isNum?el.dataset.num.startsWith(q):words.every(w=>el.dataset.s.includes(w))); el.classList.toggle('hide',!ok); el.classList.remove('sel'); });
+    navDrawer.querySelectorAll('.ndp').forEach(p=>{ const any=!!p.querySelector('.ndi:not(.hide)'); p.classList.toggle('hide',!!q&&!any); if(q) p.classList.toggle('open',any); });
+    if(!q){ navDrawer.querySelectorAll('.ndp').forEach(p=>p.classList.toggle('open',p.classList.contains('curp'))); }
+    else { const f=navDrawer.querySelector('.ndi:not(.hide)'); if(f){ f.classList.add('sel'); navDrawer.querySelector('.ndl').scrollTop=0; } }
+    navDrawer.querySelector('.ndnone').hidden=!q||!!navDrawer.querySelector('.ndi:not(.hide)'); }
+  function toggleDrawer(on){ if(!navDrawer) return; clearTimeout(navTimer); navDrawer.classList.toggle('open',on); document.documentElement.classList.toggle('navopen',on);
+    if(on){ const si=navDrawer.querySelector('.ndsr input'); if(si.value){ si.value=''; filterNav(''); } syncNav(); const L=navDrawer.querySelector('.ndl'), c=navDrawer.querySelector('.ndi.cur'), p=navDrawer.querySelector('.ndp.curp');
+      if(p){ L.scrollTop=p.offsetTop-L.offsetTop-4; if(c && c.offsetTop+c.offsetHeight-L.offsetTop > L.scrollTop+L.clientHeight) c.scrollIntoView({block:'center'}); } } }
+  function syncNav(){ if(!navDrawer) return; const cur=Reveal.getIndices().h;
+    navDrawer.querySelectorAll('.ndi').forEach(el=>el.classList.toggle('cur',+el.dataset.i===cur));
+    navDrawer.querySelectorAll('.ndp').forEach(p=>{ const has=!!p.querySelector('.ndi.cur'); p.classList.toggle('curp',has); if(has) p.classList.add('open'); });
+    const s=Reveal.getCurrentSlide(); const dark=s.classList.contains('divider');
+    document.documentElement.classList.toggle('navdark',dark);
+    document.querySelector('.navarrow.prev').disabled=Reveal.isFirstSlide()&&!Reveal.availableFragments().prev;
+    document.querySelector('.navarrow.next').disabled=Reveal.isLastSlide()&&!Reveal.availableFragments().next; }
+
+
   // ---- animation manager
   // An animation file registers:
   //   DeckAnim.register('name', {mount(canvas, ctx, opts){...}, frame(t, dt){...}, step(n){...}, reset(){...}})
@@ -180,7 +243,7 @@
         {delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false}],throwOnError:false});
       const update=()=>{ const s=Reveal.getCurrentSlide(); const hide=s.classList.contains('divider')||s.classList.contains('titleslide');
         footer.classList.toggle('hidden',hide); footer.querySelector('.num').textContent=numberOf(s); alignCols(s); startAnims(s); };
-      update(); Reveal.on('slidechanged',update);
+      buildNav(); update(); syncNav(); Reveal.on('slidechanged',()=>{update(); syncNav();}); Reveal.on('fragmentshown',syncNav); Reveal.on('fragmenthidden',syncNav);
       Reveal.on('fragmentshown',e=>{ const n=e.fragment.dataset.animStep; if(n!==undefined) live.forEach(i=>{ i.step&&i.step(+n); if(!i._run) i.frame&&i.frame(i._t,1); }); });
       Reveal.on('fragmenthidden',e=>{ const n=e.fragment.dataset.animStep; if(n!==undefined) live.forEach(i=>{ i.step&&i.step(+n-1); if(!i._run) i.frame&&i.frame(i._t,1); }); });
       // keyboard: K play/pause, [ and ] one step (or 0.5 s) back/forward on the current slide's animation
