@@ -1434,6 +1434,12 @@ section[data-id="other-pubs"] li{margin:.3em 0;line-height:1.28}
 .reveal .me{font-weight:700;color:var(--maroon);text-decoration:underline;text-underline-offset:2px}
 section[data-id="complete-picture"] .cpmap{position:relative}
 section[data-id="complete-picture"] .which-ov{position:absolute;left:80.75%;width:15.15%;padding-left:3px;box-sizing:border-box;top:85.23%;height:11.94%;background:rgb(240,245,240);display:flex;flex-direction:column;justify-content:center;font-size:15px;line-height:1.22;text-align:left;color:var(--text);white-space:nowrap}
+section[data-id="formula3-device"] .devph{display:flex;gap:14px;justify-content:center;align-items:flex-start}
+section[data-id="formula3-device"] .devph figure{margin:0;display:flex;flex-direction:column;align-items:center}
+section[data-id="formula3-device"] .devph img{height:452px;width:auto;border-radius:6px;border:1px solid var(--rule);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+section[data-id="formula3-device"] .devph figcaption{font-size:15px;color:var(--midgray);margin-top:6px;text-align:center}
+section[data-id="formula3-device"] .block ul{margin:4px 0 2px 0}
+section[data-id="formula3-device"] .block li{margin:.45em 0}
 section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon);text-align:center;line-height:1.1;margin-bottom:28px}
 </style>
 
@@ -1908,6 +1914,32 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <p>Its programmable wireless environments combine RIS with metallic reflector arrays, the hexagonal tile panels on the right. That element builds directly on this dissertation's reflector-array work.</p>
   </aside>
 </section>
+<section data-id="formula3-device" data-min="0.5">
+  <h2 class="title">The device FORMULA3 will use: a mechanical reflector array</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr">
+      <div class="col">
+        <div class="devph">
+          <figure><img src="assets/img/formula3/mra-front.jpg" alt="Front of the mechanical reflector array: hexagonal metal tiles on servos, controller box below"><figcaption>Front: tiles and servos</figcaption></figure>
+          <figure><img src="assets/img/formula3/mra-back.jpg" alt="Back of the mechanical reflector array: servo wiring, mount and rolling stand"><figcaption>Back: wiring and stand</figcaption></figure>
+        </div>
+      </div>
+      <div class="col">
+        <div class="block"><div class="bt">Lab prototype</div><div class="bb"><ul>
+          <li><b>19 hexagonal metal tiles</b>; servos behind the panel turn each tile</li>
+          <li>A <b>controller box</b> on the stand drives the servos</li>
+          <li>A <b>rolling stand</b>: the array can be moved and placed in a room</li>
+        </ul></div></div>
+        <div class="takeaway">The arrays in this dissertation were simulated; FORMULA3 will use this device to take focal-point control and placement into real rooms</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p class="timing"><b>[0.5 min | 42:30&ndash;43:00]</b></p>
+    <p>This is the physical device. It is a metallic reflector array with nineteen hexagonal tiles; servos behind the panel turn each tile, and the controller box on the stand drives them.</p>
+    <p>The arrays in this dissertation were simulated. FORMULA3 will use this device to take focal-point control and placement into real rooms.</p>
+  </aside>
+</section>
+
 <section data-id="formula3-map" data-min="0.75">
   <h2 class="title">How this dissertation feeds into FORMULA3</h2>
   <div class="body">
@@ -1924,7 +1956,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
     <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.75 min | 42:30&ndash;43:15]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.75 min | 43:00&ndash;43:45]</b></p>
     <p>Here is how this dissertation feeds into the project's four thrusts. The ray-traced reflector pipeline is a starting point for channel characterization and dataset generation.</p>
     <p>The CSI-free learned control and the hierarchical allocation are early instances of the second thrust: reconfiguring surfaces and reassigning users.</p>
     <p>The robustness and localization findings inform the third thrust, where sensing supplies the positions. And the hardware model with joint placement feeds validation and the planning of programmable environments.</p>
@@ -1945,7 +1977,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <li><span class="me">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; <span class="st">submitted to <em>IEEE Open J. Commun. Soc.</em>, 2026 (under review)</span>.</li>
     </ol>
       </div>
-  <aside class="notes"><p class="timing"><b>[0.5 min | 43:15&ndash;43:45]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.5 min | 43:45&ndash;44:15]</b></p>
     <p>The VTC Fall 2024 paper covers geometric focusing, and the TMLCN article covers flat MARL; the flat-MARL conference paper is under review at ICC 2027.</p>
     <p>For hierarchical MARL, the journal version is under review at TMLCN and the conference version will be presented at GLOBECOM in December.</p>
     <p>The placement paper is under review at the Open Journal of the Communications Society. Other publications are in the backup.</p>
@@ -1966,7 +1998,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <li>A. Nasari, <span class="me">H. Le</span>, R. Lawrence, Z. He, X. Yang, M. Krell, A. Tsyplikhin, <em>et al.</em>, &ldquo;Benchmarking the performance of accelerators on national cyberinfrastructure resources for artificial intelligence/machine learning workloads,&rdquo; in <em>Proc. PEARC '22</em>, 2022, pp.&nbsp;1&ndash;9.</li>
     </ol>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.25 min | 43:45&ndash;44:00]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.25 min | 44:15&ndash;44:30]</b></p>
     <p>Beyond the dissertation, I contributed to eight other papers, mainly with the High Performance Computing group: scientific data compression, AI accelerators, and digital twins for first responders.</p>
   </aside>
 </section>
@@ -1988,7 +2020,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       </div>
     </div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.25 min | 44:00&ndash;44:15]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.25 min | 44:30&ndash;44:45]</b></p>
     <p>Thank you to Prof. Ekin and Prof. Tao, the committee, my collaborators, and DOE and NSF for funding. I am happy to take questions.</p>
   </aside>
 </section>

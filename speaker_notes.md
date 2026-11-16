@@ -1,6 +1,6 @@
 # Speaker notes and timing
 
-Total: 44.25 min, 70 timed slides (window 40-45 min, pace <= 140 wpm).
+Total: 44.75 min, 71 timed slides (window 40-45 min, pace <= 140 wpm).
 
 | # | slide | min | window | words | wpm |
 |---|---|---|---|---|---|
@@ -70,10 +70,11 @@ Total: 44.25 min, 70 timed slides (window 40-45 min, pace <= 140 wpm).
 | 64 | Limitations and next steps | 0.5 | 40:00-40:30 | 51 | 102 |
 | 65 | Five questions, answered | 1.25 | 40:30-41:45 | 158 | 126 |
 | 66 | What comes next: the FORMULA3 project | 0.75 | 41:45-42:30 | 71 | 95 |
-| 67 | How this dissertation feeds into FORMULA3 | 0.75 | 42:30-43:15 | 89 | 119 |
-| 68 | Publications from this dissertation | 0.5 | 43:15-43:45 | 67 | 134 |
-| 69 | Other publications during the Ph.D. | 0.25 | 43:45-44:00 | 27 | 108 |
-| 70 | Thank you | 0.25 | 44:00-44:15 | 24 | 96 |
+| 67 | The device FORMULA3 will use: a mechanical reflector array | 0.5 | 42:30-43:00 | 52 | 104 |
+| 68 | How this dissertation feeds into FORMULA3 | 0.75 | 43:00-43:45 | 89 | 119 |
+| 69 | Publications from this dissertation | 0.5 | 43:45-44:15 | 67 | 134 |
+| 70 | Other publications during the Ph.D. | 0.25 | 44:15-44:30 | 27 | 108 |
+| 71 | Thank you | 0.25 | 44:30-44:45 | 24 | 96 |
 
 ## 1. title  [0.5 min | 0:00-0:30]
 
@@ -339,18 +340,22 @@ To sum up, what the five answers say together. Why: spatial information is enoug
 
 This work does not stop here. It continues in FORMULA3, a joint project of the NSF and the Research Council of Finland in the VINES program: about 1.54 million dollars across five universities in the United States and Finland, from October 2026 to September 2029. Its programmable wireless environments combine RIS with metallic reflector arrays, the hexagonal tile panels on the right. That element builds directly on this dissertation's reflector-array work.
 
-## 67. How this dissertation feeds into FORMULA3  [0.75 min | 42:30-43:15]
+## 67. The device FORMULA3 will use: a mechanical reflector array  [0.5 min | 42:30-43:00]
+
+This is the physical device. It is a metallic reflector array with nineteen hexagonal tiles; servos behind the panel turn each tile, and the controller box on the stand drives them. The arrays in this dissertation were simulated. FORMULA3 will use this device to take focal-point control and placement into real rooms.
+
+## 68. How this dissertation feeds into FORMULA3  [0.75 min | 43:00-43:45]
 
 Here is how this dissertation feeds into the project's four thrusts. The ray-traced reflector pipeline is a starting point for channel characterization and dataset generation. The CSI-free learned control and the hierarchical allocation are early instances of the second thrust: reconfiguring surfaces and reassigning users. The robustness and localization findings inform the third thrust, where sensing supplies the positions. And the hardware model with joint placement feeds validation and the planning of programmable environments. These are the foundations it builds on; the project's own results are still to come.
 
-## 68. Publications from this dissertation  [0.5 min | 43:15-43:45]
+## 69. Publications from this dissertation  [0.5 min | 43:45-44:15]
 
 The VTC Fall 2024 paper covers geometric focusing, and the TMLCN article covers flat MARL; the flat-MARL conference paper is under review at ICC 2027. For hierarchical MARL, the journal version is under review at TMLCN and the conference version will be presented at GLOBECOM in December. The placement paper is under review at the Open Journal of the Communications Society. Other publications are in the backup.
 
-## 69. Other publications during the Ph.D.  [0.25 min | 43:45-44:00]
+## 70. Other publications during the Ph.D.  [0.25 min | 44:15-44:30]
 
 Beyond the dissertation, I contributed to eight other papers, mainly with the High Performance Computing group: scientific data compression, AI accelerators, and digital twins for first responders.
 
-## 70. Thank you  [0.25 min | 44:00-44:15]
+## 71. Thank you  [0.25 min | 44:30-44:45]
 
 Thank you to Prof. Ekin and Prof. Tao, the committee, my collaborators, and DOE and NSF for funding. I am happy to take questions.
