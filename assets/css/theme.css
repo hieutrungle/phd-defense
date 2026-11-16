@@ -196,3 +196,15 @@ html.noctl .navarrow,html.noctl .navtab,html.noctl .navdrawer{display:none}
 .navdrawer .ndi.hide,.navdrawer .ndp.hide{display:none}
 .navdrawer .ndi.sel{background:#f4eeee;box-shadow:inset 3px 0 0 #c9a3a3}
 .navdrawer .ndnone{padding:14px 18px;color:var(--midgray);font-size:14px}
+
+/* full-screen button: right edge, level with the contents tab; scales with the screen and fades with the other controls */
+.navfs{position:fixed;right:0;top:var(--ntop,108px);z-index:60;height:calc(34px*var(--ns,1));width:calc(40px*var(--ns,1));padding:0 0 0 calc(4px*var(--ns,1));
+  border:1px solid rgba(80,0,0,.14);border-right:none;border-radius:calc(19px*var(--ns,1)) 0 0 calc(19px*var(--ns,1));background:rgba(255,255,255,.7);color:rgba(80,0,0,.6);
+  box-shadow:0 1px 5px rgba(0,0,0,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.65;transition:opacity .45s,background .2s}
+.navfs[hidden]{display:none}
+.navfs svg{width:calc(17px*var(--ns,1));height:calc(17px*var(--ns,1))}
+.navfs:hover{opacity:1;background:#fff;color:var(--maroon)}
+html.navdark .navfs{background:rgba(255,255,255,.14);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.3);box-shadow:none}
+html.navidle .navfs,html.navopen .navfs{opacity:0;pointer-events:none}
+html.noctl .navfs{display:none}
+@media print{.navfs{display:none}}

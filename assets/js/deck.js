@@ -151,7 +151,17 @@
     ['mousedown','click','wheel','touchstart'].forEach(ev=>navDrawer.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
     document.addEventListener('mousedown',e=>{ if(navDrawer.classList.contains('open')&&!navDrawer.contains(e.target)) toggleDrawer(false); });
     document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&navDrawer.classList.contains('open')&&e.target!==navDrawer.querySelector('.ndsr input')){ toggleDrawer(false); e.stopPropagation(); } },true);
-    document.body.append(prev,next,tab,navDrawer);
+    // full-screen toggle (same as the F key); hidden where the browser has no full-screen API (e.g. iPhone Safari)
+    const fsb=document.createElement('button'); fsb.className='navfs';
+    const ICON={on:'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5', off:'M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5'};
+    const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+    const fsSync=()=>{ const on=!!fsEl(); fsb.innerHTML=CHEV(on?ICON.off:ICON.on); fsb.title=on?'Exit full screen (Esc)':'Full screen (F)'; fsb.setAttribute('aria-label',fsb.title); };
+    fsb.onclick=e=>{ e.stopPropagation(); const d=document, el=d.documentElement;
+      if(fsEl()) (d.exitFullscreen||d.webkitExitFullscreen).call(d); else { const r=(el.requestFullscreen||el.webkitRequestFullscreen).call(el); if(r&&r.catch) r.catch(()=>{}); } };
+    ['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{ fsSync(); setTimeout(()=>window.DeckNav&&window.DeckNav.fit(),120); }));
+    if(!(document.fullscreenEnabled||document.webkitFullscreenEnabled)) fsb.hidden=true;
+    fsSync();
+    document.body.append(prev,next,tab,fsb,navDrawer);
     const wake=()=>{ document.documentElement.classList.remove('navidle'); clearTimeout(idleTimer);
       idleTimer=setTimeout(()=>{ if(!navDrawer.classList.contains('open')) document.documentElement.classList.add('navidle'); },2500); };
     ['mousemove','mousedown','touchstart'].forEach(ev=>document.addEventListener(ev,wake,{passive:true})); wake();
