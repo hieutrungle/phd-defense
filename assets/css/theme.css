@@ -1,0 +1,143 @@
+/* TAMU maroon theme for the reveal.js defense deck (mirrors beamerthemeTAMUMaroon.sty). Slide size 1280x720. */
+@font-face{font-family:"Fira Sans";font-weight:300;src:url(../../vendor/fonts/fira-sans-latin-300-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:400;src:url(../../vendor/fonts/fira-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:400;font-style:italic;src:url(../../vendor/fonts/fira-sans-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:500;src:url(../../vendor/fonts/fira-sans-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:600;src:url(../../vendor/fonts/fira-sans-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Sans";font-weight:700;src:url(../../vendor/fonts/fira-sans-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Mono";font-weight:400;src:url(../../vendor/fonts/fira-mono-latin-400-normal.woff2) format("woff2")}
+:root{
+  --maroon:#500000; --maroonmid:#732F2F; --maroonlight:#F4ECEC; --accent:#B5651D; --accentlight:#F8EFE6;
+  --text:#2B2B2B; --midgray:#6B6B6B; --rule:#D6D3CE; --good:#2E7D32; --goodlight:#EAF3EA; --gold:#E3A93C;
+  --fs:26px;            /* body text (Beamer \normalsize at 16:9 ~ 26px on 1280 wide) */
+  --fs-small:22px; --fs-foot:17px; --fs-tiny:15px;
+}
+.reveal{font-family:"Fira Sans",sans-serif;font-size:var(--fs);color:var(--text);font-weight:400}
+.reveal .slides{text-align:left}
+.reveal .slides section{height:720px;width:1280px;padding:0;box-sizing:border-box;top:0!important}
+.reveal .slides section .body{position:absolute;left:56px;right:56px;top:96px;bottom:70px;display:flex;flex-direction:column;justify-content:center}
+.reveal .slides section .body.top{justify-content:flex-start}
+.reveal strong,.reveal b{font-weight:600}
+.reveal em{font-style:italic}
+.reveal p{margin:0 0 .45em 0;line-height:1.3}
+.reveal ul,.reveal ol{margin:0 0 .3em 1.1em;padding:0;display:block}
+.reveal li{margin:.28em 0;line-height:1.28}
+.reveal ul>li::marker{color:var(--maroon);content:"\25A0\00A0\00A0";font-size:.62em}
+.reveal ol>li::marker{color:var(--maroon);font-weight:600}
+.reveal .small{font-size:var(--fs-small)} .reveal .foot{font-size:var(--fs-foot)} .reveal .tiny{font-size:var(--fs-tiny)}
+.reveal .gray{color:var(--midgray)} .reveal .alert{color:var(--accent)} .reveal .maroon{color:var(--maroon)} .reveal .good{color:var(--good)}
+.reveal .center{text-align:center} .reveal .right{text-align:right}
+/* ---------- title bar ---------- */
+.reveal section h2.title{position:absolute;left:56px;right:56px;top:22px;margin:0;padding:0 0 10px 0;
+  font-size:34px;font-weight:700;font-variant:small-caps;letter-spacing:.2px;color:var(--maroon);text-transform:none;line-height:1.15;
+  border-bottom:3px solid var(--maroon);text-align:left}
+.reveal section h2.title .sub{font-weight:500}
+.reveal .chaptag{font-size:var(--fs-tiny);color:var(--midgray);margin-bottom:6px}
+/* ---------- footer (injected by deck.js) ---------- */
+.deck-footer{position:absolute;left:0;right:0;bottom:0;height:52px;z-index:30;pointer-events:none;font-family:"Fira Sans",sans-serif}
+.deck-footer .rule{position:absolute;left:56px;right:56px;top:0;border-top:1px solid var(--rule)}
+.deck-footer .tamu{position:absolute;left:56px;top:12px;height:28px}
+.deck-footer .lab{position:absolute;right:56px;top:9px;height:34px}
+.deck-footer .mid{position:absolute;left:0;right:0;top:16px;text-align:center;font-size:14px;color:var(--midgray)}
+.deck-footer .num{position:absolute;right:140px;top:17px;font-size:14px;color:var(--midgray)}
+.deck-footer.hidden{display:none}
+/* ---------- columns ---------- */
+.reveal .cols{display:grid;grid-template-columns:var(--cols,1fr 1fr);column-gap:36px;align-items:start}
+.reveal .cols.center{align-items:center;text-align:left} .reveal .cols.stretch{align-items:stretch}
+.reveal .col{min-width:0}
+/* ---------- blocks ---------- */
+.reveal .block,.reveal .alertblock,.reveal .goodblock{border-radius:7px;overflow:hidden;background:var(--maroonlight);margin:4px 0 10px 0;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.reveal .block>.bt,.reveal .alertblock>.bt,.reveal .goodblock>.bt{background:var(--maroon);color:#fff;font-weight:600;padding:7px 16px;font-size:24px}
+.reveal .alertblock{background:var(--accentlight)} .reveal .alertblock>.bt{background:var(--accent)}
+.reveal .goodblock{background:var(--goodlight)} .reveal .goodblock>.bt{background:var(--good)}
+.reveal .block>.bb,.reveal .alertblock>.bb,.reveal .goodblock>.bb{padding:10px 16px 12px 16px}
+/* ---------- takeaway ---------- */
+.reveal .takeaway{background:var(--maroonlight);border-left:12px solid var(--maroon);border-radius:6px;padding:9px 18px;margin-top:14px;text-align:center;font-size:var(--fs-small);line-height:1.3}
+.reveal .takeaway::before{content:"Takeaway: ";font-weight:700}
+/* ---------- transition (Answered -> Opens) ---------- */
+.reveal .transition{display:grid;grid-template-columns:1fr 34px 1fr;align-items:center;margin-top:16px;font-size:19px;line-height:1.3}
+.reveal .transition .ans,.reveal .transition .opens{border-radius:7px;padding:9px 13px;color:var(--text)}
+.reveal .transition .ans{background:var(--maroonlight);border:1.5px solid var(--maroon)}
+.reveal .transition .opens{background:var(--accentlight);border:1.5px solid var(--accent)}
+.reveal .transition .ans b:first-child{color:var(--maroon)} .reveal .transition .opens b:first-child{color:var(--accent)}
+.reveal .transition .arrow{height:3px;background:var(--maroon);position:relative;margin:0 4px}
+.reveal .transition .arrow::after{content:"";position:absolute;right:-2px;top:-6px;border-left:11px solid var(--maroon);border-top:7.5px solid transparent;border-bottom:7.5px solid transparent}
+/* ---------- number callouts ---------- */
+.reveal .bignum{color:var(--maroon);font-weight:700;font-size:38px;line-height:1.1}
+.reveal .midnum{color:var(--maroon);font-weight:700;font-size:31px;line-height:1.1}
+.reveal .numcap{display:block;font-size:var(--fs-tiny);color:var(--midgray);margin-top:2px}
+/* ---------- tables (booktabs look) ---------- */
+.reveal table.bt{border-collapse:collapse;font-size:var(--fs-small);margin:4px 0}
+.reveal table.bt th,.reveal table.bt td{padding:4px 12px;border:none;text-align:left}
+.reveal table.bt thead tr{border-top:2px solid var(--text);border-bottom:1px solid var(--text)}
+.reveal table.bt tbody tr:last-child{border-bottom:2px solid var(--text)}
+.reveal table.bt td.num,.reveal table.bt th.num{text-align:right;font-variant-numeric:tabular-nums}
+.reveal table.bt tr.hl{background:var(--maroonlight);font-weight:600}
+.reveal table.bt th.hd{background:var(--maroon);color:#fff}
+/* ---------- figures ---------- */
+.reveal img{max-width:100%;margin:0;border:none;box-shadow:none;background:none}
+.reveal figure{margin:0;text-align:center} .reveal figcaption{font-size:var(--fs-tiny);color:var(--midgray);margin-top:4px;text-align:center}
+.reveal video{max-width:100%;display:block}
+/* ---------- animation canvas ---------- */
+.reveal .anim{position:relative;width:100%;background:#fff;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.reveal .anim canvas{display:block;width:100%;height:100%}
+.reveal .anim .illus{position:absolute;right:10px;bottom:6px;font-size:13px;color:var(--midgray);background:rgba(255,255,255,.85);padding:1px 6px;border-radius:4px}
+.reveal .anim .ctrl{position:absolute;left:10px;bottom:6px;font-size:13px;color:var(--midgray)}
+/* ---------- title slide ---------- */
+.reveal section.titleslide{background:#fff}
+.reveal section.titleslide .tband{position:absolute;left:0;right:0;top:0;height:330px;background:var(--maroon)}
+.reveal section.titleslide h1{position:absolute;left:70px;right:70px;top:70px;margin:0;color:#fff;font-size:44px;font-weight:700;line-height:1.18;text-transform:none;text-align:left}
+.reveal section.titleslide .subt{position:absolute;left:70px;right:70px;top:205px;color:#f1e4e4;font-size:27px;font-weight:400;line-height:1.3}
+.reveal section.titleslide .who{position:absolute;left:70px;top:372px;font-size:28px;font-weight:600;color:var(--maroon)}
+.reveal section.titleslide .meta{position:absolute;left:70px;top:418px;font-size:21px;color:var(--text);line-height:1.45}
+.reveal section.titleslide .logos{position:absolute;left:70px;right:70px;bottom:46px;display:flex;align-items:center;gap:48px}
+.reveal section.titleslide .logos img{height:64px}
+/* ---------- section divider (rendered by deck.js from data attributes) ---------- */
+.reveal section.divider{background:var(--maroon);color:#fff}
+.reveal section.divider .dnum{position:absolute;left:84px;top:236px;font-size:58px;font-weight:700;font-variant:small-caps;line-height:1.1;right:120px}
+.reveal section.divider .dq{position:absolute;left:84px;right:140px;top:330px;font-size:30px;font-style:italic;color:#f1dede;line-height:1.3}
+.reveal section.divider .dlogo{position:absolute;right:64px;top:44px;height:62px}
+.reveal .partmap{position:absolute;left:84px;right:84px;bottom:86px;display:grid;grid-template-columns:repeat(5,1fr);gap:26px}
+.reveal .partmap .p{border:1.5px solid rgba(255,255,255,.45);border-radius:8px;padding:9px 0 8px 0;text-align:center;color:rgba(255,255,255,.62);position:relative}
+.reveal .partmap .p b{display:block;font-size:22px;font-weight:700;letter-spacing:.5px}
+.reveal .partmap .p span{display:block;font-size:14px;margin-top:2px}
+.reveal .partmap .p.on{background:#fff;color:var(--maroon);border-color:#fff}
+.reveal .partmap .p:not(:last-child)::after{content:"\2192";position:absolute;right:-22px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.55);font-size:20px}
+/* light partmap (used inline on content slides) */
+.reveal .partmap.inline{position:static;margin-top:10px}
+/* ---------- misc ---------- */
+.reveal .rule{border-top:1px solid var(--rule);margin:10px 0}
+.reveal .tag{display:inline-block;background:var(--maroon);color:#fff;border-radius:5px;padding:1px 9px;font-size:17px;font-weight:600}
+.reveal .katex{font-size:1.02em}
+.reveal .backup h2.title::before{content:"Backup: ";font-variant:normal}
+
+/* animation controls: play/pause, timeline slider (snaps to control steps / slots), position label */
+.reveal .animctl{position:absolute;left:10px;bottom:6px;z-index:5;display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.92);border:1px solid var(--rule);border-radius:6px;padding:3px 9px 3px 4px;
+  font-size:13px;line-height:1;color:var(--midgray);opacity:0;transition:opacity .25s;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.reveal .anim:hover .animctl,.reveal .animctl:focus-within,.reveal .animctl.paused{opacity:1}
+.reveal .animctl button{border:0;background:var(--maroon);color:#fff;border-radius:4px;width:28px;height:22px;
+  font-size:11px;cursor:pointer;padding:0;font-family:inherit}
+.reveal .animctl input[type=range]{width:240px;accent-color:var(--maroon);margin:0;cursor:pointer}
+.reveal .animctl .lab{min-width:52px;font-variant-numeric:tabular-nums}
+html.noctl .reveal .animctl{display:none}
+
+/* slide picker (Q&A navigation) */
+.deck-footer .num{pointer-events:auto;cursor:pointer}
+.deck-footer .gotobtn{pointer-events:auto;position:absolute;right:166px;top:13px;width:22px;height:22px;padding:0;border:1px solid var(--rule);
+  border-radius:4px;background:#fff;color:var(--midgray);font-size:13px;line-height:20px;cursor:pointer;opacity:.6}
+.deck-footer .gotobtn:hover{opacity:1;color:var(--maroon);border-color:var(--maroon)}
+html.noctl .deck-footer .gotobtn{display:none}
+.goto{position:fixed;inset:0;z-index:1000;background:rgba(30,20,20,.35);display:flex;align-items:flex-start;justify-content:center;padding-top:8vh;font-family:"Fira Sans",sans-serif}
+.goto[hidden]{display:none}
+.goto .gpanel{width:min(760px,92vw);max-height:80vh;display:flex;flex-direction:column;background:#fff;border-radius:10px;
+  box-shadow:0 10px 40px rgba(0,0,0,.3);overflow:hidden;border-top:5px solid var(--maroon)}
+.goto input{font:inherit;font-size:20px;padding:12px 16px;border:0;border-bottom:1px solid var(--rule);outline:none;color:var(--text)}
+.goto .glist{overflow-y:auto;padding:4px 0 6px 0}
+.goto .gpart{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--maroon);padding:10px 16px 3px 16px}
+.goto .gitem{display:flex;gap:12px;align-items:baseline;padding:5px 16px;font-size:16px;color:var(--text);cursor:pointer}
+.goto .gitem .gnum{min-width:30px;text-align:right;color:var(--midgray);font-variant-numeric:tabular-nums}
+.goto .gitem.gcur .gtitle{font-weight:600}
+.goto .gitem.gsel{background:var(--maroonlight)}
+.goto .gnone{padding:14px 16px;color:var(--midgray)}
+.goto .ghint{font-size:12px;color:var(--midgray);padding:7px 16px;border-top:1px solid var(--rule);background:#FBFAF8}

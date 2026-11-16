@@ -1,0 +1,2109 @@
+<!doctype html>
+<html lang="en"><head>
+<meta name="robots" content="noindex, nofollow"><meta charset="utf-8">
+<title>Spatial Intelligence for Smart Radio Environments - Ph.D. Defense, Hieu T. Le</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="vendor/reveal/reset.css">
+<link rel="stylesheet" href="vendor/reveal/reveal.css">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/theme.css">
+</head><body>
+<div class="reveal"><div class="slides">
+<!-- ===================================================================
+     Track: Intro and foundations  (slides `title` ... `geo-limits`)
+     Sources: old Beamer slides.tex (title, outline), sections/01_aboutme.tex,
+     02_motivation.tex, 03_foundations.tex; dissertation data/section2-4.tex.
+     =================================================================== -->
+<style>
+/* title */
+section[data-id="title"] h1{font-size:44px;top:92px}
+section[data-id="title"] .subt{top:188px}
+section[data-id="title"] .committee{position:absolute;right:70px;top:372px;font-size:19px;line-height:1.42;color:var(--text);display:grid;grid-template-columns:auto auto;column-gap:14px}
+section[data-id="title"] .committee .lab{font-style:italic;color:var(--midgray);text-align:right}
+section[data-id="title"] .logos img.tw{height:74px}
+/* outline */
+section[data-id="outline"] ol{font-size:27px;margin-left:1.6em}
+section[data-id="outline"] ol li{margin:.5em 0}
+/* about me */
+section[data-id="aboutme"] .cols{align-items:stretch}
+section[data-id="aboutme"] ul.main>li{margin:.75em 0}
+section[data-id="aboutme"] .block{margin:0;height:100%}
+section[data-id="aboutme"] .block ul{font-size:22px;margin-left:.9em}
+section[data-id="aboutme"] .block li{margin:.55em 0}
+section[data-id="aboutme"] .block li b{color:var(--maroon)}
+section[data-id="aboutme"] .block li span{display:block;font-size:18px;color:var(--midgray)}
+/* experience */
+section[data-id="experience"] table.bt{width:100%;font-size:22px}
+section[data-id="experience"] table.bt thead tr{background:var(--maroon);color:#fff;border-top:none}
+section[data-id="experience"] table.bt td,section[data-id="experience"] table.bt th{padding:7px 14px}
+section[data-id="experience"] table.bt tr.next{background:var(--accentlight);font-weight:600}
+section[data-id="experience"] table.bt tr.alt{background:var(--maroonlight)}
+section[data-id="experience"] .logorow{display:flex;justify-content:space-around;align-items:center;margin-top:34px}
+section[data-id="experience"] .logorow img{height:46px}
+section[data-id="experience"] .logorow img.seal{height:92px}
+/* research threads */
+section[data-id="threads"] .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;align-items:stretch}
+section[data-id="threads"] .card{border:1.5px solid var(--maroon);border-top:12px solid var(--maroon);border-radius:8px;padding:14px 16px;background:#fff;font-size:20px;line-height:1.3}
+section[data-id="threads"] .card .ic{height:44px;display:flex;justify-content:center;align-items:center;margin-bottom:6px}
+section[data-id="threads"] .card .ic img{height:40px}
+section[data-id="threads"] .card h3{margin:0 0 10px 0;text-align:center;color:var(--maroon);font-size:23px;font-weight:700;text-transform:none;line-height:1.2;min-height:56px;display:flex;align-items:center;justify-content:center}
+section[data-id="threads"] .card .q{margin-top:12px}
+section[data-id="threads"] .card .q b{color:var(--maroon)}
+/* formula3 */
+section[data-id="formula3"] .cols{align-items:stretch}
+section[data-id="formula3"] .block,section[data-id="formula3"] .alertblock{margin:0;height:100%;box-sizing:border-box}
+section[data-id="formula3"] .bb{font-size:20px;line-height:1.32}
+section[data-id="formula3"] .bb ul{margin-left:.9em}
+section[data-id="formula3"] .bb li{margin:.42em 0}
+section[data-id="formula3"] .spons{display:flex;justify-content:space-around;align-items:center;margin-top:16px}
+section[data-id="formula3"] .spons img{height:96px}
+section[data-id="formula3"] .fname{font-weight:600;color:var(--maroon)}
+section[data-id="formula3"] .mra{display:grid;grid-template-columns:1fr 150px;gap:14px;align-items:center;margin-top:6px;border-top:1px solid var(--rule);padding-top:8px}
+section[data-id="formula3"] .mra img{width:150px}
+/* formula3-map */
+section[data-id="formula3-map"] .map{display:grid;grid-template-columns:1fr 46px 1fr;row-gap:12px;align-items:stretch}
+section[data-id="formula3-map"] .hd{font-size:17px;font-weight:700;color:var(--midgray);letter-spacing:.3px;text-transform:uppercase;padding:0 4px}
+section[data-id="formula3-map"] .src,section[data-id="formula3-map"] .dst{border-radius:7px;padding:9px 14px;font-size:19px;line-height:1.3}
+section[data-id="formula3-map"] .src{background:var(--maroonlight);border:1.5px solid var(--maroon)}
+section[data-id="formula3-map"] .dst{background:var(--accentlight);border:1.5px solid var(--accent)}
+section[data-id="formula3-map"] .src b,section[data-id="formula3-map"] .dst b{display:block;font-size:20px}
+section[data-id="formula3-map"] .src b{color:var(--maroon)} section[data-id="formula3-map"] .dst b{color:var(--accent)}
+section[data-id="formula3-map"] .arr{display:flex;align-items:center;justify-content:center}
+section[data-id="formula3-map"] .arr::before{content:"";width:28px;height:3px;background:var(--maroon)}
+section[data-id="formula3-map"] .arr::after{content:"";border-left:11px solid var(--maroon);border-top:7px solid transparent;border-bottom:7px solid transparent}
+/* mmwave */
+section[data-id^="mmwave"] ul{font-size:25px}
+section[data-id^="mmwave"] ul li{margin:.5em 0}
+section[data-id^="mmwave"] figure img{max-height:400px;width:100%;object-fit:contain}
+section[data-id^="mmwave"] .credit{position:absolute;left:0;bottom:6px}
+/* applications */
+section[data-id="applications"] .apps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+section[data-id="applications"] .apps img{height:190px;display:block;margin:0 auto 8px auto}
+section[data-id="applications"] .apps h3{margin:0 0 6px 0;text-align:center;color:var(--maroon);font-size:25px;text-transform:none}
+section[data-id="applications"] .apps p{font-size:21px}
+/* blocked */
+section[data-id="blocked"] ul li{margin:.6em 0}
+/* ris-vs-mra, gaps */
+section[data-id="ris-vs-mra"] table.bt,section[data-id="gaps"] table.bt{width:100%;font-size:21px}
+section[data-id="ris-vs-mra"] table.bt thead tr,section[data-id="gaps"] table.bt thead tr{background:var(--maroon);color:#fff;border-top:none}
+section[data-id="ris-vs-mra"] table.bt td,section[data-id="ris-vs-mra"] table.bt th,section[data-id="gaps"] table.bt td,section[data-id="gaps"] table.bt th{padding:7px 12px;vertical-align:top}
+section[data-id="ris-vs-mra"] table.bt tr.alt,section[data-id="gaps"] table.bt tr.alt{background:var(--maroonlight)}
+section[data-id="gaps"] td.part{text-align:center;font-weight:700;color:var(--maroon);vertical-align:middle!important}
+/* goal map */
+section[data-id="goal-map"] img{width:1150px;display:block;margin:0 auto}
+/* hardware */
+section[data-id="hardware"] .figs{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+section[data-id="hardware"] .figs figure{text-align:center;margin:0}
+section[data-id="hardware"] .figs img{height:300px;object-fit:contain;width:100%}
+section[data-id="hardware"] ul li{margin:.55em 0}
+/* bisector + focal animations */
+section[data-id="anim-bisector"] .side{font-size:21px;line-height:1.3}
+section[data-id="anim-bisector"] .side .katex-display{margin:.3em 0}
+section[data-id="anim-bisector"] .side p{margin:0 0 .5em 0}
+section[data-id="anim-bisector"] .side .fragment{border-left:5px solid var(--maroon);padding:4px 0 4px 12px;margin:10px 0}
+section[data-id="anim-bisector"] .side .fragment.f2{border-left-color:#C0392B}
+section[data-id="anim-focal"] .row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px;font-size:20px;line-height:1.3}
+section[data-id="anim-focal"] .row>div{border-left:5px solid var(--maroon);padding:2px 0 2px 12px}
+section[data-id="anim-csi"] .row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px;font-size:20px;line-height:1.3}
+section[data-id="anim-csi"] .row>div{border-left:5px solid var(--accent);padding:2px 0 2px 12px}
+section[data-id="anim-csi"] .row>div.good{border-left-color:var(--good)}
+/* testbed */
+section[data-id="testbed"] img{height:330px}
+section[data-id="testbed"] ul{font-size:23px}
+section[data-id="testbed"] ul li{margin:.5em 0}
+/* geo-setup */
+section[data-id="geo-setup"] .lay{display:grid;grid-template-columns:auto auto;gap:18px;justify-content:center;align-items:end}
+section[data-id="geo-setup"] .lay img{height:400px}
+section[data-id="geo-setup"] ul li{margin:.5em 0}
+section[data-id="geo-setup"] ul{font-size:23px}
+/* path-gain splits */
+section.pgain .maps{display:flex;gap:10px;justify-content:center;align-items:flex-end}
+section.pgain .maps figure{display:flex;flex-direction:column;align-items:center}
+section.pgain .maps img{height:380px}
+section.pgain .maps figcaption{font-size:17px;color:var(--text)}
+section.pgain table.bt{font-size:21px;width:100%}
+section.pgain table.bt td{padding:5px 10px}
+section.pgain .calls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 10px 0;text-align:center}
+section.pgain ul{font-size:21px;margin-top:6px}
+/* rssi splits */
+section.rssi img{height:400px}
+section.rssi ul{font-size:22px}
+section.rssi ul li{margin:.55em 0}
+/* geo-limits */
+section[data-id="geo-limits"] .cols{align-items:stretch}
+section[data-id="geo-limits"] .block{height:100%;margin:0}
+section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
+</style>
+
+<!-- ============================== TITLE ============================== -->
+<section class="titleslide" data-id="title" data-min="0.5">
+  <div class="tband"></div>
+  <h1>Spatial Intelligence for Smart Radio Environments</h1>
+  <div class="subt">Learning-Based Control and Joint Placement of Mechanically Reconfigurable Reflectors</div>
+  <div class="who">Hieu T. Le</div>
+  <div class="meta">Ph.D. Candidate, Electrical Engineering<br>Department of Electrical and Computer Engineering, Texas A&amp;M University<br><span class="gray">Doctoral Dissertation Defense &middot; College Station, TX &middot; Fall 2026</span></div>
+  <div class="committee"><span class="lab">Doctoral Advisory Committee:</span><span>Dr. Sabit Ekin (Chair)</span><span></span><span>Dr. Jian Tao (Co-Chair)</span><span></span><span>Dr. Erchin Serpedin</span><span></span><span>Dr. Arya Menon</span></div>
+  <div class="logos"><img src="assets/img/logos/tamu-horizontal-maroon.png" alt="Texas A&amp;M University"><img class="tw" src="assets/img/logos/texas-wireless-2026.png" alt="Texas Wireless"></div>
+</section>
+
+<!-- ============================== OUTLINE ============================== -->
+<section data-id="outline" data-min="0.25">
+  <h2 class="title">Outline</h2>
+  <div class="body">
+    <ol>
+      <li>About me</li>
+      <li>Motivation and objectives</li>
+      <li>Foundations: ray-traced reflector arrays and geometric beam-focusing</li>
+      <li>Learning-based control with multi-agent RL</li>
+      <li>Hierarchical multi-agent RL for multi-user allocation</li>
+      <li>Joint placement of access points and reflectors</li>
+      <li>Conclusions, the complete picture, and publications</li>
+    </ol>
+  </div>
+</section>
+
+<section class="divider" data-num="1" data-title="About Me"></section>
+
+<!-- ============================== ABOUT ME ============================== -->
+<section data-id="aboutme" data-min="0.5">
+  <h2 class="title">About me</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr">
+      <div class="col">
+        <ul class="main">
+          <li><b>Ph.D. Candidate</b>, Electrical Engineering, Texas A&amp;M University</li>
+          <li><b>Advisor (Chair):</b> Dr. Sabit Ekin</li>
+          <li><b>Co-Chair:</b> Dr. Jian Tao</li>
+          <li><b>Research:</b> smart radio environments built on mechanically reconfigurable metallic reflectors, controlled by <span class="alert">spatial intelligence</span> instead of pilot-based channel estimation</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="block"><div class="bt">Research areas</div><div class="bb">
+          <ul>
+            <li><b>Machine learning</b><span>learned control from spatial data</span></li>
+            <li><b>Reinforcement learning</b><span>multi-agent, hierarchical policies</span></li>
+            <li><b>Wireless communication</b><span>mmWave, reflectors, ray tracing</span></li>
+            <li><b>Optimization</b><span>global search, gradient refinement</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== EXPERIENCE ============================== -->
+<section data-id="experience" data-min="0.5">
+  <h2 class="title">Professional experience</h2>
+  <div class="body">
+    <table class="bt">
+      <thead><tr><th style="width:24%">Period</th><th style="width:36%">Role</th><th>Organization / Team</th></tr></thead>
+      <tbody>
+        <tr class="next"><td>Starting 2027</td><td>Machine Learning Engineer</td><td>Uber</td></tr>
+        <tr class="alt"><td>Sep 2021 &ndash; Present</td><td>Research Assistant</td><td>Texas A&amp;M University</td></tr>
+        <tr><td>June 2026 &ndash; Aug 2026</td><td>Machine Learning Intern</td><td>Uber | Rider Pricing &amp; Incentives</td></tr>
+        <tr class="alt"><td>Sep 2025 &ndash; Dec 2025</td><td>Engineering Intern</td><td>Qualcomm | San Diego, CA</td></tr>
+        <tr><td>Jan 2024 &ndash; June 2024</td><td>Research Assistant</td><td>High Performance Computing Center</td></tr>
+      </tbody>
+    </table>
+    <div class="logorow">
+      <img src="assets/img/aboutme/uber-logo.png" alt="Uber">
+      <img src="assets/img/proposal/image5.png" alt="Qualcomm">
+      <img class="seal" src="assets/img/proposal/image6.png" alt="Texas A&amp;M University">
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RESEARCH THREADS ============================== -->
+<section data-id="threads" data-min="0.5">
+  <h2 class="title">Research and technical innovation</h2>
+  <div class="body">
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg width="64" height="40" viewBox="0 0 64 40"><g stroke="#500000" stroke-width="3.2" stroke-linecap="round"><line x1="10" y1="34" x2="20" y2="27"/><line x1="26" y1="34" x2="36" y2="27"/><line x1="42" y1="34" x2="52" y2="27"/></g><polyline points="4,6 31,30 58,6" fill="none" stroke="#9a5a5a" stroke-width="1.6"/><path d="M58 6 l-7 1.5 l3.5 3.5z" fill="#9a5a5a"/></svg></div>
+        <h3>Geometric foundations</h3>
+        <div>Bisector rule and focal points steer metallic tiles from positions alone.</div>
+        <div class="q"><b>WHAT:</b> what geometry alone achieves</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image9.png" alt=""></div>
+        <h3>Flat MARL control</h3>
+        <div>Multi-agent RL that maps servo-actuated tile orientations to a few virtual focal points.</div>
+        <div class="q"><b>HOW:</b> steer the array for moving users</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image10.png" alt=""></div>
+        <h3>Hierarchical MARL</h3>
+        <div>Two-timescale allocator + MAPPO segment agents, with no pilot-based CSI estimation.</div>
+        <div class="q"><b>HOW:</b> share the array among several users</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image11.png" alt=""></div>
+        <h3>Joint placement</h3>
+        <div>Access points and a reflector placed jointly: PSO global search + gradient refinement through a differentiable ray tracer.</div>
+        <div class="q"><b>WHERE:</b> install the access points and the reflector</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FORMULA3 (new; folds in sponsored research) ============================== -->
+<section data-id="formula3" data-min="0.75">
+  <h2 class="title">Sponsored research and the FORMULA3 project</h2>
+  <div class="body">
+    <div class="cols" style="--cols:36% 1fr">
+      <div class="col">
+        <div class="block"><div class="bt">Sponsored research</div><div class="bb">
+          <ul>
+            <li>U.S. Department of Energy, Office of Science, ASCR, <b>Early Career Research Program</b>, Award No. <b>DE-SC0023957</b></li>
+            <li>U.S. National Science Foundation, through FORMULA3 (right)</li>
+          </ul>
+          <div class="spons"><img src="assets/img/proposal/image13.png" alt="U.S. Department of Energy"><img src="assets/img/proposal/image12.png" alt="National Science Foundation"></div>
+        </div></div>
+      </div>
+      <div class="col">
+        <div class="alertblock"><div class="bt">FORMULA3 &middot; NSF&ndash;Research Council of Finland VINES</div><div class="bb">
+          <div class="fname">Framework for Optimal Resource Management Using Generalizable AI in FR3 Dynamic Programmable Wireless Environments</div>
+          <ul>
+            <li>VINES: Verticals-enabling Intelligent Network Systems; collaborative effort of about <b>$1.54M</b>, Oct 2026 &ndash; Sep 2029</li>
+            <li>Five universities: Tennessee Tech, Texas A&amp;M, NYU, Tampere University, Aalto University</li>
+          </ul>
+          <div class="mra">
+            <div>Programmable environments combine RIS with <b>metallic reflector arrays</b>: hexagonal metal-tile panels whose tiles turn so the panel focuses on the user. This element <b>builds on this dissertation's reflector-array work</b> (hardware and focal-point control).</div>
+            <img src="assets/img/ch5/reflector-design-zoom-in-01.png" alt="Hexagonal-tile reflector array">
+          </div>
+          <div class="tiny gray" style="margin-top:6px">NSF Award Nos. 2549087, 2549088 &middot; Research Council of Finland Decision Nos. 380594, 380600 &middot; <a href="https://vines-formula3.github.io/" target="_blank" rel="noopener">vines-formula3.github.io</a></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FORMULA3 MAP (new) ============================== -->
+<section data-id="formula3-map" data-min="0.75">
+  <h2 class="title">How this dissertation feeds into FORMULA3</h2>
+  <div class="body">
+    <div class="map">
+      <div class="hd">This dissertation (completed)</div><div></div><div class="hd">FORMULA3 thrust it builds toward</div>
+      <div class="src"><b>Ray-traced reflector pipeline</b>scene model &rarr; tile angles from focal points &rarr; path gain, per band</div><div class="arr"></div>
+      <div class="dst"><b>T1 &middot; Channel characterization &amp; dataset generation</b>simulated data for scenes with metallic reflector arrays</div>
+      <div class="src"><b>CSI-free learned control + hierarchical allocation</b>focal points from user positions; which segment serves which user</div><div class="arr"></div>
+      <div class="dst"><b>T2 &middot; AI-native proactive resource management</b>reconfigure surfaces and reassign users</div>
+      <div class="src"><b>Robustness and localization findings</b>user count, array size, position noise; decimeter-level localization needed</div><div class="arr"></div>
+      <div class="dst"><b>T3 &middot; Generalization via ISAC &amp; continual learning</b>sensing supplies the positions that control relies on</div>
+      <div class="src"><b>Reflector hardware model + joint AP/reflector placement</b>one focal-point interface for planning and operation</div><div class="arr"></div>
+      <div class="dst"><b>T4 &middot; Validation &amp; evaluation</b>metallic reflector array surfaces in planned programmable environments</div>
+    </div>
+    <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
+  </div>
+</section>
+
+<section class="divider" data-num="2" data-title="Motivation and Objectives" data-part="WHY" data-question="Why steer reflectors from spatial information instead of channel estimates?"></section>
+
+<!-- ============================== MMWAVE ============================== -->
+<section data-id="mmwave" data-min="0.5">
+  <h2 class="title">Growing demand points to mmWave bandwidth</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <figure><img src="assets/img/aboutme/spectrum.png" alt="Spectrum chart: mmWave bands offer wide channels with mostly line-of-sight propagation"><figcaption>mmWave bands: wide channels, mostly line-of-sight propagation</figcaption></figure>
+      <div class="col">
+        <ul>
+          <li>Growing traffic (AR, autonomous systems, IoT) needs <b>more bandwidth</b> or <b>better signal quality</b></li>
+          <li>Large contiguous channels are available at <b>mmWave</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="tiny gray credit">Image credit: spectrummattersindeed.blogspot.com/2020/01/why-millimeter-wave-is-essential-for-5g.html</div>
+  </div>
+</section>
+
+<section data-id="mmwave-coverage" data-min="0.5">
+  <h2 class="title">More bandwidth at mmWave, but less coverage</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <figure><img src="assets/img/aboutme/freq_coverage.png" alt="Bandwidth versus coverage: higher carrier frequency gives more bandwidth and smaller coverage"><figcaption>Higher carrier frequency: more bandwidth, smaller coverage</figcaption></figure>
+      <div class="col">
+        <ul>
+          <li>The cost: <b>higher path loss</b>, weak penetration, frequent blockage</li>
+          <li>The environment (walls, materials, shadowing) is usually a <b>given channel</b> to compensate for</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tiny gray credit">Image credit: cdn.codeground.org/nsr/downloads/researchareas/2022May_6G_Spectrum.pdf</div>
+  </div>
+</section>
+
+<!-- ============================== APPLICATIONS ============================== -->
+<section data-id="applications" data-min="0.5">
+  <h2 class="title">Target applications: dense, shielded indoor environments</h2>
+  <div class="body">
+    <div class="apps">
+      <div><img src="assets/img/proposal/image19.png" alt="Data center"><h3>Data centers</h3><p>Metal server racks block signals; high data rates are needed without running fiber to every rack.</p></div>
+      <div><img src="assets/img/proposal/image20.png" alt="Nuclear facility"><h3>Nuclear facilities</h3><p>Radiation-shielded telemetry behind thick concrete and metal, where wiring and delicate electronics are prone to failure.</p></div>
+      <div><img src="assets/img/proposal/image21.png" alt="Industrial plant"><h3>Industrial plants</h3><p>Connectivity for autonomous robots and sensors across cluttered manufacturing geometries.</p></div>
+    </div>
+    <div class="takeaway">In all three, links are blocked by structure, so coverage depends on reaching non-line-of-sight (NLOS) users.</div>
+  </div>
+</section>
+
+<!-- ============================== BLOCKED ============================== -->
+<section data-id="blocked" data-min="0.5">
+  <h2 class="title">Indoor mmWave links are blocked by structure</h2>
+  <div class="body">
+    <div class="cols" style="--cols:52% 1fr;align-items:center">
+      <div class="col">
+        <ul>
+          <li>At mmWave, <span class="alert">NLOS</span> links suffer severe path loss and blockage</li>
+          <li>Conventional compensation: denser infrastructure, higher transmit power, more complex signal processing</li>
+          <li>Each adds energy consumption and deployment cost</li>
+          <li><b>Smart radio environments</b>: make parts of the propagation environment itself controllable</li>
+        </ul>
+      </div>
+      <div class="col" style="text-align:center">
+        <svg width="500" height="420" viewBox="0 0 500 420" font-family="Fira Sans, sans-serif">
+          <rect x="20" y="40" width="440" height="22" fill="#E3E0DB"/>
+          <rect x="20" y="150" width="310" height="22" fill="#E3E0DB"/>
+          <rect x="438" y="40" width="22" height="370" fill="#E3E0DB"/>
+          <rect x="308" y="150" width="22" height="260" fill="#E3E0DB"/>
+          <rect x="330" y="270" width="108" height="140" fill="#F8EFE6"/>
+          <text x="384" y="300" font-size="18" fill="#B5651D" text-anchor="middle">dead zone</text>
+          <line x1="70" y1="106" x2="300" y2="236" stroke="#B5651D" stroke-width="2.5" stroke-dasharray="8 6"/>
+          <text x="300" y="244" font-size="30" fill="#B5651D" text-anchor="middle" font-weight="700">&#215;</text>
+          <line x1="398" y1="64" x2="436" y2="102" stroke="#500000" stroke-width="7" stroke-linecap="round"/>
+          <text x="370" y="30" font-size="18" fill="#500000" text-anchor="middle">reflector</text>
+          <line x1="70" y1="106" x2="408" y2="80" stroke="#2E7D32" stroke-width="2.6"/>
+          <path d="M408 80 l-12 -4.5 l1.5 9z" fill="#2E7D32"/>
+          <line x1="416" y1="84" x2="388" y2="358" stroke="#2E7D32" stroke-width="2.6"/>
+          <path d="M388 360 l-5 -12 l9.5 1z" fill="#2E7D32"/>
+          <circle cx="70" cy="106" r="9" fill="#500000"/><text x="70" y="88" font-size="18" text-anchor="middle">AP</text>
+          <rect x="379" y="362" width="16" height="16" fill="#2E7D32"/><text x="387" y="400" font-size="18" text-anchor="middle">UE</text>
+        </svg>
+        <div class="foot gray">The corner blocks the direct path; a reflector creates an NLOS path into the dead zone</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ANIMATION A1: CSI bottleneck (new) ============================== -->
+<section data-id="anim-csi" data-min="0.75">
+  <h2 class="title">The CSI bottleneck: pilots grow with elements &times; users</h2>
+  <div class="body">
+    <div class="anim" style="height:400px"><canvas data-anim="csi"></canvas><div class="illus">Illustrative</div></div>
+    <div class="row">
+      <div><b>Electronic RIS:</b> the cascaded channel of every element to every user must be estimated; pilot time grows with $N \times K$ and eats the coherence window.</div>
+      <div class="good fragment" data-anim-step="1"><b>Mechanical reflector array:</b> the controller needs only the $K$ user positions; its input does not grow with the number of tiles $N$.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RIS vs MRA ============================== -->
+<section data-id="ris-vs-mra" data-min="0.75">
+  <h2 class="title">Electronic RIS vs. metallic reflector arrays</h2>
+  <div class="body">
+    <table class="bt">
+      <thead><tr><th style="width:17%"></th><th style="width:39%">Electronic RIS</th><th>Metallic reflector array (this work)</th></tr></thead>
+      <tbody>
+        <tr><td><b>Steering</b></td><td>PIN or varactor phase shifters per element</td><td>Servo-rotated metallic tiles, specular reflection</td></tr>
+        <tr class="alt"><td><b>Band</b></td><td>Unit cells designed for one band</td><td>Tiles large vs. wavelength: same geometry across bands</td></tr>
+        <tr><td><b>Control input</b></td><td>Cascaded CSI per element; pilots grow with elements &times; users</td><td>Run time: user positions only; training: received power as the reward; <span class="alert">no pilot-based CSI estimation</span></td></tr>
+        <tr class="alt"><td><b>Power</b></td><td>Bias voltage to hold the state</td><td>None once positioned; only while actuators move</td></tr>
+        <tr><td><b>Limitation</b></td><td>Hardware cost and CSI overhead at scale</td><td>Slower reconfiguration: quasi-static indoor scenes</td></tr>
+      </tbody>
+    </table>
+    <div class="takeaway">The burden shifts from channel estimation to <b>localization</b> (run time) and the <b>site model</b> (planning).</div>
+  </div>
+</section>
+
+<!-- ============================== GAPS ============================== -->
+<section data-id="gaps" data-min="0.5">
+  <h2 class="title">Three gaps this work addresses</h2>
+  <div class="body">
+    <table class="bt">
+      <thead><tr><th style="width:44%">What prior work does</th><th>What is missing</th><th style="width:11%" class="center">Part</th></tr></thead>
+      <tbody>
+        <tr><td>Learned control of reflecting surfaces configures electronic RIS from full, partial or statistical CSI; metallic reflectors are static or one steered plate</td><td><b>Learned, localization-driven control</b> of a segmented, mechanically reconfigurable array</td><td class="part">HOW</td></tr>
+        <tr class="alt"><td>User-association and hierarchical RIS controllers assign whole surfaces; the flat controller fixes the mapping</td><td><b>Which segment serves which user</b>, as a decision of its own</td><td class="part">HOW</td></tr>
+        <tr><td>AP and reflector sites are chosen from discrete candidates or for fixed transmitters, with simple path-loss models</td><td><b>Joint, continuous AP and reflector placement</b> with site-specific propagation, judged on lower-tail coverage</td><td class="part">WHERE</td></tr>
+      </tbody>
+    </table>
+    <div class="takeaway">First, <b>WHAT</b> geometry alone achieves; then the three gaps, in order.</div>
+  </div>
+</section>
+
+<!-- ============================== GOAL MAP ============================== -->
+<section data-id="goal-map" data-min="1">
+  <h2 class="title">Dissertation goal and research questions</h2>
+  <div class="body">
+    <img src="assets/img/crops/intro_goal_map.png" alt="Overview map: WHY thesis; WHERE to install; HOW to steer; WHAT foundations; WHICH method">
+  </div>
+</section>
+
+<section class="divider" data-num="3" data-title="Foundations" data-part="WHAT" data-question="What hardware and abstraction, and what does geometry alone achieve?"></section>
+
+<!-- ============================== HARDWARE ============================== -->
+<section data-id="hardware" data-min="0.75">
+  <h2 class="title">Hardware: metallic linear Fresnel reflector (LFR) arrays</h2>
+  <div class="body">
+    <div class="cols" style="--cols:46% 1fr">
+      <div class="col">
+        <ul>
+          <li>$N_r \times N_c$ metallic <b>tiles</b>, each rotated in elevation $\theta$ and azimuth $\phi$</li>
+          <li>Redirects the incident wavefront by <span class="alert">specular reflection</span>; no RF control circuitry</li>
+          <li>Geometric study: $10 \times 7$ square tiles of 20 cm &times; 20 cm (1.4 m &times; 2.0 m), unconstrained rotation</li>
+          <li>Learning and placement studies: $7 \times 9 = 63$ hexagonal tiles; servo range $\pm 30^\circ$</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="figs">
+          <figure><img src="assets/img/ch2/p1-freshno-01.png" alt="Top view of tiles reflecting AP to UE"><figcaption>Top view: each tile reflects AP &rarr; UE</figcaption></figure>
+          <figure><img src="assets/img/ch5/reflector-design-zoom-in-01.png" alt="Hexagonal tile array"><figcaption>Hexagonal tiles, each steered in $\theta$ and $\phi$</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ANIMATION A2a: bisector rule ============================== -->
+<section data-id="anim-bisector" data-min="1">
+  <h2 class="title">Bisector rule: each tile normal splits AP and user directions</h2>
+  <div class="body">
+    <div class="cols" style="--cols:64% 1fr;align-items:center">
+      <div class="col"><div class="anim" style="height:520px"><canvas data-anim="bisector"></canvas><div class="illus">Illustrative</div></div></div>
+      <div class="col side">
+        <p>Tile center A, AP at B, user at C. Law of reflection:</p>
+        $$\vec n=\tfrac12\Big(\tfrac{\overrightarrow{AB}}{|\overrightarrow{AB}|}+\tfrac{\overrightarrow{AC}}{|\overrightarrow{AC}|}\Big)$$
+        <p class="alert"><b>Only positions enter; no channel estimate.</b></p>
+        <div class="fragment" data-anim-step="1"><b>Normals:</b> angle in = angle out at every tile, so all reflected rays meet at the user.</div>
+        <div class="fragment f2" data-anim-step="2"><b>Servo limits:</b> a tile that needs more than $\pm30^\circ$ is clipped (red); its ray misses the user.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ANIMATION A2b: focal-point abstraction ============================== -->
+<section data-id="anim-focal" data-min="0.75">
+  <h2 class="title">Focal-point abstraction: a segment is steered by 3 coordinates</h2>
+  <div class="body">
+    <div class="anim" style="height:430px"><canvas data-anim="focal"></canvas><div class="illus">Illustrative</div></div>
+    <div class="row">
+      <div>All tiles of segment $l$ aim at one virtual <b>focal point</b> $f_l \in \mathbb{R}^3$ instead of the user; angles are clipped to servo limits.</div>
+      <div class="fragment" data-anim-step="1">$2N_rN_c$ tile angles become $3L$ focal coordinates. Learned control and placement set the focal points.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TESTBED ============================== -->
+<section data-id="testbed" data-min="0.5">
+  <h2 class="title">Ray-traced testbed: Blender scenes + NVIDIA Sionna RT</h2>
+  <div class="body">
+    <div class="cols" style="--cols:34% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch2/simulation-environment.png" alt="Simulation pipeline"><figcaption>Scene modeling &rarr; ray tracing &rarr; path gain</figcaption></figure></div>
+      <div class="col">
+        <ul>
+          <li><b>Blender</b> builds walls, AP, UEs, and tiles; a geometric solver sets the tile angles from the focal points</li>
+          <li>XML scene with ITU-R P.2040 materials: $\epsilon_r = a_{\mathrm m} f_c^{\,b_{\mathrm m}}$, $\sigma_c = c_{\mathrm m} f_c^{\,d_{\mathrm m}}$</li>
+          <li><b>Sionna RT</b>: specular reflection, diffraction, diffuse scattering; received power returned as the training reward or the placement objective</li>
+          <li>28 GHz (geometry), 60 GHz (learned control), 5.18 GHz (placement): each study has its own scene and baselines, so dB gains are <b>not compared across parts</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="takeaway">All results are ray-traced simulation results; no hardware deployment is reported.</div>
+  </div>
+</section>
+
+<!-- ============================== GEO SETUP ============================== -->
+<section data-id="geo-setup" data-min="0.5">
+  <h2 class="title">Geometric beam-focusing in NLOS hallways at 28 GHz</h2>
+  <div class="body">
+    <div class="cols" style="--cols:50% 1fr;align-items:center">
+      <div class="col">
+        <ul>
+          <li>Downlink to one UE; AP at the same position in both layouts</li>
+          <li>$10\times 7$ square tiles; concrete walls, ceiling, and floor; positions known (e.g., UWB); unconstrained rotation</li>
+          <li>Compared: no reflector; <b>simple</b> reflector (all tiles $45^\circ$ about $z$); <b>beam-focusing</b> (bisector rule per tile)</li>
+          <li>T-shaped: two arrays, bisector rule applied twice in sequence</li>
+          <li>Nine NLOS UE locations; coverage maps 1.5 m above the floor</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="lay">
+          <figure><img src="assets/img/ch3/p1-numbered_L_hallway-01.png" alt="L-shaped hallway with nine UE locations"><figcaption>L-shaped</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-numbered_T_hallway-01.png" alt="T-shaped hallway with nine UE locations"><figcaption>T-shaped</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SPLIT: L-shaped path gain ============================== -->
+<section class="pgain" data-id="L-gain" data-min="0.75">
+  <h2 class="title">L-shaped hallway: beam-focusing +53.0 dB path gain at the UE</h2>
+  <div class="body">
+    <div class="cols" style="--cols:47% 1fr;align-items:center">
+      <div class="col">
+        <div class="maps">
+          <figure><img src="assets/img/ch3/p1-no_reflector_L_hallway_00009-01.png" alt="No reflector"><figcaption>None</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-simple_reflector_L_hallway_00009-01.png" alt="Simple reflector"><figcaption>Simple</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-beamfocusing_L_hallway_00009-color_scale-01.png" alt="Beam-focusing"><figcaption>Beam-focusing (dB)</figcaption></figure>
+        </div>
+      </div>
+      <div class="col">
+        <table class="bt">
+          <thead><tr><th>Path gain at the UE</th><th class="num">L-shaped</th></tr></thead>
+          <tbody><tr><td>No reflector</td><td class="num">&minus;125.61 dB</td></tr><tr><td>Simple reflector</td><td class="num">&minus;99.54 dB</td></tr><tr class="hl"><td>Beam-focusing</td><td class="num">&minus;72.57 dB</td></tr></tbody>
+        </table>
+        <div class="calls"><div><div class="midnum">+53.04 dB</div><span class="numcap">vs. no reflector</span></div><div><div class="midnum">+26.97 dB</div><span class="numcap">vs. simple reflector</span></div></div>
+        <ul>
+          <li>Coverage maps 1.5 m above the floor; the corner blocks the direct path</li>
+          <li>The bright band: all tile paths converge at the UE</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SPLIT: L-shaped RSSI ============================== -->
+<section class="rssi" data-id="L-rssi" data-min="0.5">
+  <h2 class="title">L-shaped hallway: RSSI at nine UE locations</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch3/p1-L_sig_str1.png" alt="RSSI at nine locations, L-shaped hallway"><figcaption>10 W (40 dBm) transmitter; free space as reference</figcaption></figure></div>
+      <div class="col">
+        <ul>
+          <li>Beam-focusing is <b>highest at all nine locations</b>, above free space</li>
+          <li>Plausible reason: the 1.4 m &times; 2.0 m aperture redirects all tile paths toward one receiver</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SPLIT: T-shaped path gain ============================== -->
+<section class="pgain" data-id="T-gain" data-min="0.75">
+  <h2 class="title">T-shaped hallway: beam-focusing +87.5 dB path gain at the UE</h2>
+  <div class="body">
+    <div class="cols" style="--cols:64% 1fr;align-items:center;column-gap:24px">
+      <div class="col">
+        <div class="maps">
+          <figure><img src="assets/img/ch3/p1-no_reflector_T_hallway_00159-01.png" alt="No reflector" style="height:282px"><figcaption>None</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-simple_reflector_T_hallway_00159-01.png" alt="Simple reflectors" style="height:282px"><figcaption>Simple</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-beamfocusing_T_hallway_00159_color_map-01.png" alt="Beam-focusing" style="height:282px"><figcaption>Beam-focusing (dB)</figcaption></figure>
+        </div>
+      </div>
+      <div class="col">
+        <table class="bt">
+          <thead><tr><th>Path gain at the UE</th><th class="num">T-shaped</th></tr></thead>
+          <tbody><tr><td>No reflector</td><td class="num">&minus;156.35 dB</td></tr><tr><td>Simple reflectors</td><td class="num">&minus;109.20 dB</td></tr><tr class="hl"><td>Beam-focusing</td><td class="num">&minus;68.88 dB</td></tr></tbody>
+        </table>
+        <div class="calls"><div><div class="midnum">+87.47 dB</div><span class="numcap">vs. no reflector</span></div><div><div class="midnum">+40.32 dB</div><span class="numcap">vs. simple reflectors</span></div></div>
+        <ul>
+          <li>Two arrays: the bisector rule applied twice in sequence</li>
+          <li>The second reflection reaches the side branch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SPLIT: T-shaped RSSI ============================== -->
+<section class="rssi" data-id="T-rssi" data-min="0.5">
+  <h2 class="title">T-shaped hallway: RSSI at nine UE locations</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch3/p1-T_sig_str1.png" alt="RSSI at nine locations, T-shaped hallway"><figcaption>10 W (40 dBm) transmitter; free space as reference</figcaption></figure></div>
+      <div class="col">
+        <ul>
+          <li>Best reflector case at all nine locations, but <b>below free space at locations 2 and 5</b></li>
+          <li>Likely explanation, not verified in the original study: the rule aligns path directions but not lengths, so phases are uncontrolled</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-id="geo-videos" data-min="0.5">
+  <h2 class="title">Beam-focusing follows the UE: L- and T-shaped hallways</h2>
+  <div class="body">
+    <div class="chaptag">28 GHz ray-traced path-gain maps; the bisector rule is re-applied at every UE position (green)</div>
+    <div class="cols" style="--cols:600px 1fr;align-items:center">
+      <div class="vids">
+      <figure><div class="vwrap" style="width:151px"><video src="media/media1.mp4" data-autoplay muted loop playsinline style="left:-296px"></video></div><figcaption>L-shaped hallway</figcaption></figure>
+      <figure><div class="vwrap" style="width:355px"><video src="media/media2.mp4" data-autoplay muted loop playsinline style="left:-296px"></video></div><figcaption>T-shaped hallway (two arrays)</figcaption></figure>
+    </div>
+      <div class="col lr-panel">
+        <ul class="small">
+          <li>Tile orientations recomputed from the UE position alone: the <b>focused band follows the UE</b></li>
+          <li>L-shaped: one reflection around the corner; T-shaped: two arrays in sequence into the side branch</li>
+          <li>Each frame is a static solution for <b>one user at a known position</b>, with unconstrained rotation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== LIMITS (transition WHAT -> HOW) ============================== -->
+<section data-id="geo-limits" data-min="0.75">
+  <h2 class="title">Limits of the geometric rule motivate learned control</h2>
+  <div class="body">
+    <div class="cols" style="--cols:1fr 1fr 1fr">
+      <div class="col"><div class="block"><div class="bt">1. Servo limits</div><div class="bb">The rule assumes unconstrained rotation; it gives no configuration when the required angles are out of range.</div></div></div>
+      <div class="col"><div class="block"><div class="bt">2. Phase</div><div class="bb">It aligns path directions but not lengths; relative phases are uncontrolled. <i>Not addressed later: it remains a limitation.</i></div></div></div>
+      <div class="col"><div class="block"><div class="bt">3. One static user</div><div class="bb">It serves one UE at a known position, not several moving users sharing an array.</div></div></div>
+    </div>
+    <div class="transition"><div class="ans"><b>Answered (WHAT):</b> the tile array and the bisector rule steer signals around corners: +53.0 / +87.5 dB for one static user.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> how to act within servo limits, optimize received power rather than geometric alignment, and serve several moving users? &rarr; learned focal points.</div></div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     Learning parts: flat MARL (HOW) and hierarchical MARL (HOW)
+     Track: Learning. Slides div-marl ... alloc-buys. Sources: old Beamer 04_marl.tex, 05_hmarl.tex;
+     numbers from dissertation data/section4.tex, section5.tex.
+     =================================================================== -->
+<style>
+section[data-id="mamdp"] .body ul li{margin:.32em 0}
+section[data-id="mamdp"] .sub2{display:block;font-size:var(--fs-foot);color:var(--midgray)}
+section[data-id="marl-setup"] table.bt td{padding:8px 12px;vertical-align:top}
+.reveal .slides section[data-id="mappo"] .body{justify-content:flex-start;padding-top:6px}
+section[data-id="mappo"] .cols img{max-height:300px;width:auto;max-width:100%;display:block;margin:0 auto}
+section[data-id="mappo"] .lr-panel{padding:10px 18px}
+section[data-id="mappo"] .obj{background:var(--maroonlight);border:1.5px solid var(--maroon);border-radius:7px;padding:10px 20px 14px 20px;margin-top:16px}
+section[data-id="mappo"] .obj .eq{text-align:center;font-size:27px;margin:0 0 8px 0;padding-bottom:8px;border-bottom:1px solid rgba(80,0,0,.25)}
+section[data-id="mappo"] .obj .terms{display:grid;grid-template-columns:auto auto auto;justify-content:stretch;column-gap:0}
+section[data-id="mappo"] .obj .term{padding:2px 14px 0 14px;border-left:1px solid rgba(80,0,0,.25)}
+section[data-id="mappo"] .obj .term:first-child{border-left:0;padding-left:0}
+section[data-id="mappo"] .obj .term:last-child{padding-right:0}
+section[data-id="mappo"] .obj .term{text-align:center}
+section[data-id="mappo"] .obj .tt{font-weight:600;color:var(--maroon);font-size:21px}
+section[data-id="mappo"] .obj .te{font-size:19px;margin:8px 0 7px 0;white-space:nowrap}
+section[data-id="mappo"] .obj .ts{text-align:left;display:block;width:0;min-width:100%;font-size:16px;color:var(--midgray);line-height:1.35}
+section[data-id="marl-result"] .maps{display:flex;align-items:flex-end;justify-content:center;gap:8px}
+section[data-id="marl-result"] .maps figure img{height:292px}
+section[data-id="marl-result"] .maps figcaption{font-size:var(--fs-foot);color:var(--text);line-height:1.25}
+section[data-id="marl-result"] .vidbox{width:150px;height:292px;overflow:hidden;border-radius:4px}
+section[data-id="marl-result"] .vidbox video{width:150px;height:292px;object-fit:cover;object-position:54.3% 50%}
+section[data-id^="rob-"] .figbig img{width:100%}
+section[data-id="flat-limit"] .grid{display:grid;grid-template-columns:repeat(9,30px);gap:5px;justify-content:center}
+section[data-id="flat-limit"] .grid div{height:24px;border-radius:3px}
+section[data-id="flat-limit"] .gl{display:grid;grid-template-columns:repeat(9,30px);gap:5px;justify-content:center;font-size:var(--fs-tiny);color:var(--midgray);text-align:center;margin-top:4px}
+section[data-id="flat-limit"] .ul{display:flex;justify-content:center;gap:34px;font-size:var(--fs-foot);font-weight:600;margin-top:6px}
+section[data-id="hmamdp"] .bb .katex-display{margin:.6em 0}
+section[data-id="hmamdp"] .block .bb{padding-top:18px;padding-bottom:20px}
+section[data-id="hmamdp"] .block .bt{height:44px;line-height:44px;padding-top:0;padding-bottom:0;box-sizing:border-box;white-space:nowrap}
+section[data-id="hmarl-train-method"] .bb .katex-display{margin:.3em 0}
+section[data-id="hmarl-setup"] table.bt td{padding:5px 10px;vertical-align:top}
+section[data-id="hmarl-deploy"] table.bt td, section[data-id="hmarl-training"] table.bt td{padding:3px 12px}
+section[data-id="energy-maps"] .row{display:flex;align-items:flex-end;justify-content:center;gap:10px}
+section[data-id="energy-maps"] .row figure img{height:330px}
+section[data-id="energy-maps"] .row figcaption{font-size:var(--fs-foot);color:var(--text)}
+section[data-id="energy-maps"] .vidbox{width:262px;height:330px;overflow:hidden;border-radius:4px;background:#000}
+section[data-id="energy-maps"] .vidbox video{width:262px;height:330px;object-fit:cover;object-position:50% 50%}
+section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;background:#FBFAF8;padding:14px 20px;display:flex;flex-direction:column;justify-content:center;align-self:stretch}
+section[data-id] .lr-fill{display:flex;flex-direction:column;justify-content:space-between;align-self:stretch}
+section[data-id] .lr-fill>.block,section[data-id] .lr-stretchblock{display:flex;flex-direction:column}
+section[data-id] .lr-stretchblock{align-self:stretch;margin:0!important}
+section[data-id] .lr-stretchblock>.bb{flex:1;display:flex;flex-direction:column;justify-content:center}
+section[data-id="rob-size"] .midnum{font-size:25px}
+</style>
+
+<section class="divider" data-id="div-marl" data-num="4" data-title="Multi-Agent RL Control" data-part="HOW" data-question="How can learned agents steer the array for moving users?"></section>
+
+<!-- ============================ MA-MDP ============================ -->
+<section data-id="mamdp" data-min="1.25">
+  <h2 class="title">MA-MDP: each agent moves the focal point of one segment</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:61% 1fr">
+      <div class="col">
+        <p class="small" style="margin-bottom:.3em">Array partitioned into $L$ disjoint segments $\mathcal{T}_l$; agent $l$ controls focal point $f_{l,t}\in\mathbb{R}^3$.</p>
+        <ul class="small">
+          <li><b>State:</b> $s_t=[u_{1,t},\dots,u_{K,t},\,r_{1,t},\dots,r_{L,t},\,f_{1,t},\dots,f_{L,t}]$<span class="sub2">user positions, segment centers, focal points</span></li>
+          <li><b>Local observation:</b> $o_{l,t}=[u_{b_l,t},\,r_{l,t},\,f_{l,t}]$; assigned user $b_l$ <span class="alert">fixed in advance</span></li>
+          <li><b>Action:</b> $a_{l,t}\in\mathbb{R}^3$, $\|a_{l,t}\|_\infty\le\delta_{\max}$, $\;f_{l,t+1}=f_{l,t}+a_{l,t}$</li>
+          <li><b>Shared reward:</b> $R(s_t,a_t)=\frac{1}{K}\sum_{k=1}^{K}P_{r,k}(s_t,a_t)$ (RSSI)</li>
+          <li>Focal points clipped to $\mathcal{F}_l$, angles to $\pm30^\circ$: every action feasible</li>
+        </ul>
+        <p class="foot" style="margin:.5em 0 0 0"><b>Run time:</b> positions only; <b>training:</b> received power as the reward. No pilot-based CSI estimation.</p>
+      </div>
+      <div class="col lr-fill">
+        <div class="block" style="margin-top:0"><div class="bt">Dimensionality reduction</div><div class="bb center">
+          $$R_{\text{complexity}}=\frac{2N_rN_c}{3L}$$
+          <div class="bignum">14&times;</div><span class="numcap">fewer control variables for $N_rN_c=63$ tiles, $K=L=3$</span>
+        </div></div>
+        <div class="small" style="margin-top:14px"><b>Answers the geometric limits:</b>
+          <div class="foot" style="line-height:1.45;margin-top:2px">servo limits &rarr; clipped actions<br>alignment &rarr; received-power reward<br>several users &rarr; one agent per segment</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ A3 animation ============================ -->
+<section data-id="anim-marl" data-min="0.75">
+  <h2 class="title">Flat MARL in motion: fixed columns, moving focal points</h2>
+  <div class="body">
+    <div class="anim" style="height:470px"><canvas data-anim="marl"></canvas><div class="illus">Illustrative</div></div>
+    <p class="fragment foot gray" data-anim-step="1" style="margin:8px 0 0 0;text-align:center">Here each user's columns span the whole aperture; with arrays on different walls, the assignment would matter.</p>
+  </div>
+</section>
+
+<!-- ============================ MAPPO / CTDE ============================ -->
+<section data-id="mappo" data-min="0.75">
+  <h2 class="title">Training with MAPPO under CTDE</h2>
+  <div class="body">
+    <div class="cols" style="--cols:47% 1fr;align-items:center">
+      <div class="col"><img src="assets/img/crops/learning_ctde.png" alt="CTDE diagram: local actors exchange actions and observations with the ray-traced scene; a centralized critic sees the global state and reward during training only and supplies advantages."></div>
+      <div class="col lr-panel">
+        <ul class="small">
+          <li><b>CTDE</b> mitigates non-stationarity: global critic in training, local actors at deployment</li>
+          <li><b>Execution:</b> each actor uses only its local observation; no inter-agent communication</li>
+          <li>Actor and critic: small MLPs, Adam optimizer <span class="foot gray">(settings in backup)</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="obj">
+      <div class="eq">$L(\psi_l,\xi)=L^{\mathrm{CLIP}}(\psi_l)-c_1\,L^{\mathrm{VF}}(\xi)+c_2\,H[\pi_{\psi_l}](o_t^l)$</div>
+      <div class="terms">
+        <div class="term"><div class="tt">Clipped surrogate</div>
+          <div class="te">$L^{\mathrm{CLIP}}(\psi_l)=\mathbb{E}_t\big[\min\big(\rho_t^l\,\mathrm{Adv}_t^l,\ \mathrm{clip}(\rho_t^l,1{-}\epsilon,1{+}\epsilon)\,\mathrm{Adv}_t^l\big)\big]$</div>
+          <div class="ts">ratio $\rho_t^l=\pi_{\psi_l}/\pi_{\psi_{\mathrm{old},l}}$; advantage $\mathrm{Adv}_t^l=\mathrm{Adv}(s_{\mathrm{global},t},a_t^l)$ from the critic; clipping limits each actor update</div></div>
+        <div class="term"><div class="tt">Value loss</div>
+          <div class="te">$L^{\mathrm{VF}}(\xi)=\mathbb{E}_t\big[(V_\xi(s_{\mathrm{global},t})-V_{\mathrm{target},t})^2\big]$</div>
+          <div class="ts">mean squared error of the centralized critic to the empirical return</div></div>
+        <div class="term"><div class="tt">Entropy</div>
+          <div class="te">$H[\pi_{\psi_l}](o_t^l)=-\mathbb{E}\big[\log\pi_{\psi_l}(a\mid o_t^l)\big]$</div>
+          <div class="ts">bonus that keeps exploring focal points</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Setup ============================ -->
+<section data-id="marl-setup" data-min="0.5">
+  <h2 class="title">Setup: 60 GHz L-shaped hallway with three users</h2>
+  <div class="body">
+    <div class="cols" style="--cols:300px 1fr;align-items:center">
+      <figure><img src="assets/img/ch4/p2-hallway_L-01.png" alt="Top view of the L-shaped hallway with AP, corner reflector, obstacle and UE region" style="height:440px"><figcaption>Layout; dimensions in m</figcaption></figure>
+      <table class="bt">
+        <tbody>
+          <tr><td><b>Carrier</b></td><td>60&nbsp;GHz downlink, NLOS</td></tr>
+          <tr><td><b>Hallway</b></td><td>vertical segment about 15&nbsp;m; 20&nbsp;m end to end; both ends open</td></tr>
+          <tr><td><b>AP</b></td><td>4 antennas at $(9.5,-1.5)$, 2.5&nbsp;m high, 5.0&nbsp;dBm</td></tr>
+          <tr><td><b>Reflector</b></td><td>$7\times9=63$ hexagonal tiles at the corner $(11.2,-5.7)$</td></tr>
+          <tr><td><b>Users</b></td><td>3 single-antenna UEs in the shadowed region $(-6.0,-6.2)$ to $(2.0,-4.25)$</td></tr>
+          <tr><td><b>Obstacle</b></td><td>wooden oval, 1.8&nbsp;m high, at $(3.0,-5.5)$</td></tr>
+          <tr><td><b>Materials</b></td><td>plasterboard walls, board ceiling, concrete floor (ITU-R P.2040)</td></tr>
+          <tr><td><b>Episode start</b></td><td>tile angles uniform in $[-\pi/6,\pi/6]$</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Training ============================ -->
+<section data-id="marl-training" data-min="0.5">
+  <h2 class="title">Multi-agent decomposition trains faster and higher</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr;align-items:center">
+      <figure><img src="assets/img/ch4/p2-training_true.png" alt="Average training reward over 3,000 episodes for beam-focusing-ma, beam-focusing-sa and column-based-ma"><figcaption>Average training reward over 3,000 episodes (normalized reward units); shaded: spread across runs</figcaption></figure>
+      <div class="col small lr-panel">
+        <p style="margin-bottom:.2em">Three learned controllers:</p>
+        <ul>
+          <li><b>beam-focusing-ma:</b> one agent per user, every tile independent</li>
+          <li><b>beam-focusing-sa:</b> one agent selects all focal points</li>
+          <li><b>column-based-ma:</b> one shared azimuth per column</li>
+        </ul>
+        <p style="margin-top:.5em">Converged reward: <b>about 42</b> (ma) vs. about 27 (sa) and 27 (column)</p>
+        <p class="foot" style="margin:0">Column-based: about 35% lower but stable, so the framework also fits a lower-cost array</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Main result ============================ -->
+<section data-id="marl-result" data-min="1.25">
+  <h2 class="title">Multi-agent focusing: +20.7 dB over a static flat reflector</h2>
+  <div class="body">
+    <div class="maps">
+      <figure><img src="assets/img/ch4/p2-viz_no_reflector-01.png" alt="RSSI map, no reflector"><figcaption>None<br><b>&minus;108.2</b></figcaption></figure>
+      <figure><img src="assets/img/ch4/p2-viz_flat_reflector-01.png" alt="RSSI map, flat reflector"><figcaption>Flat<br><b>&minus;90.1</b></figcaption></figure>
+      <figure><img src="assets/img/ch4/p2-viz_focus_sa_reflector-01.png" alt="RSSI map, single-agent focusing"><figcaption>SA focus<br><b>&minus;74.22</b></figcaption></figure>
+      <figure><img src="assets/img/ch4/p2-viz_col_ma_reflector-01.png" alt="RSSI map, multi-agent column control"><figcaption>MA column<br><b>&minus;72.71</b></figcaption></figure>
+      <figure><img src="assets/img/ch4/p2-viz_focus_ma_reflector-01.png" alt="RSSI map, multi-agent focusing"><figcaption class="maroon"><span class="maroon">MA focus</span><br><b class="maroon">&minus;69.4</b></figcaption></figure>
+      <figure><img src="assets/img/aboutme/ch4_colorbar.png" alt="color scale -60 to -100 dBm" style="height:280px"><figcaption>dBm<br>&nbsp;</figcaption></figure>
+      <figure style="margin-left:18px"><div class="vidbox"><video src="media/hallway_focus_f3_e4tot100_eval_pruned_hallway_L_0.mp4" data-autoplay muted loop playsinline></video></div><figcaption>Moving users<br>(MA focus)</figcaption></figure>
+    </div>
+    <ul class="small" style="margin-top:12px">
+      <li><b>RSSI-map average</b> (dBm) per configuration; MA focus: <b>+38.8&nbsp;dB</b> vs. none, <b>+20.7&nbsp;dB</b> vs. flat, <b>+4.8&nbsp;dB</b> vs. single agent</li>
+      <li>Users move every 4 steps (3-step adaptation window); MA focus typically recovers within one simulation step</li>
+      <li>Baselines: static reflectors and learned variants, not a position-tracking geometric rule</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ Robustness (split of old 25) ============================ -->
+<section data-id="rob-users" data-min="0.5">
+  <h2 class="title">Robustness: user count</h2>
+  <div class="body">
+    <div class="chaptag">Policy trained on 3 users and 63 tiles, evaluated without retraining. Temporal-average RSSI at the users over the 300-step trace (not the map averages of the previous slide).</div>
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <figure class="figbig"><img src="assets/img/ch4/p2-multiusers.png" alt="RSSI over time for 2, 3 and 4 users"><figcaption>RSSI vs. time step for 2, 3 and 4 users</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum">&minus;67.33 / &minus;67.60 / &minus;68.33</div><span class="numcap">dBm for 2 / 3 / 4 users</span></div>
+        <ul class="small" style="margin-top:16px">
+          <li>1.0&nbsp;dB drop from 2 to 4 users</li>
+          <li>Fewer users means more tiles per user</li>
+          <li>Same policy, no retraining</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-id="rob-size" data-min="0.5">
+  <h2 class="title">Robustness: array size</h2>
+  <div class="body">
+    <div class="chaptag">Policy trained on 3 users and 63 tiles, evaluated without retraining. Temporal-average RSSI at the users over the 300-step trace.</div>
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <figure class="figbig"><img src="assets/img/ch4/p2-reflector_size.png" alt="RSSI over time for arrays of 45, 63, 81 and 99 tiles"><figcaption>RSSI vs. time step for 45, 63, 81 and 99 tiles</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum" style="font-size:28px">&minus;68.43 / &minus;67.60 / &minus;67.12 / &minus;66.80</div><span class="numcap">dBm for 45 / 63 / 81 / 99 tiles</span></div>
+        <ul class="small" style="margin-top:16px">
+          <li>Monotonic, with diminishing returns</li>
+          <li>Agents act on focal points, so one policy runs on every array size</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-id="rob-noise" data-min="0.5">
+  <h2 class="title">Robustness: user-position noise</h2>
+  <div class="body">
+    <div class="chaptag">Gaussian noise $\sigma$ on user positions in training and evaluation (noise-matched training). Results: temporal-average RSSI at the users over the 300-step trace.</div>
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <figure class="figbig"><img src="assets/img/ch4/p2-training_noise.png" alt="Training reward under position noise of 0, 0.1, 0.3, 0.5 and 1.0 m"><figcaption>Training reward under position noise</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum">$\sigma\le0.3$&nbsp;m</div><span class="numcap">within 0.54&nbsp;dB of noise-free</span></div>
+        <ul class="small" style="margin-top:16px">
+          <li>0.5&ndash;1.0&nbsp;m: about 4.6&nbsp;dB lower</li>
+          <li>Indoor localization (UWB, mmWave radar) can provide sub-meter accuracy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Flat limit + transition ============================ -->
+<section data-id="flat-limit" data-min="0.75">
+  <h2 class="title">Why flat MARL is not enough: a fixed tile-to-user assignment</h2>
+  <div class="body">
+    <div class="cols" style="--cols:60% 1fr;align-items:center">
+      <ul class="small">
+        <li>Focal points are learned, but the <span class="alert">tile-to-user assignment is fixed</span> in advance (columns 1, 4, 7 &rarr; user 1)</li>
+        <li>In this hallway it costs nothing measurable: two groupings both give $-67.60$&nbsp;dBm, because each user's tiles span the whole aperture</li>
+        <li>It matters when segments differ in geometry (contiguous parts of an array, arrays on different walls) or users $\neq$ segments</li>
+        <li>Choosing it is <b>discrete and combinatorial</b> ($K^L$ options); continuous focal-point actors are not designed for it</li>
+      </ul>
+      <div class="col">
+        <p class="foot center" style="margin-bottom:6px">Fixed column assignment</p>
+        <div class="grid"><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div></div>
+        <div class="gl"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div>
+        <div class="ul"><span style="color:#2F6DB5">user 1</span><span style="color:#2E7D32">user 2</span><span style="color:#B5651D">user 3</span></div>
+      </div>
+    </div>
+    <div class="transition"><div class="ans"><b>Answered (HOW):</b> decentralized agents steer focal points from user positions, trained on received power: +20.7&nbsp;dB over a static flat reflector.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> when segments differ in geometry, which segment should serve which user, and when should that change? &rarr; hierarchical MARL.</div></div>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<section class="divider" data-id="div-hmarl" data-num="5" data-title="Hierarchical Multi-Agent RL" data-part="HOW" data-question="How should several users share the array, and when should the assignment change?"></section>
+
+<!-- ============================ Fixed -> learned ============================ -->
+<section data-id="fixed-to-learned" data-min="0.5">
+  <h2 class="title">From fixed assignment to learned allocation</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:55% 1fr">
+      <div class="col small">
+        <p><b>Two corner arrays:</b> a user can be served by segments with very different geometry, so the assignment now matters.</p>
+        <p style="margin-bottom:.2em">Serving $K$ users with $L$ segments needs <b>two coupled decisions</b>:</p>
+        <ol>
+          <li><b>Which user should each segment serve?</b><br><span class="foot">discrete, couples the segments, should change only when the geometry changes</span></li>
+          <li><b>Where should each segment focus?</b><br><span class="foot">continuous, per segment, rate-limited by servo actuation</span></li>
+        </ol>
+      </div>
+      <div class="block lr-stretchblock"><div class="bt">Why the assignment is hard</div><div class="bb small">
+        <ul style="margin-bottom:0">
+          <li>$|\mathcal{B}|=K^L$: <b>16</b> assignments for $K=2$, <b>256</b> for $K=4$ ($L=4$)</li>
+          <li>A poor assignment leaves a user served only by residual multipath</li>
+          <li>Servo limits: non-convex reachable set</li>
+          <li>State: noisy position estimates; no pilot-based CSI estimation</li>
+        </ul></div></div>
+    </div>
+    <div class="takeaway">Make the user-to-segment assignment a learned decision on its own, slower timescale.</div>
+  </div>
+</section>
+
+<!-- ============================ Hierarchy ============================ -->
+<section data-id="hierarchy" data-min="0.75">
+  <h2 class="title">Two-timescale hierarchy: slow allocation, fast focusing</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:62% 1fr">
+      <img src="assets/img/crops/learning_hierarchy.png" alt="Hierarchy: a high-level allocator every T slots emits the assignment vector b to L segment agents, each reading its assigned user's position, its centroid and its focal point, applying a move every slot; user positions feed back to the allocator.">
+      <div class="col lr-fill">
+        <div><img src="assets/img/crops/learning_timeline.png" alt="Timeline: allocation decisions b0, b1, b2 every T slots on the high level; focal-point moves every slot on the low level" style="width:100%">
+        <p class="tiny gray" style="margin:2px 0 6px 0">slot = one control step; drawn for $T=4$, experiments use $T=10$</p></div>
+        <ul class="foot" style="font-size:19px">
+          <li>Allocator: global state, decision held for the window</li>
+          <li>Segments: masked local state, no inter-segment communication</li>
+          <li>Critics in training only; deployment runs $\pi_H$ and $\{\pi_{\psi_l}\}$</li>
+          <li><b>Run time:</b> positions only; <b>training:</b> received power as the reward</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ A4 animation ============================ -->
+<section data-id="anim-hmarl" data-min="0.75">
+  <h2 class="title">The hierarchy in motion: reassign every $T$ slots, refocus every slot</h2>
+  <div class="body">
+    <div class="anim" style="height:476px"><canvas data-anim="hmarl" data-opts='{"users":3}'></canvas><div class="illus">Illustrative</div></div>
+    <p class="foot gray center" style="margin:8px 0 0 0">Segment colors show the assignment; the allocation rule drawn here is a simple position-based stand-in for the learned allocator.</p>
+  </div>
+</section>
+
+<!-- ============================ HMA-MDP ============================ -->
+<section data-id="hmamdp" data-min="0.75">
+  <h2 class="title">HMA-MDP: one objective, a reward for each timescale</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="block" style="margin:0"><div class="bt">High level: allocation (every $T$ slots)</div><div class="bb small">
+        State $s_H=\{u_{1:K},\,r_{1:L},\,f_{1:L}\}$, action $b\in\mathcal{B}$<br>Reward: concave, every user counts
+        $$R_{\mathrm{sys}}=\frac1K\sum_{k=1}^{K}\ln\bigl(1+[\tilde P_k(t)]^+\bigr)$$
+        Trained on macro-steps: the discounted return inside each window</div></div>
+      <div class="block" style="margin:0"><div class="bt">Low level: focal points (every slot)</div><div class="bb small">
+        Masked state $s_{L,l}=\{u_{b_l},\,r_l,\,f_l\}$, $\|a_{l,t}\|_\infty\le\delta_{\max}$<br>Reward: assigned user's power + progress
+        $$R_l(t)=\frac{1}{P_{\mathrm{sc}}}\Bigl[\tilde P_{b_l}(t)+\bigl(\tilde P_{b_l}(t)-\tilde P_{b_l}(t{-}1)\bigr)\Bigr]$$
+        Second term: potential-based shaping ($\Phi=\tilde P_{b_l}$)</div></div>
+    </div>
+    <p class="foot" style="margin:28px 0 4px 0">Shared objective: $\max\ \mathbb{E}\bigl[\sum_{t}\gamma^{t}R_{\mathrm{sys}}(s(t),b(t))\bigr]$ s.t. $b(t)\in\mathcal{B}$ at $t\in\{0,T,2T,\dots\}$, $f_l(t)\in\mathcal{F}_l$, servo limits.</p>
+    <p class="foot" style="margin:0">$\tilde P_k$: shifted received power (dBm); $P_{\mathrm{sc}}$: scale (backup). Unlike flat MARL (clipping), a move that would push any tile past its limit is <b>rejected</b>.</p>
+  </div>
+</section>
+
+<!-- ============================ Training method ============================ -->
+<section data-id="hmarl-train-method" data-min="0.5">
+  <h2 class="title">Training under CTDE, with a geometric warm start</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:46% 1fr">
+      <div class="col small">
+        <p style="margin-bottom:.1em"><b>Low level: MAPPO</b></p>
+        <ul class="foot" style="font-size:20px">
+          <li>$L$ local actors $\pi_{\psi_l}(a_l\mid s_{L,l})$</li>
+          <li>One shared centralized critic $V_\xi(s_{\mathrm{global}},l)$, $s_{\mathrm{global}}=s_H$</li>
+          <li>GAE, clipped surrogate objective</li>
+        </ul>
+        <p style="margin:.4em 0 .1em 0"><b>High level: PPO on macro-steps</b></p>
+        <ul class="foot" style="font-size:20px">
+          <li>Own critic $V_{\xi_H}$ on the macro timescale</li>
+          <li>One advantage estimate per allocation</li>
+          <li>Factorized head: $LK$ logits instead of $K^L$ joint scores</li>
+        </ul>
+        <p class="foot" style="font-size:20px;margin:.5em 0 0 0"><b>One axis of prior strength:</b><br>$\alpha\equiv0$: <b>HMARL-NC</b> &nbsp;|&nbsp; warm start: <b>HMARL-C</b><br>$\alpha\to\infty$: <b>Compat-only</b> ($b_l=\arg\max_k C_{kl}$)</p>
+      </div>
+      <div class="block lr-stretchblock"><div class="bt">Compatibility prior (positions only)</div><div class="bb small">
+        $$C_{kl}=\exp\!\Bigl(-\frac{\|u_k-r_l\|}{d_0}\Bigr)\cos\!\Bigl(\frac{\vartheta_{kl}}{2}\Bigr)$$
+        $$z'_{l,k}=z_{l,k}(s_H)+\alpha(t)\,C_{kl}$$
+        <span class="foot">$\vartheta_{kl}$: bend angle at segment $l$ toward user $k$; $z$: allocator logits. $\alpha(t)>0$ only in an early warm-start phase, then $0$: <span class="alert">objective unchanged</span></span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Setup ============================ -->
+<section data-id="hmarl-setup" data-min="0.5">
+  <h2 class="title">Setup: ray-traced conference room and six controllers</h2>
+  <div class="body">
+    <div class="cols" style="--cols:27% 1fr">
+      <figure><img src="assets/img/ch5/conference_room-01.png" alt="Ray-traced conference room with AP outside the room and two corner arrays"><figcaption>AP outside the room; two corner arrays</figcaption></figure>
+      <div class="col">
+        <ul class="foot" style="font-size:19px;margin-bottom:6px">
+          <li>Sionna RT, Blender scene, ITU-R P.2040-4 materials; 60&nbsp;GHz, 5&nbsp;dBm; NLOS only</li>
+          <li>2 arrays &times; 63 tiles, $L=4$ segments (2 per array), servo limits $\pm30^\circ$</li>
+          <li>$K\in\{2,4\}$ users; training: users fixed within an episode, 5 seeds; evaluation: 300 slots, users move 30&nbsp;cm/slot</li>
+        </ul>
+        <table class="bt foot" style="font-size:19px">
+          <tbody>
+            <tr><td><b>HMARL-C</b></td><td>learned allocator + warm-start prior</td></tr>
+            <tr><td>HMARL-NC</td><td>same, no prior ($\alpha\equiv0$)</td></tr>
+            <tr><td>Compat-only</td><td>$b_l=\arg\max_k C_{kl}$, every $T$ slots</td></tr>
+            <tr><td>Static-MARL</td><td>flat MARL architecture retrained in this scene; fixed assignment</td></tr>
+            <tr><td>Centralized</td><td>one PPO agent, all focal points; no assignment</td></tr>
+            <tr><td>Random</td><td>assignment redrawn every slot (training floor)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Training curves ============================ -->
+<section data-id="hmarl-training" data-min="0.5">
+  <h2 class="title">Training: the warm-started allocator converges highest</h2>
+  <div class="body">
+    <div class="cols" style="--cols:57% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/training_4ue.png" alt="Training curves, four users, six controllers"><figcaption>Four users; mean &plusmn; 1 std, 5 seeds; prior off at episode 1,000</figcaption></figure>
+      <div class="col lr-panel">
+        <p class="foot" style="margin:0">Converged $G$ (final 200 episodes)</p>
+        <p class="tiny gray" style="margin:0 0 4px 0">$G$: per-episode sum of the normalized reward, averaged over all users</p>
+        <table class="bt">
+          <thead><tr><th></th><th class="num">2UE</th><th class="num">4UE</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>HMARL-C</td><td class="num">50.26</td><td class="num">46.00</td></tr>
+            <tr><td>Compat-only</td><td class="num">45.10</td><td class="num">39.81</td></tr>
+            <tr><td>HMARL-NC</td><td class="num">44.91</td><td class="num">33.06</td></tr>
+            <tr><td>Static-MARL</td><td class="num">43.91</td><td class="num">26.36</td></tr>
+            <tr><td>Centralized</td><td class="num">40.87</td><td class="num">20.42</td></tr>
+            <tr><td>Random</td><td class="num">27.00</td><td class="num">15.06</td></tr>
+          </tbody>
+        </table>
+        <ul class="foot" style="margin-top:8px">
+          <li>2UE: methods in a narrow band; 4UE: every adjacent pair separates</li>
+          <li>C vs. NC gap: 5.35 &rarr; 12.94, persisting after the prior is off</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Deployment ============================ -->
+<section data-id="hmarl-deploy" data-min="1.25">
+  <h2 class="title">Deployment with moving users (4 users)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:57% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_4ue_methods.png" alt="RSSI over 300 evaluation slots for five controllers, four users"><figcaption>Four users, 300 slots, 30&nbsp;cm/slot; mean across users, 5 seeds</figcaption></figure>
+      <div class="col lr-panel">
+        <p class="foot" style="margin:0 0 2px 0">Mean RSSI over 300 slots (dBm)</p>
+        <table class="bt">
+          <thead><tr><th></th><th class="num">2UE</th><th class="num">4UE</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>HMARL-C</td><td class="num">&minus;65.46</td><td class="num">&minus;66.62</td></tr>
+            <tr><td>Compat-only</td><td class="num">&minus;66.60</td><td class="num">&minus;68.50</td></tr>
+            <tr><td>HMARL-NC</td><td class="num">&minus;66.86</td><td class="num">&minus;70.16</td></tr>
+            <tr><td>Static-MARL</td><td class="num">&minus;67.29</td><td class="num">&minus;72.46</td></tr>
+            <tr><td>Centralized</td><td class="num">&minus;68.05</td><td class="num">&minus;74.56</td></tr>
+          </tbody>
+        </table>
+        <div class="center" style="margin-top:10px"><div class="midnum">&minus;72.46 &rarr; &minus;66.62 dBm</div><span class="numcap">fixed &rarr; learned assignment (4UE)</span></div>
+        <div class="cols" style="--cols:1fr 1fr;margin-top:8px;column-gap:10px">
+          <div class="center"><div class="midnum">+1.88 dB</div><span class="numcap">vs. Compat-only (geometric)</span></div>
+          <div class="center"><div class="midnum">+7.94 dB</div><span class="numcap">vs. Centralized (a bound)</span></div>
+        </div>
+        <p class="foot center" style="margin:8px 0 0 0">4UE std: 0.71&nbsp;dB vs. 1.39&ndash;1.74&nbsp;dB</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-id="energy-maps" data-min="0.5">
+  <h2 class="title">Where the energy goes (4 users)</h2>
+  <div class="body">
+    <div class="row">
+      <figure><img src="assets/img/ch5/allocator_output_00294-1.png" alt="RSSI map, HMARL-C, slot 294"><figcaption><b class="maroon">HMARL-C</b>, &minus;66.2 dBm</figcaption></figure>
+      <figure><img src="assets/img/ch5/no_compat_output_00294-1.png" alt="RSSI map, HMARL-NC, slot 294"><figcaption>HMARL-NC, &minus;68.3 dBm</figcaption></figure>
+      <figure><img src="assets/img/ch5/no_allocator_output_00294-1.png" alt="RSSI map, Centralized, slot 294"><figcaption>Centralized, &minus;73.6 dBm</figcaption></figure>
+      <figure><img src="assets/img/crops/learning_scale_ch5.png" alt="color scale -60 to -100 dBm" style="height:310px"><figcaption>&nbsp;</figcaption></figure>
+      <figure style="margin-left:12px"><div class="vidbox"><video src="media/alct_4ue_0.mp4" data-autoplay muted loop playsinline></video></div><figcaption>Learned allocator, 4-user run</figcaption></figure>
+    </div>
+    <p class="small center" style="margin:12px 0 2px 0">Narrow beams through the users (C) &rarr; wider spread (NC) &rarr; little focusing (Centralized)</p>
+    <p class="tiny gray center" style="margin:0">RSSI maps at evaluation slot 294; values are user averages at that slot, not 300-slot run means.</p>
+  </div>
+</section>
+
+<!-- ============================ Energy maps + video ============================ -->
+<section data-id="realloc-T" data-min="0.5">
+  <h2 class="title">How often to reallocate? An interior optimum at $T=10$ slots (4 users)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:55% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/t_ablation_training_curves.png" alt="Training curves for T = 1, 5, 10, 20, 50, 100"><figcaption>Four users, 63 tiles per array; black lines: converged reference levels</figcaption></figure>
+      <div class="col lr-panel">
+        <table class="bt" style="margin:0 auto">
+          <thead><tr><th>$T$</th><th class="num">1</th><th class="num">5</th><th class="num">10</th><th class="num">20</th><th class="num">50*</th><th class="num">100*</th></tr></thead>
+          <tbody><tr><td>$G$</td><td class="num">20.4</td><td class="num">39.4</td><td class="num" style="background:var(--maroonlight);font-weight:600">46.0</td><td class="num">37.7</td><td class="num">32.8</td><td class="num">26.4</td></tr></tbody>
+        </table>
+        <p class="tiny gray center" style="margin:2px 0 10px 0">*still rising at 3,000 episodes (lower bounds)</p>
+        <ul class="foot" style="font-size:20px">
+          <li><b>Small $T$:</b> a segment cannot tell a reassignment from a jump; the hierarchy collapses toward a flat policy</li>
+          <li><b>Large $T$:</b> stale focal configuration and few allocator decisions ($T=100$: one per episode)</li>
+          <li>$T=10$ also gives exactly 10 decisions per 100-slot episode</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ T ablation ============================ -->
+<section data-id="hmarl-deploy-2ue" data-min="0.5">
+  <h2 class="title">Flexible across user counts: the same ranking with 2 users</h2>
+  <div class="body">
+    <div class="chaptag">Same hierarchical architecture and training, configured for 2 users (16 possible assignments instead of 256)</div>
+    <div class="cols" style="--cols:47% 210px 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_2ue_methods.png" alt="RSSI over 300 slots, two users, five controllers"><figcaption>Two users, 300 slots, users move 30&nbsp;cm/slot; 5 seeds</figcaption></figure>
+      <figure><div class="vidbox"><video src="media/alct_2ue_0.mp4" data-autoplay muted loop playsinline></video></div><figcaption>Learned allocator, 2-user run</figcaption></figure>
+      <ul class="small lr-panel" style="margin:0;padding-left:40px">
+        <li>HMARL-C: +1.14&nbsp;dB vs. Compat-only, +2.59&nbsp;dB vs. Centralized</li>
+        <li>Only 16 assignments, most serve both users: narrower margins</li>
+        <li>Static-MARL dips: a fixed assignment cannot release a degraded path</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Aperture (split of old 36) ============================ -->
+<section data-id="aperture" data-min="0.5">
+  <h2 class="title">Operating regime: aperture (2 users)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_2ue_reflector_size.png" alt="RSSI CDF under HMARL-C for arrays of 5, 7, 9 and 11 rows"><figcaption>RSSI CDF under HMARL-C for 5, 7, 9, 11 rows</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum">&asymp;1.3 dB</div><span class="numcap">median gain for 45 &rarr; 99 tiles (2.2&times;)</span></div>
+        <ul class="small" style="margin-top:14px">
+          <li>7 rows (63 tiles) gives about two thirds of that span</li>
+          <li>Saturation: servo limits + feasibility rule</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Localization (split of old 36) ============================ -->
+<section data-id="localization" data-min="0.5">
+  <h2 class="title">Operating regime: localization (2 users)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_2ue_noise_obs.png" alt="RSSI CDF for localization error 0, 0.1, 0.3, 0.5, 1.0 and 2.0 m"><figcaption>RSSI CDF for $\sigma_{\mathrm{error}}\in\{0,0.1,0.3,0.5,1.0,2.0\}$&nbsp;m</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum">$\sigma_{\mathrm{error}}\approx0.1$ m</div><span class="numcap">near-optimal up to here</span></div>
+        <ul class="small" style="margin-top:14px">
+          <li>Several-dB loss at 0.3&ndash;0.5&nbsp;m; larger at 1.0 and 2.0&nbsp;m</li>
+          <li>Flat study tolerated &asymp;0.3&nbsp;m in a different setting; not directly comparable. Together: <b>decimeter-level</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Summary + transition ============================ -->
+<section data-id="alloc-buys" data-min="0.5">
+  <h2 class="title">What allocation buys, and what it cannot fix</h2>
+  <div class="body">
+    <ul class="small">
+      <li>Allocator every $T$ slots, decentralized focusing every slot; <b>run time:</b> positions only, <b>training:</b> received power as the reward</li>
+      <li>Choosing the assignment within this scene: $-72.46\to-66.62$&nbsp;dBm vs. the fixed split (4 users); the geometric prior helps only as a warm start</li>
+      <li>Larger arrays at the same site saturate: 2.2&times; tiles &rarr; only &asymp;1.3&nbsp;dB median</li>
+      <li>The controllers take the AP and array sites as given, so their benefit is bounded by that geometry</li>
+    </ul>
+    <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> learning the assignment raises 4-user mean RSSI from $-72.46$&nbsp;dBm (fixed split) to $-66.62$&nbsp;dBm, +1.88&nbsp;dB over the best geometric heuristic.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
+  </div>
+</section>
+
+<!-- ===================== Placement (WHERE) and Conclusions (WHICH) - track: Placement and close ===================== -->
+<style>
+section[data-id="replace-ap"] .flow{display:flex;align-items:center;justify-content:center;gap:0;margin:2px 0 18px 0}
+section[data-id="replace-ap"] .flow .bx{border:1.5px solid var(--maroon);border-radius:7px;padding:6px 14px;text-align:center;background:#fff;font-size:22px;line-height:1.25}
+section[data-id="replace-ap"] .flow .bx span{display:block;font-size:17px;color:var(--midgray)}
+section[data-id="replace-ap"] .flow .bx.on{background:var(--maroon);color:#fff}
+section[data-id="replace-ap"] .flow .bx.on span{color:#f1dede}
+section[data-id="replace-ap"] .flow .ar{width:46px;height:2.5px;background:var(--maroon);position:relative;margin:0 6px}
+section[data-id="replace-ap"] .flow .ar::after{content:"";position:absolute;right:-2px;top:-6px;border-left:10px solid var(--maroon);border-top:7px solid transparent;border-bottom:7px solid transparent}
+section[data-id="replace-ap"] .q{margin:0 0 12px 0;line-height:1.3}
+section[data-id="floorplans"] .fp{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:end;margin-bottom:16px}
+section[data-id="floorplans"] .fp img{height:215px;object-fit:contain}
+section[data-id="design-vector"] .katex-display{margin:4px 0}
+section[data-id="objective"] .katex-display{margin:2px 0}
+section[data-id="objective"] .bb .katex{font-size:1.0em}
+section[data-id="anim-pso"] .foot{margin-top:8px}
+section[data-id="methods-protocol"] dl{margin:0;font-size:22px;display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:9px;line-height:1.25}
+section[data-id="methods-protocol"] dt{font-style:italic;font-weight:600;color:var(--maroon);white-space:nowrap}
+section[data-id="methods-protocol"] dd{margin:0}
+section[data-id="convergence"] .cols{column-gap:30px}
+section[data-id="convergence"] h4{margin:0 0 4px 0;font-size:22px;font-weight:600;color:var(--maroon);text-transform:none;font-family:"Fira Sans",sans-serif}
+section[data-id="convergence"] ul{font-size:21px}
+section[data-id="p5-3aps"] table.bt{font-size:20px} section[data-id="p5-3aps"] table.bt td,section[data-id="p5-3aps"] table.bt th{padding:3px 9px}
+section[data-id="p5-3aps"] table.bt tr.sep td{border-top:1px solid var(--text)}
+section[data-id="p5-3aps"] .bars{display:grid;grid-template-columns:auto 1fr;column-gap:10px;row-gap:6px;align-items:center;font-size:18px;margin:6px 0 10px 0}
+section[data-id="p5-3aps"] .bars .lab{text-align:right;white-space:nowrap}
+section[data-id="p5-3aps"] .bars .bar{height:22px;background:var(--midgray);border-radius:2px;position:relative}
+section[data-id="p5-3aps"] .bars .bar span{position:absolute;left:100%;margin-left:6px;top:0;line-height:22px;white-space:nowrap}
+section[data-id="p5-3aps"] .bars .bar.b1{background:var(--maroon)} section[data-id="p5-3aps"] .bars .bar.b2{background:var(--maroonmid)}
+section[data-id="fewer-ap-office"] table.bt,section[data-id="fewer-ap-hrbb"] table.bt{font-size:20px}
+section[data-id="fewer-ap-office"] .leg span,section[data-id="fewer-ap-hrbb"] .leg span{font-weight:600}
+section[data-id="coverage-limits"] .maps{display:grid;grid-template-columns:1fr 1fr 44px;gap:12px;align-items:start}
+section[data-id="coverage-limits"] .maps img.sc{height:200px;width:auto;margin-top:16px}
+section[data-id="coverage-limits"] .alertblock li{margin:.5em 0}
+section[data-id="five-questions"] table.fq{border-collapse:collapse;width:100%;font-size:21px;line-height:1.28}
+section[data-id="five-questions"] table.fq tr{border-bottom:1px solid var(--rule)}
+section[data-id="five-questions"] table.fq{border-top:2px solid var(--text);border-bottom:2px solid var(--text)}
+section[data-id="five-questions"] table.fq td{padding:7px 10px;vertical-align:top;border:none}
+section[data-id="five-questions"] table.fq td.k{color:var(--maroon);font-weight:700;width:96px}
+section[data-id="publications"] ol{font-size:18.5px;margin-left:1.3em}
+section[data-id="publications"] li{margin:.42em 0;line-height:1.3}
+section[data-id="publications"] .st{color:inherit;font-weight:400}
+section[data-id="other-pubs"] ol{font-size:17.5px;margin-left:1.6em}
+section[data-id="other-pubs"] li{margin:.3em 0;line-height:1.28}
+.reveal .me{font-weight:700;color:var(--maroon);text-decoration:underline;text-underline-offset:2px}
+section[data-id="complete-picture"] .cpmap{position:relative}
+section[data-id="complete-picture"] .which-ov{position:absolute;left:80.75%;width:15.15%;padding-left:3px;box-sizing:border-box;top:85.23%;height:11.94%;background:rgb(240,245,240);display:flex;flex-direction:column;justify-content:center;font-size:15px;line-height:1.22;text-align:left;color:var(--text);white-space:nowrap}
+section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon);text-align:center;line-height:1.1;margin-bottom:28px}
+</style>
+
+<section class="divider" data-id="div-place" data-num="6" data-title="Joint AP and Reflector Placement" data-part="WHERE" data-question="Where should the access points and the reflector be installed?"></section>
+
+<!-- old 38 -->
+<section data-id="replace-ap" data-min="0.75">
+  <h2 class="title">Can a passive reflector replace an access point?</h2>
+  <div class="body">
+    <div class="cols" style="--cols:55% 1fr">
+      <div class="col">
+        <ul style="font-size:23.5px">
+          <li>So far, AP and reflector were <b>installed</b> in advance: gain bounded by the mounting site</li>
+          <li>Same tile array and focal-point steering; mechanical steering is band-independent, so we study <b>indoor Wi-Fi at 5.18&nbsp;GHz</b>, where wall loss sets the AP count</li>
+          <li>Each added AP: cabling, power, a license, channel budget</li>
+          <li>New question, new tools: positions are <b>design variables</b>; the reflector, a <b>passive reflective surface (PRS)</b>, is configured once at installation (one focal-point pair, no run-time controller); objective: lower-tail priority coverage, solved once per building</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="flow"><div class="bx"><b>Operation</b><span>gain bounded by<br>the mounting site</span></div><div class="ar"></div><div class="bx on"><b>Placement</b><span>where to install</span></div></div>
+        <div class="block"><div class="bt">Two placement questions</div><div class="bb small">
+          <p class="q"><b>(a)</b> At a fixed AP count, does a jointly optimized reflector improve priority-region coverage without degrading floor-wide coverage?</p>
+          <p class="q" style="margin-bottom:2px"><b>(b)</b> Does that improvement reduce the number of APs needed to meet the coverage target?</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- old 39 -->
+<section data-id="floorplans" data-min="0.5">
+  <h2 class="title">Two floorplans with operator-defined priority maps</h2>
+  <div class="body">
+    <div class="fp">
+      <figure><img src="assets/img/ch6/split_building_office_small.png" alt="Office floorplan"><figcaption>Office, $30\times30$&nbsp;m</figcaption></figure>
+      <figure><img src="assets/img/ch6/office-priority-map.png" alt="Office priority map"><figcaption>Office priority map $\mathbf{W}$</figcaption></figure>
+      <figure><img src="assets/img/ch6/building_hrbb.png" alt="HRBB floorplan"><figcaption>HRBB lab floor, $40\times40$&nbsp;m</figcaption></figure>
+      <figure><img src="assets/img/ch6/hrbb-priority-map.png" alt="HRBB priority map"><figcaption>HRBB priority map $\mathbf{W}$</figcaption></figure>
+    </div>
+    <div class="cols" style="--cols:53% 1fr">
+      <div class="col"><ul class="small">
+        <li>Priority weight $w_u&gt;1$ on rooms that need service, $w_u=1$ elsewhere; weights steer the optimizer only</li>
+        <li>Office: high-priority perimeter rooms shadowed by walls; HRBB: high-priority central block ringed by a corridor</li>
+      </ul></div>
+      <div class="col"><ul class="small">
+        <li>5.18&nbsp;GHz, 20&nbsp;dBm, concrete walls; Sionna RT, $10^6$ rays per AP, $1\times1$&nbsp;m grid at 1.5&nbsp;m</li>
+        <li>Target: priority-region P5 $\ge-65$&nbsp;dBm (about 95% of priority locations)</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- old 40 -->
+<section data-id="design-vector" data-min="0.75">
+  <h2 class="title">Design vector: AP poses, wall position, focal points</h2>
+  <div class="body">
+    <div class="cols" style="--cols:45% 1fr">
+      <div class="col">
+        <figure><img src="assets/img/ch6/reflector.png" alt="Reflector tiles and focal points" style="height:180px"><figcaption>$7\times9=63$ hexagonal metal tiles, $2.0\times2.0$&nbsp;m; tile pitch $\approx4$&ndash;$5\lambda$</figcaption></figure>
+        <div class="block" style="margin-top:10px"><div class="bt">Bisector rule with virtual focal points</div><div class="bb">
+          $$\hat{\mathbf{n}}_{ij}=\frac{\hat{\mathbf{e}}^{\,\mathrm{in}}_{ij}+\hat{\mathbf{e}}^{\,\mathrm{out}}_{ij}}{\big\|\hat{\mathbf{e}}^{\,\mathrm{in}}_{ij}+\hat{\mathbf{e}}^{\,\mathrm{out}}_{ij}\big\|_2}$$
+          <p class="small" style="margin:0">Unit vectors from tile $(i,j)$ toward $\mathbf{f}_1$, $\mathbf{f}_2$; $\mathbf{f}_1=$ AP, $\mathbf{f}_2=$ user gives the bisector rule.</p>
+        </div></div>
+      </div>
+      <div class="col">
+        <ul class="small">
+          <li>AP $n$: position $\mathbf{p}_n$ at ceiling height $h_{\mathrm{ceil}}=3.8$&nbsp;m; downward boresight $\mathbf{o}_n=\mathbf{v}_n/\|\mathbf{v}_n\|_2$</li>
+          <li>Reflector centroid $(u_{\mathrm{ref}},v_{\mathrm{ref}})\in[0,1]^2$ on the mounting region $\mathcal{M}_{\mathrm{wall}}$ of one preselected wall</li>
+          <li>Virtual source $\mathbf{f}_1$, virtual target $\mathbf{f}_2$, set once at installation: 6 coordinates instead of $2N_rN_c=126$ tile angles</li>
+          <li>Feasible set $\mathcal{M}$: floorplan bounds, $d_{\min}=5$&nbsp;m AP separation (clipping, push-apart); tile angles clipped to $\pm30^\circ$</li>
+        </ul>
+        <div class="block" style="margin-top:12px"><div class="bt">Joint design vector ($5N+8$ free coordinates)</div><div class="bb">
+          $$\boldsymbol{\Theta}=\{\mathbf{p}_1,\mathbf{v}_1,\ldots,\mathbf{p}_N,\mathbf{v}_N,u_{\mathrm{ref}},v_{\mathrm{ref}},\mathbf{f}_1,\mathbf{f}_2\}$$
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- old 41 -->
+<section data-id="objective" data-min="0.5">
+  <h2 class="title">Objective: soft worst case plus floor-wide coverage</h2>
+  <div class="body">
+    <div class="cols" style="--cols:59% 1fr">
+      <div class="col">
+        <div class="block"><div class="bt">Strongest-server power, penalty, and objective</div><div class="bb">
+          $$\begin{aligned}
+          P_{u,\mathrm{net}}&=\max_{n}P_{u,n}(\boldsymbol{\Theta})\\[2pt]
+          s_u&=\tfrac{x_u-\mathrm{floor}_{\mathrm{dBm}}}{\mathrm{ceil}_{\mathrm{dBm}}-\mathrm{floor}_{\mathrm{dBm}}},\quad p_u=1-\min(s_u,1)\\[2pt]
+          \mathcal{L}_{\mathrm{softmin}}&=T_{\mathrm{sm}}\Big[\log\sum_{u\in\mathcal{U}}w_u e^{p_u/T_{\mathrm{sm}}}-\log\sum_{u\in\mathcal{U}}w_u\Big]\\[2pt]
+          \mathcal{L}_{\mathrm{coverage}}&=-\frac{1}{|\mathcal{U}|}\sum_{u\in\mathcal{U}}\sigma\Big(\frac{x_u-\gamma_{\mathrm{SLA}}}{T_{\mathrm{cov}}}\Big)\\[2pt]
+          \mathcal{L}_{\mathrm{total}}&=\alpha\,\mathcal{L}_{\mathrm{softmin}}+\beta\,\mathcal{L}_{\mathrm{coverage}}
+          \end{aligned}$$
+        </div></div>
+      </div>
+      <div class="col">
+        <ul class="small">
+          <li>$P_{u,n}$: ray-traced radio map, incoherent sum of path powers; $x_u$: $P_{u,\mathrm{net}}$ in dBm</li>
+          <li>$T_{\mathrm{sm}}\to0$: worst-location penalty; $T_{\mathrm{sm}}\to\infty$: weighted mean</li>
+          <li>Weight $w_u$ acts as a penalty offset $T_{\mathrm{sm}}\ln w_u$</li>
+          <li>$\gamma_{\mathrm{SLA}}$: service target; the coverage term has a small weight: it encourages, but does not guarantee, floor-wide coverage</li>
+        </ul>
+        <p class="foot gray" style="margin-top:10px">Weights, temperatures and score limits: backup</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- old 42 -->
+<section data-id="two-phase" data-min="0.75">
+  <h2 class="title">Two-phase method: PSO search, then gradient refinement</h2>
+  <div class="body">
+    <div class="cols" style="--cols:35% 1fr">
+      <div class="col">
+        <p style="margin:0 0 4px 0;font-size:24px"><b>Why gradients alone fall short</b></p>
+        <ul class="small">
+          <li>Paths appear and vanish at visibility boundaries</li>
+          <li>Walls split the design space into separate good regions</li>
+          <li>Each location's gradient reaches only its serving AP</li>
+        </ul>
+        <p style="margin:14px 0 4px 0;font-size:24px"><b>PSO+GD</b></p>
+        <ul class="small">
+          <li>Phase 1: PSO; each particle is a full layout</li>
+          <li>Phase 2: Adam steps through differentiable Sionna RT</li>
+        </ul>
+      </div>
+      <div class="col">
+        <figure><img src="assets/img/ch6/detailed-workflow-01.png" alt="Two-phase workflow: PSO then gradient refinement" style="width:100%"></figure>
+        <div class="block" style="margin-top:14px"><div class="bt">Computational cost per run</div><div class="bb small">About 180&nbsp;s of serial work per run on one RTX 5070&nbsp;Ti GPU (swarm and gradient phases; settings in backup)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEW animation A5 -->
+<section data-id="anim-pso" data-min="0.75">
+  <h2 class="title">Intuition: a swarm of layouts, then gradient refinement</h2>
+  <div class="body">
+    <div class="anim" style="height:488px"><canvas data-anim="pso"></canvas><div class="illus">Illustrative</div></div>
+    <p class="foot gray center">Schematic floorplan and toy propagation model, not simulation output. Each particle = one layout: three APs, reflector position, focal target.</p>
+  </div>
+</section>
+
+<!-- SPLIT old 43 (a): methods and protocol -->
+<section data-id="methods-protocol" data-min="0.5">
+  <h2 class="title">Compared methods and evaluation protocol</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:54% 1fr">
+      <div class="col">
+        <div class="block" style="height:calc(100% - 14px)"><div class="bt">Compared methods</div><div class="bb">
+          <dl>
+            <dt>PSO+GD</dt><dd>proposed: swarm search, then gradient refinement</dd>
+            <dt>GA+GD</dt><dd>other global search (genetic algorithm), same refinement</dd>
+            <dt>PSO-only</dt><dd>no refinement: isolates the gradient phase</dd>
+            <dt>random+GD</dt><dd>random multi-start, no global search</dd>
+            <dt>Weighted $k$-means</dt><dd>priority-weighted distance, no propagation model (ignores walls)</dd>
+            <dt>Random</dt><dd>uniform sampling of the full design vector</dd>
+          </dl>
+        </div></div>
+      </div>
+      <div class="col">
+        <div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Evaluation protocol</div><div class="bb">
+          <ul class="small">
+            <li>Office and HRBB, with and without the PRS</li>
+            <li>1 to 7 APs; 5 seeds per configuration</li>
+            <li>Metrics: mean, P5 and minimum RSSI, over priority regions and over the whole floor</li>
+            <li>Target: priority-region P5 $\ge-65$&nbsp;dBm</li>
+            <li>Welch's $t$-test, 95% CIs; $p$-values uncorrected and descriptive</li>
+            <li>Each baseline removes or replaces one part; methods run at their own operating cost, not an equal number of evaluations</li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT old 43 (b): convergence results -->
+<section data-id="convergence" data-min="0.75">
+  <h2 class="title">Convergence of a representative run</h2>
+  <div class="body">
+    <p class="small gray center" style="margin-bottom:8px">Office, 3 APs, with PRS; dotted line: phase boundary at iteration 35</p>
+    <div class="cols" style="--cols:1fr 1fr">
+      <div class="col">
+        <h4>Objective (lower is better)</h4>
+        <figure><img src="assets/img/ch6/split_conv_objective.png" alt="Objective versus iteration for six methods" style="height:300px"></figure>
+        <ul>
+          <li>GA+GD leads early but levels off by about iteration 20; PSO+GD overtakes it by iteration 36</li>
+          <li>random+GD plateaus at a higher objective: initialization matters</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Priority-region P5 (higher is better)</h4>
+        <figure><img src="assets/img/ch6/split_conv_p5.png" alt="Priority-region P5 RSSI versus iteration for six methods" style="height:300px"></figure>
+        <ul>
+          <li>Refinement raises PSO+GD priority-region P5 from about $-61$ to $-57$&nbsp;dBm in this run</li>
+          <li>PSO-only is held after iteration 35: the gap is the refinement's share</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- old 44 -->
+<section data-id="p5-3aps" data-min="1.25">
+  <h2 class="title">At three APs, the reflector raises priority P5 by 4.8 dB</h2>
+  <div class="body">
+    <div class="cols" style="--cols:50% 1fr">
+      <div class="col">
+        <p class="small" style="margin-bottom:4px"><b>PSO+GD, Office, 3 APs</b> (RSSI in dBm, mean over 5 seeds)</p>
+        <table class="bt">
+          <thead><tr><th>Region</th><th>Statistic</th><th class="num">w/o PRS</th><th class="num">w/ PRS</th><th class="num">Gain (dB)</th></tr></thead>
+          <tbody>
+            <tr><td>Priority</td><td>Mean</td><td class="num">&minus;50.8</td><td class="num">&minus;47.5</td><td class="num">+3.3</td></tr>
+            <tr class="hl"><td></td><td>P5</td><td class="num">&minus;62.1</td><td class="num">&minus;57.3</td><td class="num maroon">+4.8</td></tr>
+            <tr><td></td><td>Min</td><td class="num">&minus;74.7</td><td class="num">&minus;65.2</td><td class="num">+9.5</td></tr>
+            <tr class="sep"><td>All</td><td>Mean</td><td class="num">&minus;50.0</td><td class="num">&minus;47.1</td><td></td></tr>
+            <tr><td></td><td>P5</td><td class="num">&minus;63.1</td><td class="num">&minus;58.0</td><td></td></tr>
+            <tr><td></td><td>Min</td><td class="num">&minus;75.0</td><td class="num">&minus;65.9</td><td></td></tr>
+          </tbody>
+        </table>
+        <p class="foot gray" style="margin-top:6px">P5 gain 95% CI 3.1&ndash;6.5&nbsp;dB; minimum gain 95% CI 5.8&ndash;13.2&nbsp;dB; P5, minimum and mean gains $p&lt;0.001$</p>
+      </div>
+      <div class="col">
+        <p class="small" style="margin-bottom:2px"><b>Priority-region P5 gain from the same PRS</b></p>
+        <div class="bars">
+          <div class="lab">PSO+GD</div><div><div class="bar b1" style="width:calc(4.8/4.8*80%)"><span>+4.8 dB</span></div></div>
+          <div class="lab">GA+GD</div><div><div class="bar b2" style="width:calc(4.1/4.8*80%)"><span>+4.1 dB</span></div></div>
+          <div class="lab">random+GD</div><div><div class="bar" style="width:calc(2.8/4.8*80%)"><span>+2.8 dB</span></div></div>
+          <div class="lab">PSO-only</div><div><div class="bar" style="width:calc(2.3/4.8*80%)"><span>+2.3 dB</span></div></div>
+          <div class="lab">weighted $k$-means</div><div><div class="bar" style="width:calc(1.3/4.8*80%)"><span>+1.3 dB</span></div></div>
+          <div class="lab">random</div><div><div class="bar" style="width:calc(1.0/4.8*80%)"><span>+1.0 dB</span></div></div>
+        </div>
+        <ul class="small">
+          <li>Refinement adds 4.1&nbsp;dB with the PRS (95% CI 2.0&ndash;6.2&nbsp;dB) but only 1.6&nbsp;dB without it ($p=0.07$)</li>
+          <li>PSO+GD vs. GA+GD: 1.6&nbsp;dB, not significant ($p=0.10$)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="takeaway">The gain is largest at the weakest locations, and how much of it is realized depends on the planning method.</div>
+  </div>
+</section>
+
+<section data-id="place-cdf" data-min="0.5">
+  <h2 class="title">Where the gain goes: the lower tail (Office, 3 APs)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch6/fig5H_cdf.png" alt="Office RSSI CDFs"><figcaption>Empirical RSSI CDFs, seed 0. (a)&ndash;(b) with PRS, all and priority regions; (c)&ndash;(d) without PRS; dashed: $-65$&nbsp;dBm</figcaption></figure></div>
+      <div class="col"><ul class="small">
+        <li>PSO+GD, priority regions: at most 2% below $-65$&nbsp;dBm with PRS, about 3% without</li>
+        <li>Minimum rises from about $-74.5$ to about $-65$&nbsp;dBm; median falls by about 1&nbsp;dB</li>
+        <li>With PRS, fraction below $-65$&nbsp;dBm: GA+GD 2%, PSO-only 3%, weighted $k$-means 4%, random+GD 5%, random 22%</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT old 45 (a): Office -->
+<section data-id="fewer-ap-office" data-min="0.5">
+  <h2 class="title">Office: with the reflector, one fewer AP meets the target (seed mean)</h2>
+  <div class="body">
+    <figure><img src="assets/img/ch6/split_office_scaling.png" alt="Office priority-region P5 versus AP count, with and without PRS" style="height:318px">
+      <figcaption class="leg">Priority-region P5 vs. AP count, mean $\pm1$ s.d., 5 seeds; dashed: $-65$&nbsp;dBm. <span style="color:#FF7F0E">PSO+GD</span>, <span style="color:#1F77B4">GA+GD</span>, <span style="color:#8C564B">PSO-only</span>, <span style="color:#D62728">weighted $k$-means</span>, <span style="color:#2CA02C">random+GD</span>, <span style="color:#9467BD">random</span></figcaption></figure>
+    <div class="cols" style="--cols:58% 1fr;margin-top:12px;align-items:center">
+      <div class="col"><ul class="small">
+        <li>3 APs $\to$ 2: at 2 APs, $-62.9$ vs. $-65.4$&nbsp;dBm (margin 2.1&nbsp;dB)</li>
+        <li>PSO-only needs 3 APs either way: refinement is necessary for the reduction</li>
+      </ul></div>
+      <div class="col">
+        <table class="bt"><thead><tr><th>Office, PSO+GD</th><th class="num">w/ PRS</th><th class="num">w/o PRS</th><th class="num">Fisher $p$</th></tr></thead>
+        <tbody><tr class="hl"><td>2 APs</td><td class="num">4/5</td><td class="num">1/5</td><td class="num">0.21</td></tr><tr><td>3 APs</td><td class="num">5/5</td><td class="num">5/5</td><td class="num">&ndash;</td></tr></tbody></table>
+        <p class="tiny gray" style="margin:2px 0 0 0">Seeds (of 5) meeting the target</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT old 45 (b): HRBB -->
+<section data-id="fewer-ap-hrbb" data-min="0.5">
+  <h2 class="title">HRBB: the same one-AP shift, with a smaller margin</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr;align-items:center">
+      <div class="col">
+        <figure><img src="assets/img/ch6/hrbb_p5_priority.png" alt="HRBB priority-region P5 versus AP count"><figcaption class="leg">HRBB, priority regions, mean $\pm1$ s.d., 5 seeds: PSO+GD <span style="color:#FF7F0E">with</span> / <span style="color:#1F77B4">without</span> PRS; gray: weighted $k$-means (no PRS)</figcaption></figure>
+      </div>
+      <div class="col"><div class="block" style="margin:0"><div class="bt">One fewer AP, smaller margin</div><div class="bb">
+        <ul class="small">
+          <li>2 APs $\to$ 1: $-64.3$&nbsp;dBm at 1 AP with the PRS (margin 0.7&nbsp;dB)</li>
+          <li>With five seeds the Fisher tests are not significant: a seed-mean result, not a deployment guarantee</li>
+        </ul>
+        <table class="bt" style="margin-top:10px"><thead><tr><th>HRBB, PSO+GD</th><th class="num">w/ PRS</th><th class="num">w/o PRS</th><th class="num">Fisher $p$</th></tr></thead>
+        <tbody><tr class="hl"><td>1 AP</td><td class="num">3/5</td><td class="num">0/5</td><td class="num">0.17</td></tr><tr><td>2 APs</td><td class="num">5/5</td><td class="num">5/5</td><td class="num">&ndash;</td></tr></tbody></table>
+        <p class="tiny gray" style="margin:2px 0 0 0">Seeds (of 5) meeting the target</p>
+      </div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- old 46 -->
+<section data-id="coverage-limits" data-min="0.75">
+  <h2 class="title">Coverage maps and limitations</h2>
+  <div class="body">
+    <div class="cols" style="--cols:53% 1fr">
+      <div class="col">
+        <div class="maps">
+          <figure><img src="assets/img/ch6/split_cov_pso_small.png" alt="PSO+GD coverage map"><figcaption>PSO+GD</figcaption></figure>
+          <figure><img src="assets/img/ch6/split_cov_k-mean_small.png" alt="Weighted k-means coverage map"><figcaption>Weighted $k$-means</figcaption></figure>
+          <img class="sc" src="assets/img/ch6/color-scale.png" alt="color scale">
+        </div>
+        <p class="foot gray" style="margin:4px 0 6px 0">Office, 3 APs (red), PRS on the north wall; color scale $-80$ to $-40$&nbsp;dBm</p>
+        <p class="small" style="margin:0">PSO+GD reaches shadowed rooms through corridors and doorways; weighted $k$-means leaves southeast shadows.</p>
+      </div>
+      <div class="col">
+        <div class="alertblock" style="margin-top:0"><div class="bt">Limitations</div><div class="bb"><ul class="small">
+          <li>Strongest-server received power only: no interference, SINR, capacity, or installed cost</li>
+          <li>Five seeds, two floorplans, one preselected wall per floor (an unquantified PRS advantage)</li>
+          <li>Known geometry, incoherent power sum, no measured reflector; new search per floorplan</li>
+        </ul></div></div>
+      </div>
+    </div>
+    <div class="transition"><div class="ans"><b>Answered (WHERE):</b> joint AP and reflector planning met the priority target with one fewer AP in both layouts (seed mean, small margins).</div><div class="arrow"></div><div class="opens"><b>Opens (WHICH):</b> how do placement and operation fit together, and which method fits which problem? &rarr; conclusions.</div></div>
+  </div>
+</section>
+
+<section class="divider" data-id="div-which" data-num="7" data-title="Conclusions" data-part="WHICH" data-question="Which method fits which problem, and what does the whole work answer?"></section>
+
+<!-- old 47 -->
+<section data-id="complete-picture" data-min="0.75">
+  <h2 class="title">The complete picture</h2>
+  <div class="body">
+    <figure class="cpmap"><img src="assets/img/crops/complete_picture.png" alt="Overview map with the answers to the five questions" style="width:100%;display:block">
+      <div class="which-ov"><div>Geometry: static user</div><div>RL: run-time control</div><div>PSO+GD: placement</div></div></figure>
+  </div>
+</section>
+
+<!-- old 48 -->
+<section data-id="limits-next" data-min="0.5">
+  <h2 class="title">Limitations and next steps</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Limitations</div><div class="bb"><ul class="small">
+        <li>Ray-traced simulation only; no fabricated-array validation</li>
+        <li>Received power, not rate; no interference model</li>
+        <li>Few scenes, user counts, seeds, and mounting walls</li>
+        <li>Path length and phase not controlled; no position-tracking geometric baseline for learned control</li>
+      </ul></div></div></div>
+      <div class="col"><div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Next steps</div><div class="bb"><ul class="small">
+        <li>Hardware-in-the-loop tests on servo arrays</li>
+        <li>Training under mobility and unseen localization error</li>
+        <li>SINR/rate-aware, multi-AP objectives</li>
+        <li>Run a placed layout with the learned controller (the dashed arrow)</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- old 49 -->
+<section data-id="five-questions" data-min="1.25">
+  <h2 class="title">Five questions, answered</h2>
+  <div class="body">
+    <table class="fq"><tbody>
+      <tr><td class="k">WHY</td><td><b>Spatial information suffices</b>: every part decides from user positions (run time) or a site model (planning), never from pilot-based CSI estimation; the cost is decimeter-level localization and site-model fidelity.</td></tr>
+      <tr><td class="k">WHAT</td><td><b>Focal points are the shared interface</b>: one abstraction steers the tiles in the geometric rule, both learned controllers, and the placement optimizer.</td></tr>
+      <tr><td class="k">HOW</td><td><b>Learned, decentralized policies</b> act within servo limits and are trained on received power for several moving users; when segments differ in geometry, learning the assignment beats a fixed split and the best geometric heuristic.</td></tr>
+      <tr><td class="k">WHERE</td><td><b>Where to install is a decision of its own</b>: a reflector configured once and placed jointly with the APs met the priority-coverage target with one fewer AP (seed mean, small margins).</td></tr>
+      <tr><td class="k">WHICH</td><td><b>Match the method to the problem.</b> Geometry for one static user or as a warm start; learned policies for run-time multi-user control; direct optimization (PSO + gradient refinement) for once-per-building placement.</td></tr>
+    </tbody></table>
+    <div class="takeaway">Together, the answers cover both stages, where to install and how to operate, through one focal-point interface and without pilot-based CSI estimation (ray-traced simulation); closing the loop between them is the next step.</div>
+  </div>
+</section>
+
+<!-- old 50 (+ one line for old 51, full list in backup) -->
+<section data-id="publications" data-min="0.5">
+  <h2 class="title">Publications from this dissertation</h2>
+  <div class="body">
+    <ol>
+      <li><span class="me">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Guiding wireless signals with arrays of metallic linear Fresnel reflectors: A low-cost, frequency-versatile, and practical approach,&rdquo; in <em>Proc. IEEE 100th Vehicular Technology Conf. (VTC2024-Fall)</em>, Washington, DC, USA, 2024, pp.&nbsp;1&ndash;7.</li>
+      <li><span class="me">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Signal Whisperers: Enhancing wireless reception using DRL-guided reflector arrays,&rdquo; <em>IEEE Trans. Mach. Learn. Commun. Netw.</em>, vol.&nbsp;4, pp.&nbsp;265&ndash;281, 2026.</li>
+      <li><span class="me">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Bypassing the CSI bottleneck: MARL-driven spatial control for reflector arrays,&rdquo; arXiv:2604.05162, 2026; <span class="st">submitted to IEEE ICC 2027 (under review)</span>.</li>
+      <li><span class="me">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Learning to Reflect: Hierarchical multi-agent reinforcement learning for CSI-free mmWave beam-focusing,&rdquo; arXiv:2603.07370, 2026; <span class="st">under review, <em>IEEE Trans. Mach. Learn. Commun. Netw.</em></span></li>
+      <li><span class="me">H. Le</span>, M. Ibrahim, O. Bedir, J. Tao, and S. Ekin, &ldquo;Learning to Focus: CSI-free hierarchical MARL for reconfigurable reflectors,&rdquo; arXiv:2604.05165, 2026; <span class="st">accepted, IEEE GLOBECOM 2026, Macau (to be presented Dec.&nbsp;2026)</span>.</li>
+      <li><span class="me">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; <span class="st">submitted to <em>IEEE Open J. Commun. Soc.</em>, 2026 (under review)</span>.</li>
+    </ol>
+      </div>
+</section>
+
+<section data-id="other-pubs" data-min="0.25">
+  <h2 class="title">Other publications during the Ph.D.</h2>
+  <div class="body">
+    <ol start="7">
+      <li><span class="me">H. Le</span> and J. Tao, &ldquo;Hierarchical autoencoder-based lossy compression for large-scale high-resolution scientific data,&rdquo; <em>Computing&amp;AI Connect</em>, vol.&nbsp;1, p.&nbsp;0001, 2024.</li>
+      <li>M. Le, A. Yao, A. Zhang, <span class="me">H. Le</span>, Z. Chen, X. Wu, L. Zhao, and J. Chen, &ldquo;Expediting ionic conductivity prediction of solid-state battery electrodes using machine learning,&rdquo; <em>IEEE J. Multiscale Multiphys. Comput. Techn.</em>, vol.&nbsp;9, pp.&nbsp;375&ndash;382, 2024.</li>
+      <li><span class="me">H. Le</span>, Z. He, M. Le, D. Chakravorty, L. M. Perez, A. Chilumuru, Y. Yao, and J. Chen, &ldquo;Insight gained from migrating a machine learning model to intelligence processing units,&rdquo; in <em>Proc. PEARC '24</em>, 2024, Art.&nbsp;no.&nbsp;7.</li>
+      <li>A. Cassity, <span class="me">H. Le</span>, H. Santos, E. Priest, and J. Tao, &ldquo;Dynamic data-driven digital twin testbed for enhanced first responder,&rdquo; in <em>DDDAS 2024</em>, 2025, p.&nbsp;100.</li>
+      <li>H. Raghukumar, <span class="me">H. Le</span>, <em>et al.</em>, &ldquo;Smart communities, smart responders &ndash; Artificial intelligence for Internet of Things competition: A case study in organizing a public safety innovation challenge,&rdquo; in <em>Proc. IEEE WFPST</em>, 2024, pp.&nbsp;114&ndash;119.</li>
+      <li>A. Nasari, L. Zhai, Z. He, <span class="me">H. Le</span>, S. Cui, D. Chakravorty, J. Tao, and H. Liu, &ldquo;Porting AI/ML models to intelligence processing units (IPUs),&rdquo; in <em>Proc. PEARC '23</em>, 2023, pp.&nbsp;231&ndash;236.</li>
+      <li>Z. He, S. Nite, J. Winchell, A. Nasari, <span class="me">H. Le</span>, J. Tao, D. Chakravorty, L. Perez, and H. Liu, &ldquo;Development of a training framework for novel accelerators,&rdquo; in <em>Proc. IEEE FIE</em>, 2023, pp.&nbsp;1&ndash;6.</li>
+      <li>A. Nasari, <span class="me">H. Le</span>, R. Lawrence, Z. He, X. Yang, M. Krell, A. Tsyplikhin, <em>et al.</em>, &ldquo;Benchmarking the performance of accelerators on national cyberinfrastructure resources for artificial intelligence/machine learning workloads,&rdquo; in <em>Proc. PEARC '22</em>, 2022, pp.&nbsp;1&ndash;9.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- old 52 -->
+<section data-id="thanks" data-min="0.25">
+  <h2 class="title">Thank you</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr;align-items:center">
+      <div class="col"><ul>
+        <li>Advisor <b>Dr. Sabit Ekin</b> and co-chair <b>Dr. Jian Tao</b></li>
+        <li>Committee members <b>Dr. Erchin Serpedin</b> and <b>Dr. Arya Menon</b></li>
+        <li>Collaborators Mostafa Ibrahim and Oguz Bedir</li>
+        <li>Funding: U.S. DOE Office of Science, ASCR Early Career Research Program (DE-SC0023957); U.S. NSF (Grant 2549088)</li>
+      </ul></div>
+      <div class="col center">
+        <div class="qq">Questions?</div>
+        <img src="assets/img/logos/texas-wireless-2026.png" alt="Texas Wireless" style="height:110px">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="divider" data-id="div-backup" data-title="Backup slides"></section>
+
+<!-- ===================================================================
+     Track: Intro and foundations - backup slides (untimed)
+     Sources: old sections/backup_ch2-4.tex (beam-focusing animations, ITU-R P.2040),
+     old foundations slide 14 (3D bisector figure and angle formulas).
+     =================================================================== -->
+<style>
+section[data-id="geo-videos"] .vids{display:flex;gap:50px;justify-content:center;align-items:flex-end}
+section[data-id="geo-videos"] .vwrap{position:relative;overflow:hidden;height:460px;background:#000;border-radius:4px}
+section[data-id="geo-videos"] .vwrap video{position:absolute;height:473px;width:auto;max-width:none;top:-10px}
+section[data-id="geo-videos"] figcaption{font-size:var(--fs-foot);color:var(--text)}
+section[data-id="bk-p2040"] table.bt td,section[data-id="bk-p2040"] table.bt th{padding:5px 14px}
+section[data-id="bk-bisector-3d"] img{height:390px}
+</style>
+
+
+<section class="backup" data-id="bk-p2040">
+  <h2 class="title">ITU-R P.2040 material model</h2>
+  <div class="body">
+    <div class="cols" style="--cols:50% 1fr;align-items:center">
+      <div class="col">
+        <p>Real relative permittivity and conductivity, with $f_c$ in GHz:</p>
+        $$\epsilon_r(f_c)=a_{\mathrm m}f_c^{\,b_{\mathrm m}},\qquad \sigma_c(f_c)=c_{\mathrm m}f_c^{\,d_{\mathrm m}}\ \text{(S/m)}$$
+        <ul class="small">
+          <li>28 GHz hallways: concrete walls, ceiling, floor; metal tiles</li>
+          <li>60 GHz hallway: plasterboard walls, board ceiling, concrete floor, wooden obstacle</li>
+        </ul>
+      </div>
+      <div class="col">
+        <table class="bt">
+          <thead><tr><th>Material</th><th class="num">$a_{\mathrm m}$</th><th class="num">$b_{\mathrm m}$</th><th class="num">$c_{\mathrm m}$</th><th class="num">$d_{\mathrm m}$</th></tr></thead>
+          <tbody>
+            <tr><td>Metal</td><td class="num">1</td><td class="num">0</td><td class="num">$10^{7}$</td><td class="num">0</td></tr>
+            <tr><td>Concrete</td><td class="num">5.24</td><td class="num">0</td><td class="num">0.0462</td><td class="num">0.7822</td></tr>
+            <tr><td>Wood</td><td class="num">1.99</td><td class="num">0</td><td class="num">0.0047</td><td class="num">1.0718</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="backup" data-id="bk-bisector-3d">
+  <h2 class="title">bisector rule in 3D: tile elevation and azimuth</h2>
+  <div class="body">
+    <div class="cols" style="--cols:46% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch2/p1-bisector-01-01-01.png" alt="Tile normal bisecting AP and UE directions in 3D"><figcaption>Normal $\vec n=(x,y,z)$ at tile A; AP at B, UE at C</figcaption></figure></div>
+      <div class="col">
+        $$\vec n=\frac12\left(\frac{\overrightarrow{AB}}{|\overrightarrow{AB}|}+\frac{\overrightarrow{AC}}{|\overrightarrow{AC}|}\right)$$
+        $$\theta=\arccos\frac{z}{|\vec n|},\qquad \phi=\mathrm{sgn}(y)\arccos\frac{x}{\sqrt{x^2+y^2}}$$
+        <ul class="small">
+          <li>With the focal-point abstraction, C is replaced by the segment's focal point $f_l$</li>
+          <li>Learned control clips $\theta,\phi$ to the servo range</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Backup slides, learning parts (untimed). Sources: old backup_ch2-4.tex (MAPPO hyperparameters, tile grouping) and backup_ch5.tex. -->
+<style>
+section[data-id="hmarl-deploy-2ue"] .vidbox{width:200px;height:252px;overflow:hidden;border-radius:4px;background:#000;margin:0 auto}
+section[data-id="hmarl-deploy-2ue"] .vidbox video{width:200px;height:252px;object-fit:cover;object-position:50% 50%}
+section[data-id="bk-hmarl-params"] table.bt td{padding:3px 10px}
+section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;background:#FBFAF8;padding:14px 20px;display:flex;flex-direction:column;justify-content:center;align-self:stretch}
+</style>
+
+<section class="backup" data-id="bk-mappo-hparams">
+  <h2 class="title">MAPPO hyperparameters (flat MARL)</h2>
+  <div class="body">
+    <table class="bt" style="margin:0 auto">
+      <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Hidden layers (actor and critic)</td><td>2 layers, 256 neurons each</td></tr>
+        <tr><td>Activation</td><td>ReLU</td></tr>
+        <tr><td>Optimizer</td><td>Adam</td></tr>
+        <tr><td>Learning rate</td><td>$2.0\times10^{-4}$ (constant)</td></tr>
+        <tr><td>Discount factor $\gamma$</td><td>0.985</td></tr>
+        <tr><td>Rollout buffer (on-policy)</td><td>1000 transitions</td></tr>
+        <tr><td>Minibatch size</td><td>200 samples</td></tr>
+        <tr><td>PPO clipping parameter $\epsilon$</td><td>0.2</td></tr>
+        <tr><td>GAE parameter $\lambda_{\mathrm{GAE}}$</td><td>0.9</td></tr>
+        <tr><td>Value-function coefficient $c_1$</td><td>0.5</td></tr>
+        <tr><td>Entropy coefficient $c_2$</td><td>$1.0\times10^{-4}$</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="backup" data-id="bk-tile-grouping">
+  <h2 class="title">Tile grouping and reward normalization</h2>
+  <div class="body">
+    <div class="chaptag">Three users, 63 tiles</div>
+    <div class="cols" style="--cols:1fr 1fr">
+      <div class="col"><figure><img src="assets/img/ch4/p2-pattern3ue.png" alt="RSSI over time for two tile groupings"></figure>
+        <p class="small" style="margin-top:8px"><b>Grouping:</b> interleaved columns (regular3ue) vs. staggered hexagonal pattern (shifted3ue); both $-67.60$&nbsp;dBm</p></div>
+      <div class="col"><figure><img src="assets/img/ch4/p2-rew_sensitivity_1.png" alt="RSSI over time for distance-normalized reward variants"></figure>
+        <p class="small" style="margin-top:8px"><b>Reward</b> $P_{r,k}\cdot d^{\,n}$, $n=2,3,4$: $-67.60$, $-67.32$, $-67.70$&nbsp;dBm (range 0.38&nbsp;dB)</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="backup" data-id="bk-hmarl-peruser">
+  <h2 class="title">HMARL per-user vs. aggregate received power</h2>
+  <div class="body">
+    <div class="cols" style="--cols:1fr 1fr">
+      <figure><img src="assets/img/ch5/comparison_2ue_4ue_mean_power.png" alt="CDF of per-user RSSI, 2 vs 4 users" style="width:92%"><figcaption style="font-size:20px;color:var(--text)">Per-user RSSI: median &asymp;2.5&nbsp;dB lower at 4 users</figcaption></figure>
+      <figure><img src="assets/img/ch5/comparison_2ue_4ue_total_power.png" alt="CDF of aggregate power, 2 vs 4 users" style="width:92%"><figcaption style="font-size:20px;color:var(--text)">Aggregate power: slightly higher at 4 users (up to 1&nbsp;dB)</figcaption></figure>
+    </div>
+    <p class="small" style="margin-top:14px">The aperture is passive and every controlled tile reaches every user, so there is no fixed power budget to divide; the per-user loss is consistent with <em>competition for steering range</em>, though no experiment separates the two.</p>
+  </div>
+</section>
+
+<section class="backup" data-id="bk-hmarl-reward">
+  <h2 class="title">HMARL reward sensitivity and the role of $P_{\mathrm{off}}$</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_2ue_rew.png" alt="RSSI CDFs for distance exponents n = 0 to 4, two users"><figcaption>Two users; curves $n_0$&ndash;$n_4$: distance exponent $n=0,\dots,4$</figcaption></figure>
+      <div class="col small lr-panel">
+        <p style="margin-bottom:0">Path-loss compensated measurement:</p>
+        $$\tilde P_k^{(n)}=\tilde P_k+10\,n\log_{10}d_k$$
+        <ul>
+          <li>Larger $n$ favors distant users</li>
+          <li>Medians span $-65.23$ to $-64.42$&nbsp;dBm (<b>0.81&nbsp;dB</b>)</li>
+          <li>$P_{\mathrm{off}}=80$&nbsp;dB also sets the fairness weighting: a user at $-75$&nbsp;dBm carries $2.7\times$ the marginal weight of one at $-65$&nbsp;dBm ($1.38\times$ at $P_{\mathrm{off}}=100$&nbsp;dB); not swept</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="backup" data-id="bk-hmarl-focal">
+  <h2 class="title">HMARL focal points and allocation space</h2>
+  <div class="body">
+    <div class="cols" style="--cols:55% 1fr;align-items:center">
+      <ul>
+        <li>Per-tile control: $\mathcal{D}_{\mathrm{tile}}=2N_rN_c$ angles</li>
+        <li>Focal-point control: $\mathcal{D}_{\mathrm{focal}}=3L$ coordinates</li>
+        <li>$R_{\text{complexity}}=\dfrac{2N_rN_c}{3L}$, quadratic in surface resolution</li>
+        <li>Allocation space unchanged: $|\mathcal{B}|=K^L$<br><span class="small">handled by the factorized head: $LK$ logits instead of $K^L$ joint scores</span></li>
+      </ul>
+      <div class="block"><div class="bt">This deployment</div><div class="bb center">
+        <p>2 arrays &times; $7\times9=63$ tiles, $L=4$</p>
+        <div class="bignum">252 &rarr; 12</div><span class="numcap">continuous control variables (21&times;)</span>
+        <div class="bignum" style="margin-top:14px">16 / 256</div><span class="numcap">joint assignments for $K=2$ / $K=4$</span>
+      </div></div>
+    </div>
+    <p class="small" style="margin-top:12px">This counts control variables; no tile-level controller was trained, so it is not a measured saving in samples or wall-clock time.</p>
+  </div>
+</section>
+
+<section class="backup" data-id="bk-hmarl-params">
+  <h2 class="title">HMARL system parameters and hyperparameters</h2>
+  <div class="body">
+    <div class="cols" style="--cols:1fr 1fr">
+      <table class="bt foot" style="font-size:20px">
+        <tbody>
+          <tr><td>Carrier, transmit power</td><td>60&nbsp;GHz, 5&nbsp;dBm</td></tr>
+          <tr><td>Arrays, tiles per array</td><td>2, 63</td></tr>
+          <tr><td>Segments $L$</td><td>4 (2 per array)</td></tr>
+          <tr><td>Servo limits $\theta,\phi$</td><td>$\pm30^\circ$</td></tr>
+          <tr><td>$\delta_{\max}$</td><td>0.3&nbsp;m/slot</td></tr>
+          <tr><td>AP position</td><td>$[0.0,\,8.0,\,3.8]$&nbsp;m</td></tr>
+          <tr><td>Coverage area</td><td>10&nbsp;m &times; 10&nbsp;m</td></tr>
+          <tr><td>Ray tracing (paths)</td><td>depth 8, $10^6$ samples</td></tr>
+          <tr><td>Materials</td><td>ITU-R P.2040-4</td></tr>
+        </tbody>
+      </table>
+      <table class="bt foot" style="font-size:20px">
+        <tbody>
+          <tr><td>$\gamma$, $\epsilon$, $\lambda_{\mathrm{GAE}}$</td><td>0.985, 0.2, 0.9</td></tr>
+          <tr><td>$c_2$ (entropy), $c_1$ (value)</td><td>$1.0\times10^{-4}$, 1.0</td></tr>
+          <tr><td>Batch size, epochs</td><td>200, 40</td></tr>
+          <tr><td>Optimizer, learning rate</td><td>Adam, $2.0\times10^{-4}$</td></tr>
+          <tr><td>Allocation interval $T$</td><td>10 slots</td></tr>
+          <tr><td>$\alpha_0$, $e_{\mathrm{th}}$, $d_0$</td><td>1.0, 1,000, 10&nbsp;m</td></tr>
+          <tr><td>Training</td><td>3,000 episodes &times; 100 slots</td></tr>
+          <tr><td>Evaluation</td><td>300 slots, 30&nbsp;cm/slot</td></tr>
+          <tr><td>$P_{\mathrm{off}}$, $P_{\mathrm{sc}}$</td><td>80&nbsp;dB, 30&nbsp;dB</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small" style="margin-top:12px">High-level network: attention + two 128-neuron heads. Low-level actors and shared critic: 2 layers, 256 neurons.</p>
+  </div>
+</section>
+
+<section class="backup" data-id="bk-hmarl-slot">
+  <h2 class="title">HMARL: what one slot means physically</h2>
+  <div class="body">
+    <ul>
+      <li>The study is simulation-only and does <b>not</b> fix a slot duration; the protocol is specified in slots</li>
+      <li>Users advance 30&nbsp;cm per slot and the focal point may move $\delta_{\max}=0.3$&nbsp;m per axis per slot: the actuator is provisioned to match the assumed user displacement</li>
+    </ul>
+    <div class="cols stretch" style="--cols:1fr 1fr;margin-top:10px">
+      <div class="block"><div class="bt">Slot set by servo rotation time</div><div class="bb small">Order of tens of milliseconds: user speed well above walking pace, so the setting is a <b>stress test</b> of the tracking loop rather than an indoor mobility model.</div></div>
+      <div class="block"><div class="bt">Slot set by localization update rate</div><div class="bb small">Order of one second: 30&nbsp;cm per slot is a <b>slow walk</b>, and the servo is no longer the binding constraint.</div></div>
+    </div>
+    <p class="small" style="margin-top:10px">Either way, mechanical rotation time and quasi-static geometry confine deployment to low-mobility indoor use; fixing the slot duration requires hardware-in-the-loop validation.</p>
+  </div>
+</section>
+
+<!-- ===================== Backup: placement + other publications - track: Placement and close ===================== -->
+<style>
+section[data-id^="bk-place"] table.bt{font-size:20px}
+section[data-id^="bk-place"] table.bt td,section[data-id^="bk-place"] table.bt th{padding:3px 10px}
+section[data-id="bk-place-stats"] table.bt{font-size:17.5px;width:100%}
+section[data-id="bk-place-stats"] table.bt td,section[data-id="bk-place-stats"] table.bt th{padding:2px 7px}
+section[data-id="bk-place-stats"] table.bt tr.sep td{border-top:1px solid var(--text)}
+section[data-id="bk-place-stats"] td.grp{font-weight:600;color:var(--maroon)}
+section[data-id="bk-place-maps"] .maps{display:grid;grid-template-columns:repeat(4,1fr) 50px;gap:14px;align-items:start}
+section[data-id="bk-place-maps"] .maps img.sc{height:230px;width:auto;margin-top:10px}
+section[data-id="bk-other-pubs"] ol{font-size:17px;margin-left:1.6em}
+section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
+</style>
+
+<!-- old 64 -->
+<section class="backup" data-id="bk-place-prop">
+  <h2 class="title">Placement: propagation and ray-tracing parameters</h2>
+  <div class="body">
+    <div class="cols" style="--cols:47% 1fr">
+      <div class="col">
+        <table class="bt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Carrier frequency $f_c$</td><td>5.18&nbsp;GHz</td></tr>
+          <tr><td>Wavelength $\lambda$</td><td>5.8&nbsp;cm</td></tr>
+          <tr><td>Transmit power</td><td>20&nbsp;dBm</td></tr>
+          <tr><td>AP ceiling height $h_{\mathrm{ceil}}$</td><td>3.8&nbsp;m</td></tr>
+          <tr><td>Min. AP separation $d_{\min}$</td><td>5.0&nbsp;m</td></tr>
+          <tr><td>PRS size</td><td>$2.0\times2.0$&nbsp;m</td></tr>
+          <tr><td>Tiles $N_r\times N_c$</td><td>$7\times9$ (63)</td></tr>
+          <tr><td>Tile pitch</td><td>$\approx4$&ndash;$5\lambda$</td></tr>
+          <tr><td>Focal-point heights</td><td>$[0,h_{\mathrm{ceil}}]$</td></tr>
+          <tr><td>Servo limits $\theta$, $\phi$</td><td>$\pm30^\circ$</td></tr>
+          <tr><td>Grid cell; receiver height</td><td>$1\times1$&nbsp;m$^2$; 1.5&nbsp;m</td></tr>
+        </tbody></table>
+      </div>
+      <div class="col">
+        <table class="bt"><thead><tr><th>Material</th><th class="num">$\epsilon_r$</th><th class="num">$\sigma_c$ (S/m)</th></tr></thead><tbody>
+          <tr><td>Metal (tiles)</td><td class="num">1</td><td class="num">$10^{7}$</td></tr>
+          <tr><td>Concrete (walls, floor)</td><td class="num">5.24</td><td class="num">0.167</td></tr>
+          <tr><td>Plasterboard (ceiling)</td><td class="num">2.73</td><td class="num">0.04</td></tr>
+        </tbody></table>
+        <table class="bt" style="margin-top:14px"><thead><tr><th>Setting</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Wall thickness</td><td>20&nbsp;cm</td></tr>
+          <tr><td>AP antenna</td><td>TR 38.901, cross pol.</td></tr>
+          <tr><td>UE antenna</td><td>Isotropic</td></tr>
+          <tr><td>Rays per transmitter</td><td>$1\times10^6$</td></tr>
+          <tr><td>Max. ray depth</td><td>10</td></tr>
+          <tr><td>Ray tracer</td><td>Sionna RT 2.2</td></tr>
+        </tbody></table>
+        <p class="foot gray" style="margin-top:6px">Reflection, diffuse scattering, refraction, diffraction enabled</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- old 65 -->
+<section class="backup" data-id="bk-place-opt">
+  <h2 class="title">Placement: objective and optimizer parameters</h2>
+  <div class="body">
+    <div class="cols" style="--cols:47% 1fr">
+      <div class="col">
+        <table class="bt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Weights $\alpha$, $\beta$</td><td>1.0, 0.2</td></tr>
+          <tr><td>Soft-min temp. $T_{\mathrm{sm}}$</td><td>0.3</td></tr>
+          <tr><td>(floor, ceil)</td><td>$(-90,-40)$&nbsp;dBm</td></tr>
+          <tr><td>Threshold $\gamma_{\mathrm{SLA}}$</td><td>$-65$&nbsp;dBm</td></tr>
+          <tr><td>Coverage temp. $T_{\mathrm{cov}}$</td><td>1.0&nbsp;dB</td></tr>
+          <tr><td>Non-priority weight</td><td>$w_u=1$</td></tr>
+          <tr style="border-top:1px solid var(--text)"><td>PSO $(M,T_1)$</td><td>50, 35</td></tr>
+          <tr><td>Inertia $\omega$</td><td>$0.9\to0.4$</td></tr>
+          <tr><td>$c_{\mathrm{p}}$; $c_{\mathrm{g}}$</td><td>$2.5\to0.5$; $0.5\to2.5$</td></tr>
+          <tr><td>Gradient phase $(T_2,\eta)$</td><td>30, 0.02</td></tr>
+        </tbody></table>
+      </div>
+      <div class="col">
+        <table class="bt"><thead><tr><th>Baseline</th><th>Setting</th></tr></thead><tbody>
+          <tr><td>GA population, generations</td><td>50, 35</td></tr>
+          <tr><td>GA crossover, mutation</td><td>0.6, 0.4</td></tr>
+          <tr><td>PSO-only</td><td>50, 35; no GD</td></tr>
+          <tr><td>Random: draws, iterations</td><td>10, 65</td></tr>
+          <tr><td>random+GD: starts, steps</td><td>10, 65</td></tr>
+          <tr><td>Weighted $k$-means grid</td><td>250</td></tr>
+          <tr style="border-top:1px solid var(--text)"><td>Seeds</td><td>$\{0,10,20,30,40\}$</td></tr>
+        </tbody></table>
+        <ul class="small" style="margin-top:12px">
+          <li>Radio maps per run: $1{,}750+30$ (PSO+GD, GA+GD); 650 (random); 650 differentiable (random+GD)</li>
+          <li>Weighted $k$-means: not at equal budget</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- old 66 -->
+<section class="backup" data-id="bk-place-stats">
+  <h2 class="title">Placement: Office coverage statistics, 3 APs</h2>
+  <div class="body">
+    <p class="small gray center" style="margin-bottom:6px">RSSI in dBm, mean $\pm$ standard deviation over five seeds; bold: largest mean per column</p>
+    <table class="bt">
+      <thead>
+        <tr><th></th><th></th><th class="num" colspan="3" style="text-align:center">All regions</th><th class="num" colspan="3" style="text-align:center">Priority regions</th></tr>
+        <tr><th></th><th>Method</th><th class="num">Mean</th><th class="num">P5</th><th class="num">Min</th><th class="num">Mean</th><th class="num">P5</th><th class="num">Min</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="grp">w/ PRS</td><td>PSO+GD</td><td class="num"><b>&minus;47.1</b>&plusmn;1.2</td><td class="num"><b>&minus;58.0</b>&plusmn;0.6</td><td class="num"><b>&minus;65.9</b>&plusmn;1.6</td><td class="num"><b>&minus;47.5</b>&plusmn;0.7</td><td class="num"><b>&minus;57.3</b>&plusmn;1.3</td><td class="num">&minus;65.2&plusmn;3.0</td></tr>
+        <tr><td></td><td>GA+GD</td><td class="num">&minus;48.3&plusmn;0.5</td><td class="num">&minus;59.2&plusmn;1.0</td><td class="num">&minus;66.0&plusmn;1.2</td><td class="num">&minus;48.6&plusmn;1.0</td><td class="num">&minus;58.9&plusmn;1.4</td><td class="num"><b>&minus;64.8</b>&plusmn;2.0</td></tr>
+        <tr><td></td><td>PSO-only</td><td class="num">&minus;49.2&plusmn;1.5</td><td class="num">&minus;61.5&plusmn;0.5</td><td class="num">&minus;69.1&plusmn;1.8</td><td class="num">&minus;50.3&plusmn;0.9</td><td class="num">&minus;61.4&plusmn;1.6</td><td class="num">&minus;68.9&plusmn;2.6</td></tr>
+        <tr><td></td><td>Weighted $k$-means</td><td class="num">&minus;50.2&plusmn;0.2</td><td class="num">&minus;63.1&plusmn;0.3</td><td class="num">&minus;70.5&plusmn;0.9</td><td class="num">&minus;51.5&plusmn;0.4</td><td class="num">&minus;63.1&plusmn;0.6</td><td class="num">&minus;70.5&plusmn;0.9</td></tr>
+        <tr><td></td><td>random+GD</td><td class="num">&minus;50.7&plusmn;1.2</td><td class="num">&minus;64.3&plusmn;1.9</td><td class="num">&minus;71.7&plusmn;4.2</td><td class="num">&minus;51.9&plusmn;2.8</td><td class="num">&minus;64.7&plusmn;2.0</td><td class="num">&minus;70.6&plusmn;4.2</td></tr>
+        <tr><td></td><td>Random</td><td class="num">&minus;53.5&plusmn;0.4</td><td class="num">&minus;71.3&plusmn;0.7</td><td class="num">&minus;81.9&plusmn;1.6</td><td class="num">&minus;56.6&plusmn;0.5</td><td class="num">&minus;73.5&plusmn;0.6</td><td class="num">&minus;80.8&plusmn;1.7</td></tr>
+        <tr class="sep"><td class="grp">w/o PRS</td><td>PSO+GD</td><td class="num"><b>&minus;50.0</b>&plusmn;1.3</td><td class="num">&minus;63.1&plusmn;0.4</td><td class="num"><b>&minus;75.0</b>&plusmn;1.8</td><td class="num"><b>&minus;50.8</b>&plusmn;0.6</td><td class="num"><b>&minus;62.1</b>&plusmn;1.0</td><td class="num">&minus;74.7&plusmn;1.4</td></tr>
+        <tr><td></td><td>GA+GD</td><td class="num">&minus;51.8&plusmn;1.2</td><td class="num"><b>&minus;62.6</b>&plusmn;0.4</td><td class="num"><b>&minus;75.0</b>&plusmn;2.1</td><td class="num">&minus;52.1&plusmn;0.8</td><td class="num">&minus;63.0&plusmn;1.2</td><td class="num"><b>&minus;74.4</b>&plusmn;1.2</td></tr>
+        <tr><td></td><td>PSO-only</td><td class="num">&minus;51.3&plusmn;1.6</td><td class="num">&minus;64.3&plusmn;0.5</td><td class="num">&minus;79.7&plusmn;1.7</td><td class="num">&minus;52.5&plusmn;0.6</td><td class="num">&minus;63.7&plusmn;1.4</td><td class="num">&minus;76.5&plusmn;1.9</td></tr>
+        <tr><td></td><td>Weighted $k$-means</td><td class="num">&minus;53.2&plusmn;0.3</td><td class="num">&minus;65.1&plusmn;0.3</td><td class="num">&minus;76.7&plusmn;1.1</td><td class="num">&minus;52.4&plusmn;0.3</td><td class="num">&minus;64.4&plusmn;0.6</td><td class="num">&minus;76.7&plusmn;0.8</td></tr>
+        <tr><td></td><td>random+GD</td><td class="num">&minus;53.1&plusmn;1.9</td><td class="num">&minus;67.2&plusmn;0.7</td><td class="num">&minus;76.4&plusmn;1.6</td><td class="num">&minus;54.5&plusmn;1.9</td><td class="num">&minus;67.5&plusmn;1.9</td><td class="num">&minus;76.4&plusmn;2.0</td></tr>
+        <tr><td></td><td>Random</td><td class="num">&minus;55.3&plusmn;1.8</td><td class="num">&minus;70.1&plusmn;0.8</td><td class="num">&minus;80.7&plusmn;0.9</td><td class="num">&minus;52.6&plusmn;0.4</td><td class="num">&minus;74.5&plusmn;0.4</td><td class="num">&minus;76.2&plusmn;0.6</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- old 67 -->
+<section class="backup" data-id="bk-place-ablation">
+  <h2 class="title">Placement: PSO vs. GA and gradient refinement</h2>
+  <div class="body">
+    <p class="small gray" style="margin-bottom:6px">Office, 3 APs; Welch's $t$-test over five seeds; $p$-values uncorrected</p>
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">PSO+GD vs. GA+GD (with PRS)</div><div class="bb"><ul class="small">
+        <li>Priority P5: PSO+GD ahead by 1.6&nbsp;dB ($p=0.10$)</li>
+        <li>Priority mean: ahead by 1.1&nbsp;dB ($p=0.08$)</li>
+        <li>All-region minimum nearly identical ($p=0.91$); GA+GD leads priority minimum by 0.4&nbsp;dB ($p=0.81$)</li>
+        <li>Both gain from the PRS: 4.8 and 4.1&nbsp;dB at priority P5 (GA+GD $p=0.001$; minimum $+9.6$&nbsp;dB)</li>
+      </ul></div></div></div>
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Refinement: PSO+GD vs. PSO-only</div><div class="bb"><ul class="small">
+        <li>With PRS: $+4.1$&nbsp;dB priority P5 (95% CI 2.0&ndash;6.2&nbsp;dB, $p=0.002$); $+3.5$&nbsp;dB all-region P5, $+2.8$&nbsp;dB priority mean ($p&lt;0.001$); $+3.7$&nbsp;dB priority min ($p=0.07$)</li>
+        <li>Without PRS: $+1.6$&nbsp;dB priority P5 (95% CI $-0.2$ to 3.4&nbsp;dB, $p=0.07$)</li>
+        <li>Of the 5.8&nbsp;dB gap to weighted $k$-means, 4.1&nbsp;dB is added by refinement; PSO-only leads $k$-means by 1.7&nbsp;dB ($p=0.08$)</li>
+        <li>GA+GD exceeds PSO-only by 2.5&nbsp;dB ($p=0.03$)</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- old 68 -->
+<section class="backup" data-id="bk-place-scaling">
+  <h2 class="title">Placement: scaling with AP count in Office</h2>
+  <div class="body">
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch6/fig6H_scaling.png" alt="Office scaling with AP count"><figcaption>(a)&ndash;(b) with PRS, (c)&ndash;(d) without; objective at left, priority-region P5 at right; mean $\pm1$ s.d. over 5 seeds</figcaption></figure></div>
+      <div class="col"><ul class="small">
+        <li>APs needed for priority P5 $\ge-65$&nbsp;dBm (w/ / w/o PRS): PSO+GD 2 / 3; GA+GD 2 / 3; PSO-only 3 / 3; weighted $k$-means 3 / 3; random+GD 3 / 4; random 7 / 7</li>
+        <li>At 2 APs: GA+GD $-64.8$&nbsp;dBm (0.2&nbsp;dB margin); PSO-only $-66.0\pm1.1$ / $-66.9\pm0.8$&nbsp;dBm</li>
+        <li>PRS P5 benefit: 4&ndash;5&nbsp;dB at 3&ndash;5 APs, 2&ndash;3&nbsp;dB at 6&ndash;7 APs</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- old 69 -->
+<section class="backup" data-id="bk-place-hrbb">
+  <h2 class="title">Placement: HRBB, P5 versus AP count</h2>
+  <div class="body">
+    <figure><img src="assets/img/ch6/hrbb_p5_rssi.png" alt="HRBB P5 versus AP count, priority and all regions" style="height:300px"><figcaption>(a) priority regions, (b) all regions; PSO+GD with and without the PRS, weighted $k$-means without the PRS</figcaption></figure>
+    <div class="cols" style="--cols:1fr 1fr;margin-top:12px">
+      <div class="col"><ul class="small">
+        <li>Priority P5: 1 AP + PRS $\approx-64.3$&nbsp;dBm (0.7&nbsp;dB margin, 3/5 seeds) vs. 2 APs without</li>
+        <li>All-region P5: threshold at 2 APs with PRS, 3 without</li>
+      </ul></div>
+      <div class="col"><ul class="small">
+        <li>PRS gain $\approx3.0$&nbsp;dB at 1 AP, 1.5&nbsp;dB at 2; below 1&nbsp;dB from 4 APs</li>
+        <li>An AP inside the central room can serve the dominant priority region directly</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- old 70 -->
+
+<!-- old 71 -->
+<section class="backup" data-id="bk-place-maps">
+  <h2 class="title">Placement: coverage maps of four methods</h2>
+  <div class="body">
+    <div class="maps">
+      <figure><img src="assets/img/ch6/split_cov_pso_small.png" alt="PSO+GD map"><figcaption>PSO+GD</figcaption></figure>
+      <figure><img src="assets/img/ch6/split_cov_ga_small.png" alt="GA+GD map"><figcaption>GA+GD</figcaption></figure>
+      <figure><img src="assets/img/ch6/split_cov_k-mean_small.png" alt="Weighted k-means map"><figcaption>Weighted $k$-means</figcaption></figure>
+      <figure><img src="assets/img/ch6/split_cov_random_small.png" alt="Random map"><figcaption>Random</figcaption></figure>
+      <img class="sc" src="assets/img/ch6/color-scale.png" alt="color scale">
+    </div>
+    <ul class="small" style="margin-top:14px">
+      <li>PSO+GD: APs in a west room and at two corridor junctions; reflector west on the north wall near the northwest AP</li>
+      <li>GA+GD: one AP in the lowest-weight central room, west rooms weaker; weighted $k$-means: southeast shadows; random: weaker east rooms</li>
+      <li>All three baselines place the reflector east of center, each at a different position</li>
+    </ul>
+  </div>
+</section>
+
+<!-- old 72 -->
+<section class="backup" data-id="bk-place-model">
+  <h2 class="title">Placement: model approximations, implementation</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Model approximations</div><div class="bb"><ul class="small">
+        <li>Each tile is a locally planar specular facet: finite-tile edge diffraction is neglected</li>
+        <li>Radio map sums path powers incoherently; it approximates the average over small-scale fading</li>
+        <li>Constructive combining of the $N_rN_c$ tile paths could add up to $10\log_{10}(N_rN_c)$&nbsp;dB at a point; destructive combining could remove as much</li>
+        <li>Quantifying this needs full-wave simulation or measurement</li>
+      </ul></div></div></div>
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Implementation</div><div class="bb"><ul class="small">
+        <li>Three Ray workers share one RTX 5070&nbsp;Ti GPU</li>
+        <li>Scene load about 1&nbsp;s vs. about 0.1&nbsp;s per radio map, so each worker loads its scene once</li>
+        <li>One PSO+GD run: 1,750 swarm $+$ 30 differentiable evaluations, about 180&nbsp;s serial</li>
+        <li>Cost scales with evaluations, rays per transmitter, AP count, and grid cells</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- old 51, moved to backup -->
+
+</div></div>
+<script src="vendor/reveal/reveal.js"></script>
+<script src="vendor/reveal/plugin/notes/notes.js"></script>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/contrib/auto-render.min.js"></script>
+<script src="assets/js/anim/_lib.js"></script>
+<script src="assets/js/anim/a1_csi.js"></script>
+<script src="assets/js/anim/a2_bisector.js"></script>
+<script src="assets/js/anim/a2_focal.js"></script>
+<script src="assets/js/anim/a3_marl.js"></script>
+<script src="assets/js/anim/a4_hmarl.js"></script>
+<script src="assets/js/anim/a5_pso.js"></script>
+
+<script src="assets/js/deck.js"></script>
+</body></html>
