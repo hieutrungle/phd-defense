@@ -1,0 +1,253 @@
+<!-- ===================== Backup: placement + other publications - track: Placement and close ===================== -->
+<style>
+section[data-id^="bk-place"] table.bt{font-size:20px}
+section[data-id^="bk-place"] table.bt td,section[data-id^="bk-place"] table.bt th{padding:3px 10px}
+section[data-id="bk-place-stats"] table.bt{font-size:17.5px;width:100%}
+section[data-id="bk-place-stats"] table.bt td,section[data-id="bk-place-stats"] table.bt th{padding:2px 7px}
+section[data-id="bk-place-stats"] table.bt tr.sep td{border-top:1px solid var(--text)}
+section[data-id="bk-place-stats"] td.grp{font-weight:600;color:var(--maroon)}
+section[data-id="bk-place-maps"] .maps{display:grid;grid-template-columns:repeat(4,1fr) 50px;gap:14px;align-items:start}
+section[data-id="bk-place-maps"] .maps img.sc{height:230px;width:auto;margin-top:10px}
+section[data-id="bk-other-pubs"] ol{font-size:17px;margin-left:1.6em}
+section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
+</style>
+
+<!-- old 64 -->
+<section class="backup" data-id="bk-place-prop">
+  <h2 class="title">Placement: propagation and ray-tracing parameters</h2>
+  <div class="body">
+    <div class="cols" style="--cols:47% 1fr">
+      <div class="col">
+        <table class="bt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Carrier frequency $f_c$</td><td>5.18&nbsp;GHz</td></tr>
+          <tr><td>Wavelength $\lambda$</td><td>5.8&nbsp;cm</td></tr>
+          <tr><td>Transmit power</td><td>20&nbsp;dBm</td></tr>
+          <tr><td>AP ceiling height $h_{\mathrm{ceil}}$</td><td>3.8&nbsp;m</td></tr>
+          <tr><td>Min. AP separation $d_{\min}$</td><td>5.0&nbsp;m</td></tr>
+          <tr><td>PRS size</td><td>$2.0\times2.0$&nbsp;m</td></tr>
+          <tr><td>Tiles $N_r\times N_c$</td><td>$7\times9$ (63)</td></tr>
+          <tr><td>Tile pitch</td><td>$\approx4$&ndash;$5\lambda$</td></tr>
+          <tr><td>Focal-point heights</td><td>$[0,h_{\mathrm{ceil}}]$</td></tr>
+          <tr><td>Servo limits $\theta$, $\phi$</td><td>$\pm30^\circ$</td></tr>
+          <tr><td>Grid cell; receiver height</td><td>$1\times1$&nbsp;m$^2$; 1.5&nbsp;m</td></tr>
+        </tbody></table>
+      </div>
+      <div class="col">
+        <table class="bt"><thead><tr><th>Material</th><th class="num">$\epsilon_r$</th><th class="num">$\sigma_c$ (S/m)</th></tr></thead><tbody>
+          <tr><td>Metal (tiles)</td><td class="num">1</td><td class="num">$10^{7}$</td></tr>
+          <tr><td>Concrete (walls, floor)</td><td class="num">5.24</td><td class="num">0.167</td></tr>
+          <tr><td>Plasterboard (ceiling)</td><td class="num">2.73</td><td class="num">0.04</td></tr>
+        </tbody></table>
+        <table class="bt" style="margin-top:14px"><thead><tr><th>Setting</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Wall thickness</td><td>20&nbsp;cm</td></tr>
+          <tr><td>AP antenna</td><td>TR 38.901, cross pol.</td></tr>
+          <tr><td>UE antenna</td><td>Isotropic</td></tr>
+          <tr><td>Rays per transmitter</td><td>$1\times10^6$</td></tr>
+          <tr><td>Max. ray depth</td><td>10</td></tr>
+          <tr><td>Ray tracer</td><td>Sionna RT 2.2</td></tr>
+        </tbody></table>
+        <p class="foot gray" style="margin-top:6px">Reflection, diffuse scattering, refraction, diffraction enabled</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Backup: propagation parameters for placement. The tile pitch is about 4 to 5 wavelengths at 5.18 GHz, so each tile acts as a specular facet, not a subwavelength reflectarray element.</p>
+    <p>Materials follow ITU-R P.2040. All interaction types are enabled in the radio-map solver.</p>
+  </aside>
+</section>
+
+<!-- old 65 -->
+<section class="backup" data-id="bk-place-opt">
+  <h2 class="title">Placement: objective and optimizer parameters</h2>
+  <div class="body">
+    <div class="cols" style="--cols:47% 1fr">
+      <div class="col">
+        <table class="bt"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Weights $\alpha$, $\beta$</td><td>1.0, 0.2</td></tr>
+          <tr><td>Soft-min temp. $T_{\mathrm{sm}}$</td><td>0.3</td></tr>
+          <tr><td>(floor, ceil)</td><td>$(-90,-40)$&nbsp;dBm</td></tr>
+          <tr><td>Threshold $\gamma_{\mathrm{SLA}}$</td><td>$-65$&nbsp;dBm</td></tr>
+          <tr><td>Coverage temp. $T_{\mathrm{cov}}$</td><td>1.0&nbsp;dB</td></tr>
+          <tr><td>Non-priority weight</td><td>$w_u=1$</td></tr>
+          <tr style="border-top:1px solid var(--text)"><td>PSO $(M,T_1)$</td><td>50, 35</td></tr>
+          <tr><td>Inertia $\omega$</td><td>$0.9\to0.4$</td></tr>
+          <tr><td>$c_{\mathrm{p}}$; $c_{\mathrm{g}}$</td><td>$2.5\to0.5$; $0.5\to2.5$</td></tr>
+          <tr><td>Gradient phase $(T_2,\eta)$</td><td>30, 0.02</td></tr>
+        </tbody></table>
+      </div>
+      <div class="col">
+        <table class="bt"><thead><tr><th>Baseline</th><th>Setting</th></tr></thead><tbody>
+          <tr><td>GA population, generations</td><td>50, 35</td></tr>
+          <tr><td>GA crossover, mutation</td><td>0.6, 0.4</td></tr>
+          <tr><td>PSO-only</td><td>50, 35; no GD</td></tr>
+          <tr><td>Random: draws, iterations</td><td>10, 65</td></tr>
+          <tr><td>random+GD: starts, steps</td><td>10, 65</td></tr>
+          <tr><td>Weighted $k$-means grid</td><td>250</td></tr>
+          <tr style="border-top:1px solid var(--text)"><td>Seeds</td><td>$\{0,10,20,30,40\}$</td></tr>
+        </tbody></table>
+        <ul class="small" style="margin-top:12px">
+          <li>Radio maps per run: $1{,}750+30$ (PSO+GD, GA+GD); 650 (random); 650 differentiable (random+GD)</li>
+          <li>Weighted $k$-means: not at equal budget</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Backup: optimizer and baseline settings. Inertia decreases linearly; the cognitive and social coefficients follow a time-varying schedule.</p>
+    <p>The methods are compared at their own operating costs, not at an equal number of evaluations. Weighted k-means illustrates the effect of ignoring site-specific propagation.</p>
+    <p>One learning rate for all coordinates: about 2 cm per step for an AP, but about 2% of the admissible wall span per step for the reflector.</p>
+  </aside>
+</section>
+
+<!-- old 66 -->
+<section class="backup" data-id="bk-place-stats">
+  <h2 class="title">Placement: Office coverage statistics, 3 APs</h2>
+  <div class="body">
+    <p class="small gray center" style="margin-bottom:6px">RSSI in dBm, mean $\pm$ standard deviation over five seeds; bold: largest mean per column</p>
+    <table class="bt">
+      <thead>
+        <tr><th></th><th></th><th class="num" colspan="3" style="text-align:center">All regions</th><th class="num" colspan="3" style="text-align:center">Priority regions</th></tr>
+        <tr><th></th><th>Method</th><th class="num">Mean</th><th class="num">P5</th><th class="num">Min</th><th class="num">Mean</th><th class="num">P5</th><th class="num">Min</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="grp">w/ PRS</td><td>PSO+GD</td><td class="num"><b>&minus;47.1</b>&plusmn;1.2</td><td class="num"><b>&minus;58.0</b>&plusmn;0.6</td><td class="num"><b>&minus;65.9</b>&plusmn;1.6</td><td class="num"><b>&minus;47.5</b>&plusmn;0.7</td><td class="num"><b>&minus;57.3</b>&plusmn;1.3</td><td class="num">&minus;65.2&plusmn;3.0</td></tr>
+        <tr><td></td><td>GA+GD</td><td class="num">&minus;48.3&plusmn;0.5</td><td class="num">&minus;59.2&plusmn;1.0</td><td class="num">&minus;66.0&plusmn;1.2</td><td class="num">&minus;48.6&plusmn;1.0</td><td class="num">&minus;58.9&plusmn;1.4</td><td class="num"><b>&minus;64.8</b>&plusmn;2.0</td></tr>
+        <tr><td></td><td>PSO-only</td><td class="num">&minus;49.2&plusmn;1.5</td><td class="num">&minus;61.5&plusmn;0.5</td><td class="num">&minus;69.1&plusmn;1.8</td><td class="num">&minus;50.3&plusmn;0.9</td><td class="num">&minus;61.4&plusmn;1.6</td><td class="num">&minus;68.9&plusmn;2.6</td></tr>
+        <tr><td></td><td>Weighted $k$-means</td><td class="num">&minus;50.2&plusmn;0.2</td><td class="num">&minus;63.1&plusmn;0.3</td><td class="num">&minus;70.5&plusmn;0.9</td><td class="num">&minus;51.5&plusmn;0.4</td><td class="num">&minus;63.1&plusmn;0.6</td><td class="num">&minus;70.5&plusmn;0.9</td></tr>
+        <tr><td></td><td>random+GD</td><td class="num">&minus;50.7&plusmn;1.2</td><td class="num">&minus;64.3&plusmn;1.9</td><td class="num">&minus;71.7&plusmn;4.2</td><td class="num">&minus;51.9&plusmn;2.8</td><td class="num">&minus;64.7&plusmn;2.0</td><td class="num">&minus;70.6&plusmn;4.2</td></tr>
+        <tr><td></td><td>Random</td><td class="num">&minus;53.5&plusmn;0.4</td><td class="num">&minus;71.3&plusmn;0.7</td><td class="num">&minus;81.9&plusmn;1.6</td><td class="num">&minus;56.6&plusmn;0.5</td><td class="num">&minus;73.5&plusmn;0.6</td><td class="num">&minus;80.8&plusmn;1.7</td></tr>
+        <tr class="sep"><td class="grp">w/o PRS</td><td>PSO+GD</td><td class="num"><b>&minus;50.0</b>&plusmn;1.3</td><td class="num">&minus;63.1&plusmn;0.4</td><td class="num"><b>&minus;75.0</b>&plusmn;1.8</td><td class="num"><b>&minus;50.8</b>&plusmn;0.6</td><td class="num"><b>&minus;62.1</b>&plusmn;1.0</td><td class="num">&minus;74.7&plusmn;1.4</td></tr>
+        <tr><td></td><td>GA+GD</td><td class="num">&minus;51.8&plusmn;1.2</td><td class="num"><b>&minus;62.6</b>&plusmn;0.4</td><td class="num"><b>&minus;75.0</b>&plusmn;2.1</td><td class="num">&minus;52.1&plusmn;0.8</td><td class="num">&minus;63.0&plusmn;1.2</td><td class="num"><b>&minus;74.4</b>&plusmn;1.2</td></tr>
+        <tr><td></td><td>PSO-only</td><td class="num">&minus;51.3&plusmn;1.6</td><td class="num">&minus;64.3&plusmn;0.5</td><td class="num">&minus;79.7&plusmn;1.7</td><td class="num">&minus;52.5&plusmn;0.6</td><td class="num">&minus;63.7&plusmn;1.4</td><td class="num">&minus;76.5&plusmn;1.9</td></tr>
+        <tr><td></td><td>Weighted $k$-means</td><td class="num">&minus;53.2&plusmn;0.3</td><td class="num">&minus;65.1&plusmn;0.3</td><td class="num">&minus;76.7&plusmn;1.1</td><td class="num">&minus;52.4&plusmn;0.3</td><td class="num">&minus;64.4&plusmn;0.6</td><td class="num">&minus;76.7&plusmn;0.8</td></tr>
+        <tr><td></td><td>random+GD</td><td class="num">&minus;53.1&plusmn;1.9</td><td class="num">&minus;67.2&plusmn;0.7</td><td class="num">&minus;76.4&plusmn;1.6</td><td class="num">&minus;54.5&plusmn;1.9</td><td class="num">&minus;67.5&plusmn;1.9</td><td class="num">&minus;76.4&plusmn;2.0</td></tr>
+        <tr><td></td><td>Random</td><td class="num">&minus;55.3&plusmn;1.8</td><td class="num">&minus;70.1&plusmn;0.8</td><td class="num">&minus;80.7&plusmn;0.9</td><td class="num">&minus;52.6&plusmn;0.4</td><td class="num">&minus;74.5&plusmn;0.4</td><td class="num">&minus;76.2&plusmn;0.6</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes">
+    <p>Backup: full table of coverage statistics at three APs in Office.</p>
+    <p>The priority-region minimum is the least precise statistic: minus 65.2 plus or minus 3.0 dBm for PSO+GD with the PRS, set by a single cell. Target satisfaction is judged by P5, which lies 7.7 dB above the target.</p>
+    <p>Bold marks the largest mean in each column, not statistical significance.</p>
+  </aside>
+</section>
+
+<!-- old 67 -->
+<section class="backup" data-id="bk-place-ablation">
+  <h2 class="title">Placement: PSO vs. GA and gradient refinement</h2>
+  <div class="body">
+    <p class="small gray" style="margin-bottom:6px">Office, 3 APs; Welch's $t$-test over five seeds; $p$-values uncorrected</p>
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">PSO+GD vs. GA+GD (with PRS)</div><div class="bb"><ul class="small">
+        <li>Priority P5: PSO+GD ahead by 1.6&nbsp;dB ($p=0.10$)</li>
+        <li>Priority mean: ahead by 1.1&nbsp;dB ($p=0.08$)</li>
+        <li>All-region minimum nearly identical ($p=0.91$); GA+GD leads priority minimum by 0.4&nbsp;dB ($p=0.81$)</li>
+        <li>Both gain from the PRS: 4.8 and 4.1&nbsp;dB at priority P5 (GA+GD $p=0.001$; minimum $+9.6$&nbsp;dB)</li>
+      </ul></div></div></div>
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Refinement: PSO+GD vs. PSO-only</div><div class="bb"><ul class="small">
+        <li>With PRS: $+4.1$&nbsp;dB priority P5 (95% CI 2.0&ndash;6.2&nbsp;dB, $p=0.002$); $+3.5$&nbsp;dB all-region P5, $+2.8$&nbsp;dB priority mean ($p&lt;0.001$); $+3.7$&nbsp;dB priority min ($p=0.07$)</li>
+        <li>Without PRS: $+1.6$&nbsp;dB priority P5 (95% CI $-0.2$ to 3.4&nbsp;dB, $p=0.07$)</li>
+        <li>Of the 5.8&nbsp;dB gap to weighted $k$-means, 4.1&nbsp;dB is added by refinement; PSO-only leads $k$-means by 1.7&nbsp;dB ($p=0.08$)</li>
+        <li>GA+GD exceeds PSO-only by 2.5&nbsp;dB ($p=0.03$)</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Backup: global-search choice and the refinement ablation. The results do not show that either global search is better; the benefit of joint planning with refinement holds for both.</p>
+    <p>Refinement helps more when a reflector is present. One possible explanation is variable scaling: the same learning rate moves the normalized reflector coordinates much farther than the AP coordinates in meters.</p>
+    <p>No GA-only run was made, so the GA+GD versus PSO-only gap does not isolate refinement after GA.</p>
+  </aside>
+</section>
+
+<!-- old 68 -->
+<section class="backup" data-id="bk-place-scaling">
+  <h2 class="title">Placement: scaling with AP count in Office</h2>
+  <div class="body">
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch6/fig6H_scaling.png" alt="Office scaling with AP count"><figcaption>(a)&ndash;(b) with PRS, (c)&ndash;(d) without; objective at left, priority-region P5 at right; mean $\pm1$ s.d. over 5 seeds</figcaption></figure></div>
+      <div class="col"><ul class="small">
+        <li>APs needed for priority P5 $\ge-65$&nbsp;dBm (w/ / w/o PRS): PSO+GD 2 / 3; GA+GD 2 / 3; PSO-only 3 / 3; weighted $k$-means 3 / 3; random+GD 3 / 4; random 7 / 7</li>
+        <li>At 2 APs: GA+GD $-64.8$&nbsp;dBm (0.2&nbsp;dB margin); PSO-only $-66.0\pm1.1$ / $-66.9\pm0.8$&nbsp;dBm</li>
+        <li>PRS P5 benefit: 4&ndash;5&nbsp;dB at 3&ndash;5 APs, 2&ndash;3&nbsp;dB at 6&ndash;7 APs</li>
+      </ul></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Backup: AP-count sweep in Office. The objective falls steeply up to three APs and then flattens.</p>
+    <p>Once both configurations meet the target, the reflector mainly adds RSSI margin. The persistent benefit is consistent with the perimeter rooms remaining shadowed by partition walls as ceiling APs are added.</p>
+    <p>The PSO-only two-AP band with the PRS spans the target, from minus 67.1 to minus 64.9 dBm.</p>
+  </aside>
+</section>
+
+<!-- old 69 -->
+<section class="backup" data-id="bk-place-hrbb">
+  <h2 class="title">Placement: HRBB, P5 versus AP count</h2>
+  <div class="body">
+    <figure><img src="assets/img/ch6/hrbb_p5_rssi.png" alt="HRBB P5 versus AP count, priority and all regions" style="height:300px"><figcaption>(a) priority regions, (b) all regions; PSO+GD with and without the PRS, weighted $k$-means without the PRS</figcaption></figure>
+    <div class="cols" style="--cols:1fr 1fr;margin-top:12px">
+      <div class="col"><ul class="small">
+        <li>Priority P5: 1 AP + PRS $\approx-64.3$&nbsp;dBm (0.7&nbsp;dB margin, 3/5 seeds) vs. 2 APs without</li>
+        <li>All-region P5: threshold at 2 APs with PRS, 3 without</li>
+      </ul></div>
+      <div class="col"><ul class="small">
+        <li>PRS gain $\approx3.0$&nbsp;dB at 1 AP, 1.5&nbsp;dB at 2; below 1&nbsp;dB from 4 APs</li>
+        <li>An AP inside the central room can serve the dominant priority region directly</li>
+      </ul></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Backup: second floorplan. The one-AP reduction also appears here, but with a smaller margin; it indicates a reduction rather than a reliably deployable one-AP configuration.</p>
+    <p>The reflector's value shrinks once an AP can see the priority region directly. Two geometries do not establish this as a general design rule.</p>
+  </aside>
+</section>
+
+<!-- old 70 -->
+
+<!-- old 71 -->
+<section class="backup" data-id="bk-place-maps">
+  <h2 class="title">Placement: coverage maps of four methods</h2>
+  <div class="body">
+    <div class="maps">
+      <figure><img src="assets/img/ch6/split_cov_pso_small.png" alt="PSO+GD map"><figcaption>PSO+GD</figcaption></figure>
+      <figure><img src="assets/img/ch6/split_cov_ga_small.png" alt="GA+GD map"><figcaption>GA+GD</figcaption></figure>
+      <figure><img src="assets/img/ch6/split_cov_k-mean_small.png" alt="Weighted k-means map"><figcaption>Weighted $k$-means</figcaption></figure>
+      <figure><img src="assets/img/ch6/split_cov_random_small.png" alt="Random map"><figcaption>Random</figcaption></figure>
+      <img class="sc" src="assets/img/ch6/color-scale.png" alt="color scale">
+    </div>
+    <ul class="small" style="margin-top:14px">
+      <li>PSO+GD: APs in a west room and at two corridor junctions; reflector west on the north wall near the northwest AP</li>
+      <li>GA+GD: one AP in the lowest-weight central room, west rooms weaker; weighted $k$-means: southeast shadows; random: weaker east rooms</li>
+      <li>All three baselines place the reflector east of center, each at a different position</li>
+    </ul>
+  </div>
+  <aside class="notes">
+    <p>Backup: one Office placement per method. APs are red; the color scale runs from minus 80 to minus 40 dBm.</p>
+  </aside>
+</section>
+
+<!-- old 72 -->
+<section class="backup" data-id="bk-place-model">
+  <h2 class="title">Placement: model approximations, implementation</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Model approximations</div><div class="bb"><ul class="small">
+        <li>Each tile is a locally planar specular facet: finite-tile edge diffraction is neglected</li>
+        <li>Radio map sums path powers incoherently; it approximates the average over small-scale fading</li>
+        <li>Constructive combining of the $N_rN_c$ tile paths could add up to $10\log_{10}(N_rN_c)$&nbsp;dB at a point; destructive combining could remove as much</li>
+        <li>Quantifying this needs full-wave simulation or measurement</li>
+      </ul></div></div></div>
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Implementation</div><div class="bb"><ul class="small">
+        <li>Three Ray workers share one RTX 5070&nbsp;Ti GPU</li>
+        <li>Scene load about 1&nbsp;s vs. about 0.1&nbsp;s per radio map, so each worker loads its scene once</li>
+        <li>One PSO+GD run: 1,750 swarm $+$ 30 differentiable evaluations, about 180&nbsp;s serial</li>
+        <li>Cost scales with evaluations, rays per transmitter, AP count, and grid cells</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Backup: what the ray-traced reflector model does and does not capture, and how the runs were executed.</p>
+    <p>The focal-point geometry aligns reflection directions but not path lengths, so the narrowband power fluctuates around the incoherent sum.</p>
+  </aside>
+</section>
+
+<!-- old 51, moved to backup -->

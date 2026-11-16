@@ -1,0 +1,149 @@
+<!-- Backup slides, learning parts (untimed). Sources: old backup_ch2-4.tex (MAPPO hyperparameters, tile grouping) and backup_ch5.tex. -->
+<style>
+section[data-id="hmarl-deploy-2ue"] .vidbox{width:200px;height:252px;overflow:hidden;border-radius:4px;background:#000;margin:0 auto}
+section[data-id="hmarl-deploy-2ue"] .vidbox video{width:200px;height:252px;object-fit:cover;object-position:50% 50%}
+section[data-id="bk-hmarl-params"] table.bt td{padding:3px 10px}
+section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;background:#FBFAF8;padding:14px 20px;display:flex;flex-direction:column;justify-content:center;align-self:stretch}
+</style>
+
+<section class="backup" data-id="bk-mappo-hparams">
+  <h2 class="title">MAPPO hyperparameters (flat MARL)</h2>
+  <div class="body">
+    <table class="bt" style="margin:0 auto">
+      <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Hidden layers (actor and critic)</td><td>2 layers, 256 neurons each</td></tr>
+        <tr><td>Activation</td><td>ReLU</td></tr>
+        <tr><td>Optimizer</td><td>Adam</td></tr>
+        <tr><td>Learning rate</td><td>$2.0\times10^{-4}$ (constant)</td></tr>
+        <tr><td>Discount factor $\gamma$</td><td>0.985</td></tr>
+        <tr><td>Rollout buffer (on-policy)</td><td>1000 transitions</td></tr>
+        <tr><td>Minibatch size</td><td>200 samples</td></tr>
+        <tr><td>PPO clipping parameter $\epsilon$</td><td>0.2</td></tr>
+        <tr><td>GAE parameter $\lambda_{\mathrm{GAE}}$</td><td>0.9</td></tr>
+        <tr><td>Value-function coefficient $c_1$</td><td>0.5</td></tr>
+        <tr><td>Entropy coefficient $c_2$</td><td>$1.0\times10^{-4}$</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes"><p>Backup. MAPPO settings of the flat MARL study (dissertation Chapter 4, hyperparameter table); training runs for 3,000 episodes.</p></aside>
+</section>
+
+<section class="backup" data-id="bk-tile-grouping">
+  <h2 class="title">Tile grouping and reward normalization</h2>
+  <div class="body">
+    <div class="chaptag">Three users, 63 tiles</div>
+    <div class="cols" style="--cols:1fr 1fr">
+      <div class="col"><figure><img src="assets/img/ch4/p2-pattern3ue.png" alt="RSSI over time for two tile groupings"></figure>
+        <p class="small" style="margin-top:8px"><b>Grouping:</b> interleaved columns (regular3ue) vs. staggered hexagonal pattern (shifted3ue); both $-67.60$&nbsp;dBm</p></div>
+      <div class="col"><figure><img src="assets/img/ch4/p2-rew_sensitivity_1.png" alt="RSSI over time for distance-normalized reward variants"></figure>
+        <p class="small" style="margin-top:8px"><b>Reward</b> $P_{r,k}\cdot d^{\,n}$, $n=2,3,4$: $-67.60$, $-67.32$, $-67.70$&nbsp;dBm (range 0.38&nbsp;dB)</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Backup. Two sensitivity analyses. The tile grouping among agents does not change the temporal-average RSSI ($-67.60$&nbsp;dBm for both). Distance-normalized reward variants differ by at most 0.38&nbsp;dB; per-minibatch advantage normalization in PPO is one plausible contributor, but it does not fully explain the result because the distance factors change the relative weighting of users.</p></aside>
+</section>
+
+
+<section class="backup" data-id="bk-hmarl-peruser">
+  <h2 class="title">HMARL per-user vs. aggregate received power</h2>
+  <div class="body">
+    <div class="cols" style="--cols:1fr 1fr">
+      <figure><img src="assets/img/ch5/comparison_2ue_4ue_mean_power.png" alt="CDF of per-user RSSI, 2 vs 4 users" style="width:92%"><figcaption style="font-size:20px;color:var(--text)">Per-user RSSI: median &asymp;2.5&nbsp;dB lower at 4 users</figcaption></figure>
+      <figure><img src="assets/img/ch5/comparison_2ue_4ue_total_power.png" alt="CDF of aggregate power, 2 vs 4 users" style="width:92%"><figcaption style="font-size:20px;color:var(--text)">Aggregate power: slightly higher at 4 users (up to 1&nbsp;dB)</figcaption></figure>
+    </div>
+    <p class="small" style="margin-top:14px">The aperture is passive and every controlled tile reaches every user, so there is no fixed power budget to divide; the per-user loss is consistent with <em>competition for steering range</em>, though no experiment separates the two.</p>
+  </div>
+  <aside class="notes"><p>Backup: what happens when the user count doubles. Per-user RSSI: the median drops by about 2.5&nbsp;dB from two to four users; the HMARL-C run means differ by 1.16&nbsp;dB, because the distributions differ in shape. Aggregate power is slightly higher with four users, up to about 1&nbsp;dB. The CDFs come from the 300-slot HMARL-C deployment runs.</p></aside>
+</section>
+
+<section class="backup" data-id="bk-hmarl-reward">
+  <h2 class="title">HMARL reward sensitivity and the role of $P_{\mathrm{off}}$</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_2ue_rew.png" alt="RSSI CDFs for distance exponents n = 0 to 4, two users"><figcaption>Two users; curves $n_0$&ndash;$n_4$: distance exponent $n=0,\dots,4$</figcaption></figure>
+      <div class="col small lr-panel">
+        <p style="margin-bottom:0">Path-loss compensated measurement:</p>
+        $$\tilde P_k^{(n)}=\tilde P_k+10\,n\log_{10}d_k$$
+        <ul>
+          <li>Larger $n$ favors distant users</li>
+          <li>Medians span $-65.23$ to $-64.42$&nbsp;dBm (<b>0.81&nbsp;dB</b>)</li>
+          <li>$P_{\mathrm{off}}=80$&nbsp;dB also sets the fairness weighting: a user at $-75$&nbsp;dBm carries $2.7\times$ the marginal weight of one at $-65$&nbsp;dBm ($1.38\times$ at $P_{\mathrm{off}}=100$&nbsp;dB); not swept</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Backup: reward design. Training was repeated with the linear received power scaled by $d_k^n$ before conversion to dBm, which progressively favors distant users. The five deployment CDFs nearly coincide: medians span 0.81&nbsp;dB. $P_{\mathrm{off}} = 80$&nbsp;dB is the smallest round value that keeps the shifted power non-negative over the observed $-60$ to $-80$&nbsp;dBm range, but it also sets how strongly the log utility favors weak users; that weighting was not swept.</p></aside>
+</section>
+
+<section class="backup" data-id="bk-hmarl-focal">
+  <h2 class="title">HMARL focal points and allocation space</h2>
+  <div class="body">
+    <div class="cols" style="--cols:55% 1fr;align-items:center">
+      <ul>
+        <li>Per-tile control: $\mathcal{D}_{\mathrm{tile}}=2N_rN_c$ angles</li>
+        <li>Focal-point control: $\mathcal{D}_{\mathrm{focal}}=3L$ coordinates</li>
+        <li>$R_{\text{complexity}}=\dfrac{2N_rN_c}{3L}$, quadratic in surface resolution</li>
+        <li>Allocation space unchanged: $|\mathcal{B}|=K^L$<br><span class="small">handled by the factorized head: $LK$ logits instead of $K^L$ joint scores</span></li>
+      </ul>
+      <div class="block"><div class="bt">This deployment</div><div class="bb center">
+        <p>2 arrays &times; $7\times9=63$ tiles, $L=4$</p>
+        <div class="bignum">252 &rarr; 12</div><span class="numcap">continuous control variables (21&times;)</span>
+        <div class="bignum" style="margin-top:14px">16 / 256</div><span class="numcap">joint assignments for $K=2$ / $K=4$</span>
+      </div></div>
+    </div>
+    <p class="small" style="margin-top:12px">This counts control variables; no tile-level controller was trained, so it is not a measured saving in samples or wall-clock time.</p>
+  </div>
+  <aside class="notes"><p>Backup: control dimension. The focal point turns 252 tile angles into 12 focal coordinates, a 21-fold reduction; the same factor $R_{\text{complexity}}$ as in the flat study. The assignment space does not shrink: 16 options with two users and 256 with four. The factorized allocator head emits $LK$ logits, one softmax per segment.</p></aside>
+</section>
+
+<section class="backup" data-id="bk-hmarl-params">
+  <h2 class="title">HMARL system parameters and hyperparameters</h2>
+  <div class="body">
+    <div class="cols" style="--cols:1fr 1fr">
+      <table class="bt foot" style="font-size:20px">
+        <tbody>
+          <tr><td>Carrier, transmit power</td><td>60&nbsp;GHz, 5&nbsp;dBm</td></tr>
+          <tr><td>Arrays, tiles per array</td><td>2, 63</td></tr>
+          <tr><td>Segments $L$</td><td>4 (2 per array)</td></tr>
+          <tr><td>Servo limits $\theta,\phi$</td><td>$\pm30^\circ$</td></tr>
+          <tr><td>$\delta_{\max}$</td><td>0.3&nbsp;m/slot</td></tr>
+          <tr><td>AP position</td><td>$[0.0,\,8.0,\,3.8]$&nbsp;m</td></tr>
+          <tr><td>Coverage area</td><td>10&nbsp;m &times; 10&nbsp;m</td></tr>
+          <tr><td>Ray tracing (paths)</td><td>depth 8, $10^6$ samples</td></tr>
+          <tr><td>Materials</td><td>ITU-R P.2040-4</td></tr>
+        </tbody>
+      </table>
+      <table class="bt foot" style="font-size:20px">
+        <tbody>
+          <tr><td>$\gamma$, $\epsilon$, $\lambda_{\mathrm{GAE}}$</td><td>0.985, 0.2, 0.9</td></tr>
+          <tr><td>$c_2$ (entropy), $c_1$ (value)</td><td>$1.0\times10^{-4}$, 1.0</td></tr>
+          <tr><td>Batch size, epochs</td><td>200, 40</td></tr>
+          <tr><td>Optimizer, learning rate</td><td>Adam, $2.0\times10^{-4}$</td></tr>
+          <tr><td>Allocation interval $T$</td><td>10 slots</td></tr>
+          <tr><td>$\alpha_0$, $e_{\mathrm{th}}$, $d_0$</td><td>1.0, 1,000, 10&nbsp;m</td></tr>
+          <tr><td>Training</td><td>3,000 episodes &times; 100 slots</td></tr>
+          <tr><td>Evaluation</td><td>300 slots, 30&nbsp;cm/slot</td></tr>
+          <tr><td>$P_{\mathrm{off}}$, $P_{\mathrm{sc}}$</td><td>80&nbsp;dB, 30&nbsp;dB</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small" style="margin-top:12px">High-level network: attention + two 128-neuron heads. Low-level actors and shared critic: 2 layers, 256 neurons.</p>
+  </div>
+  <aside class="notes"><p>Backup: parameter table of the hierarchical study (dissertation Chapter 5), for questions about the setup. Walls and floors are concrete and ceilings wood (ITU-R P.2040-4); the AP and each user have a single antenna element; users are at 1.5&nbsp;m height. The two segments of an array are 0.96&nbsp;m apart and the two arrays 15.18&nbsp;m apart.</p></aside>
+</section>
+
+<section class="backup" data-id="bk-hmarl-slot">
+  <h2 class="title">HMARL: what one slot means physically</h2>
+  <div class="body">
+    <ul>
+      <li>The study is simulation-only and does <b>not</b> fix a slot duration; the protocol is specified in slots</li>
+      <li>Users advance 30&nbsp;cm per slot and the focal point may move $\delta_{\max}=0.3$&nbsp;m per axis per slot: the actuator is provisioned to match the assumed user displacement</li>
+    </ul>
+    <div class="cols stretch" style="--cols:1fr 1fr;margin-top:10px">
+      <div class="block"><div class="bt">Slot set by servo rotation time</div><div class="bb small">Order of tens of milliseconds: user speed well above walking pace, so the setting is a <b>stress test</b> of the tracking loop rather than an indoor mobility model.</div></div>
+      <div class="block"><div class="bt">Slot set by localization update rate</div><div class="bb small">Order of one second: 30&nbsp;cm per slot is a <b>slow walk</b>, and the servo is no longer the binding constraint.</div></div>
+    </div>
+    <p class="small" style="margin-top:10px">Either way, mechanical rotation time and quasi-static geometry confine deployment to low-mobility indoor use; fixing the slot duration requires hardware-in-the-loop validation.</p>
+  </div>
+  <aside class="notes"><p>Backup: if asked how fast the users move in real time. There is no physical slot duration in this study; two consistent readings exist, and which constraint binds depends on hardware that has not yet been tested in the loop.</p></aside>
+</section>

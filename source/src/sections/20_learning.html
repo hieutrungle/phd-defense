@@ -1,0 +1,657 @@
+<!-- ===================================================================
+     Learning parts: flat MARL (HOW) and hierarchical MARL (HOW)
+     Track: Learning. Slides div-marl ... alloc-buys. Sources: old Beamer 04_marl.tex, 05_hmarl.tex;
+     numbers from dissertation data/section4.tex, section5.tex.
+     =================================================================== -->
+<style>
+section[data-id="mamdp"] .body ul li{margin:.32em 0}
+section[data-id="mamdp"] .sub2{display:block;font-size:var(--fs-foot);color:var(--midgray)}
+section[data-id="marl-setup"] table.bt td{padding:8px 12px;vertical-align:top}
+.reveal .slides section[data-id="mappo"] .body{justify-content:flex-start;padding-top:6px}
+section[data-id="mappo"] .cols img{max-height:300px;width:auto;max-width:100%;display:block;margin:0 auto}
+section[data-id="mappo"] .lr-panel{padding:10px 18px}
+section[data-id="mappo"] .obj{background:var(--maroonlight);border:1.5px solid var(--maroon);border-radius:7px;padding:10px 20px 14px 20px;margin-top:16px}
+section[data-id="mappo"] .obj .eq{text-align:center;font-size:27px;margin:0 0 8px 0;padding-bottom:8px;border-bottom:1px solid rgba(80,0,0,.25)}
+section[data-id="mappo"] .obj .terms{display:grid;grid-template-columns:auto auto auto;justify-content:stretch;column-gap:0}
+section[data-id="mappo"] .obj .term{padding:2px 14px 0 14px;border-left:1px solid rgba(80,0,0,.25)}
+section[data-id="mappo"] .obj .term:first-child{border-left:0;padding-left:0}
+section[data-id="mappo"] .obj .term:last-child{padding-right:0}
+section[data-id="mappo"] .obj .term{text-align:center}
+section[data-id="mappo"] .obj .tt{font-weight:600;color:var(--maroon);font-size:21px}
+section[data-id="mappo"] .obj .te{font-size:19px;margin:8px 0 7px 0;white-space:nowrap}
+section[data-id="mappo"] .obj .ts{text-align:left;display:block;width:0;min-width:100%;font-size:16px;color:var(--midgray);line-height:1.35}
+section[data-id="marl-result"] .maps{display:flex;align-items:flex-end;justify-content:center;gap:8px}
+section[data-id="marl-result"] .maps figure img{height:292px}
+section[data-id="marl-result"] .maps figcaption{font-size:var(--fs-foot);color:var(--text);line-height:1.25}
+section[data-id="marl-result"] .vidbox{width:150px;height:292px;overflow:hidden;border-radius:4px}
+section[data-id="marl-result"] .vidbox video{width:150px;height:292px;object-fit:cover;object-position:54.3% 50%}
+section[data-id^="rob-"] .figbig img{width:100%}
+section[data-id="flat-limit"] .grid{display:grid;grid-template-columns:repeat(9,30px);gap:5px;justify-content:center}
+section[data-id="flat-limit"] .grid div{height:24px;border-radius:3px}
+section[data-id="flat-limit"] .gl{display:grid;grid-template-columns:repeat(9,30px);gap:5px;justify-content:center;font-size:var(--fs-tiny);color:var(--midgray);text-align:center;margin-top:4px}
+section[data-id="flat-limit"] .ul{display:flex;justify-content:center;gap:34px;font-size:var(--fs-foot);font-weight:600;margin-top:6px}
+section[data-id="hmamdp"] .bb .katex-display{margin:.6em 0}
+section[data-id="hmamdp"] .block .bb{padding-top:18px;padding-bottom:20px}
+section[data-id="hmamdp"] .block .bt{height:44px;line-height:44px;padding-top:0;padding-bottom:0;box-sizing:border-box;white-space:nowrap}
+section[data-id="hmarl-train-method"] .bb .katex-display{margin:.3em 0}
+section[data-id="hmarl-setup"] table.bt td{padding:5px 10px;vertical-align:top}
+section[data-id="hmarl-deploy"] table.bt td, section[data-id="hmarl-training"] table.bt td{padding:3px 12px}
+section[data-id="energy-maps"] .row{display:flex;align-items:flex-end;justify-content:center;gap:10px}
+section[data-id="energy-maps"] .row figure img{height:330px}
+section[data-id="energy-maps"] .row figcaption{font-size:var(--fs-foot);color:var(--text)}
+section[data-id="energy-maps"] .vidbox{width:262px;height:330px;overflow:hidden;border-radius:4px;background:#000}
+section[data-id="energy-maps"] .vidbox video{width:262px;height:330px;object-fit:cover;object-position:50% 50%}
+section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;background:#FBFAF8;padding:14px 20px;display:flex;flex-direction:column;justify-content:center;align-self:stretch}
+section[data-id] .lr-fill{display:flex;flex-direction:column;justify-content:space-between;align-self:stretch}
+section[data-id] .lr-fill>.block,section[data-id] .lr-stretchblock{display:flex;flex-direction:column}
+section[data-id] .lr-stretchblock{align-self:stretch;margin:0!important}
+section[data-id] .lr-stretchblock>.bb{flex:1;display:flex;flex-direction:column;justify-content:center}
+section[data-id="rob-size"] .midnum{font-size:25px}
+</style>
+
+<section class="divider" data-id="div-marl" data-num="4" data-title="Multi-Agent RL Control" data-part="HOW" data-question="How can learned agents steer the array for moving users?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Signal Whisperers: Enhancing wireless reception using DRL-guided reflector arrays,&rdquo; <i>IEEE Trans. Mach. Learn. Commun. Netw.</i>, vol.&nbsp;4, pp.&nbsp;265&ndash;281, 2026.</p><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Bypassing the CSI bottleneck: MARL-driven spatial control for reflector arrays,&rdquo; arXiv:2604.05162, 2026; submitted to IEEE ICC 2027 (under review).</p></div><aside class="notes"><p>Section divider: learned control for several moving users. Move on.</p></aside></section>
+
+<!-- ============================ MA-MDP ============================ -->
+<section data-id="mamdp" data-min="1.25">
+  <h2 class="title">MA-MDP: each agent moves the focal point of one segment</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:61% 1fr">
+      <div class="col">
+        <p class="small" style="margin-bottom:.3em">Array partitioned into $L$ disjoint segments $\mathcal{T}_l$; agent $l$ controls focal point $f_{l,t}\in\mathbb{R}^3$.</p>
+        <ul class="small">
+          <li><b>State:</b> $s_t=[u_{1,t},\dots,u_{K,t},\,r_{1,t},\dots,r_{L,t},\,f_{1,t},\dots,f_{L,t}]$<span class="sub2">user positions, segment centers, focal points</span></li>
+          <li><b>Local observation:</b> $o_{l,t}=[u_{b_l,t},\,r_{l,t},\,f_{l,t}]$; assigned user $b_l$ <span class="alert">fixed in advance</span></li>
+          <li><b>Action:</b> $a_{l,t}\in\mathbb{R}^3$, $\|a_{l,t}\|_\infty\le\delta_{\max}$, $\;f_{l,t+1}=f_{l,t}+a_{l,t}$</li>
+          <li><b>Shared reward:</b> $R(s_t,a_t)=\frac{1}{K}\sum_{k=1}^{K}P_{r,k}(s_t,a_t)$ (RSSI)</li>
+          <li>Focal points clipped to $\mathcal{F}_l$, angles to $\pm30^\circ$: every action feasible</li>
+        </ul>
+        <p class="foot" style="margin:.5em 0 0 0"><b>Run time:</b> positions only; <b>training:</b> received power as the reward. No pilot-based CSI estimation.</p>
+      </div>
+      <div class="col lr-fill">
+        <div class="block" style="margin-top:0"><div class="bt">Dimensionality reduction</div><div class="bb center">
+          $$R_{\text{complexity}}=\frac{2N_rN_c}{3L}$$
+          <div class="bignum">14&times;</div><span class="numcap">fewer control variables for $N_rN_c=63$ tiles, $K=L=3$</span>
+        </div></div>
+        <div class="small" style="margin-top:14px"><b>Answers the geometric limits:</b>
+          <div class="foot" style="line-height:1.45;margin-top:2px">servo limits &rarr; clipped actions<br>alignment &rarr; received-power reward<br>several users &rarr; one agent per segment</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Multi-user control becomes a cooperative multi-agent MDP. The array is split into $L$ disjoint segments, and each agent controls one segment's focal point.</p>
+    <p>The global state holds the user positions, the fixed segment centers, and the current focal points. Each agent observes only its own segment: the position of its assigned user, its center, and its focal point. The assigned user is fixed in advance; this will matter at the end of the part.</p>
+    <p>The action is a bounded focal-point displacement, so the tiles move smoothly.</p>
+    <p>All agents share one reward, the mean received power of the users. Power is used only in training, so at run time the agents need positions only.</p>
+    <p>Focal points and tile angles are clipped to their limits, so every action is feasible. This is how learning answers the geometric limits: it acts within servo limits, optimizes received power, and serves several users.</p>
+    <p>The abstraction cuts the control dimension from $2N_rN_c$ angles to $3L$ coordinates, fourteen times fewer here.</p>
+  </aside>
+</section>
+
+<!-- ============================ A3 animation ============================ -->
+<section data-id="anim-marl" data-min="0.75">
+  <h2 class="title">Flat MARL in motion: fixed columns, moving focal points</h2>
+  <div class="body">
+    <div class="anim" style="height:470px"><canvas data-anim="marl"></canvas><div class="illus">Illustrative</div></div>
+    <p class="fragment foot gray" data-anim-step="1" style="margin:8px 0 0 0;text-align:center">Here each user's columns span the whole aperture; with arrays on different walls, the assignment would matter.</p>
+  </div>
+  <aside class="notes">
+    <p>Here is the controller in motion. The access point has no direct path to the users; the corner array reflects into the hallway.</p>
+    <p>Each color is one agent. Its columns are fixed: user one always owns columns one, four and seven.</p>
+    <p>When the users move, each agent shifts its focal point toward its user in bounded steps, the dashed box, and the tiles re-orient so the reflected beams follow.</p>
+    <p>Click: the assignment never changes. Here that costs little, because each user's columns span the whole aperture; on arrays on different walls it would matter.</p>
+  </aside>
+</section>
+
+<!-- ============================ MAPPO / CTDE ============================ -->
+<section data-id="mappo" data-min="0.75">
+  <h2 class="title">Training with MAPPO under CTDE</h2>
+  <div class="body">
+    <div class="cols" style="--cols:47% 1fr;align-items:center">
+      <div class="col"><img src="assets/img/crops/learning_ctde.png" alt="CTDE diagram: local actors exchange actions and observations with the ray-traced scene; a centralized critic sees the global state and reward during training only and supplies advantages."></div>
+      <div class="col lr-panel">
+        <ul class="small">
+          <li><b>CTDE</b> mitigates non-stationarity: global critic in training, local actors at deployment</li>
+          <li><b>Execution:</b> each actor uses only its local observation; no inter-agent communication</li>
+          <li>Actor and critic: small MLPs, Adam optimizer <span class="foot gray">(settings in backup)</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="obj">
+      <div class="eq">$L(\psi_l,\xi)=L^{\mathrm{CLIP}}(\psi_l)-c_1\,L^{\mathrm{VF}}(\xi)+c_2\,H[\pi_{\psi_l}](o_t^l)$</div>
+      <div class="terms">
+        <div class="term"><div class="tt">Clipped surrogate</div>
+          <div class="te">$L^{\mathrm{CLIP}}(\psi_l)=\mathbb{E}_t\big[\min\big(\rho_t^l\,\mathrm{Adv}_t^l,\ \mathrm{clip}(\rho_t^l,1{-}\epsilon,1{+}\epsilon)\,\mathrm{Adv}_t^l\big)\big]$</div>
+          <div class="ts">ratio $\rho_t^l=\pi_{\psi_l}/\pi_{\psi_{\mathrm{old},l}}$; advantage $\mathrm{Adv}_t^l=\mathrm{Adv}(s_{\mathrm{global},t},a_t^l)$ from the critic; clipping limits each actor update</div></div>
+        <div class="term"><div class="tt">Value loss</div>
+          <div class="te">$L^{\mathrm{VF}}(\xi)=\mathbb{E}_t\big[(V_\xi(s_{\mathrm{global},t})-V_{\mathrm{target},t})^2\big]$</div>
+          <div class="ts">mean squared error of the centralized critic to the empirical return</div></div>
+        <div class="term"><div class="tt">Entropy</div>
+          <div class="te">$H[\pi_{\psi_l}](o_t^l)=-\mathbb{E}\big[\log\pi_{\psi_l}(a\mid o_t^l)\big]$</div>
+          <div class="ts">bonus that keeps exploring focal points</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The agents are trained with MAPPO under centralized training with decentralized execution, which addresses non-stationarity.</p>
+    <p>In training, the centralized critic sees the global state and reward and supplies advantages to every actor. At deployment the critic is discarded; each actor maps its local observation to a focal-point move, with no communication.</p>
+    <p>The objective has three terms. The clipped surrogate takes the smaller of the ratio-weighted advantage and its clipped version, so one batch cannot move a policy far. The value loss fits the critic to the observed return, and the entropy bonus keeps the agents exploring focal points. The weights are in the backup.</p>
+  </aside>
+</section>
+
+<!-- ============================ Setup ============================ -->
+<section data-id="marl-setup" data-min="0.5">
+  <h2 class="title">Setup: 60 GHz L-shaped hallway with three users</h2>
+  <div class="body">
+    <div class="cols" style="--cols:300px 1fr;align-items:center">
+      <figure><img src="assets/img/ch4/p2-hallway_L-01.png" alt="Top view of the L-shaped hallway with AP, corner reflector, obstacle and UE region" style="height:440px"><figcaption>Layout; dimensions in m</figcaption></figure>
+      <table class="bt">
+        <tbody>
+          <tr><td><b>Carrier</b></td><td>60&nbsp;GHz downlink, NLOS</td></tr>
+          <tr><td><b>Hallway</b></td><td>vertical segment about 15&nbsp;m; 20&nbsp;m end to end; both ends open</td></tr>
+          <tr><td><b>AP</b></td><td>4 antennas at $(9.5,-1.5)$, 2.5&nbsp;m high, 5.0&nbsp;dBm</td></tr>
+          <tr><td><b>Reflector</b></td><td>$7\times9=63$ hexagonal tiles at the corner $(11.2,-5.7)$</td></tr>
+          <tr><td><b>Users</b></td><td>3 single-antenna UEs in the shadowed region $(-6.0,-6.2)$ to $(2.0,-4.25)$</td></tr>
+          <tr><td><b>Obstacle</b></td><td>wooden oval, 1.8&nbsp;m high, at $(3.0,-5.5)$</td></tr>
+          <tr><td><b>Materials</b></td><td>plasterboard walls, board ceiling, concrete floor (ITU-R P.2040)</td></tr>
+          <tr><td><b>Episode start</b></td><td>tile angles uniform in $[-\pi/6,\pi/6]$</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The scene is an L-shaped hallway at 60&nbsp;GHz. A four-antenna access point transmits 5&nbsp;dBm, and the 63-tile array sits at the corner.</p>
+    <p>Three users are in the shadowed region, the yellow rectangle, and a 1.8&nbsp;m wooden obstacle blocks the remaining direct paths.</p>
+    <p>Each episode starts from random tile angles within plus or minus 30 degrees.</p>
+  </aside>
+</section>
+
+<!-- ============================ Training ============================ -->
+<section data-id="marl-training" data-min="0.5">
+  <h2 class="title">Multi-agent decomposition trains faster and higher</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr;align-items:center">
+      <figure><img src="assets/img/ch4/p2-training_true.png" alt="Average training reward over 3,000 episodes for beam-focusing-ma, beam-focusing-sa and column-based-ma"><figcaption>Average training reward over 3,000 episodes (normalized reward units); shaded: spread across runs</figcaption></figure>
+      <div class="col small lr-panel">
+        <p style="margin-bottom:.2em">Three learned controllers:</p>
+        <ul>
+          <li><b>beam-focusing-ma:</b> one agent per user, every tile independent</li>
+          <li><b>beam-focusing-sa:</b> one agent selects all focal points</li>
+          <li><b>column-based-ma:</b> one shared azimuth per column</li>
+        </ul>
+        <p style="margin-top:.5em">Converged reward: <b>about 42</b> (ma) vs. about 27 (sa) and 27 (column)</p>
+        <p class="foot" style="margin:0">Column-based: about 35% lower but stable, so the framework also fits a lower-cost array</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Three controllers: multi-agent focusing, a single agent choosing all focal points, and a multi-agent version that shares one azimuth per column, a cheaper array.</p>
+    <p>The multi-agent controller converges to about 42, the other two near 27. A plausible reason: each agent faces a smaller problem. The column-based one trains stably, so the method fits a lower-cost array.</p>
+  </aside>
+</section>
+
+<!-- ============================ Main result ============================ -->
+<section data-id="marl-result" data-min="1.25">
+  <h2 class="title">Multi-agent focusing: +20.7 dB over a static flat reflector</h2>
+  <div class="body">
+    <div class="maps">
+      <figure><img src="assets/img/ch4/p2-viz_no_reflector-01.png" alt="RSSI map, no reflector"><figcaption>None<br><b>&minus;108.2</b></figcaption></figure>
+      <figure><img src="assets/img/ch4/p2-viz_flat_reflector-01.png" alt="RSSI map, flat reflector"><figcaption>Flat<br><b>&minus;90.1</b></figcaption></figure>
+      <figure><img src="assets/img/ch4/p2-viz_focus_sa_reflector-01.png" alt="RSSI map, single-agent focusing"><figcaption>SA focus<br><b>&minus;74.22</b></figcaption></figure>
+      <figure><img src="assets/img/ch4/p2-viz_col_ma_reflector-01.png" alt="RSSI map, multi-agent column control"><figcaption>MA column<br><b>&minus;72.71</b></figcaption></figure>
+      <figure><img src="assets/img/ch4/p2-viz_focus_ma_reflector-01.png" alt="RSSI map, multi-agent focusing"><figcaption class="maroon"><span class="maroon">MA focus</span><br><b class="maroon">&minus;69.4</b></figcaption></figure>
+      <figure><img src="assets/img/aboutme/ch4_colorbar.png" alt="color scale -60 to -100 dBm" style="height:280px"><figcaption>dBm<br>&nbsp;</figcaption></figure>
+      <figure style="margin-left:18px"><div class="vidbox"><video src="media/hallway_focus_f3_e4tot100_eval_pruned_hallway_L_0.mp4" data-autoplay muted loop playsinline></video></div><figcaption>Moving users<br>(MA focus)</figcaption></figure>
+    </div>
+    <ul class="small" style="margin-top:12px">
+      <li><b>RSSI-map average</b> (dBm) per configuration; MA focus: <b>+38.8&nbsp;dB</b> vs. none, <b>+20.7&nbsp;dB</b> vs. flat, <b>+4.8&nbsp;dB</b> vs. single agent</li>
+      <li>Users move every 4 steps (3-step adaptation window); MA focus typically recovers within one simulation step</li>
+      <li>Baselines: static reflectors and learned variants, not a position-tracking geometric rule</li>
+    </ul>
+  </div>
+  <aside class="notes">
+    <p>These are RSSI maps of the hallway during evaluation, with the RSSI-map average of each configuration underneath. The users are the magenta dots.</p>
+    <p>With no reflector the average is $-108.2$&nbsp;dBm. A static flat reflector raises it by 18.1&nbsp;dB to $-90.1$&nbsp;dBm.</p>
+    <p>Compare the flat panel, where power spreads along the corridor, with the narrow beams the learned controllers form toward each user. Single-agent focusing reaches $-74.22$, the column-based controller $-72.71$, and multi-agent beam-focusing $-69.4$&nbsp;dBm.</p>
+    <p>That is 38.8&nbsp;dB above no reflector, 20.7&nbsp;dB above the static flat reflector, and 4.8&nbsp;dB above the single-agent controller. The baselines are static reflectors and learned variants; a position-tracking geometric rule was not run here.</p>
+    <p>The video shows the multi-agent controller with moving users. Users move every four simulation steps, with a three-step adaptation window, an assumed allowance for mechanical latency. After a move, the controller typically recovers within one step.</p>
+  </aside>
+</section>
+
+<!-- ============================ Robustness (split of old 25) ============================ -->
+<section data-id="rob-users" data-min="0.5">
+  <h2 class="title">Robustness: user count</h2>
+  <div class="body">
+    <div class="chaptag">Policy trained on 3 users and 63 tiles, evaluated without retraining. Temporal-average RSSI at the users over the 300-step trace (not the map averages of the previous slide).</div>
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <figure class="figbig"><img src="assets/img/ch4/p2-multiusers.png" alt="RSSI over time for 2, 3 and 4 users"><figcaption>RSSI vs. time step for 2, 3 and 4 users</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum">&minus;67.33 / &minus;67.60 / &minus;68.33</div><span class="numcap">dBm for 2 / 3 / 4 users</span></div>
+        <ul class="small" style="margin-top:16px">
+          <li>1.0&nbsp;dB drop from 2 to 4 users</li>
+          <li>Fewer users means more tiles per user</li>
+          <li>Same policy, no retraining</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Three robustness checks, one per slide. Here and on the next slide the metric is the temporal-average RSSI at the users over the 300-step trace.</p>
+    <p>The three-user policy runs unchanged with two, three and four users: $-67.33$, $-67.60$ and $-68.33$&nbsp;dBm, a 1&nbsp;dB drop from two to four users, since fewer users means more tiles per user.</p>
+  </aside>
+</section>
+
+<section data-id="rob-size" data-min="0.5">
+  <h2 class="title">Robustness: array size</h2>
+  <div class="body">
+    <div class="chaptag">Policy trained on 3 users and 63 tiles, evaluated without retraining. Temporal-average RSSI at the users over the 300-step trace.</div>
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <figure class="figbig"><img src="assets/img/ch4/p2-reflector_size.png" alt="RSSI over time for arrays of 45, 63, 81 and 99 tiles"><figcaption>RSSI vs. time step for 45, 63, 81 and 99 tiles</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum" style="font-size:28px">&minus;68.43 / &minus;67.60 / &minus;67.12 / &minus;66.80</div><span class="numcap">dBm for 45 / 63 / 81 / 99 tiles</span></div>
+        <ul class="small" style="margin-top:16px">
+          <li>Monotonic, with diminishing returns</li>
+          <li>Agents act on focal points, so one policy runs on every array size</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Second check: arrays from 45 to 99 tiles, again without retraining.</p>
+    <p>RSSI rises monotonically with size, from $-68.43$ to $-66.80$&nbsp;dBm, with diminishing returns. Because the agents act on focal points rather than individual tiles, the same policy runs on every array size.</p>
+  </aside>
+</section>
+
+<section data-id="rob-noise" data-min="0.5">
+  <h2 class="title">Robustness: user-position noise</h2>
+  <div class="body">
+    <div class="chaptag">Gaussian noise $\sigma$ on user positions in training and evaluation (noise-matched training). Results: temporal-average RSSI at the users over the 300-step trace.</div>
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <figure class="figbig"><img src="assets/img/ch4/p2-training_noise.png" alt="Training reward under position noise of 0, 0.1, 0.3, 0.5 and 1.0 m"><figcaption>Training reward under position noise</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum">$\sigma\le0.3$&nbsp;m</div><span class="numcap">within 0.54&nbsp;dB of noise-free</span></div>
+        <ul class="small" style="margin-top:16px">
+          <li>0.5&ndash;1.0&nbsp;m: about 4.6&nbsp;dB lower</li>
+          <li>Indoor localization (UWB, mmWave radar) can provide sub-meter accuracy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Third check: Gaussian noise on the user positions, in both training and evaluation. The plot shows training under each noise level.</p>
+    <p>Up to 0.3&nbsp;m, RSSI stays within 0.54&nbsp;dB of the noise-free case; at 0.5 and 1.0&nbsp;m it is about 4.6&nbsp;dB lower. UWB or mmWave radar can provide sub-meter accuracy.</p>
+  </aside>
+</section>
+
+<!-- ============================ Flat limit + transition ============================ -->
+<section data-id="flat-limit" data-min="0.75">
+  <h2 class="title">Why flat MARL is not enough: a fixed tile-to-user assignment</h2>
+  <div class="body">
+    <div class="cols" style="--cols:60% 1fr;align-items:center">
+      <ul class="small">
+        <li>Focal points are learned, but the <span class="alert">tile-to-user assignment is fixed</span> in advance (columns 1, 4, 7 &rarr; user 1)</li>
+        <li>In this hallway it costs nothing measurable: two groupings both give $-67.60$&nbsp;dBm, because each user's tiles span the whole aperture</li>
+        <li>It matters when segments differ in geometry (contiguous parts of an array, arrays on different walls) or users $\neq$ segments</li>
+        <li>Choosing it is <b>discrete and combinatorial</b> ($K^L$ options); continuous focal-point actors are not designed for it</li>
+      </ul>
+      <div class="col">
+        <p class="foot center" style="margin-bottom:6px">Fixed column assignment</p>
+        <div class="grid"><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div><div style="background:#2F6DB5;opacity:.85"></div><div style="background:#2E7D32;opacity:.85"></div><div style="background:#B5651D;opacity:.85"></div></div>
+        <div class="gl"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div>
+        <div class="ul"><span style="color:#2F6DB5">user 1</span><span style="color:#2E7D32">user 2</span><span style="color:#B5651D">user 3</span></div>
+      </div>
+    </div>
+    <div class="transition"><div class="ans"><b>Answered (HOW):</b> decentralized agents steer focal points from user positions, trained on received power: +20.7&nbsp;dB over a static flat reflector.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> when segments differ in geometry, which segment should serve which user, and when should that change? &rarr; hierarchical MARL.</div></div>
+  </div>
+  <aside class="notes">
+    <p>To summarize: decentralized agents steer focal points from user positions, trained on received power, well above static reflectors.</p>
+    <p>One structural choice was fixed in advance: which tiles serve which user. Columns 1, 4 and 7 always serve user 1.</p>
+    <p>In this hallway that costs nothing measurable: two groupings give the same $-67.60$&nbsp;dBm, because each user's tiles span the whole aperture.</p>
+    <p>It matters when segments differ in geometry, for example arrays on different walls, or when users and segments differ in number. Choosing it is a discrete problem with $K^L$ options. That opens the next question: which segment serves which user, and when.</p>
+  </aside>
+</section>
+
+<!-- =================================================================== -->
+<section class="divider" data-id="div-hmarl" data-num="5" data-title="Hierarchical Multi-Agent RL" data-part="HOW" data-question="How should several users share the array, and when should the assignment change?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Learning to Reflect: Hierarchical multi-agent reinforcement learning for CSI-free mmWave beam-focusing,&rdquo; arXiv:2603.07370, 2026; under review, <i>IEEE Trans. Mach. Learn. Commun. Netw.</i></p><p><span class="dme">H. Le</span>, M. Ibrahim, O. Bedir, J. Tao, and S. Ekin, &ldquo;Learning to Focus: CSI-free hierarchical MARL for reconfigurable reflectors,&rdquo; arXiv:2604.05165, 2026; accepted, IEEE GLOBECOM 2026, Macau.</p></div><aside class="notes"><p>Section divider: learned allocation on a slower timescale. Move on.</p></aside></section>
+
+<!-- ============================ Fixed -> learned ============================ -->
+<section data-id="fixed-to-learned" data-min="0.5">
+  <h2 class="title">From fixed assignment to learned allocation</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:55% 1fr">
+      <div class="col small">
+        <p><b>Two corner arrays:</b> a user can be served by segments with very different geometry, so the assignment now matters.</p>
+        <p style="margin-bottom:.2em">Serving $K$ users with $L$ segments needs <b>two coupled decisions</b>:</p>
+        <ol>
+          <li><b>Which user should each segment serve?</b><br><span class="foot">discrete, couples the segments, should change only when the geometry changes</span></li>
+          <li><b>Where should each segment focus?</b><br><span class="foot">continuous, per segment, rate-limited by servo actuation</span></li>
+        </ol>
+      </div>
+      <div class="block lr-stretchblock"><div class="bt">Why the assignment is hard</div><div class="bb small">
+        <ul style="margin-bottom:0">
+          <li>$|\mathcal{B}|=K^L$: <b>16</b> assignments for $K=2$, <b>256</b> for $K=4$ ($L=4$)</li>
+          <li>A poor assignment leaves a user served only by residual multipath</li>
+          <li>Servo limits: non-convex reachable set</li>
+          <li>State: noisy position estimates; no pilot-based CSI estimation</li>
+        </ul></div></div>
+    </div>
+    <div class="takeaway">Make the user-to-segment assignment a learned decision on its own, slower timescale.</div>
+  </div>
+  <aside class="notes">
+    <p>Now two corner arrays serve the room, so a user can be reached by segments with very different geometry; the partition matters.</p>
+    <p>There are two decisions: which user each segment serves, discrete and coupled; and where each segment focuses, continuous and servo-limited. The assignment space grows as $K^L$, 256 options with four users. So the assignment becomes a learned decision on its own, slower timescale.</p>
+  </aside>
+</section>
+
+<!-- ============================ Hierarchy ============================ -->
+<section data-id="hierarchy" data-min="0.75">
+  <h2 class="title">Two-timescale hierarchy: slow allocation, fast focusing</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:62% 1fr">
+      <img src="assets/img/crops/learning_hierarchy.png" alt="Hierarchy: a high-level allocator every T slots emits the assignment vector b to L segment agents, each reading its assigned user's position, its centroid and its focal point, applying a move every slot; user positions feed back to the allocator.">
+      <div class="col lr-fill">
+        <div><img src="assets/img/crops/learning_timeline.png" alt="Timeline: allocation decisions b0, b1, b2 every T slots on the high level; focal-point moves every slot on the low level" style="width:100%">
+        <p class="tiny gray" style="margin:2px 0 6px 0">slot = one control step; drawn for $T=4$, experiments use $T=10$</p></div>
+        <ul class="foot" style="font-size:19px">
+          <li>Allocator: global state, decision held for the window</li>
+          <li>Segments: masked local state, no inter-segment communication</li>
+          <li>Critics in training only; deployment runs $\pi_H$ and $\{\pi_{\psi_l}\}$</li>
+          <li><b>Run time:</b> positions only; <b>training:</b> received power as the reward</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The hierarchy has two levels. At the top, a centralized allocator reads the global state: all user positions, segment centroids and current focal points. Every $T$ slots it emits an assignment vector $b$, one user index per segment, which is broadcast and held for the window.</p>
+    <p>Below, one agent per segment moves its focal point every slot. It sees only nine numbers: its assigned user's position, its own centroid and its focal point. Segments do not communicate.</p>
+    <p>At run time both levels see positions only; power is only the training reward. The timeline is drawn with $T$ of four; experiments use ten.</p>
+  </aside>
+</section>
+
+<!-- ============================ A4 animation ============================ -->
+<section data-id="anim-hmarl" data-min="0.75">
+  <h2 class="title">The hierarchy in motion: reassign every $T$ slots, refocus every slot</h2>
+  <div class="body">
+    <div class="anim" style="height:476px"><canvas data-anim="hmarl" data-opts='{"users":3}'></canvas><div class="illus">Illustrative</div></div>
+    <p class="foot gray center" style="margin:8px 0 0 0">Segment colors show the assignment; the allocation rule drawn here is a simple position-based stand-in for the learned allocator.</p>
+  </div>
+  <aside class="notes">
+    <p>Here are both timescales together. Two corner arrays, each split into two segments; three users walk paths that cross.</p>
+    <p>Watch the timeline on the right. Every slot, each segment nudges its focal point a bounded step toward its user, the fast level.</p>
+    <p>Every $T$ slots the allocator decides again which user each segment serves; a segment that changes color swings its beam to its new user. Between those decisions the assignment is held, so segments are not thrown around while users cross.</p>
+  </aside>
+</section>
+
+<!-- ============================ HMA-MDP ============================ -->
+<section data-id="hmamdp" data-min="0.75">
+  <h2 class="title">HMA-MDP: one objective, a reward for each timescale</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="block" style="margin:0"><div class="bt">High level: allocation (every $T$ slots)</div><div class="bb small">
+        State $s_H=\{u_{1:K},\,r_{1:L},\,f_{1:L}\}$, action $b\in\mathcal{B}$<br>Reward: concave, every user counts
+        $$R_{\mathrm{sys}}=\frac1K\sum_{k=1}^{K}\ln\bigl(1+[\tilde P_k(t)]^+\bigr)$$
+        Trained on macro-steps: the discounted return inside each window</div></div>
+      <div class="block" style="margin:0"><div class="bt">Low level: focal points (every slot)</div><div class="bb small">
+        Masked state $s_{L,l}=\{u_{b_l},\,r_l,\,f_l\}$, $\|a_{l,t}\|_\infty\le\delta_{\max}$<br>Reward: assigned user's power + progress
+        $$R_l(t)=\frac{1}{P_{\mathrm{sc}}}\Bigl[\tilde P_{b_l}(t)+\bigl(\tilde P_{b_l}(t)-\tilde P_{b_l}(t{-}1)\bigr)\Bigr]$$
+        Second term: potential-based shaping ($\Phi=\tilde P_{b_l}$)</div></div>
+    </div>
+    <p class="foot" style="margin:28px 0 4px 0">Shared objective: $\max\ \mathbb{E}\bigl[\sum_{t}\gamma^{t}R_{\mathrm{sys}}(s(t),b(t))\bigr]$ s.t. $b(t)\in\mathcal{B}$ at $t\in\{0,T,2T,\dots\}$, $f_l(t)\in\mathcal{F}_l$, servo limits.</p>
+    <p class="foot" style="margin:0">$\tilde P_k$: shifted received power (dBm); $P_{\mathrm{sc}}$: scale (backup). Unlike flat MARL (clipping), a move that would push any tile past its limit is <b>rejected</b>.</p>
+  </div>
+  <aside class="notes">
+    <p>Both levels serve one discounted objective, each with a reward suited to its decision.</p>
+    <p>The allocator's reward is a log utility averaged over all users. Unlike flat MARL's mean, one strong user cannot mask an unserved one, and a decibel gained by a weak user is worth more. Because its decision is held for $T$ slots, it is trained on macro-steps: the discounted return inside each window.</p>
+    <p>Each segment is rewarded with its assigned user's shifted power plus a progress term, potential-based shaping. One change from flat MARL: a move that would push any tile past its limit is rejected rather than clipped.</p>
+  </aside>
+</section>
+
+<!-- ============================ Training method ============================ -->
+<section data-id="hmarl-train-method" data-min="0.5">
+  <h2 class="title">Training under CTDE, with a geometric warm start</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:46% 1fr">
+      <div class="col small">
+        <p style="margin-bottom:.1em"><b>Low level: MAPPO</b></p>
+        <ul class="foot" style="font-size:20px">
+          <li>$L$ local actors $\pi_{\psi_l}(a_l\mid s_{L,l})$</li>
+          <li>One shared centralized critic $V_\xi(s_{\mathrm{global}},l)$, $s_{\mathrm{global}}=s_H$</li>
+          <li>GAE, clipped surrogate objective</li>
+        </ul>
+        <p style="margin:.4em 0 .1em 0"><b>High level: PPO on macro-steps</b></p>
+        <ul class="foot" style="font-size:20px">
+          <li>Own critic $V_{\xi_H}$ on the macro timescale</li>
+          <li>One advantage estimate per allocation</li>
+          <li>Factorized head: $LK$ logits instead of $K^L$ joint scores</li>
+        </ul>
+        <p class="foot" style="font-size:20px;margin:.5em 0 0 0"><b>One axis of prior strength:</b><br>$\alpha\equiv0$: <b>HMARL-NC</b> &nbsp;|&nbsp; warm start: <b>HMARL-C</b><br>$\alpha\to\infty$: <b>Compat-only</b> ($b_l=\arg\max_k C_{kl}$)</p>
+      </div>
+      <div class="block lr-stretchblock"><div class="bt">Compatibility prior (positions only)</div><div class="bb small">
+        $$C_{kl}=\exp\!\Bigl(-\frac{\|u_k-r_l\|}{d_0}\Bigr)\cos\!\Bigl(\frac{\vartheta_{kl}}{2}\Bigr)$$
+        $$z'_{l,k}=z_{l,k}(s_H)+\alpha(t)\,C_{kl}$$
+        <span class="foot">$\vartheta_{kl}$: bend angle at segment $l$ toward user $k$; $z$: allocator logits. $\alpha(t)>0$ only in an early warm-start phase, then $0$: <span class="alert">objective unchanged</span></span></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Segments train with MAPPO, as in flat MARL; the allocator uses PPO on the macro timescale with its own critic and a factorized head.</p>
+    <p>Exploring 256 assignments is slow, so early on a geometric prior, from positions only, is added to the logits, then switched off. Prior strength gives three variants: none, warm start, and infinite, a pure heuristic.</p>
+  </aside>
+</section>
+
+<!-- ============================ Setup ============================ -->
+<section data-id="hmarl-setup" data-min="0.5">
+  <h2 class="title">Setup: ray-traced conference room and six controllers</h2>
+  <div class="body">
+    <div class="cols" style="--cols:27% 1fr">
+      <figure><img src="assets/img/ch5/conference_room-01.png" alt="Ray-traced conference room with AP outside the room and two corner arrays"><figcaption>AP outside the room; two corner arrays</figcaption></figure>
+      <div class="col">
+        <ul class="foot" style="font-size:19px;margin-bottom:6px">
+          <li>Sionna RT, Blender scene, ITU-R P.2040-4 materials; 60&nbsp;GHz, 5&nbsp;dBm; NLOS only</li>
+          <li>2 arrays &times; 63 tiles, $L=4$ segments (2 per array), servo limits $\pm30^\circ$</li>
+          <li>$K\in\{2,4\}$ users; training: users fixed within an episode, 5 seeds; evaluation: 300 slots, users move 30&nbsp;cm/slot</li>
+        </ul>
+        <table class="bt foot" style="font-size:19px">
+          <tbody>
+            <tr><td><b>HMARL-C</b></td><td>learned allocator + warm-start prior</td></tr>
+            <tr><td>HMARL-NC</td><td>same, no prior ($\alpha\equiv0$)</td></tr>
+            <tr><td>Compat-only</td><td>$b_l=\arg\max_k C_{kl}$, every $T$ slots</td></tr>
+            <tr><td>Static-MARL</td><td>flat MARL architecture retrained in this scene; fixed assignment</td></tr>
+            <tr><td>Centralized</td><td>one PPO agent, all focal points; no assignment</td></tr>
+            <tr><td>Random</td><td>assignment redrawn every slot (training floor)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>A ray-traced conference room: the AP is outside, so every user is non-line-of-sight, and two corner arrays provide the controllable paths. In evaluation users move 30&nbsp;cm every slot for 300 slots.</p>
+    <p>Static-MARL is the flat architecture retrained here with a fixed assignment. Centralized also differs in reward and learner, so it is a bound.</p>
+  </aside>
+</section>
+
+<!-- ============================ Training curves ============================ -->
+<section data-id="hmarl-training" data-min="0.5">
+  <h2 class="title">Training: the warm-started allocator converges highest</h2>
+  <div class="body">
+    <div class="cols" style="--cols:57% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/training_4ue.png" alt="Training curves, four users, six controllers"><figcaption>Four users; mean &plusmn; 1 std, 5 seeds; prior off at episode 1,000</figcaption></figure>
+      <div class="col lr-panel">
+        <p class="foot" style="margin:0">Converged $G$ (final 200 episodes)</p>
+        <p class="tiny gray" style="margin:0 0 4px 0">$G$: per-episode sum of the normalized reward, averaged over all users</p>
+        <table class="bt">
+          <thead><tr><th></th><th class="num">2UE</th><th class="num">4UE</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>HMARL-C</td><td class="num">50.26</td><td class="num">46.00</td></tr>
+            <tr><td>Compat-only</td><td class="num">45.10</td><td class="num">39.81</td></tr>
+            <tr><td>HMARL-NC</td><td class="num">44.91</td><td class="num">33.06</td></tr>
+            <tr><td>Static-MARL</td><td class="num">43.91</td><td class="num">26.36</td></tr>
+            <tr><td>Centralized</td><td class="num">40.87</td><td class="num">20.42</td></tr>
+            <tr><td>Random</td><td class="num">27.00</td><td class="num">15.06</td></tr>
+          </tbody>
+        </table>
+        <ul class="foot" style="margin-top:8px">
+          <li>2UE: methods in a narrow band; 4UE: every adjacent pair separates</li>
+          <li>C vs. NC gap: 5.35 &rarr; 12.94, persisting after the prior is off</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>HMARL-C converges highest in both configurations. With two users the methods cluster; with four users every adjacent pair separates.</p>
+    <p>The gap to the prior-free variant grows from 5.35 to 12.94 and persists after the prior is switched off, so the warm start changes which optimum the allocator reaches.</p>
+  </aside>
+</section>
+
+<!-- ============================ Deployment ============================ -->
+<section data-id="hmarl-deploy" data-min="1.25">
+  <h2 class="title">Deployment with moving users (4 users)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:57% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_4ue_methods.png" alt="RSSI over 300 evaluation slots for five controllers, four users"><figcaption>Four users, 300 slots, 30&nbsp;cm/slot; mean across users, 5 seeds</figcaption></figure>
+      <div class="col lr-panel">
+        <p class="foot" style="margin:0 0 2px 0">Mean RSSI over 300 slots (dBm)</p>
+        <table class="bt">
+          <thead><tr><th></th><th class="num">2UE</th><th class="num">4UE</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>HMARL-C</td><td class="num">&minus;65.46</td><td class="num">&minus;66.62</td></tr>
+            <tr><td>Compat-only</td><td class="num">&minus;66.60</td><td class="num">&minus;68.50</td></tr>
+            <tr><td>HMARL-NC</td><td class="num">&minus;66.86</td><td class="num">&minus;70.16</td></tr>
+            <tr><td>Static-MARL</td><td class="num">&minus;67.29</td><td class="num">&minus;72.46</td></tr>
+            <tr><td>Centralized</td><td class="num">&minus;68.05</td><td class="num">&minus;74.56</td></tr>
+          </tbody>
+        </table>
+        <div class="center" style="margin-top:10px"><div class="midnum">&minus;72.46 &rarr; &minus;66.62 dBm</div><span class="numcap">fixed &rarr; learned assignment (4UE)</span></div>
+        <div class="cols" style="--cols:1fr 1fr;margin-top:8px;column-gap:10px">
+          <div class="center"><div class="midnum">+1.88 dB</div><span class="numcap">vs. Compat-only (geometric)</span></div>
+          <div class="center"><div class="midnum">+7.94 dB</div><span class="numcap">vs. Centralized (a bound)</span></div>
+        </div>
+        <p class="foot center" style="margin:8px 0 0 0">4UE std: 0.71&nbsp;dB vs. 1.39&ndash;1.74&nbsp;dB</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Main result, with users now moving every slot. The ordering matches training.</p>
+    <p>With four users, choosing the assignment raises mean RSSI from $-72.46$&nbsp;dBm with the fixed split to $-66.62$&nbsp;dBm, within this scene. That is also 1.88&nbsp;dB above the strongest baseline, the geometric heuristic, our one geometry head-to-head, and 7.94&nbsp;dB above Centralized, a bound since it differs in architecture, reward and learner.</p>
+    <p>With four users HMARL-C is also the most stable: 0.71&nbsp;dB standard deviation, against 1.39 to 1.74&nbsp;dB for the baselines.</p>
+    <p>The dips have two causes. Static-MARL keeps focusing on its assigned user after that path degrades; releasing the segment is the expected mechanism that removes those dips. Compat-only gives neighboring segments nearly identical scores, so they pick the same user and leave another one unassigned.</p>
+    <p>If asked: the plot legend shows $-72.26$ for Static-MARL; the tabulated value is $-72.46$&nbsp;dBm.</p>
+  </aside>
+</section>
+
+<section data-id="energy-maps" data-min="0.5">
+  <h2 class="title">Where the energy goes (4 users)</h2>
+  <div class="body">
+    <div class="row">
+      <figure><img src="assets/img/ch5/allocator_output_00294-1.png" alt="RSSI map, HMARL-C, slot 294"><figcaption><b class="maroon">HMARL-C</b>, &minus;66.2 dBm</figcaption></figure>
+      <figure><img src="assets/img/ch5/no_compat_output_00294-1.png" alt="RSSI map, HMARL-NC, slot 294"><figcaption>HMARL-NC, &minus;68.3 dBm</figcaption></figure>
+      <figure><img src="assets/img/ch5/no_allocator_output_00294-1.png" alt="RSSI map, Centralized, slot 294"><figcaption>Centralized, &minus;73.6 dBm</figcaption></figure>
+      <figure><img src="assets/img/crops/learning_scale_ch5.png" alt="color scale -60 to -100 dBm" style="height:310px"><figcaption>&nbsp;</figcaption></figure>
+      <figure style="margin-left:12px"><div class="vidbox"><video src="media/alct_4ue_0.mp4" data-autoplay muted loop playsinline></video></div><figcaption>Learned allocator, 4-user run</figcaption></figure>
+    </div>
+    <p class="small center" style="margin:12px 0 2px 0">Narrow beams through the users (C) &rarr; wider spread (NC) &rarr; little focusing (Centralized)</p>
+    <p class="tiny gray center" style="margin:0">RSSI maps at evaluation slot 294; values are user averages at that slot, not 300-slot run means.</p>
+  </div>
+  <aside class="notes">
+    <p>Snapshots at evaluation slot 294, users as magenta dots. HMARL-C forms narrow beams through the users, HMARL-NC spreads wider, and Centralized shows little focusing. These are single-slot averages, not run means. The video shows the learned allocator re-steering segments as users move.</p>
+  </aside>
+</section>
+
+<!-- ============================ Energy maps + video ============================ -->
+<section data-id="realloc-T" data-min="0.5">
+  <h2 class="title">How often to reallocate? An interior optimum at $T=10$ slots (4 users)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:55% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/t_ablation_training_curves.png" alt="Training curves for T = 1, 5, 10, 20, 50, 100"><figcaption>Four users, 63 tiles per array; black lines: converged reference levels</figcaption></figure>
+      <div class="col lr-panel">
+        <table class="bt" style="margin:0 auto">
+          <thead><tr><th>$T$</th><th class="num">1</th><th class="num">5</th><th class="num">10</th><th class="num">20</th><th class="num">50*</th><th class="num">100*</th></tr></thead>
+          <tbody><tr><td>$G$</td><td class="num">20.4</td><td class="num">39.4</td><td class="num" style="background:var(--maroonlight);font-weight:600">46.0</td><td class="num">37.7</td><td class="num">32.8</td><td class="num">26.4</td></tr></tbody>
+        </table>
+        <p class="tiny gray center" style="margin:2px 0 10px 0">*still rising at 3,000 episodes (lower bounds)</p>
+        <ul class="foot" style="font-size:20px">
+          <li><b>Small $T$:</b> a segment cannot tell a reassignment from a jump; the hierarchy collapses toward a flat policy</li>
+          <li><b>Large $T$:</b> stale focal configuration and few allocator decisions ($T=100$: one per episode)</li>
+          <li>$T=10$ also gives exactly 10 decisions per 100-slot episode</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>$T$ sets the ratio of the two timescales, and the result peaks at ten slots. At $T$ of one a segment cannot tell a reassignment from a jump, and the hierarchy collapses toward a flat policy. At large $T$ the allocator decides from stale states; those curves are lower bounds.</p>
+  </aside>
+</section>
+
+<!-- ============================ T ablation ============================ -->
+<section data-id="hmarl-deploy-2ue" data-min="0.5">
+  <h2 class="title">Flexible across user counts: the same ranking with 2 users</h2>
+  <div class="body">
+    <div class="chaptag">Same hierarchical architecture and training, configured for 2 users (16 possible assignments instead of 256)</div>
+    <div class="cols" style="--cols:47% 210px 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_2ue_methods.png" alt="RSSI over 300 slots, two users, five controllers"><figcaption>Two users, 300 slots, users move 30&nbsp;cm/slot; 5 seeds</figcaption></figure>
+      <figure><div class="vidbox"><video src="media/alct_2ue_0.mp4" data-autoplay muted loop playsinline></video></div><figcaption>Learned allocator, 2-user run</figcaption></figure>
+      <ul class="small lr-panel" style="margin:0;padding-left:40px">
+        <li>HMARL-C: +1.14&nbsp;dB vs. Compat-only, +2.59&nbsp;dB vs. Centralized</li>
+        <li>Only 16 assignments, most serve both users: narrower margins</li>
+        <li>Static-MARL dips: a fixed assignment cannot release a degraded path</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes"><p>The approach is not tied to four users. Configured and trained the same way for two users, it keeps the same ranking, with narrower margins: HMARL-C is 1.14&nbsp;dB above Compat-only and 2.59&nbsp;dB above Centralized. With only 16 assignments, most serving both users, allocation has less to choose. If asked: the legend shows $-67.28$; the table gives $-67.29$&nbsp;dBm.</p></aside>
+</section>
+
+<!-- ============================ Aperture (split of old 36) ============================ -->
+<section data-id="aperture" data-min="0.5">
+  <h2 class="title">Operating regime: aperture (2 users)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_2ue_reflector_size.png" alt="RSSI CDF under HMARL-C for arrays of 5, 7, 9 and 11 rows"><figcaption>RSSI CDF under HMARL-C for 5, 7, 9, 11 rows</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum">&asymp;1.3 dB</div><span class="numcap">median gain for 45 &rarr; 99 tiles (2.2&times;)</span></div>
+        <ul class="small" style="margin-top:14px">
+          <li>7 rows (63 tiles) gives about two thirds of that span</li>
+          <li>Saturation: servo limits + feasibility rule</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Two operating-regime sweeps, both with two users. First, aperture: going from 45 to 99 tiles, 2.2 times the area, raises the median RSSI by only about 1.3&nbsp;dB. The array saturates because one tile past its servo limit rejects the whole segment update.</p>
+  </aside>
+</section>
+
+<!-- ============================ Localization (split of old 36) ============================ -->
+<section data-id="localization" data-min="0.5">
+  <h2 class="title">Operating regime: localization (2 users)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <figure><img src="assets/img/ch5/eval_2ue_noise_obs.png" alt="RSSI CDF for localization error 0, 0.1, 0.3, 0.5, 1.0 and 2.0 m"><figcaption>RSSI CDF for $\sigma_{\mathrm{error}}\in\{0,0.1,0.3,0.5,1.0,2.0\}$&nbsp;m</figcaption></figure>
+      <div class="col lr-panel">
+        <div class="center"><div class="midnum">$\sigma_{\mathrm{error}}\approx0.1$ m</div><span class="numcap">near-optimal up to here</span></div>
+        <ul class="small" style="margin-top:14px">
+          <li>Several-dB loss at 0.3&ndash;0.5&nbsp;m; larger at 1.0 and 2.0&nbsp;m</li>
+          <li>Flat study tolerated &asymp;0.3&nbsp;m in a different setting; not directly comparable. Together: <b>decimeter-level</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Second, localization, where the burden now sits. Performance is near-optimal up to about 10&nbsp;cm and loses several dB at 0.3 to 0.5&nbsp;m, with error-matched training. Flat MARL tolerated about 0.3&nbsp;m in a different setting, so the two are not directly comparable; together they say decimeter-level.</p>
+  </aside>
+</section>
+
+<!-- ============================ Summary + transition ============================ -->
+<section data-id="alloc-buys" data-min="0.5">
+  <h2 class="title">What allocation buys, and what it cannot fix</h2>
+  <div class="body">
+    <ul class="small">
+      <li>Allocator every $T$ slots, decentralized focusing every slot; <b>run time:</b> positions only, <b>training:</b> received power as the reward</li>
+      <li>Choosing the assignment within this scene: $-72.46\to-66.62$&nbsp;dBm vs. the fixed split (4 users); the geometric prior helps only as a warm start</li>
+      <li>Larger arrays at the same site saturate: 2.2&times; tiles &rarr; only &asymp;1.3&nbsp;dB median</li>
+      <li>The controllers take the AP and array sites as given, so their benefit is bounded by that geometry</li>
+    </ul>
+    <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> learning the assignment raises 4-user mean RSSI from $-72.46$&nbsp;dBm (fixed split) to $-66.62$&nbsp;dBm, +1.88&nbsp;dB over the best geometric heuristic.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
+  </div>
+  <aside class="notes">
+    <p>Learning the assignment lifts four users from $-72.46$ to $-66.62$&nbsp;dBm over a fixed split in this scene, and beats the best geometric heuristic.</p>
+    <p>But adding tiles at the same site saturates, and both controllers take the access point and array positions as given. The next part asks where they should be installed.</p>
+  </aside>
+</section>

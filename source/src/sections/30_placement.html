@@ -1,0 +1,605 @@
+<!-- ===================== Placement (WHERE) and Conclusions (WHICH) - track: Placement and close ===================== -->
+<style>
+section[data-id="replace-ap"] .flow{display:flex;align-items:center;justify-content:center;gap:0;margin:2px 0 18px 0}
+section[data-id="replace-ap"] .flow .bx{border:1.5px solid var(--maroon);border-radius:7px;padding:6px 14px;text-align:center;background:#fff;font-size:22px;line-height:1.25}
+section[data-id="replace-ap"] .flow .bx span{display:block;font-size:17px;color:var(--midgray)}
+section[data-id="replace-ap"] .flow .bx.on{background:var(--maroon);color:#fff}
+section[data-id="replace-ap"] .flow .bx.on span{color:#f1dede}
+section[data-id="replace-ap"] .flow .ar{width:46px;height:2.5px;background:var(--maroon);position:relative;margin:0 6px}
+section[data-id="replace-ap"] .flow .ar::after{content:"";position:absolute;right:-2px;top:-6px;border-left:10px solid var(--maroon);border-top:7px solid transparent;border-bottom:7px solid transparent}
+section[data-id="replace-ap"] .q{margin:0 0 12px 0;line-height:1.3}
+section[data-id="floorplans"] .fp{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:end;margin-bottom:16px}
+section[data-id="floorplans"] .fp img{height:215px;object-fit:contain}
+section[data-id="design-vector"] .katex-display{margin:4px 0}
+section[data-id="objective"] .katex-display{margin:2px 0}
+section[data-id="objective"] .bb .katex{font-size:1.0em}
+section[data-id="anim-pso"] .foot{margin-top:8px}
+section[data-id="methods-protocol"] dl{margin:0;font-size:22px;display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:9px;line-height:1.25}
+section[data-id="methods-protocol"] dt{font-style:italic;font-weight:600;color:var(--maroon);white-space:nowrap}
+section[data-id="methods-protocol"] dd{margin:0}
+section[data-id="convergence"] .cols{column-gap:30px}
+section[data-id="convergence"] h4{margin:0 0 4px 0;font-size:22px;font-weight:600;color:var(--maroon);text-transform:none;font-family:"Fira Sans",sans-serif}
+section[data-id="convergence"] ul{font-size:21px}
+section[data-id="p5-3aps"] table.bt{font-size:20px} section[data-id="p5-3aps"] table.bt td,section[data-id="p5-3aps"] table.bt th{padding:3px 9px}
+section[data-id="p5-3aps"] table.bt tr.sep td{border-top:1px solid var(--text)}
+section[data-id="p5-3aps"] .bars{display:grid;grid-template-columns:auto 1fr;column-gap:10px;row-gap:6px;align-items:center;font-size:18px;margin:6px 0 10px 0}
+section[data-id="p5-3aps"] .bars .lab{text-align:right;white-space:nowrap}
+section[data-id="p5-3aps"] .bars .bar{height:22px;background:var(--midgray);border-radius:2px;position:relative}
+section[data-id="p5-3aps"] .bars .bar span{position:absolute;left:100%;margin-left:6px;top:0;line-height:22px;white-space:nowrap}
+section[data-id="p5-3aps"] .bars .bar.b1{background:var(--maroon)} section[data-id="p5-3aps"] .bars .bar.b2{background:var(--maroonmid)}
+section[data-id="fewer-ap-office"] table.bt,section[data-id="fewer-ap-hrbb"] table.bt{font-size:20px}
+section[data-id="fewer-ap-office"] .leg span,section[data-id="fewer-ap-hrbb"] .leg span{font-weight:600}
+section[data-id="coverage-limits"] .maps{display:grid;grid-template-columns:1fr 1fr 44px;gap:12px;align-items:start}
+section[data-id="coverage-limits"] .maps img.sc{height:200px;width:auto;margin-top:16px}
+section[data-id="coverage-limits"] .alertblock li{margin:.5em 0}
+section[data-id="five-questions"] table.fq{border-collapse:collapse;width:100%;font-size:21px;line-height:1.28}
+section[data-id="five-questions"] table.fq tr{border-bottom:1px solid var(--rule)}
+section[data-id="five-questions"] table.fq{border-top:2px solid var(--text);border-bottom:2px solid var(--text)}
+section[data-id="five-questions"] table.fq td{padding:7px 10px;vertical-align:top;border:none}
+section[data-id="five-questions"] table.fq td.k{color:var(--maroon);font-weight:700;width:96px}
+section[data-id="publications"] ol{font-size:18.5px;margin-left:1.3em}
+section[data-id="publications"] li{margin:.42em 0;line-height:1.3}
+section[data-id="publications"] .st{color:inherit;font-weight:400}
+section[data-id="other-pubs"] ol{font-size:17.5px;margin-left:1.6em}
+section[data-id="other-pubs"] li{margin:.3em 0;line-height:1.28}
+.reveal .me{font-weight:700;color:var(--maroon);text-decoration:underline;text-underline-offset:2px}
+section[data-id="complete-picture"] .cpmap{position:relative}
+section[data-id="complete-picture"] .which-ov{position:absolute;left:80.75%;width:15.15%;padding-left:3px;box-sizing:border-box;top:85.23%;height:11.94%;background:rgb(240,245,240);display:flex;flex-direction:column;justify-content:center;font-size:15px;line-height:1.22;text-align:left;color:var(--text);white-space:nowrap}
+section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon);text-align:center;line-height:1.1;margin-bottom:28px}
+</style>
+
+<section class="divider" data-id="div-place" data-num="6" data-title="Joint AP and Reflector Placement" data-part="WHERE" data-question="Where should the access points and the reflector be installed?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; submitted to <i>IEEE Open J. Commun. Soc.</i>, 2026 (under review).</p></div><aside class="notes"><p>Section divider: placement. Move on.</p></aside></section>
+
+<!-- old 38 -->
+<section data-id="replace-ap" data-min="0.75">
+  <h2 class="title">Can a passive reflector replace an access point?</h2>
+  <div class="body">
+    <div class="cols" style="--cols:55% 1fr">
+      <div class="col">
+        <ul style="font-size:23.5px">
+          <li>So far, AP and reflector were <b>installed</b> in advance: gain bounded by the mounting site</li>
+          <li>Same tile array and focal-point steering; mechanical steering is band-independent, so we study <b>indoor Wi-Fi at 5.18&nbsp;GHz</b>, where wall loss sets the AP count</li>
+          <li>Each added AP: cabling, power, a license, channel budget</li>
+          <li>New question, new tools: positions are <b>design variables</b>; the reflector, a <b>passive reflective surface (PRS)</b>, is configured once at installation (one focal-point pair, no run-time controller); objective: lower-tail priority coverage, solved once per building</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="flow"><div class="bx"><b>Operation</b><span>gain bounded by<br>the mounting site</span></div><div class="ar"></div><div class="bx on"><b>Placement</b><span>where to install</span></div></div>
+        <div class="block"><div class="bt">Two placement questions</div><div class="bb small">
+          <p class="q"><b>(a)</b> At a fixed AP count, does a jointly optimized reflector improve priority-region coverage without degrading floor-wide coverage?</p>
+          <p class="q" style="margin-bottom:2px"><b>(b)</b> Does that improvement reduce the number of APs needed to meet the coverage target?</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>So far the AP and the reflector were installed in advance, so the gain was bounded by where they were mounted. This part asks where they should go.</p>
+    <p>It is the same tile array and focal-point steering. Mechanical steering does not depend on the band, so we study indoor Wi-Fi at 5.18 gigahertz, where walls set the AP count; each extra AP costs cabling, power, a license and channel budget.</p>
+    <p>Positions become design variables, and the reflector, a passive reflective surface, is configured once at installation.</p>
+    <p>Two questions: (a) better priority coverage at a fixed AP count, and (b) one fewer AP?</p>
+  </aside>
+</section>
+
+<!-- old 39 -->
+<section data-id="floorplans" data-min="0.5">
+  <h2 class="title">Two floorplans with operator-defined priority maps</h2>
+  <div class="body">
+    <div class="fp">
+      <figure><img src="assets/img/ch6/split_building_office_small.png" alt="Office floorplan"><figcaption>Office, $30\times30$&nbsp;m</figcaption></figure>
+      <figure><img src="assets/img/ch6/office-priority-map.png" alt="Office priority map"><figcaption>Office priority map $\mathbf{W}$</figcaption></figure>
+      <figure><img src="assets/img/ch6/building_hrbb.png" alt="HRBB floorplan"><figcaption>HRBB lab floor, $40\times40$&nbsp;m</figcaption></figure>
+      <figure><img src="assets/img/ch6/hrbb-priority-map.png" alt="HRBB priority map"><figcaption>HRBB priority map $\mathbf{W}$</figcaption></figure>
+    </div>
+    <div class="cols" style="--cols:53% 1fr">
+      <div class="col"><ul class="small">
+        <li>Priority weight $w_u&gt;1$ on rooms that need service, $w_u=1$ elsewhere; weights steer the optimizer only</li>
+        <li>Office: high-priority perimeter rooms shadowed by walls; HRBB: high-priority central block ringed by a corridor</li>
+      </ul></div>
+      <div class="col"><ul class="small">
+        <li>5.18&nbsp;GHz, 20&nbsp;dBm, concrete walls; Sionna RT, $10^6$ rays per AP, $1\times1$&nbsp;m grid at 1.5&nbsp;m</li>
+        <li>Target: priority-region P5 $\ge-65$&nbsp;dBm (about 95% of priority locations)</li>
+      </ul></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Two university floorplans. Office, 30 by 30 meters, has its highest-priority rooms on the perimeter behind walls. HRBB, a 40 by 40 meter lab floor, has a central priority block.</p>
+    <p>The operator supplies the priority map: rooms that must be served weigh more than corridors. Weights only shape the objective; reported RSSI is unweighted.</p>
+    <p>The target: priority-region fifth percentile at least minus 65 dBm.</p>
+  </aside>
+</section>
+
+<!-- old 40 -->
+<section data-id="design-vector" data-min="0.75">
+  <h2 class="title">Design vector: AP poses, wall position, focal points</h2>
+  <div class="body">
+    <div class="cols" style="--cols:45% 1fr">
+      <div class="col">
+        <figure><img src="assets/img/ch6/reflector.png" alt="Reflector tiles and focal points" style="height:180px"><figcaption>$7\times9=63$ hexagonal metal tiles, $2.0\times2.0$&nbsp;m; tile pitch $\approx4$&ndash;$5\lambda$</figcaption></figure>
+        <div class="block" style="margin-top:10px"><div class="bt">Bisector rule with virtual focal points</div><div class="bb">
+          $$\hat{\mathbf{n}}_{ij}=\frac{\hat{\mathbf{e}}^{\,\mathrm{in}}_{ij}+\hat{\mathbf{e}}^{\,\mathrm{out}}_{ij}}{\big\|\hat{\mathbf{e}}^{\,\mathrm{in}}_{ij}+\hat{\mathbf{e}}^{\,\mathrm{out}}_{ij}\big\|_2}$$
+          <p class="small" style="margin:0">Unit vectors from tile $(i,j)$ toward $\mathbf{f}_1$, $\mathbf{f}_2$; $\mathbf{f}_1=$ AP, $\mathbf{f}_2=$ user gives the bisector rule.</p>
+        </div></div>
+      </div>
+      <div class="col">
+        <ul class="small">
+          <li>AP $n$: position $\mathbf{p}_n$ at ceiling height $h_{\mathrm{ceil}}=3.8$&nbsp;m; downward boresight $\mathbf{o}_n=\mathbf{v}_n/\|\mathbf{v}_n\|_2$</li>
+          <li>Reflector centroid $(u_{\mathrm{ref}},v_{\mathrm{ref}})\in[0,1]^2$ on the mounting region $\mathcal{M}_{\mathrm{wall}}$ of one preselected wall</li>
+          <li>Virtual source $\mathbf{f}_1$, virtual target $\mathbf{f}_2$, set once at installation: 6 coordinates instead of $2N_rN_c=126$ tile angles</li>
+          <li>Feasible set $\mathcal{M}$: floorplan bounds, $d_{\min}=5$&nbsp;m AP separation (clipping, push-apart); tile angles clipped to $\pm30^\circ$</li>
+        </ul>
+        <div class="block" style="margin-top:12px"><div class="bt">Joint design vector ($5N+8$ free coordinates)</div><div class="bb">
+          $$\boldsymbol{\Theta}=\{\mathbf{p}_1,\mathbf{v}_1,\ldots,\mathbf{p}_N,\mathbf{v}_N,u_{\mathrm{ref}},v_{\mathrm{ref}},\mathbf{f}_1,\mathbf{f}_2\}$$
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Everything we can choose goes into one continuous design vector, Theta.</p>
+    <p>Each AP sits on the ceiling. We optimize its horizontal position and an orientation vector normalized to a downward boresight, which avoids the singularities of Euler angles.</p>
+    <p>The reflector, 63 hexagonal tiles over 2 by 2 meters, slides along one preselected wall through two normalized coordinates.</p>
+    <p>Its tiles are steered by a virtual source and a virtual target: each tile normal bisects the directions to them, so placing them at the AP and a user recovers the bisector rule. Six focal coordinates replace 126 tile angles, so Theta has 5N plus 8 coordinates.</p>
+  </aside>
+</section>
+
+<!-- old 41 -->
+<section data-id="objective" data-min="0.5">
+  <h2 class="title">Objective: soft worst case plus floor-wide coverage</h2>
+  <div class="body">
+    <div class="cols" style="--cols:59% 1fr">
+      <div class="col">
+        <div class="block"><div class="bt">Strongest-server power, penalty, and objective</div><div class="bb">
+          $$\begin{aligned}
+          P_{u,\mathrm{net}}&=\max_{n}P_{u,n}(\boldsymbol{\Theta})\\[2pt]
+          s_u&=\tfrac{x_u-\mathrm{floor}_{\mathrm{dBm}}}{\mathrm{ceil}_{\mathrm{dBm}}-\mathrm{floor}_{\mathrm{dBm}}},\quad p_u=1-\min(s_u,1)\\[2pt]
+          \mathcal{L}_{\mathrm{softmin}}&=T_{\mathrm{sm}}\Big[\log\sum_{u\in\mathcal{U}}w_u e^{p_u/T_{\mathrm{sm}}}-\log\sum_{u\in\mathcal{U}}w_u\Big]\\[2pt]
+          \mathcal{L}_{\mathrm{coverage}}&=-\frac{1}{|\mathcal{U}|}\sum_{u\in\mathcal{U}}\sigma\Big(\frac{x_u-\gamma_{\mathrm{SLA}}}{T_{\mathrm{cov}}}\Big)\\[2pt]
+          \mathcal{L}_{\mathrm{total}}&=\alpha\,\mathcal{L}_{\mathrm{softmin}}+\beta\,\mathcal{L}_{\mathrm{coverage}}
+          \end{aligned}$$
+        </div></div>
+      </div>
+      <div class="col">
+        <ul class="small">
+          <li>$P_{u,n}$: ray-traced radio map, incoherent sum of path powers; $x_u$: $P_{u,\mathrm{net}}$ in dBm</li>
+          <li>$T_{\mathrm{sm}}\to0$: worst-location penalty; $T_{\mathrm{sm}}\to\infty$: weighted mean</li>
+          <li>Weight $w_u$ acts as a penalty offset $T_{\mathrm{sm}}\ln w_u$</li>
+          <li>$\gamma_{\mathrm{SLA}}$: service target; the coverage term has a small weight: it encourages, but does not guarantee, floor-wide coverage</li>
+        </ul>
+        <p class="foot gray" style="margin-top:10px">Weights, temperatures and score limits: backup</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Each location is served by its strongest AP, and its power maps to a penalty that grows as power drops.</p>
+    <p>An average hides holes and a hard minimum is not smooth, so the main term is a priority-weighted soft worst case; a larger weight acts like a lower RSSI.</p>
+    <p>A small sigmoid term discourages sacrificing the rest of the floor.</p>
+  </aside>
+</section>
+
+<!-- old 42 -->
+<section data-id="two-phase" data-min="0.75">
+  <h2 class="title">Two-phase method: PSO search, then gradient refinement</h2>
+  <div class="body">
+    <div class="cols" style="--cols:35% 1fr">
+      <div class="col">
+        <p style="margin:0 0 4px 0;font-size:24px"><b>Why gradients alone fall short</b></p>
+        <ul class="small">
+          <li>Paths appear and vanish at visibility boundaries</li>
+          <li>Walls split the design space into separate good regions</li>
+          <li>Each location's gradient reaches only its serving AP</li>
+        </ul>
+        <p style="margin:14px 0 4px 0;font-size:24px"><b>PSO+GD</b></p>
+        <ul class="small">
+          <li>Phase 1: PSO; each particle is a full layout</li>
+          <li>Phase 2: Adam steps through differentiable Sionna RT</li>
+        </ul>
+      </div>
+      <div class="col">
+        <figure><img src="assets/img/ch6/detailed-workflow-01.png" alt="Two-phase workflow: PSO then gradient refinement" style="width:100%"></figure>
+        <div class="block" style="margin-top:14px"><div class="bt">Computational cost per run</div><div class="bb small">About 180&nbsp;s of serial work per run on one RTX 5070&nbsp;Ti GPU (swarm and gradient phases; settings in backup)</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The objective is differentiable for a fixed set of paths, but a small move of an AP or the reflector can create or remove paths at a visibility boundary, and walls split the design space into separated good regions.</p>
+    <p>So we use two phases. First, particle swarm optimization; each particle is a complete layout scored by a full radio map. PSO moves whole configurations, whereas GA crossover could split an AP from the reflector it works with.</p>
+    <p>Then the best particle is refined with Adam steps through the differentiable ray tracer. One run costs about 180 seconds of serial GPU work.</p>
+  </aside>
+</section>
+
+<!-- NEW animation A5 -->
+<section data-id="anim-pso" data-min="0.75">
+  <h2 class="title">Intuition: a swarm of layouts, then gradient refinement</h2>
+  <div class="body">
+    <div class="anim" style="height:488px"><canvas data-anim="pso"></canvas><div class="illus">Illustrative</div></div>
+    <p class="foot gray center">Schematic floorplan and toy propagation model, not simulation output. Each particle = one layout: three APs, reflector position, focal target.</p>
+  </div>
+  <aside class="notes">
+    <p>Here is the intuition, as a schematic. Each color is one particle, a full layout of three APs and the reflector.</p>
+    <p>Every iteration, a particle keeps part of its velocity and is pulled toward its own best layout, the hollow rings, and toward the swarm's best, the large AP icons. The heat map is the coverage of that best layout, and the inset curve its objective.</p>
+    <p>Once the swarm settles, the label switches to gradient refinement: small deterministic steps move the best layout locally to lift the weakest priority rooms.</p>
+  </aside>
+</section>
+
+<!-- SPLIT old 43 (a): methods and protocol -->
+<section data-id="methods-protocol" data-min="0.5">
+  <h2 class="title">Compared methods and evaluation protocol</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:54% 1fr">
+      <div class="col">
+        <div class="block" style="height:calc(100% - 14px)"><div class="bt">Compared methods</div><div class="bb">
+          <dl>
+            <dt>PSO+GD</dt><dd>proposed: swarm search, then gradient refinement</dd>
+            <dt>GA+GD</dt><dd>other global search (genetic algorithm), same refinement</dd>
+            <dt>PSO-only</dt><dd>no refinement: isolates the gradient phase</dd>
+            <dt>random+GD</dt><dd>random multi-start, no global search</dd>
+            <dt>Weighted $k$-means</dt><dd>priority-weighted distance, no propagation model (ignores walls)</dd>
+            <dt>Random</dt><dd>uniform sampling of the full design vector</dd>
+          </dl>
+        </div></div>
+      </div>
+      <div class="col">
+        <div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Evaluation protocol</div><div class="bb">
+          <ul class="small">
+            <li>Office and HRBB, with and without the PRS</li>
+            <li>1 to 7 APs; 5 seeds per configuration</li>
+            <li>Metrics: mean, P5 and minimum RSSI, over priority regions and over the whole floor</li>
+            <li>Target: priority-region P5 $\ge-65$&nbsp;dBm</li>
+            <li>Welch's $t$-test, 95% CIs; $p$-values uncorrected and descriptive</li>
+            <li>Each baseline removes or replaces one part; methods run at their own operating cost, not an equal number of evaluations</li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Five baselines each remove or replace one component. GA+GD swaps the global search. PSO-only skips refinement. Random+GD removes global search. Weighted k-means ignores walls. Random sampling is the floor.</p>
+    <p>Each configuration runs with five seeds, one to seven APs, both floorplans, with and without the reflector. I report mean, P5 and minimum RSSI, with Welch tests and 95 percent intervals.</p>
+  </aside>
+</section>
+
+<!-- SPLIT old 43 (b): convergence results -->
+<section data-id="convergence" data-min="0.75">
+  <h2 class="title">Convergence of a representative run</h2>
+  <div class="body">
+    <p class="small gray center" style="margin-bottom:8px">Office, 3 APs, with PRS; dotted line: phase boundary at iteration 35</p>
+    <div class="cols" style="--cols:1fr 1fr">
+      <div class="col">
+        <h4>Objective (lower is better)</h4>
+        <figure><img src="assets/img/ch6/split_conv_objective.png" alt="Objective versus iteration for six methods" style="height:300px"></figure>
+        <ul>
+          <li>GA+GD leads early but levels off by about iteration 20; PSO+GD overtakes it by iteration 36</li>
+          <li>random+GD plateaus at a higher objective: initialization matters</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Priority-region P5 (higher is better)</h4>
+        <figure><img src="assets/img/ch6/split_conv_p5.png" alt="Priority-region P5 RSSI versus iteration for six methods" style="height:300px"></figure>
+        <ul>
+          <li>Refinement raises PSO+GD priority-region P5 from about $-61$ to $-57$&nbsp;dBm in this run</li>
+          <li>PSO-only is held after iteration 35: the gap is the refinement's share</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>One representative run: Office, three APs, with the reflector.</p>
+    <p>Left, the objective. GA+GD is ahead early but levels off around iteration 20, and PSO+GD overtakes it by iteration 36. Random+GD improves but plateaus higher, so the starting point matters.</p>
+    <p>Right, the priority-region P5. After the phase boundary at iteration 35, gradient refinement lifts PSO+GD from about minus 61 to minus 57 dBm, while PSO-only stays flat. Both phases contribute; the seed averages come next.</p>
+  </aside>
+</section>
+
+<!-- old 44 -->
+<section data-id="p5-3aps" data-min="1.25">
+  <h2 class="title">At three APs, the reflector raises priority P5 by 4.8 dB</h2>
+  <div class="body">
+    <div class="cols" style="--cols:50% 1fr">
+      <div class="col">
+        <p class="small" style="margin-bottom:4px"><b>PSO+GD, Office, 3 APs</b> (RSSI in dBm, mean over 5 seeds)</p>
+        <table class="bt">
+          <thead><tr><th>Region</th><th>Statistic</th><th class="num">w/o PRS</th><th class="num">w/ PRS</th><th class="num">Gain (dB)</th></tr></thead>
+          <tbody>
+            <tr><td>Priority</td><td>Mean</td><td class="num">&minus;50.8</td><td class="num">&minus;47.5</td><td class="num">+3.3</td></tr>
+            <tr class="hl"><td></td><td>P5</td><td class="num">&minus;62.1</td><td class="num">&minus;57.3</td><td class="num maroon">+4.8</td></tr>
+            <tr><td></td><td>Min</td><td class="num">&minus;74.7</td><td class="num">&minus;65.2</td><td class="num">+9.5</td></tr>
+            <tr class="sep"><td>All</td><td>Mean</td><td class="num">&minus;50.0</td><td class="num">&minus;47.1</td><td></td></tr>
+            <tr><td></td><td>P5</td><td class="num">&minus;63.1</td><td class="num">&minus;58.0</td><td></td></tr>
+            <tr><td></td><td>Min</td><td class="num">&minus;75.0</td><td class="num">&minus;65.9</td><td></td></tr>
+          </tbody>
+        </table>
+        <p class="foot gray" style="margin-top:6px">P5 gain 95% CI 3.1&ndash;6.5&nbsp;dB; minimum gain 95% CI 5.8&ndash;13.2&nbsp;dB; P5, minimum and mean gains $p&lt;0.001$</p>
+      </div>
+      <div class="col">
+        <p class="small" style="margin-bottom:2px"><b>Priority-region P5 gain from the same PRS</b></p>
+        <div class="bars">
+          <div class="lab">PSO+GD</div><div><div class="bar b1" style="width:calc(4.8/4.8*80%)"><span>+4.8 dB</span></div></div>
+          <div class="lab">GA+GD</div><div><div class="bar b2" style="width:calc(4.1/4.8*80%)"><span>+4.1 dB</span></div></div>
+          <div class="lab">random+GD</div><div><div class="bar" style="width:calc(2.8/4.8*80%)"><span>+2.8 dB</span></div></div>
+          <div class="lab">PSO-only</div><div><div class="bar" style="width:calc(2.3/4.8*80%)"><span>+2.3 dB</span></div></div>
+          <div class="lab">weighted $k$-means</div><div><div class="bar" style="width:calc(1.3/4.8*80%)"><span>+1.3 dB</span></div></div>
+          <div class="lab">random</div><div><div class="bar" style="width:calc(1.0/4.8*80%)"><span>+1.0 dB</span></div></div>
+        </div>
+        <ul class="small">
+          <li>Refinement adds 4.1&nbsp;dB with the PRS (95% CI 2.0&ndash;6.2&nbsp;dB) but only 1.6&nbsp;dB without it ($p=0.07$)</li>
+          <li>PSO+GD vs. GA+GD: 1.6&nbsp;dB, not significant ($p=0.10$)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="takeaway">The gain is largest at the weakest locations, and how much of it is realized depends on the planning method.</div>
+  </div>
+  <aside class="notes">
+    <p>Question (a). With three APs in Office, adding one jointly optimized reflector raises priority-region P5 from minus 62.1 to minus 57.3 dBm, a 4.8 dB gain with a confidence interval of 3.1 to 6.5.</p>
+    <p>The minimum gains 9.5 dB, more than P5 or the mean, so the reflector mostly redirects energy into shadowed locations. Floor-wide mean, P5 and minimum improve too, so priority coverage does not come at the expense of the floor.</p>
+    <p>The bar chart compares methods that all have the same reflector. PSO+GD and GA+GD gain 4.8 and 4.1 dB; the other methods gain between 1 and 2.8 dB. Installing the reflector alone does not deliver the benefit.</p>
+    <p>Gradient refinement adds 4.1 dB with the reflector but only 1.6 dB, not significant, without it. One possible explanation: with a shared learning rate, refinement can move the reflector much farther than the APs.</p>
+    <p>PSO+GD and GA+GD are not significantly different.</p>
+  </aside>
+</section>
+
+<section data-id="place-cdf" data-min="0.5">
+  <h2 class="title">Where the gain goes: the lower tail (Office, 3 APs)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch6/fig5H_cdf.png" alt="Office RSSI CDFs"><figcaption>Empirical RSSI CDFs, seed 0. (a)&ndash;(b) with PRS, all and priority regions; (c)&ndash;(d) without PRS; dashed: $-65$&nbsp;dBm</figcaption></figure></div>
+      <div class="col"><ul class="small">
+        <li>PSO+GD, priority regions: at most 2% below $-65$&nbsp;dBm with PRS, about 3% without</li>
+        <li>Minimum rises from about $-74.5$ to about $-65$&nbsp;dBm; median falls by about 1&nbsp;dB</li>
+        <li>With PRS, fraction below $-65$&nbsp;dBm: GA+GD 2%, PSO-only 3%, weighted $k$-means 4%, random+GD 5%, random 22%</li>
+      </ul></div>
+    </div>
+  </div>
+  <aside class="notes"><p>These are the distributions behind that table, for one seed. With the reflector, PSO+GD leaves at most 2 percent of priority locations below minus 65 dBm, against about 3 percent without it. The minimum rises from about minus 74.5 to about minus 65 dBm, while the median falls by about 1 dB: energy is redirected into shadowed locations rather than raised everywhere.</p></aside>
+</section>
+
+<!-- SPLIT old 45 (a): Office -->
+<section data-id="fewer-ap-office" data-min="0.5">
+  <h2 class="title">Office: with the reflector, one fewer AP meets the target (seed mean)</h2>
+  <div class="body">
+    <figure><img src="assets/img/ch6/split_office_scaling.png" alt="Office priority-region P5 versus AP count, with and without PRS" style="height:318px">
+      <figcaption class="leg">Priority-region P5 vs. AP count, mean $\pm1$ s.d., 5 seeds; dashed: $-65$&nbsp;dBm. <span style="color:#FF7F0E">PSO+GD</span>, <span style="color:#1F77B4">GA+GD</span>, <span style="color:#8C564B">PSO-only</span>, <span style="color:#D62728">weighted $k$-means</span>, <span style="color:#2CA02C">random+GD</span>, <span style="color:#9467BD">random</span></figcaption></figure>
+    <div class="cols" style="--cols:58% 1fr;margin-top:12px;align-items:center">
+      <div class="col"><ul class="small">
+        <li>3 APs $\to$ 2: at 2 APs, $-62.9$ vs. $-65.4$&nbsp;dBm (margin 2.1&nbsp;dB)</li>
+        <li>PSO-only needs 3 APs either way: refinement is necessary for the reduction</li>
+      </ul></div>
+      <div class="col">
+        <table class="bt"><thead><tr><th>Office, PSO+GD</th><th class="num">w/ PRS</th><th class="num">w/o PRS</th><th class="num">Fisher $p$</th></tr></thead>
+        <tbody><tr class="hl"><td>2 APs</td><td class="num">4/5</td><td class="num">1/5</td><td class="num">0.21</td></tr><tr><td>3 APs</td><td class="num">5/5</td><td class="num">5/5</td><td class="num">&ndash;</td></tr></tbody></table>
+        <p class="tiny gray" style="margin:2px 0 0 0">Seeds (of 5) meeting the target</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Question (b): does the gain mean fewer APs? These panels sweep one to seven APs in Office against the minus 65 dBm line.</p>
+    <p>PSO+GD needs three APs without the reflector and two with it: minus 62.9 versus minus 65.4 dBm at two APs, a 2.1 dB margin. PSO-only needs three either way, so refinement is necessary. Per seed: 4 of 5 versus 1 of 5.</p>
+  </aside>
+</section>
+
+<!-- SPLIT old 45 (b): HRBB -->
+<section data-id="fewer-ap-hrbb" data-min="0.5">
+  <h2 class="title">HRBB: the same one-AP shift, with a smaller margin</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr;align-items:center">
+      <div class="col">
+        <figure><img src="assets/img/ch6/hrbb_p5_priority.png" alt="HRBB priority-region P5 versus AP count"><figcaption class="leg">HRBB, priority regions, mean $\pm1$ s.d., 5 seeds: PSO+GD <span style="color:#FF7F0E">with</span> / <span style="color:#1F77B4">without</span> PRS; gray: weighted $k$-means (no PRS)</figcaption></figure>
+      </div>
+      <div class="col"><div class="block" style="margin:0"><div class="bt">One fewer AP, smaller margin</div><div class="bb">
+        <ul class="small">
+          <li>2 APs $\to$ 1: $-64.3$&nbsp;dBm at 1 AP with the PRS (margin 0.7&nbsp;dB)</li>
+          <li>With five seeds the Fisher tests are not significant: a seed-mean result, not a deployment guarantee</li>
+        </ul>
+        <table class="bt" style="margin-top:10px"><thead><tr><th>HRBB, PSO+GD</th><th class="num">w/ PRS</th><th class="num">w/o PRS</th><th class="num">Fisher $p$</th></tr></thead>
+        <tbody><tr class="hl"><td>1 AP</td><td class="num">3/5</td><td class="num">0/5</td><td class="num">0.17</td></tr><tr><td>2 APs</td><td class="num">5/5</td><td class="num">5/5</td><td class="num">&ndash;</td></tr></tbody></table>
+        <p class="tiny gray" style="margin:2px 0 0 0">Seeds (of 5) meeting the target</p>
+      </div></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The second floorplan shows the same shift. In HRBB, one AP plus the reflector reaches minus 64.3 dBm, a 0.7 dB margin, where two APs are needed without it; 3 of 5 seeds meet the target versus none.</p>
+    <p>With five seeds the Fisher tests are not significant, so this is a seed-mean result with small margins, not a deployment guarantee.</p>
+  </aside>
+</section>
+
+<!-- old 46 -->
+<section data-id="coverage-limits" data-min="0.75">
+  <h2 class="title">Coverage maps and limitations</h2>
+  <div class="body">
+    <div class="cols" style="--cols:53% 1fr">
+      <div class="col">
+        <div class="maps">
+          <figure><img src="assets/img/ch6/split_cov_pso_small.png" alt="PSO+GD coverage map"><figcaption>PSO+GD</figcaption></figure>
+          <figure><img src="assets/img/ch6/split_cov_k-mean_small.png" alt="Weighted k-means coverage map"><figcaption>Weighted $k$-means</figcaption></figure>
+          <img class="sc" src="assets/img/ch6/color-scale.png" alt="color scale">
+        </div>
+        <p class="foot gray" style="margin:4px 0 6px 0">Office, 3 APs (red), PRS on the north wall; color scale $-80$ to $-40$&nbsp;dBm</p>
+        <p class="small" style="margin:0">PSO+GD reaches shadowed rooms through corridors and doorways; weighted $k$-means leaves southeast shadows.</p>
+      </div>
+      <div class="col">
+        <div class="alertblock" style="margin-top:0"><div class="bt">Limitations</div><div class="bb"><ul class="small">
+          <li>Strongest-server received power only: no interference, SINR, capacity, or installed cost</li>
+          <li>Five seeds, two floorplans, one preselected wall per floor (an unquantified PRS advantage)</li>
+          <li>Known geometry, incoherent power sum, no measured reflector; new search per floorplan</li>
+        </ul></div></div>
+      </div>
+    </div>
+    <div class="transition"><div class="ans"><b>Answered (WHERE):</b> joint AP and reflector planning met the priority target with one fewer AP in both layouts (seed mean, small margins).</div><div class="arrow"></div><div class="opens"><b>Opens (WHICH):</b> how do placement and operation fit together, and which method fits which problem? &rarr; conclusions.</div></div>
+  </div>
+  <aside class="notes">
+    <p>The maps show where the gain comes from. PSO+GD places APs in a west room and at two corridor junctions and reaches shadowed rooms through corridors and doorways; the reflector serves the north rooms. Weighted k-means follows Euclidean distance and leaves the southeast dark.</p>
+    <p>The limits: strongest-server received power only, so the AP saving is a coverage statement, not a cost statement; five seeds, two floorplans, one preselected wall, known geometry.</p>
+    <p>Within those limits, joint planning removed one AP in both layouts, as a seed mean with small margins. That answers where.</p>
+  </aside>
+</section>
+
+<section class="divider" data-id="div-which" data-num="7" data-title="Conclusions" data-part="WHICH" data-question="Which method fits which problem, and what does the whole work answer?"><aside class="notes"><p>Section divider: conclusions. Move on.</p></aside></section>
+
+<!-- old 47 -->
+<section data-id="complete-picture" data-min="0.75">
+  <h2 class="title">The complete picture</h2>
+  <div class="body">
+    <figure class="cpmap"><img src="assets/img/crops/complete_picture.png" alt="Overview map with the answers to the five questions" style="width:100%;display:block">
+      <div class="which-ov"><div>Geometry: static user</div><div>RL: run-time control</div><div>PSO+GD: placement</div></div></figure>
+  </div>
+  <aside class="notes">
+    <p>Back to the map from the start, now with the answers filled in. Each part has its own band and scene, so these gains are not compared across parts.</p>
+    <p>What: geometry alone raises path gain by 53.0 and 87.5 dB for one static user.</p>
+    <p>How: multi-agent learning adds 20.7 dB over a static flat reflector, and learning the assignment lifts four users from minus 72.46 to minus 66.62 dBm over a fixed split.</p>
+    <p>Where: with three APs, placement raises priority P5 by 4.8 dB, and one fewer AP meets the target, as a seed mean.</p>
+  </aside>
+</section>
+
+<!-- old 48 -->
+<section data-id="limits-next" data-min="0.5">
+  <h2 class="title">Limitations and next steps</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Limitations</div><div class="bb"><ul class="small">
+        <li>Ray-traced simulation only; no fabricated-array validation</li>
+        <li>Received power, not rate; no interference model</li>
+        <li>Few scenes, user counts, seeds, and mounting walls</li>
+        <li>Path length and phase not controlled; no position-tracking geometric baseline for learned control</li>
+      </ul></div></div></div>
+      <div class="col"><div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Next steps</div><div class="bb"><ul class="small">
+        <li>Hardware-in-the-loop tests on servo arrays</li>
+        <li>Training under mobility and unseen localization error</li>
+        <li>SINR/rate-aware, multi-AP objectives</li>
+        <li>Run a placed layout with the learned controller (the dashed arrow)</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The limits apply to every part: ray-traced simulation only, received power rather than rate, few scenarios. Phase is not controlled, and learned control was not compared with a position-tracking geometric rule.</p>
+    <p>Next: hardware-in-the-loop tests, training under mobility, rate-aware objectives, and running a placed layout with the learned controller, the dashed arrow.</p>
+  </aside>
+</section>
+
+<!-- old 49 -->
+<section data-id="five-questions" data-min="1.25">
+  <h2 class="title">Five questions, answered</h2>
+  <div class="body">
+    <table class="fq"><tbody>
+      <tr><td class="k">WHY</td><td><b>Spatial information suffices</b>: every part decides from user positions (run time) or a site model (planning), never from pilot-based CSI estimation; the cost is decimeter-level localization and site-model fidelity.</td></tr>
+      <tr><td class="k">WHAT</td><td><b>Focal points are the shared interface</b>: one abstraction steers the tiles in the geometric rule, both learned controllers, and the placement optimizer.</td></tr>
+      <tr><td class="k">HOW</td><td><b>Learned, decentralized policies</b> act within servo limits and are trained on received power for several moving users; when segments differ in geometry, learning the assignment beats a fixed split and the best geometric heuristic.</td></tr>
+      <tr><td class="k">WHERE</td><td><b>Where to install is a decision of its own</b>: a reflector configured once and placed jointly with the APs met the priority-coverage target with one fewer AP (seed mean, small margins).</td></tr>
+      <tr><td class="k">WHICH</td><td><b>Match the method to the problem.</b> Geometry for one static user or as a warm start; learned policies for run-time multi-user control; direct optimization (PSO + gradient refinement) for once-per-building placement.</td></tr>
+    </tbody></table>
+    <div class="takeaway">Together, the answers cover both stages, where to install and how to operate, through one focal-point interface and without pilot-based CSI estimation (ray-traced simulation); closing the loop between them is the next step.</div>
+  </div>
+  <aside class="notes">
+    <p>To sum up, what the five answers say together.</p>
+    <p>Why: spatial information is enough. Every part decides from user positions at run time or a site model at planning, never from pilot-based channel estimation; the price is decimeter-level localization and an accurate site model.</p>
+    <p>What: the focal point is the interface shared by the geometric rule, both learned controllers and the placement optimizer.</p>
+    <p>How: learned decentralized policies work within servo limits for several moving users, and when segments differ in geometry, learning the assignment beats a fixed split and the geometric heuristic.</p>
+    <p>Where: installation is a decision of its own; a jointly placed reflector met the priority-coverage target with one fewer access point.</p>
+    <p>Which: geometry for a static user or a warm start, learned policies at run time, direct optimization once per building.</p>
+    <p>Together these cover installing and operating the reflectors through one interface, in simulation; closing the loop between the two stages and hardware validation come next.</p>
+  </aside>
+</section>
+
+<section data-id="formula3" data-min="0.75">
+  <h2 class="title">What comes next: the FORMULA3 project</h2>
+  <div class="body">
+    <div class="alertblock"><div class="bt">FORMULA3 &middot; NSF&ndash;Research Council of Finland VINES</div><div class="bb">
+      <div class="fname">Framework for Optimal Resource Management Using Generalizable AI in FR3 Dynamic Programmable Wireless Environments</div>
+      <div class="f3grid">
+        <div>
+          <ul>
+            <li>VINES: Verticals-enabling Intelligent Network Systems; collaborative effort of about <b>$1.54M</b>, Oct 2026 &ndash; Sep 2029</li>
+            <li>Five universities: Tennessee Tech, Texas A&amp;M, NYU, Tampere University, Aalto University</li>
+          </ul>
+          <p class="mra">Programmable environments combine RIS with <b>metallic reflector arrays</b>: hexagonal metal-tile panels whose tiles turn so the panel focuses on the user. This element <b>builds on this dissertation's reflector-array work</b> (hardware and focal-point control).</p>
+        </div>
+        <img src="assets/img/ch5/reflector-design-zoom-in-01.png" alt="Hexagonal-tile metallic reflector array">
+      </div>
+      <div class="tiny gray" style="margin-top:8px">U.S. National Science Foundation (NSF) Award Nos. 2549087, 2549088 &middot; Research Council of Finland Decision Nos. 380594, 380600 &middot; <a href="https://vines-formula3.github.io/" target="_blank" rel="noopener">vines-formula3.github.io</a></div>
+    </div></div>
+  </div>
+  <aside class="notes">
+    <p>This work does not stop here. It continues in FORMULA3, a joint project of the NSF and the Research Council of Finland in the VINES program: about 1.54 million dollars across five universities in the United States and Finland, from October 2026 to September 2029.</p>
+    <p>Its programmable wireless environments combine RIS with metallic reflector arrays, the hexagonal tile panels on the right. That element builds directly on this dissertation's reflector-array work.</p>
+  </aside>
+</section>
+<section data-id="formula3-map" data-min="0.75">
+  <h2 class="title">How this dissertation feeds into FORMULA3</h2>
+  <div class="body">
+    <div class="map">
+      <div class="hd">This dissertation (completed)</div><div></div><div class="hd">FORMULA3 thrust it builds toward</div>
+      <div class="src"><b>Ray-traced reflector pipeline</b>scene model &rarr; tile angles from focal points &rarr; path gain, per band</div><div class="arr"></div>
+      <div class="dst"><b>T1 &middot; Channel characterization &amp; dataset generation</b>simulated data for scenes with metallic reflector arrays</div>
+      <div class="src"><b>CSI-free learned control + hierarchical allocation</b>focal points from user positions; which segment serves which user</div><div class="arr"></div>
+      <div class="dst"><b>T2 &middot; AI-native proactive resource management</b>reconfigure surfaces and reassign users</div>
+      <div class="src"><b>Robustness and localization findings</b>user count, array size, position noise; decimeter-level localization needed</div><div class="arr"></div>
+      <div class="dst"><b>T3 &middot; Generalization via ISAC &amp; continual learning</b>sensing supplies the positions that control relies on</div>
+      <div class="src"><b>Reflector hardware model + joint AP/reflector placement</b>one focal-point interface for planning and operation</div><div class="arr"></div>
+      <div class="dst"><b>T4 &middot; Validation &amp; evaluation</b>metallic reflector array surfaces in planned programmable environments</div>
+    </div>
+    <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
+  </div>
+  <aside class="notes">
+    <p>Here is how this dissertation feeds into the project's four thrusts. The ray-traced reflector pipeline is a starting point for channel characterization and dataset generation.</p>
+    <p>The CSI-free learned control and the hierarchical allocation are early instances of the second thrust: reconfiguring surfaces and reassigning users.</p>
+    <p>The robustness and localization findings inform the third thrust, where sensing supplies the positions. And the hardware model with joint placement feeds validation and the planning of programmable environments.</p>
+    <p>These are the foundations it builds on; the project's own results are still to come.</p>
+  </aside>
+</section>
+
+<!-- old 50 (+ one line for old 51, full list in backup) -->
+<section data-id="publications" data-min="0.5">
+  <h2 class="title">Publications from this dissertation</h2>
+  <div class="body">
+    <ol>
+      <li><span class="me">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Guiding wireless signals with arrays of metallic linear Fresnel reflectors: A low-cost, frequency-versatile, and practical approach,&rdquo; in <em>Proc. IEEE 100th Vehicular Technology Conf. (VTC2024-Fall)</em>, Washington, DC, USA, 2024, pp.&nbsp;1&ndash;7.</li>
+      <li><span class="me">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Signal Whisperers: Enhancing wireless reception using DRL-guided reflector arrays,&rdquo; <em>IEEE Trans. Mach. Learn. Commun. Netw.</em>, vol.&nbsp;4, pp.&nbsp;265&ndash;281, 2026.</li>
+      <li><span class="me">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Bypassing the CSI bottleneck: MARL-driven spatial control for reflector arrays,&rdquo; arXiv:2604.05162, 2026; <span class="st">submitted to IEEE ICC 2027 (under review)</span>.</li>
+      <li><span class="me">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Learning to Reflect: Hierarchical multi-agent reinforcement learning for CSI-free mmWave beam-focusing,&rdquo; arXiv:2603.07370, 2026; <span class="st">under review, <em>IEEE Trans. Mach. Learn. Commun. Netw.</em></span></li>
+      <li><span class="me">H. Le</span>, M. Ibrahim, O. Bedir, J. Tao, and S. Ekin, &ldquo;Learning to Focus: CSI-free hierarchical MARL for reconfigurable reflectors,&rdquo; arXiv:2604.05165, 2026; <span class="st">accepted, IEEE GLOBECOM 2026, Macau (to be presented Dec.&nbsp;2026)</span>.</li>
+      <li><span class="me">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; <span class="st">submitted to <em>IEEE Open J. Commun. Soc.</em>, 2026 (under review)</span>.</li>
+    </ol>
+      </div>
+  <aside class="notes">
+    <p>The VTC Fall 2024 paper covers geometric focusing, and the TMLCN article covers flat MARL; the flat-MARL conference paper is under review at ICC 2027.</p>
+    <p>For hierarchical MARL, the journal version is under review at TMLCN and the conference version will be presented at GLOBECOM in December.</p>
+    <p>The placement paper is under review at the Open Journal of the Communications Society. Other publications are in the backup.</p>
+  </aside>
+</section>
+
+<section data-id="other-pubs" data-min="0.25">
+  <h2 class="title">Other publications during the Ph.D.</h2>
+  <div class="body">
+    <ol start="7">
+      <li><span class="me">H. Le</span> and J. Tao, &ldquo;Hierarchical autoencoder-based lossy compression for large-scale high-resolution scientific data,&rdquo; <em>Computing&amp;AI Connect</em>, vol.&nbsp;1, p.&nbsp;0001, 2024.</li>
+      <li>M. Le, A. Yao, A. Zhang, <span class="me">H. Le</span>, Z. Chen, X. Wu, L. Zhao, and J. Chen, &ldquo;Expediting ionic conductivity prediction of solid-state battery electrodes using machine learning,&rdquo; <em>IEEE J. Multiscale Multiphys. Comput. Techn.</em>, vol.&nbsp;9, pp.&nbsp;375&ndash;382, 2024.</li>
+      <li><span class="me">H. Le</span>, Z. He, M. Le, D. Chakravorty, L. M. Perez, A. Chilumuru, Y. Yao, and J. Chen, &ldquo;Insight gained from migrating a machine learning model to intelligence processing units,&rdquo; in <em>Proc. PEARC '24</em>, 2024, Art.&nbsp;no.&nbsp;7.</li>
+      <li>A. Cassity, <span class="me">H. Le</span>, H. Santos, E. Priest, and J. Tao, &ldquo;Dynamic data-driven digital twin testbed for enhanced first responder,&rdquo; in <em>DDDAS 2024</em>, 2025, p.&nbsp;100.</li>
+      <li>H. Raghukumar, <span class="me">H. Le</span>, <em>et al.</em>, &ldquo;Smart communities, smart responders &ndash; Artificial intelligence for Internet of Things competition: A case study in organizing a public safety innovation challenge,&rdquo; in <em>Proc. IEEE WFPST</em>, 2024, pp.&nbsp;114&ndash;119.</li>
+      <li>A. Nasari, L. Zhai, Z. He, <span class="me">H. Le</span>, S. Cui, D. Chakravorty, J. Tao, and H. Liu, &ldquo;Porting AI/ML models to intelligence processing units (IPUs),&rdquo; in <em>Proc. PEARC '23</em>, 2023, pp.&nbsp;231&ndash;236.</li>
+      <li>Z. He, S. Nite, J. Winchell, A. Nasari, <span class="me">H. Le</span>, J. Tao, D. Chakravorty, L. Perez, and H. Liu, &ldquo;Development of a training framework for novel accelerators,&rdquo; in <em>Proc. IEEE FIE</em>, 2023, pp.&nbsp;1&ndash;6.</li>
+      <li>A. Nasari, <span class="me">H. Le</span>, R. Lawrence, Z. He, X. Yang, M. Krell, A. Tsyplikhin, <em>et al.</em>, &ldquo;Benchmarking the performance of accelerators on national cyberinfrastructure resources for artificial intelligence/machine learning workloads,&rdquo; in <em>Proc. PEARC '22</em>, 2022, pp.&nbsp;1&ndash;9.</li>
+    </ol>
+  </div>
+  <aside class="notes">
+    <p>Beyond the dissertation, I contributed to eight other papers, mainly with the High Performance Computing group: scientific data compression, AI accelerators, and digital twins for first responders.</p>
+  </aside>
+</section>
+
+<!-- old 52 -->
+<section data-id="thanks" data-min="0.25">
+  <h2 class="title">Thank you</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr;align-items:center">
+      <div class="col"><ul>
+        <li>Chair <b>Prof.&nbsp;Sabit Ekin</b> and Co-Chair <b>Prof.&nbsp;Jian Tao</b></li>
+        <li>Committee members <b>Prof.&nbsp;Erchin Serpedin</b> and <b>Prof.&nbsp;Arya Menon</b></li>
+        <li>Collaborators Dr.&nbsp;Mostafa Ibrahim and Oguz Bedir</li>
+        <li>Funding: U.S. Department of Energy (DOE), Office of Science, ASCR Early Career Research Program <span style="white-space:nowrap">(DE-SC0023957)</span>; U.S. National Science Foundation (NSF), Grants 2549088 and 2535873</li>
+      </ul></div>
+      <div class="col center">
+        <div class="qq">Questions?</div>
+        <img src="assets/img/logos/texas-wireless-2026.png" alt="Texas Wireless" style="height:110px">
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Thank you to Prof. Ekin and Prof. Tao, the committee, my collaborators, and DOE and NSF for funding. I am happy to take questions.</p>
+  </aside>
+</section>

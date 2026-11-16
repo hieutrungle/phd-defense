@@ -1,0 +1,59 @@
+<!-- ===================================================================
+     Track: Intro and foundations - backup slides (untimed)
+     Sources: old sections/backup_ch2-4.tex (beam-focusing animations, ITU-R P.2040),
+     old foundations slide 14 (3D bisector figure and angle formulas).
+     =================================================================== -->
+<style>
+section[data-id="geo-videos"] .vids{display:flex;gap:50px;justify-content:center;align-items:flex-end}
+section[data-id="geo-videos"] .vwrap{position:relative;overflow:hidden;height:460px;background:#000;border-radius:4px}
+section[data-id="geo-videos"] .vwrap video{position:absolute;height:473px;width:auto;max-width:none;top:-10px}
+section[data-id="geo-videos"] figcaption{font-size:var(--fs-foot);color:var(--text)}
+section[data-id="bk-p2040"] table.bt td,section[data-id="bk-p2040"] table.bt th{padding:5px 14px}
+section[data-id="bk-bisector-3d"] img{height:390px}
+</style>
+
+
+<section class="backup" data-id="bk-p2040">
+  <h2 class="title">ITU-R P.2040 material model</h2>
+  <div class="body">
+    <div class="cols" style="--cols:50% 1fr;align-items:center">
+      <div class="col">
+        <p>Real relative permittivity and conductivity, with $f_c$ in GHz:</p>
+        $$\epsilon_r(f_c)=a_{\mathrm m}f_c^{\,b_{\mathrm m}},\qquad \sigma_c(f_c)=c_{\mathrm m}f_c^{\,d_{\mathrm m}}\ \text{(S/m)}$$
+        <ul class="small">
+          <li>28 GHz hallways: concrete walls, ceiling, floor; metal tiles</li>
+          <li>60 GHz hallway: plasterboard walls, board ceiling, concrete floor, wooden obstacle</li>
+        </ul>
+      </div>
+      <div class="col">
+        <table class="bt">
+          <thead><tr><th>Material</th><th class="num">$a_{\mathrm m}$</th><th class="num">$b_{\mathrm m}$</th><th class="num">$c_{\mathrm m}$</th><th class="num">$d_{\mathrm m}$</th></tr></thead>
+          <tbody>
+            <tr><td>Metal</td><td class="num">1</td><td class="num">0</td><td class="num">$10^{7}$</td><td class="num">0</td></tr>
+            <tr><td>Concrete</td><td class="num">5.24</td><td class="num">0</td><td class="num">0.0462</td><td class="num">0.7822</td></tr>
+            <tr><td>Wood</td><td class="num">1.99</td><td class="num">0</td><td class="num">0.0047</td><td class="num">1.0718</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Backup. Material constants from ITU-R Recommendation P.2040 as listed in the dissertation. Plasterboard and ceiling-board constants are not tabulated in the dissertation.</p></aside>
+</section>
+
+<section class="backup" data-id="bk-bisector-3d">
+  <h2 class="title">bisector rule in 3D: tile elevation and azimuth</h2>
+  <div class="body">
+    <div class="cols" style="--cols:46% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch2/p1-bisector-01-01-01.png" alt="Tile normal bisecting AP and UE directions in 3D"><figcaption>Normal $\vec n=(x,y,z)$ at tile A; AP at B, UE at C</figcaption></figure></div>
+      <div class="col">
+        $$\vec n=\frac12\left(\frac{\overrightarrow{AB}}{|\overrightarrow{AB}|}+\frac{\overrightarrow{AC}}{|\overrightarrow{AC}|}\right)$$
+        $$\theta=\arccos\frac{z}{|\vec n|},\qquad \phi=\mathrm{sgn}(y)\arccos\frac{x}{\sqrt{x^2+y^2}}$$
+        <ul class="small">
+          <li>With the focal-point abstraction, C is replaced by the segment's focal point $f_l$</li>
+          <li>Learned control clips $\theta,\phi$ to the servo range</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Backup. The 3D form of the bisector rule: the normal is the sum of unit vectors toward the AP and the UE (or focal point); converting it to spherical coordinates gives the tile elevation and azimuth.</p></aside>
+</section>

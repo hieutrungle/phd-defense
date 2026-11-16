@@ -1,0 +1,720 @@
+<!-- ===================================================================
+     Track: Intro and foundations  (slides `title` ... `geo-limits`)
+     Sources: old Beamer slides.tex (title, outline), sections/01_aboutme.tex,
+     02_motivation.tex, 03_foundations.tex; dissertation data/section2-4.tex.
+     =================================================================== -->
+<style>
+/* title */
+section[data-id="title"] h1{font-size:44px;top:92px}
+section[data-id="title"] .subt{top:188px}
+section[data-id="title"] .committee{position:absolute;right:70px;top:372px;font-size:19px;line-height:1.42;color:var(--text);display:grid;grid-template-columns:auto auto;column-gap:14px}
+section[data-id="title"] .committee .lab{font-style:italic;color:var(--midgray);text-align:right}
+section[data-id="title"] .logos img.tw{height:74px}
+/* outline */
+section[data-id="outline"] ol{font-size:27px;margin-left:1.6em}
+section[data-id="outline"] ol li{margin:.5em 0}
+/* about me */
+section[data-id="aboutme"] .cols{align-items:stretch}
+section[data-id="aboutme"] ul.main>li{margin:.75em 0}
+section[data-id="aboutme"] .block{margin:0;height:100%}
+section[data-id="aboutme"] .block ul{font-size:22px;margin-left:.9em}
+section[data-id="aboutme"] .block li{margin:.55em 0}
+section[data-id="aboutme"] .block li b{color:var(--maroon)}
+section[data-id="aboutme"] .block li span{display:block;font-size:18px;color:var(--midgray)}
+/* experience */
+section[data-id="experience"] table.bt{width:100%;font-size:22px}
+section[data-id="experience"] table.bt thead tr{background:var(--maroon);color:#fff;border-top:none}
+section[data-id="experience"] table.bt td,section[data-id="experience"] table.bt th{padding:7px 14px}
+section[data-id="experience"] table.bt tr.next{background:var(--accentlight);font-weight:600}
+section[data-id="experience"] table.bt tr.alt{background:var(--maroonlight)}
+section[data-id="experience"] .logorow{display:flex;justify-content:space-around;align-items:center;margin-top:34px}
+section[data-id="experience"] .logorow img{height:46px}
+section[data-id="experience"] .logorow img.seal{height:92px}
+/* research threads */
+section[data-id="threads"] .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;align-items:stretch}
+section[data-id="threads"] .card{border:1.5px solid var(--maroon);border-top:12px solid var(--maroon);border-radius:8px;padding:14px 16px;background:#fff;font-size:20px;line-height:1.3}
+section[data-id="threads"] .card .ic{height:44px;display:flex;justify-content:center;align-items:center;margin-bottom:6px}
+section[data-id="threads"] .card .ic img{height:40px}
+section[data-id="threads"] .card h3{margin:0 0 10px 0;text-align:center;color:var(--maroon);font-size:23px;font-weight:700;text-transform:none;line-height:1.2;min-height:56px;display:flex;align-items:center;justify-content:center}
+section[data-id="threads"] .card .q{margin-top:12px}
+section[data-id="threads"] .card .q b{color:var(--maroon)}
+/* formula3 */
+/* formula3-map */
+section[data-id="sponsors"] .cols{align-items:stretch}
+section[data-id="sponsors"] .block{margin:0;height:100%;box-sizing:border-box}
+section[data-id="sponsors"] .bb{font-size:22px;line-height:1.4}
+section[data-id="sponsors"] .sp{display:flex;align-items:center;gap:26px;padding:18px 6px}
+section[data-id="sponsors"] .sp img{height:130px;width:auto;flex:none}
+section[data-id="formula3"] .alertblock{margin:0}
+section[data-id="formula3"] .bb{font-size:21px;line-height:1.36}
+section[data-id="formula3"] .fname{font-weight:600;color:var(--maroon);font-size:23px;margin-bottom:6px}
+section[data-id="formula3"] .f3grid{display:grid;grid-template-columns:1fr 250px;gap:26px;align-items:center}
+section[data-id="formula3"] .f3grid img{width:250px}
+section[data-id="formula3"] .bb ul{margin-left:.9em}
+section[data-id="formula3"] .bb li{margin:.4em 0}
+section[data-id="formula3"] .mra{margin:.6em 0 0 0;border-top:1px solid var(--rule);padding-top:10px}
+section[data-id="formula3-map"] .map{display:grid;grid-template-columns:1fr 46px 1fr;row-gap:12px;align-items:stretch}
+section[data-id="formula3-map"] .hd{font-size:17px;font-weight:700;color:var(--midgray);letter-spacing:.3px;text-transform:uppercase;padding:0 4px}
+section[data-id="formula3-map"] .src,section[data-id="formula3-map"] .dst{border-radius:7px;padding:9px 14px;font-size:19px;line-height:1.3}
+section[data-id="formula3-map"] .src{background:var(--maroonlight);border:1.5px solid var(--maroon)}
+section[data-id="formula3-map"] .dst{background:var(--accentlight);border:1.5px solid var(--accent)}
+section[data-id="formula3-map"] .src b,section[data-id="formula3-map"] .dst b{display:block;font-size:20px}
+section[data-id="formula3-map"] .src b{color:var(--maroon)} section[data-id="formula3-map"] .dst b{color:var(--accent)}
+section[data-id="formula3-map"] .arr{display:flex;align-items:center;justify-content:center}
+section[data-id="formula3-map"] .arr::before{content:"";width:28px;height:3px;background:var(--maroon)}
+section[data-id="formula3-map"] .arr::after{content:"";border-left:11px solid var(--maroon);border-top:7px solid transparent;border-bottom:7px solid transparent}
+/* mmwave */
+section[data-id^="mmwave"] ul{font-size:25px}
+section[data-id^="mmwave"] ul li{margin:.5em 0}
+section[data-id^="mmwave"] figure img{max-height:400px;width:100%;object-fit:contain}
+section[data-id^="mmwave"] .credit{position:absolute;left:0;bottom:6px}
+/* applications */
+section[data-id="applications"] .apps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+section[data-id="applications"] .apps img{height:190px;display:block;margin:0 auto 8px auto}
+section[data-id="applications"] .apps h3{margin:0 0 6px 0;text-align:center;color:var(--maroon);font-size:25px;text-transform:none}
+section[data-id="applications"] .apps p{font-size:21px}
+/* blocked */
+section[data-id="blocked"] ul li{margin:.6em 0}
+/* ris-vs-mra, gaps */
+section[data-id="ris-vs-mra"] table.bt,section[data-id="gaps"] table.bt{width:100%;font-size:21px}
+section[data-id="ris-vs-mra"] table.bt thead tr,section[data-id="gaps"] table.bt thead tr{background:var(--maroon);color:#fff;border-top:none}
+section[data-id="ris-vs-mra"] table.bt td,section[data-id="ris-vs-mra"] table.bt th,section[data-id="gaps"] table.bt td,section[data-id="gaps"] table.bt th{padding:7px 12px;vertical-align:top}
+section[data-id="ris-vs-mra"] table.bt tr.alt,section[data-id="gaps"] table.bt tr.alt{background:var(--maroonlight)}
+section[data-id="gaps"] td.part{text-align:center;font-weight:700;color:var(--maroon);vertical-align:middle!important}
+/* goal map */
+section[data-id="goal-map"] img{width:1150px;display:block;margin:0 auto}
+/* hardware */
+section[data-id="hardware"] .figs{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+section[data-id="hardware"] .figs figure{text-align:center;margin:0}
+section[data-id="hardware"] .figs img{height:300px;object-fit:contain;width:100%}
+section[data-id="hardware"] ul li{margin:.55em 0}
+/* bisector + focal animations */
+section[data-id="anim-bisector"] .side{font-size:21px;line-height:1.3}
+section[data-id="anim-bisector"] .side .katex-display{margin:.3em 0}
+section[data-id="anim-bisector"] .side p{margin:0 0 .5em 0}
+section[data-id="anim-bisector"] .side .fragment{border-left:5px solid var(--maroon);padding:4px 0 4px 12px;margin:10px 0}
+section[data-id="anim-bisector"] .side .fragment.f2{border-left-color:#C0392B}
+section[data-id="anim-focal"] .row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px;font-size:20px;line-height:1.3}
+section[data-id="anim-focal"] .row>div{border-left:5px solid var(--maroon);padding:2px 0 2px 12px}
+section[data-id="anim-csi"] .row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px;font-size:20px;line-height:1.3}
+section[data-id="anim-csi"] .row>div{border-left:5px solid var(--accent);padding:2px 0 2px 12px}
+section[data-id="anim-csi"] .row>div.good{border-left-color:var(--good)}
+/* testbed */
+section[data-id="testbed"] img{height:330px}
+section[data-id="testbed"] ul{font-size:23px}
+section[data-id="testbed"] ul li{margin:.5em 0}
+/* geo-setup */
+section[data-id="geo-setup"] .lay{display:grid;grid-template-columns:auto auto;gap:18px;justify-content:center;align-items:end}
+section[data-id="geo-setup"] .lay img{height:400px}
+section[data-id="geo-setup"] ul li{margin:.5em 0}
+section[data-id="geo-setup"] ul{font-size:23px}
+/* path-gain splits */
+section.pgain .maps{display:flex;gap:10px;justify-content:center;align-items:flex-end}
+section.pgain .maps figure{display:flex;flex-direction:column;align-items:center}
+section.pgain .maps img{height:380px}
+section.pgain .maps figcaption{font-size:17px;color:var(--text)}
+section.pgain table.bt{font-size:21px;width:100%}
+section.pgain table.bt td{padding:5px 10px}
+section.pgain .calls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 10px 0;text-align:center}
+section.pgain ul{font-size:21px;margin-top:6px}
+/* rssi splits */
+section.rssi img{height:400px}
+section.rssi ul{font-size:22px}
+section.rssi ul li{margin:.55em 0}
+/* geo-limits */
+section[data-id="geo-limits"] .cols{align-items:stretch}
+section[data-id="geo-limits"] .block{height:100%;margin:0}
+section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
+</style>
+
+<!-- ============================== TITLE ============================== -->
+<section class="titleslide" data-id="title" data-min="0.5">
+  <div class="tband"></div>
+  <h1>Spatial Intelligence for Smart Radio Environments</h1>
+  <div class="subt">Learning-Based Control and Joint Placement of Mechanically Reconfigurable Reflectors</div>
+  <div class="who">Hieu T. Le</div>
+  <div class="meta">Ph.D. Candidate, Electrical Engineering<br>Department of Electrical and Computer Engineering<br>Texas A&amp;M University<br><span class="gray">Doctoral Dissertation Defense &middot; College Station, TX &middot; Fall 2026</span></div>
+  <div class="committee"><span class="lab">Chair:</span><span>Prof. Sabit Ekin</span><span class="lab">Co-chair:</span><span>Prof. Jian Tao</span><span class="lab">Committee board:</span><span>Prof. Erchin Serpedin</span><span></span><span>Prof. Arya Menon</span></div>
+  <div class="logos"><img src="assets/img/logos/tamu-horizontal-maroon.png" alt="Texas A&amp;M University"><img class="tw" src="assets/img/logos/texas-wireless-2026.png" alt="Texas Wireless"></div>
+  <aside class="notes">
+    <p>Good morning. Thank you to my committee chair, Prof. Ekin, my co-chair, Prof. Tao, and the committee members for being here.</p>
+    <p>This talk is about how mechanically reconfigurable metallic reflectors can be controlled and placed from spatial information, meaning positions and a site model, without pilot-based channel estimation.</p>
+  </aside>
+</section>
+
+<!-- ============================== OUTLINE ============================== -->
+<section data-id="outline" data-min="0.25">
+  <h2 class="title">Outline</h2>
+  <div class="body">
+    <ol>
+      <li>About Me</li>
+      <li>Motivation and Objectives</li>
+      <li>Foundations: Ray-Traced Reflector Arrays and Geometric Beam-Focusing</li>
+      <li>Learning-Based Control with Multi-Agent RL</li>
+      <li>Hierarchical Multi-Agent RL for Multi-User Allocation</li>
+      <li>Joint Placement of Access Points and Reflectors</li>
+      <li>Conclusions, the Complete Picture, and Publications</li>
+    </ol>
+  </div>
+  <aside class="notes">
+    <p>Seven parts. After the introduction, they answer five questions: why this approach, what geometry gives, how to steer the array, where to install it, and which method fits which problem.</p>
+  </aside>
+</section>
+
+<section class="divider" data-num="1" data-title="About Me"><aside class="notes"><p>Section divider: about me. Move on.</p></aside></section>
+
+<!-- ============================== ABOUT ME ============================== -->
+<section data-id="aboutme" data-min="0.5">
+  <h2 class="title">About me</h2>
+  <div class="body">
+    <div class="cols" style="--cols:56% 1fr">
+      <div class="col">
+        <ul class="main">
+          <li><b>Ph.D. Candidate</b>, Electrical Engineering, Texas A&amp;M University</li>
+          <li><b>Chair:</b> Prof. Sabit Ekin</li>
+          <li><b>Co-Chair:</b> Prof. Jian Tao</li>
+          <li><b>Research:</b> smart radio environments built on mechanically reconfigurable metallic reflectors, controlled by <span class="alert">spatial intelligence</span> instead of pilot-based channel estimation</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="block"><div class="bt">Research areas</div><div class="bb">
+          <ul>
+            <li><b>Machine learning</b><span>learned control from spatial data</span></li>
+            <li><b>Reinforcement learning</b><span>multi-agent, hierarchical policies</span></li>
+            <li><b>Wireless communication</b><span>mmWave, reflectors, ray tracing</span></li>
+            <li><b>Optimization</b><span>global search, gradient refinement</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>I am a Ph.D. candidate in Electrical Engineering at Texas A&amp;M, with Prof. Sabit Ekin as committee chair and Prof. Jian Tao as co-chair.</p>
+    <p>My research is on smart radio environments: I control and place mechanically reconfigurable metallic reflectors from spatial information, positions and a site model, rather than pilot-based channel estimation.</p>
+    <p>It sits where machine learning, reinforcement learning, wireless communication and optimization meet.</p>
+  </aside>
+</section>
+
+<!-- ============================== EXPERIENCE ============================== -->
+<section data-id="experience" data-min="0.5">
+  <h2 class="title">Professional experience</h2>
+  <div class="body">
+    <table class="bt">
+      <thead><tr><th style="width:24%">Period</th><th style="width:36%">Role</th><th>Organization / Team</th></tr></thead>
+      <tbody>
+        <tr class="next"><td>Starting 2027</td><td>Machine Learning Engineer</td><td>Uber</td></tr>
+        <tr class="alt"><td>Sep 2021 &ndash; Present</td><td>Research Assistant</td><td>Texas A&amp;M University</td></tr>
+        <tr><td>June 2026 &ndash; Aug 2026</td><td>Machine Learning Intern</td><td>Uber | Rider Pricing &amp; Incentives</td></tr>
+        <tr class="alt"><td>Sep 2025 &ndash; Dec 2025</td><td>Engineering Intern</td><td>Qualcomm | San Diego, CA</td></tr>
+        <tr><td>Jan 2024 &ndash; June 2024</td><td>Research Assistant</td><td>High Performance Computing Center</td></tr>
+      </tbody>
+    </table>
+    <div class="logorow">
+      <img src="assets/img/aboutme/uber-logo.png" alt="Uber">
+      <img src="assets/img/proposal/image5.png" alt="Qualcomm">
+      <img class="seal" src="assets/img/proposal/image6.png" alt="Texas A&amp;M University">
+    </div>
+  </div>
+  <aside class="notes">
+    <p>My professional experience, most recent first. After graduation I will return to Uber as a Machine Learning Engineer, starting in 2027.</p>
+    <p>Since 2021 I have been a research assistant at Texas A&amp;M, where this work was done. This summer I interned at Uber on Rider Pricing and Incentives; in fall 2025 at Qualcomm in San Diego; and in 2024 I worked at the High Performance Computing Center.</p>
+  </aside>
+</section>
+
+<!-- ============================== RESEARCH THREADS ============================== -->
+<section data-id="threads" data-min="0.5">
+  <h2 class="title">Research and technical innovation</h2>
+  <div class="body">
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg width="64" height="40" viewBox="0 0 64 40"><g stroke="#500000" stroke-width="3.2" stroke-linecap="round"><line x1="10" y1="34" x2="20" y2="27"/><line x1="26" y1="34" x2="36" y2="27"/><line x1="42" y1="34" x2="52" y2="27"/></g><polyline points="4,6 31,30 58,6" fill="none" stroke="#9a5a5a" stroke-width="1.6"/><path d="M58 6 l-7 1.5 l3.5 3.5z" fill="#9a5a5a"/></svg></div>
+        <h3>Geometric foundations</h3>
+        <div>Bisector rule and focal points steer metallic tiles from positions alone.</div>
+        <div class="q"><b>WHAT:</b> what geometry alone achieves</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image9.png" alt=""></div>
+        <h3>Flat MARL control</h3>
+        <div>Multi-agent RL that maps servo-actuated tile orientations to a few virtual focal points.</div>
+        <div class="q"><b>HOW:</b> steer the array for moving users</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image10.png" alt=""></div>
+        <h3>Hierarchical MARL</h3>
+        <div>Two-timescale allocator + MAPPO segment agents, with no pilot-based CSI estimation.</div>
+        <div class="q"><b>HOW:</b> share the array among several users</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image11.png" alt=""></div>
+        <h3>Joint placement</h3>
+        <div>Access points and a reflector placed jointly: PSO global search + gradient refinement through a differentiable ray tracer.</div>
+        <div class="q"><b>WHERE:</b> install the access points and the reflector</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The research has four technical parts, each with its own part of the talk.</p>
+    <p>First, geometry: the bisector rule and focal points steer the tiles from positions alone. Second, multi-agent learning: each agent moves one virtual focal point. Third, a hierarchy: an allocator decides which segment serves which user. Fourth, placement: where the access points and the reflector go.</p>
+  </aside>
+</section>
+
+<!-- ============================== FORMULA3 (new; folds in sponsored research) ============================== -->
+<section data-id="sponsors" data-min="0.25">
+  <h2 class="title">Sponsored research</h2>
+  <div class="body">
+    <div class="cols" style="--cols:1fr 1fr">
+      <div class="block"><div class="bt">U.S. Department of Energy</div><div class="bb">
+        <div class="sp"><img src="assets/img/proposal/image13.png" alt="U.S. Department of Energy seal">
+        <div>Office of Science, Office of Advanced Scientific Computing Research (ASCR)<br><b>Early Career Research Program</b><br>Award No. <b>DE-SC0023957</b></div></div>
+      </div></div>
+      <div class="block"><div class="bt">U.S. National Science Foundation</div><div class="bb">
+        <div class="sp"><img src="assets/img/proposal/image12.png" alt="National Science Foundation logo">
+        <div>Grant Nos. <b>2549088</b> and <b>2535873</b></div></div>
+      </div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>This work was supported in part by the Department of Energy Early Career Research Program, award DE-SC0023957, and by the National Science Foundation, grants 2549088 and 2535873.</p>
+  </aside>
+</section>
+
+<!-- ============================== FORMULA3 MAP (new) ============================== -->
+
+<section class="divider" data-num="2" data-title="Motivation and Objectives" data-part="WHY" data-question="Why steer reflectors from spatial information instead of channel estimates?"><aside class="notes"><p>Section divider: why steer reflectors from spatial information instead of channel estimates?</p></aside></section>
+
+<!-- ============================== MMWAVE ============================== -->
+<section data-id="mmwave" data-min="0.5">
+  <h2 class="title">Growing demand points to mmWave bandwidth</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <figure><img src="assets/img/aboutme/spectrum.png" alt="Spectrum chart: mmWave bands offer wide channels with mostly line-of-sight propagation"><figcaption>mmWave bands: wide channels, mostly line-of-sight propagation</figcaption></figure>
+      <div class="col">
+        <ul>
+          <li>Growing traffic (AR, autonomous systems, IoT) needs <b>more bandwidth</b> or <b>better signal quality</b></li>
+          <li>Large contiguous channels are available at <b>mmWave</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="tiny gray credit">Image credit: spectrummattersindeed.blogspot.com/2020/01/why-millimeter-wave-is-essential-for-5g.html</div>
+  </div>
+  <aside class="notes">
+    <p>Each wireless generation carries more demanding applications: augmented reality, autonomous systems, large-scale IoT. Engineers have two levers: more bandwidth, or better signal quality.</p>
+    <p>The large contiguous channels are at millimeter-wave frequencies, where propagation is mostly line of sight.</p>
+  </aside>
+</section>
+
+<section data-id="mmwave-coverage" data-min="0.5">
+  <h2 class="title">More bandwidth at mmWave, but less coverage</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <figure><img src="assets/img/aboutme/freq_coverage_noline.png" alt="Bandwidth versus coverage: higher carrier frequency gives more bandwidth and smaller coverage"><figcaption>Higher carrier frequency: more bandwidth, smaller coverage</figcaption></figure>
+      <div class="col">
+        <ul>
+          <li>The cost: <b>higher path loss</b>, weak penetration, frequent blockage</li>
+          <li>The environment (walls, materials, shadowing) is usually a <b>given channel</b> to compensate for</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tiny gray credit">Image credit: cdn.codeground.org/nsr/downloads/researchareas/2022May_6G_Spectrum.pdf</div>
+  </div>
+  <aside class="notes">
+    <p>This chart shows the trade-off: higher frequency, more bandwidth, smaller coverage.</p>
+    <p>The price is higher path loss, weak penetration and frequent blockage. Usually the environment is a fixed channel to compensate for; this dissertation asks what happens if part of it becomes controllable.</p>
+  </aside>
+</section>
+
+<!-- ============================== APPLICATIONS ============================== -->
+<section data-id="applications" data-min="0.5">
+  <h2 class="title">Target applications: dense, shielded indoor environments</h2>
+  <div class="body">
+    <div class="apps">
+      <div><img src="assets/img/proposal/image19.png" alt="Data center"><h3>Data centers</h3><p>Metal server racks block signals; high data rates are needed without running fiber to every rack.</p></div>
+      <div><img src="assets/img/proposal/image20.png" alt="Nuclear facility"><h3>Nuclear facilities</h3><p>Radiation-shielded telemetry behind thick concrete and metal, where wiring and delicate electronics are prone to failure.</p></div>
+      <div><img src="assets/img/proposal/image21.png" alt="Industrial plant"><h3>Industrial plants</h3><p>Connectivity for autonomous robots and sensors across cluttered manufacturing geometries.</p></div>
+    </div>
+    <div class="takeaway">In all three, links are blocked by structure, so coverage depends on reaching non-line-of-sight (NLOS) users.</div>
+  </div>
+  <aside class="notes">
+    <p>Three settings motivate this work: data centers, where metal racks block signals; nuclear facilities, where telemetry must work behind shielding; and industrial plants, with robots in cluttered geometry.</p>
+    <p>In all three, structure blocks the direct path, so coverage depends on reaching non-line-of-sight users. The scenes later in the talk are generic indoor geometries with this blockage.</p>
+  </aside>
+</section>
+
+<!-- ============================== BLOCKED ============================== -->
+<section data-id="blocked" data-min="0.5">
+  <h2 class="title">Indoor mmWave links are blocked by structure</h2>
+  <div class="body">
+    <div class="cols" style="--cols:52% 1fr;align-items:center">
+      <div class="col">
+        <ul>
+          <li>At mmWave, <span class="alert">NLOS</span> links suffer severe path loss and blockage</li>
+          <li>Conventional compensation: denser infrastructure, higher transmit power, more complex signal processing</li>
+          <li>Each adds energy consumption and deployment cost</li>
+          <li><b>Smart radio environments</b>: make parts of the propagation environment itself controllable</li>
+        </ul>
+      </div>
+      <div class="col" style="text-align:center">
+        <svg width="500" height="420" viewBox="0 0 500 420" font-family="Fira Sans, sans-serif">
+          <rect x="20" y="40" width="440" height="22" fill="#E3E0DB"/>
+          <rect x="20" y="150" width="310" height="22" fill="#E3E0DB"/>
+          <rect x="438" y="40" width="22" height="370" fill="#E3E0DB"/>
+          <rect x="308" y="150" width="22" height="260" fill="#E3E0DB"/>
+          <rect x="330" y="270" width="108" height="140" fill="#F8EFE6"/>
+          <text x="384" y="300" font-size="18" fill="#B5651D" text-anchor="middle">dead zone</text>
+          <line x1="70" y1="106" x2="300" y2="236" stroke="#B5651D" stroke-width="2.5" stroke-dasharray="8 6"/>
+          <text x="300" y="244" font-size="30" fill="#B5651D" text-anchor="middle" font-weight="700">&#215;</text>
+          <line x1="398" y1="64" x2="436" y2="102" stroke="#500000" stroke-width="7" stroke-linecap="round"/>
+          <text x="370" y="30" font-size="18" fill="#500000" text-anchor="middle">reflector</text>
+          <line x1="70" y1="106" x2="408" y2="80" stroke="#2E7D32" stroke-width="2.6"/>
+          <path d="M408 80 l-12 -4.5 l1.5 9z" fill="#2E7D32"/>
+          <line x1="416" y1="84" x2="388" y2="358" stroke="#2E7D32" stroke-width="2.6"/>
+          <path d="M388 360 l-5 -12 l9.5 1z" fill="#2E7D32"/>
+          <circle cx="70" cy="106" r="9" fill="#500000"/><text x="70" y="88" font-size="18" text-anchor="middle">AP</text>
+          <rect x="379" y="362" width="16" height="16" fill="#2E7D32"/><text x="387" y="400" font-size="18" text-anchor="middle">UE</text>
+        </svg>
+        <div class="foot gray">The corner blocks the direct path; a reflector creates an NLOS path into the dead zone</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The core challenge in one picture: in an L-shaped corridor the corner blocks the direct path, and the user around the corner sits in a dead zone.</p>
+    <p>The usual answer is more access points, more power, or more processing, each adding cost. The first remedy returns in placement. The alternative: a controllable surface at the corner creates a reflected path into the dead zone.</p>
+  </aside>
+</section>
+
+<!-- ============================== ANIMATION A1: CSI bottleneck (new) ============================== -->
+<section data-id="anim-csi" data-min="0.75">
+  <h2 class="title">The CSI bottleneck: pilots grow with elements &times; users</h2>
+  <div class="body">
+    <div class="anim" style="height:400px"><canvas data-anim="csi"></canvas><div class="illus">Illustrative</div></div>
+    <div class="row">
+      <div><b>Electronic RIS:</b> the cascaded channel of every element to every user must be estimated; pilot time grows with $N \times K$ and eats the coherence window.</div>
+      <div class="good fragment" data-anim-step="1"><b>Mechanical reflector array:</b> the controller needs only the $K$ user positions; its input does not grow with the number of tiles $N$.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Why avoid channel estimation? On the left is an electronic RIS with N elements serving K users. To configure it, the controller needs the cascaded channel through every element to every user, so pilot time grows with N times K.</p>
+    <p>Watch the bar: the channel stays coherent only for a fixed window. As the surface grows, pilots fill more of it and little time is left for data.</p>
+    <p>On the right, a mechanical reflector array is steered from user positions. Its control input stays small, independent of the number of tiles. This is schematic, not a measurement.</p>
+  </aside>
+</section>
+
+<!-- ============================== RIS vs MRA ============================== -->
+<section data-id="ris-vs-mra" data-min="0.75">
+  <h2 class="title">Electronic RIS vs. metallic reflector arrays</h2>
+  <div class="body">
+    <table class="bt">
+      <thead><tr><th style="width:17%"></th><th style="width:39%">Electronic RIS</th><th>Metallic reflector array (this work)</th></tr></thead>
+      <tbody>
+        <tr><td><b>Steering</b></td><td>PIN or varactor phase shifters per element</td><td>Servo-rotated metallic tiles, specular reflection</td></tr>
+        <tr class="alt"><td><b>Band</b></td><td>Unit cells designed for one band</td><td>Tiles large vs. wavelength: same geometry across bands</td></tr>
+        <tr><td><b>Control input</b></td><td>Cascaded CSI per element; pilots grow with elements &times; users</td><td>Run time: user positions only; training: received power as the reward; <span class="alert">no pilot-based CSI estimation</span></td></tr>
+        <tr class="alt"><td><b>Power</b></td><td>Bias voltage to hold the state</td><td>None once positioned; only while actuators move</td></tr>
+        <tr><td><b>Limitation</b></td><td>Hardware cost and CSI overhead at scale</td><td>Slower reconfiguration: quasi-static indoor scenes</td></tr>
+      </tbody>
+    </table>
+    <div class="takeaway">The burden shifts from channel estimation to <b>localization</b> (run time) and the <b>site model</b> (planning).</div>
+  </div>
+  <aside class="notes">
+    <p>The standard controllable surface, the electronic RIS, faces three barriers: unit cells designed for one band; the cascaded channel through every element, which we just saw; and bias power to hold its state.</p>
+    <p>Our alternative is a metallic array of servo-rotated tiles, large compared with the wavelength, so they act as mirrors across bands.</p>
+    <p>At run time the controller uses only user positions; received power serves as the training reward. The tiles draw no power once positioned. The trade-off is slower reconfiguration, which suits quasi-static indoor scenes.</p>
+  </aside>
+</section>
+
+<!-- ============================== GAPS ============================== -->
+<section data-id="gaps" data-min="0.5">
+  <h2 class="title">Three gaps this work addresses</h2>
+  <div class="body">
+    <table class="bt">
+      <thead><tr><th style="width:44%">What prior work does</th><th>What is missing</th><th style="width:11%" class="center">Part</th></tr></thead>
+      <tbody>
+        <tr><td>Learned control of reflecting surfaces configures electronic RIS from full, partial or statistical CSI; metallic reflectors are static or one steered plate</td><td><b>Learned, localization-driven control</b> of a segmented, mechanically reconfigurable array</td><td class="part">HOW</td></tr>
+        <tr class="alt"><td>User-association and hierarchical RIS controllers assign whole surfaces; the flat controller fixes the mapping</td><td><b>Which segment serves which user</b>, as a decision of its own</td><td class="part">HOW</td></tr>
+        <tr><td>AP and reflector sites are chosen from discrete candidates or for fixed transmitters, with simple path-loss models</td><td><b>Joint, continuous AP and reflector placement</b> with site-specific propagation, judged on lower-tail coverage</td><td class="part">WHERE</td></tr>
+      </tbody>
+    </table>
+    <div class="takeaway">First, <b>WHAT</b> geometry alone achieves; then the three gaps, in order.</div>
+  </div>
+  <aside class="notes">
+    <p>Three gaps, one per technical part. First, learned control targets electronic RIS configured from channel information; learned, localization-driven control of a segmented mechanical array is open.</p>
+    <p>Second, which segment serves which user is a decision of its own. Third, access points and reflectors are rarely placed jointly with site-specific propagation.</p>
+  </aside>
+</section>
+
+<!-- ============================== GOAL MAP ============================== -->
+<section data-id="goal-map" data-min="1">
+  <h2 class="title">Dissertation goal and research questions</h2>
+  <div class="body">
+    <img src="assets/img/crops/intro_goal_map.png" alt="Overview map: WHY thesis; WHERE to install; HOW to steer; WHAT foundations; WHICH method">
+  </div>
+  <aside class="notes">
+    <p>The thesis, at the top: spatial information, meaning AP and tile positions, user-position estimates and a site model, is enough to configure, control and place these reflectors without pilot-based channel estimation. That is what spatial intelligence means here; the cost moves to localization and site-model accuracy.</p>
+    <p>The numbers give the talk order: what geometry achieves, how to operate the array, then where to install it, because the controllers take the mounting sites as given. The map itself is in system order.</p>
+    <p>The two stages share the focal-point interface. They were studied separately, and coupling them, the dashed arrow, is future work.</p>
+  </aside>
+</section>
+
+<section class="divider" data-num="3" data-title="Foundations" data-part="WHAT" data-question="What hardware and abstraction, and what does geometry alone achieve?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Guiding wireless signals with arrays of metallic linear Fresnel reflectors: A low-cost, frequency-versatile, and practical approach,&rdquo; in <i>Proc. IEEE 100th Veh. Technol. Conf. (VTC2024-Fall)</i>, Washington, DC, USA, 2024, pp.&nbsp;1&ndash;7.</p></div><aside class="notes"><p>Section divider: what hardware and abstraction, and what does geometry alone achieve?</p></aside></section>
+
+<!-- ============================== HARDWARE ============================== -->
+<section data-id="hardware" data-min="0.75">
+  <h2 class="title">Hardware: metallic linear Fresnel reflector (LFR) arrays</h2>
+  <div class="body">
+    <div class="cols" style="--cols:46% 1fr">
+      <div class="col">
+        <ul>
+          <li>$N_r \times N_c$ metallic <b>tiles</b>, each rotated in elevation $\theta$ and azimuth $\phi$</li>
+          <li>Redirects the incident wavefront by <span class="alert">specular reflection</span>; no RF control circuitry</li>
+          <li>Geometric study: $10 \times 7$ square tiles of 20 cm &times; 20 cm (1.4 m &times; 2.0 m), unconstrained rotation</li>
+          <li>Learning and placement studies: $7 \times 9 = 63$ hexagonal tiles; servo range $\pm 30^\circ$</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="figs">
+          <figure><img src="assets/img/ch2/p1-freshno-01.png" alt="Top view of tiles reflecting AP to UE"><figcaption>Top view: each tile reflects AP &rarr; UE</figcaption></figure>
+          <figure><img src="assets/img/ch5/reflector-design-zoom-in-01.png" alt="Hexagonal tile array"><figcaption>Hexagonal tiles, each steered in $\theta$ and $\phi$</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The hardware throughout is a metallic linear Fresnel reflector array: a grid of metallic tiles, each rotated in elevation and azimuth.</p>
+    <p>It redirects the wave by ordinary specular reflection, so it needs no RF circuitry. In the top view, each tile is angled so its reflection from the access point lands on the user.</p>
+    <p>The geometric study uses ten by seven square tiles, a 1.4 by 2.0 meter device, with unconstrained rotation. The learning and placement studies use 63 hexagonal tiles, with servos limited to plus or minus 30 degrees.</p>
+  </aside>
+</section>
+
+<!-- ============================== ANIMATION A2a: bisector rule ============================== -->
+<section data-id="anim-bisector" data-min="1">
+  <h2 class="title">Bisector rule: each tile normal splits AP and user directions</h2>
+  <div class="body">
+    <div class="cols" style="--cols:64% 1fr;align-items:center">
+      <div class="col"><div class="anim" style="height:520px"><canvas data-anim="bisector"></canvas><div class="illus">Illustrative</div></div></div>
+      <div class="col side">
+        <p>Tile center A, AP at B, user at C. Law of reflection:</p>
+        $$\vec n=\tfrac12\Big(\tfrac{\overrightarrow{AB}}{|\overrightarrow{AB}|}+\tfrac{\overrightarrow{AC}}{|\overrightarrow{AC}|}\Big)$$
+        <p class="alert"><b>Only positions enter; no channel estimate.</b></p>
+        <div class="fragment" data-anim-step="1"><b>Normals:</b> angle in = angle out at every tile, so all reflected rays meet at the user.</div>
+        <div class="fragment f2" data-anim-step="2"><b>Servo limits:</b> a tile that needs more than $\pm30^\circ$ is clipped (red); its ray misses the user.</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>How is each tile oriented? This is a top view: the access point on the left, a row of tiles on the wall, and a user walking along the hallway.</p>
+    <p>Call the tile center A, the access point B and the user C. By the law of reflection the tile normal must bisect the unit vectors toward the access point and toward the user. As the user moves, every tile turns, and all reflected rays still converge on the user.</p>
+    <p>First click: the dashed normals, with equal angles on each side. Only positions enter this rule; there is no channel estimate.</p>
+    <p>Second click: real servos have a limited range. When the user walks back toward the access point side, some tiles would need more than 30 degrees. They clip, turn red, and their rays miss.</p>
+  </aside>
+</section>
+
+<!-- ============================== ANIMATION A2b: focal-point abstraction ============================== -->
+<section data-id="anim-focal" data-min="0.75">
+  <h2 class="title">Focal-point abstraction: a segment is steered by 3 coordinates</h2>
+  <div class="body">
+    <div class="anim" style="height:430px"><canvas data-anim="focal"></canvas><div class="illus">Illustrative</div></div>
+    <div class="row">
+      <div>All tiles of segment $l$ aim at one virtual <b>focal point</b> $f_l \in \mathbb{R}^3$ instead of the user; angles are clipped to servo limits.</div>
+      <div class="fragment" data-anim-step="1">$2N_rN_c$ tile angles become $3L$ focal coordinates. Learned control and placement set the focal points.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The rest of the dissertation builds on one abstraction. Instead of the user position, all tiles of a segment aim at a shared virtual focal point.</p>
+    <p>Here the array has three segments, each with its own focal point. When a focal point moves, all tiles of its segment re-orient together through the bisector rule; the front view shows their tilt.</p>
+    <p>Click: a segment of n tiles is controlled by three coordinates instead of 2n angles. For 63 tiles and three segments that is 126 angles versus nine coordinates. Learned control learns these focal points; placement optimizes them.</p>
+  </aside>
+</section>
+
+<!-- ============================== TESTBED ============================== -->
+<section data-id="testbed" data-min="0.5">
+  <h2 class="title">Ray-traced testbed: Blender scenes + NVIDIA Sionna RT</h2>
+  <div class="body">
+    <div class="cols" style="--cols:34% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch2/simulation-environment.png" alt="Simulation pipeline"><figcaption>Scene modeling &rarr; ray tracing &rarr; path gain</figcaption></figure></div>
+      <div class="col">
+        <ul>
+          <li><b>Blender</b> builds walls, AP, UEs, and tiles; a geometric solver sets the tile angles from the focal points</li>
+          <li>XML scene with ITU-R P.2040 materials: $\epsilon_r = a_{\mathrm m} f_c^{\,b_{\mathrm m}}$, $\sigma_c = c_{\mathrm m} f_c^{\,d_{\mathrm m}}$</li>
+          <li><b>Sionna RT</b>: specular reflection, diffraction, diffuse scattering; received power returned as the training reward or the placement objective</li>
+          <li>28 GHz (geometry), 60 GHz (learned control), 5.18 GHz (placement): each study has its own scene and baselines, so dB gains are <b>not compared across parts</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="takeaway">All results are ray-traced simulation results; no hardware deployment is reported.</div>
+  </div>
+  <aside class="notes">
+    <p>One automated pipeline: Blender builds the scene and sets the tile angles from the focal points; Sionna RT traces it with ITU-R P.2040 materials.</p>
+    <p>The bands are 28 GHz for geometry, 60 for learned control and 5.18 for placement. Each study has its own scene and baselines, so I do not compare decibel gains across parts. Every result is ray-traced simulation.</p>
+  </aside>
+</section>
+
+<!-- ============================== GEO SETUP ============================== -->
+<section data-id="geo-setup" data-min="0.5">
+  <h2 class="title">Geometric beam-focusing in NLOS hallways at 28 GHz</h2>
+  <div class="body">
+    <div class="cols" style="--cols:50% 1fr;align-items:center">
+      <div class="col">
+        <ul>
+          <li>Downlink to one UE; AP at the same position in both layouts</li>
+          <li>$10\times 7$ square tiles; concrete walls, ceiling, and floor; positions known (e.g., UWB); unconstrained rotation</li>
+          <li>Compared: no reflector; <b>simple</b> reflector (all tiles $45^\circ$ about $z$); <b>beam-focusing</b> (bisector rule per tile)</li>
+          <li>T-shaped: two arrays, bisector rule applied twice in sequence</li>
+          <li>Nine NLOS UE locations; coverage maps 1.5 m above the floor</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="lay">
+          <figure><img src="assets/img/ch3/p1-numbered_L_hallway-01.png" alt="L-shaped hallway with nine UE locations"><figcaption>L-shaped</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-numbered_T_hallway-01.png" alt="T-shaped hallway with nine UE locations"><figcaption>T-shaped</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Is the geometric rule alone worth pursuing? A 28 GHz downlink to one user in two concrete hallways, with the ten-by-seven array, known positions and unconstrained rotation.</p>
+    <p>Three cases: no reflector; a simple reflector, every tile at 45 degrees; and beam-focusing with the bisector rule. The T-shaped hallway uses two arrays. Nine non-line-of-sight locations, the green spheres.</p>
+  </aside>
+</section>
+
+<!-- ============================== SPLIT: L-shaped path gain ============================== -->
+<section class="pgain" data-id="L-gain" data-min="0.75">
+  <h2 class="title">L-shaped hallway: beam-focusing +53.0 dB path gain at the UE</h2>
+  <div class="body">
+    <div class="cols" style="--cols:47% 1fr;align-items:center">
+      <div class="col">
+        <div class="maps">
+          <figure><img src="assets/img/ch3/p1-no_reflector_L_hallway_00009-01.png" alt="No reflector"><figcaption>None</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-simple_reflector_L_hallway_00009-01.png" alt="Simple reflector"><figcaption>Simple</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-beamfocusing_L_hallway_00009-color_scale-01.png" alt="Beam-focusing"><figcaption>Beam-focusing (dB)</figcaption></figure>
+        </div>
+      </div>
+      <div class="col">
+        <table class="bt">
+          <thead><tr><th>Path gain at the UE</th><th class="num">L-shaped</th></tr></thead>
+          <tbody><tr><td>No reflector</td><td class="num">&minus;125.61 dB</td></tr><tr><td>Simple reflector</td><td class="num">&minus;99.54 dB</td></tr><tr class="hl"><td>Beam-focusing</td><td class="num">&minus;72.57 dB</td></tr></tbody>
+        </table>
+        <div class="calls"><div><div class="midnum">+53.04 dB</div><span class="numcap">vs. no reflector</span></div><div><div class="midnum">+26.97 dB</div><span class="numcap">vs. simple reflector</span></div></div>
+        <ul>
+          <li>Coverage maps 1.5 m above the floor; the corner blocks the direct path</li>
+          <li>The bright band: all tile paths converge at the UE</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The L-shaped hallway first. These are path-gain maps 1.5 meters above the floor: no reflector, simple reflector, beam-focusing.</p>
+    <p>The corner blocks the direct path, and the gain at the user is minus 125.61 dB. The simple reflector adds about 26 dB.</p>
+    <p>Beam-focusing reaches minus 72.57 dB: 53.0 dB above no reflector and 27.0 dB above the simple reflector. The bright band on the right is the tile paths converging at the user, the same picture as the animation, now in the ray tracer.</p>
+  </aside>
+</section>
+
+<!-- ============================== SPLIT: L-shaped RSSI ============================== -->
+<section class="rssi" data-id="L-rssi" data-min="0.5">
+  <h2 class="title">L-shaped hallway: RSSI at nine UE locations</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch3/p1-L_sig_str1.png" alt="RSSI at nine locations, L-shaped hallway"><figcaption>10 W (40 dBm) transmitter; free space as reference</figcaption></figure></div>
+      <div class="col">
+        <ul>
+          <li>Beam-focusing is <b>highest at all nine locations</b>, above free space</li>
+          <li>Plausible reason: the 1.4 m &times; 2.0 m aperture redirects all tile paths toward one receiver</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Received signal strength at the nine locations, with a 10 watt transmitter and free space as reference.</p>
+    <p>In the L-shaped hallway, beam-focusing, the purple curve, is highest at all nine locations, even above free space. A plausible reason is that the 1.4 by 2.0 meter aperture redirects all tile paths toward one receiver.</p>
+  </aside>
+</section>
+
+<!-- ============================== SPLIT: T-shaped path gain ============================== -->
+<section class="pgain" data-id="T-gain" data-min="0.75">
+  <h2 class="title">T-shaped hallway: beam-focusing +87.5 dB path gain at the UE</h2>
+  <div class="body">
+    <div class="cols" style="--cols:64% 1fr;align-items:center;column-gap:24px">
+      <div class="col">
+        <div class="maps">
+          <figure><img src="assets/img/ch3/p1-no_reflector_T_hallway_00159-01.png" alt="No reflector" style="height:282px"><figcaption>None</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-simple_reflector_T_hallway_00159-01.png" alt="Simple reflectors" style="height:282px"><figcaption>Simple</figcaption></figure>
+          <figure><img src="assets/img/ch3/p1-beamfocusing_T_hallway_00159_color_map-01.png" alt="Beam-focusing" style="height:282px"><figcaption>Beam-focusing (dB)</figcaption></figure>
+        </div>
+      </div>
+      <div class="col">
+        <table class="bt">
+          <thead><tr><th>Path gain at the UE</th><th class="num">T-shaped</th></tr></thead>
+          <tbody><tr><td>No reflector</td><td class="num">&minus;156.35 dB</td></tr><tr><td>Simple reflectors</td><td class="num">&minus;109.20 dB</td></tr><tr class="hl"><td>Beam-focusing</td><td class="num">&minus;68.88 dB</td></tr></tbody>
+        </table>
+        <div class="calls"><div><div class="midnum">+87.47 dB</div><span class="numcap">vs. no reflector</span></div><div><div class="midnum">+40.32 dB</div><span class="numcap">vs. simple reflectors</span></div></div>
+        <ul>
+          <li>Two arrays: the bisector rule applied twice in sequence</li>
+          <li>The second reflection reaches the side branch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The T-shaped hallway needs two reflections in sequence, so there are two arrays and the bisector rule is applied twice.</p>
+    <p>Without reflectors the gain at the user is minus 156.35 dB. Simple reflectors reach minus 109.20.</p>
+    <p>Beam-focusing with both arrays reaches minus 68.88 dB, an 87.5 dB improvement over no reflector and 40.3 dB above the simple reflectors. The focused band turns twice and lands in the side branch.</p>
+  </aside>
+</section>
+
+<!-- ============================== SPLIT: T-shaped RSSI ============================== -->
+<section class="rssi" data-id="T-rssi" data-min="0.5">
+  <h2 class="title">T-shaped hallway: RSSI at nine UE locations</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch3/p1-T_sig_str1.png" alt="RSSI at nine locations, T-shaped hallway"><figcaption>10 W (40 dBm) transmitter; free space as reference</figcaption></figure></div>
+      <div class="col">
+        <ul>
+          <li>Best reflector case at all nine locations, but <b>below free space at locations 2 and 5</b></li>
+          <li>Likely explanation, not verified in the original study: the rule aligns path directions but not lengths, so phases are uncontrolled</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>In the T-shaped hallway, beam-focusing is again the best reflector case at every location, but it falls below free space at locations 2 and 5.</p>
+    <p>A likely explanation, not verified in the original study, is that the rule aligns path directions but not path lengths, so the phases are uncontrolled.</p>
+  </aside>
+</section>
+
+<section data-id="geo-videos" data-min="0.5">
+  <h2 class="title">Beam-focusing follows the UE: L- and T-shaped hallways</h2>
+  <div class="body">
+    <div class="chaptag">28 GHz ray-traced path-gain maps; the bisector rule is re-applied at every UE position (green)</div>
+    <div class="cols" style="--cols:600px 1fr;align-items:center">
+      <div class="vids">
+      <figure><div class="vwrap" style="width:151px"><video src="media/media1.mp4" data-autoplay muted loop playsinline style="left:-296px"></video></div><figcaption>L-shaped hallway</figcaption></figure>
+      <figure><div class="vwrap" style="width:355px"><video src="media/media2.mp4" data-autoplay muted loop playsinline style="left:-296px"></video></div><figcaption>T-shaped hallway (two arrays)</figcaption></figure>
+    </div>
+      <div class="col lr-panel">
+        <ul class="small">
+          <li>Tile orientations recomputed from the UE position alone: the <b>focused band follows the UE</b></li>
+          <li>L-shaped: one reflection around the corner; T-shaped: two arrays in sequence into the side branch</li>
+          <li>Each frame is a static solution for <b>one user at a known position</b>, with unconstrained rotation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Here is the geometric rule in motion. At every user position along the hallway, the bisector rule recomputes all tile orientations, and the ray-traced path-gain map shows the focused band following the user: around one corner in the L-shaped hallway, and through two reflections into the side branch in the T-shaped hallway. Each frame is still a static solution for one user at a known position.</p></aside>
+</section>
+
+<!-- ============================== LIMITS (transition WHAT -> HOW) ============================== -->
+<section data-id="geo-limits" data-min="0.75">
+  <h2 class="title">Limits of the geometric rule motivate learned control</h2>
+  <div class="body">
+    <div class="cols" style="--cols:1fr 1fr 1fr">
+      <div class="col"><div class="block"><div class="bt">1. Servo limits</div><div class="bb">The rule assumes unconstrained rotation; it gives no configuration when the required angles are out of range.</div></div></div>
+      <div class="col"><div class="block"><div class="bt">2. Phase</div><div class="bb">It aligns path directions but not lengths; relative phases are uncontrolled. <i>Not addressed later: it remains a limitation.</i></div></div></div>
+      <div class="col"><div class="block"><div class="bt">3. One static user</div><div class="bb">It serves one UE at a known position, not several moving users sharing an array.</div></div></div>
+    </div>
+    <div class="transition"><div class="ans"><b>Answered (WHAT):</b> the tile array and the bisector rule steer signals around corners: +53.0 / +87.5 dB for one static user.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> how to act within servo limits, optimize received power rather than geometric alignment, and serve several moving users? &rarr; learned focal points.</div></div>
+  </div>
+  <aside class="notes">
+    <p>The study also exposes three limits. First, servo limits: the rule assumes unconstrained rotation, as the red tiles in the animation showed.</p>
+    <p>Second, phase: it aligns directions but not path lengths, a likely cause of the shortfall at T-shaped locations 2 and 5. No later part controls phase; it stays a limitation.</p>
+    <p>Third, it serves one user at a known position. The next part keeps the bisector rule but learns the focal points, within servo limits, trained on received power, for several moving users. Its baselines are static reflectors and learned variants, not a position-tracking geometric rule.</p>
+  </aside>
+</section>
