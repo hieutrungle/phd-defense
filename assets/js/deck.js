@@ -164,11 +164,33 @@
     const ovSync=()=>{ const on=Reveal.isOverview(); ovb.classList.toggle('on',on); ovb.title=on?'Close slide overview (Esc)':'Slide overview (O)'; ovb.setAttribute('aria-label',ovb.title); };
     ovb.onclick=e=>{ e.stopPropagation(); toggleDrawer(false); Reveal.toggleOverview(); };
     Reveal.on('overviewshown',ovSync); Reveal.on('overviewhidden',ovSync); ovSync();
-    document.body.append(prev,next,tab,ovb,fsb,navDrawer);
+    // overview scrubber: a horizontal slider (one step per slide, ticks at each part) + wheel/trackpad scrolling, shown only in the overview
+    const all=[...document.querySelectorAll('.reveal .slides > section')], N=all.length;
+    const ovbar=document.createElement('div'); ovbar.className='ovbar';
+    const ticks=pickItems.filter(it=>it.div).map(it=>{ const d=all[it.i], lab=d.dataset.num||(/backup/i.test(it.title)?'B':''); return '<button class="ovtick" data-i="'+it.i+'" style="left:'+(100*it.i/(N-1)).toFixed(3)+'%" title="'+it.title.replace(/"/g,'&quot;')+'"><i></i><span>'+lab+'</span></button>'; }).join('');
+    ovbar.innerHTML='<div class="ovlab"></div><div class="ovtrack"><input type="range" min="0" max="'+(N-1)+'" step="1" value="0" aria-label="Scroll slides">'+ticks+'</div><div class="ovhint">drag · click a part number · scroll or swipe · click a slide to open it</div>';
+    const rng=ovbar.querySelector('input'), lab=ovbar.querySelector('.ovlab');
+    const labelFor=h=>{ const it=pickItems.find(x=>x.i===h); if(!it) return ''; return it.div ? ('Part: '+it.title) : (it.num+' · '+it.title.replace(/^Backup: /,'Backup: ')); };
+    const ovPaint=()=>{ const h=Reveal.getIndices().h; rng.value=h; rng.style.setProperty('--p',(100*h/(N-1)).toFixed(2)+'%'); lab.textContent=labelFor(h); };
+    let raf=0; rng.addEventListener('input',()=>{ cancelAnimationFrame(raf); raf=requestAnimationFrame(()=>{ Reveal.slide(+rng.value); ovPaint(); }); });
+    rng.addEventListener('change',()=>rng.blur()); rng.addEventListener('pointerup',()=>setTimeout(()=>rng.blur(),0));
+    ovbar.querySelectorAll('.ovtick').forEach(b=>b.onclick=e=>{ e.stopPropagation(); Reveal.slide(+b.dataset.i); ovPaint(); b.blur(); });
+    ['mousedown','click','touchstart'].forEach(ev=>ovbar.addEventListener(ev,e=>e.stopPropagation()));
+    let wAcc=0, wLast=0;
+    window.addEventListener('wheel',e=>{ if(!Reveal.isOverview()||navDrawer.classList.contains('open')) return; e.preventDefault();
+      wAcc+=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY; const now=performance.now();
+      if(Math.abs(wAcc)>=40 && now-wLast>45){ const h=Reveal.getIndices().h, d=wAcc>0?1:-1; wAcc=0; wLast=now; Reveal.slide(Math.min(N-1,Math.max(0,h+d))); ovPaint(); } },{passive:false});
+    window.addEventListener('unhandledrejection',e=>{ if(e.reason&&e.reason.name==='AbortError') e.preventDefault(); });   // video play() cut short by fast scrolling: harmless
+    Reveal.on('overviewshown',()=>{ ovPaint(); document.documentElement.classList.add('ovmode'); });
+    Reveal.on('overviewhidden',()=>document.documentElement.classList.remove('ovmode'));
+    Reveal.on('slidechanged',()=>{ if(Reveal.isOverview()) ovPaint(); });
+    document.body.append(prev,next,tab,ovb,fsb,navDrawer,ovbar);
     const wake=()=>{ document.documentElement.classList.remove('navidle'); clearTimeout(idleTimer);
       idleTimer=setTimeout(()=>{ if(!navDrawer.classList.contains('open')) document.documentElement.classList.add('navidle'); },2500); };
     ['mousemove','mousedown','touchstart'].forEach(ev=>document.addEventListener(ev,wake,{passive:true})); wake();
-    const fit=()=>{ const s=Math.min(4,Math.max(0.6,Reveal.getScale()||1)), r=document.querySelector('.reveal .slides').getBoundingClientRect(), st=document.documentElement.style;
+    const fit=()=>{ const s=Math.min(4,Math.max(0.6,Reveal.getScale()||1)), sc=Reveal.getScale()||1, st=document.documentElement.style;
+      const r={left:(window.innerWidth-1280*sc)/2, top:(window.innerHeight-720*sc)/2};   // slide box (also valid while the overview transforms .slides)
+      st.setProperty('--ovtop',Math.round(r.top+566*s)+'px'); st.setProperty('--ovleft',Math.round(r.left+150*s)+'px');
       st.setProperty('--ns',s.toFixed(3)); st.setProperty('--ntop',Math.max(4,Math.round(r.top+108*s))+'px');
       st.setProperty('--fx',Math.round(r.left)+'px'); st.setProperty('--fy',Math.round(r.top+668*s)+'px'); };   // footer follows the slide box
     fit(); Reveal.on('resize',fit); window.addEventListener('resize',()=>setTimeout(fit,60));

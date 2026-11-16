@@ -8,7 +8,7 @@ Open the presentation: **https://hieutrungle.github.io/phd-defense/**
 - **☰›** tab (left edge): contents bar with every part and slide, a search box, click to jump
 - **G**: go to any slide (type a number or words)
 - **F** or the ⛶ button (bottom right): full screen
-- **Esc** / **O** or the ▦ button (left of ⛶): slide overview with thumbnails of every slide; click one to jump
+- **Esc** / **O** or the ▦ button (left of ⛶): slide overview with thumbnails of every slide; click one to jump. In the overview, a slider below the thumbnails scrolls through all slides (drag it, click a part number 1–7/B, or use the mouse wheel / trackpad swipe)
 - Animations: hover to show play/pause and a step slider; **K** play/pause, **[** / **]** step
 
 Best viewed in Chrome or Edge. The site is fully static (reveal.js); no data is collected.
