@@ -50,17 +50,20 @@ section[data-id="threads"] .card h3{margin:0 0 10px 0;text-align:center;color:va
 section[data-id="threads"] .card .q{margin-top:12px}
 section[data-id="threads"] .card .q b{color:var(--maroon)}
 /* formula3 */
-section[data-id="formula3"] .cols{align-items:stretch}
-section[data-id="formula3"] .block,section[data-id="formula3"] .alertblock{margin:0;height:100%;box-sizing:border-box}
-section[data-id="formula3"] .bb{font-size:20px;line-height:1.32}
-section[data-id="formula3"] .bb ul{margin-left:.9em}
-section[data-id="formula3"] .bb li{margin:.42em 0}
-section[data-id="formula3"] .spons{display:flex;justify-content:space-around;align-items:center;margin-top:16px}
-section[data-id="formula3"] .spons img{height:96px}
-section[data-id="formula3"] .fname{font-weight:600;color:var(--maroon)}
-section[data-id="formula3"] .mra{display:grid;grid-template-columns:1fr 150px;gap:14px;align-items:center;margin-top:6px;border-top:1px solid var(--rule);padding-top:8px}
-section[data-id="formula3"] .mra img{width:150px}
 /* formula3-map */
+section[data-id="sponsors"] .cols{align-items:stretch}
+section[data-id="sponsors"] .block{margin:0;height:100%;box-sizing:border-box}
+section[data-id="sponsors"] .bb{font-size:22px;line-height:1.4}
+section[data-id="sponsors"] .sp{display:flex;align-items:center;gap:26px;padding:18px 6px}
+section[data-id="sponsors"] .sp img{height:130px;width:auto;flex:none}
+section[data-id="formula3"] .alertblock{margin:0}
+section[data-id="formula3"] .bb{font-size:21px;line-height:1.36}
+section[data-id="formula3"] .fname{font-weight:600;color:var(--maroon);font-size:23px;margin-bottom:6px}
+section[data-id="formula3"] .f3grid{display:grid;grid-template-columns:1fr 250px;gap:26px;align-items:center}
+section[data-id="formula3"] .f3grid img{width:250px}
+section[data-id="formula3"] .bb ul{margin-left:.9em}
+section[data-id="formula3"] .bb li{margin:.4em 0}
+section[data-id="formula3"] .mra{margin:.6em 0 0 0;border-top:1px solid var(--rule);padding-top:10px}
 section[data-id="formula3-map"] .map{display:grid;grid-template-columns:1fr 46px 1fr;row-gap:12px;align-items:stretch}
 section[data-id="formula3-map"] .hd{font-size:17px;font-weight:700;color:var(--midgray);letter-spacing:.3px;text-transform:uppercase;padding:0 4px}
 section[data-id="formula3-map"] .src,section[data-id="formula3-map"] .dst{border-radius:7px;padding:9px 14px;font-size:19px;line-height:1.3}
@@ -172,7 +175,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
       <div class="col">
         <ul class="main">
           <li><b>Ph.D. Candidate</b>, Electrical Engineering, Texas A&amp;M University</li>
-          <li><b>Advisor (Chair):</b> Dr. Sabit Ekin</li>
+          <li><b>Chair:</b> Dr. Sabit Ekin</li>
           <li><b>Co-Chair:</b> Dr. Jian Tao</li>
           <li><b>Research:</b> smart radio environments built on mechanically reconfigurable metallic reflectors, controlled by <span class="alert">spatial intelligence</span> instead of pilot-based channel estimation</li>
         </ul>
@@ -247,55 +250,23 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
 </section>
 
 <!-- ============================== FORMULA3 (new; folds in sponsored research) ============================== -->
-<section data-id="formula3" data-min="0.75">
-  <h2 class="title">Sponsored research and the FORMULA3 project</h2>
+<section data-id="sponsors" data-min="0.25">
+  <h2 class="title">Sponsored research</h2>
   <div class="body">
-    <div class="cols" style="--cols:36% 1fr">
-      <div class="col">
-        <div class="block"><div class="bt">Sponsored research</div><div class="bb">
-          <ul>
-            <li>U.S. Department of Energy, Office of Science, ASCR, <b>Early Career Research Program</b>, Award No. <b>DE-SC0023957</b></li>
-            <li>U.S. National Science Foundation, through FORMULA3 (right)</li>
-          </ul>
-          <div class="spons"><img src="assets/img/proposal/image13.png" alt="U.S. Department of Energy"><img src="assets/img/proposal/image12.png" alt="National Science Foundation"></div>
-        </div></div>
-      </div>
-      <div class="col">
-        <div class="alertblock"><div class="bt">FORMULA3 &middot; NSF&ndash;Research Council of Finland VINES</div><div class="bb">
-          <div class="fname">Framework for Optimal Resource Management Using Generalizable AI in FR3 Dynamic Programmable Wireless Environments</div>
-          <ul>
-            <li>VINES: Verticals-enabling Intelligent Network Systems; collaborative effort of about <b>$1.54M</b>, Oct 2026 &ndash; Sep 2029</li>
-            <li>Five universities: Tennessee Tech, Texas A&amp;M, NYU, Tampere University, Aalto University</li>
-          </ul>
-          <div class="mra">
-            <div>Programmable environments combine RIS with <b>metallic reflector arrays</b>: hexagonal metal-tile panels whose tiles turn so the panel focuses on the user. This element <b>builds on this dissertation's reflector-array work</b> (hardware and focal-point control).</div>
-            <img src="assets/img/ch5/reflector-design-zoom-in-01.png" alt="Hexagonal-tile reflector array">
-          </div>
-          <div class="tiny gray" style="margin-top:6px">NSF Award Nos. 2549087, 2549088 &middot; Research Council of Finland Decision Nos. 380594, 380600 &middot; <a href="https://vines-formula3.github.io/" target="_blank" rel="noopener">vines-formula3.github.io</a></div>
-        </div></div>
-      </div>
+    <div class="cols" style="--cols:1fr 1fr">
+      <div class="block"><div class="bt">U.S. Department of Energy</div><div class="bb">
+        <div class="sp"><img src="assets/img/proposal/image13.png" alt="U.S. Department of Energy seal">
+        <div>Office of Science, Advanced Scientific Computing Research (ASCR)<br><b>Early Career Research Program</b><br>Award No. <b>DE-SC0023957</b></div></div>
+      </div></div>
+      <div class="block"><div class="bt">U.S. National Science Foundation</div><div class="bb">
+        <div class="sp"><img src="assets/img/proposal/image12.png" alt="National Science Foundation logo">
+        <div>Grant No. <b>2549088</b></div></div>
+      </div></div>
     </div>
   </div>
 </section>
 
 <!-- ============================== FORMULA3 MAP (new) ============================== -->
-<section data-id="formula3-map" data-min="0.75">
-  <h2 class="title">How this dissertation feeds into FORMULA3</h2>
-  <div class="body">
-    <div class="map">
-      <div class="hd">This dissertation (completed)</div><div></div><div class="hd">FORMULA3 thrust it builds toward</div>
-      <div class="src"><b>Ray-traced reflector pipeline</b>scene model &rarr; tile angles from focal points &rarr; path gain, per band</div><div class="arr"></div>
-      <div class="dst"><b>T1 &middot; Channel characterization &amp; dataset generation</b>simulated data for scenes with metallic reflector arrays</div>
-      <div class="src"><b>CSI-free learned control + hierarchical allocation</b>focal points from user positions; which segment serves which user</div><div class="arr"></div>
-      <div class="dst"><b>T2 &middot; AI-native proactive resource management</b>reconfigure surfaces and reassign users</div>
-      <div class="src"><b>Robustness and localization findings</b>user count, array size, position noise; decimeter-level localization needed</div><div class="arr"></div>
-      <div class="dst"><b>T3 &middot; Generalization via ISAC &amp; continual learning</b>sensing supplies the positions that control relies on</div>
-      <div class="src"><b>Reflector hardware model + joint AP/reflector placement</b>one focal-point interface for planning and operation</div><div class="arr"></div>
-      <div class="dst"><b>T4 &middot; Validation &amp; evaluation</b>metallic reflector array surfaces in planned programmable environments</div>
-    </div>
-    <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
-  </div>
-</section>
 
 <section class="divider" data-num="2" data-title="Motivation and Objectives" data-part="WHY" data-question="Why steer reflectors from spatial information instead of channel estimates?"></section>
 
@@ -320,7 +291,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
   <h2 class="title">More bandwidth at mmWave, but less coverage</h2>
   <div class="body">
     <div class="cols" style="--cols:58% 1fr;align-items:center">
-      <figure><img src="assets/img/aboutme/freq_coverage.png" alt="Bandwidth versus coverage: higher carrier frequency gives more bandwidth and smaller coverage"><figcaption>Higher carrier frequency: more bandwidth, smaller coverage</figcaption></figure>
+      <figure><img src="assets/img/aboutme/freq_coverage_noline.png" alt="Bandwidth versus coverage: higher carrier frequency gives more bandwidth and smaller coverage"><figcaption>Higher carrier frequency: more bandwidth, smaller coverage</figcaption></figure>
       <div class="col">
         <ul>
           <li>The cost: <b>higher path loss</b>, weak penetration, frequent blockage</li>
@@ -1620,6 +1591,43 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
   </div>
 </section>
 
+<section data-id="formula3" data-min="0.75">
+  <h2 class="title">What comes next: the FORMULA3 project</h2>
+  <div class="body">
+    <div class="alertblock"><div class="bt">FORMULA3 &middot; NSF&ndash;Research Council of Finland VINES</div><div class="bb">
+      <div class="fname">Framework for Optimal Resource Management Using Generalizable AI in FR3 Dynamic Programmable Wireless Environments</div>
+      <div class="f3grid">
+        <div>
+          <ul>
+            <li>VINES: Verticals-enabling Intelligent Network Systems; collaborative effort of about <b>$1.54M</b>, Oct 2026 &ndash; Sep 2029</li>
+            <li>Five universities: Tennessee Tech, Texas A&amp;M, NYU, Tampere University, Aalto University</li>
+          </ul>
+          <p class="mra">Programmable environments combine RIS with <b>metallic reflector arrays</b>: hexagonal metal-tile panels whose tiles turn so the panel focuses on the user. This element <b>builds on this dissertation's reflector-array work</b> (hardware and focal-point control).</p>
+        </div>
+        <img src="assets/img/ch5/reflector-design-zoom-in-01.png" alt="Hexagonal-tile metallic reflector array">
+      </div>
+      <div class="tiny gray" style="margin-top:8px">NSF Award Nos. 2549087, 2549088 &middot; Research Council of Finland Decision Nos. 380594, 380600 &middot; <a href="https://vines-formula3.github.io/" target="_blank" rel="noopener">vines-formula3.github.io</a></div>
+    </div></div>
+  </div>
+</section>
+<section data-id="formula3-map" data-min="0.75">
+  <h2 class="title">How this dissertation feeds into FORMULA3</h2>
+  <div class="body">
+    <div class="map">
+      <div class="hd">This dissertation (completed)</div><div></div><div class="hd">FORMULA3 thrust it builds toward</div>
+      <div class="src"><b>Ray-traced reflector pipeline</b>scene model &rarr; tile angles from focal points &rarr; path gain, per band</div><div class="arr"></div>
+      <div class="dst"><b>T1 &middot; Channel characterization &amp; dataset generation</b>simulated data for scenes with metallic reflector arrays</div>
+      <div class="src"><b>CSI-free learned control + hierarchical allocation</b>focal points from user positions; which segment serves which user</div><div class="arr"></div>
+      <div class="dst"><b>T2 &middot; AI-native proactive resource management</b>reconfigure surfaces and reassign users</div>
+      <div class="src"><b>Robustness and localization findings</b>user count, array size, position noise; decimeter-level localization needed</div><div class="arr"></div>
+      <div class="dst"><b>T3 &middot; Generalization via ISAC &amp; continual learning</b>sensing supplies the positions that control relies on</div>
+      <div class="src"><b>Reflector hardware model + joint AP/reflector placement</b>one focal-point interface for planning and operation</div><div class="arr"></div>
+      <div class="dst"><b>T4 &middot; Validation &amp; evaluation</b>metallic reflector array surfaces in planned programmable environments</div>
+    </div>
+    <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
+  </div>
+</section>
+
 <!-- old 50 (+ one line for old 51, full list in backup) -->
 <section data-id="publications" data-min="0.5">
   <h2 class="title">Publications from this dissertation</h2>
@@ -1657,7 +1665,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
   <div class="body">
     <div class="cols" style="--cols:56% 1fr;align-items:center">
       <div class="col"><ul>
-        <li>Advisor <b>Dr. Sabit Ekin</b> and co-chair <b>Dr. Jian Tao</b></li>
+        <li>Chair <b>Dr. Sabit Ekin</b> and Co-Chair <b>Dr. Jian Tao</b></li>
         <li>Committee members <b>Dr. Erchin Serpedin</b> and <b>Dr. Arya Menon</b></li>
         <li>Collaborators Mostafa Ibrahim and Oguz Bedir</li>
         <li>Funding: U.S. DOE Office of Science, ASCR Early Career Research Program (DE-SC0023957); U.S. NSF (Grant 2549088)</li>
