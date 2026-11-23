@@ -1400,27 +1400,6 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
   </div>
 </section>
 
-<!-- old 48 -->
-<section data-id="limits-next" data-min="0.5">
-  <h2 class="title">Limitations and next steps</h2>
-  <div class="body">
-    <div class="cols stretch" style="--cols:1fr 1fr">
-      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Limitations</div><div class="bb"><ul class="small">
-        <li>Ray-traced simulation only; no fabricated-array validation</li>
-        <li>Received power, not rate; no interference model</li>
-        <li>Few scenes, user counts, seeds, and mounting walls</li>
-        <li>Path length and phase not controlled; no position-tracking geometric baseline for learned control</li>
-      </ul></div></div></div>
-      <div class="col"><div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Next steps</div><div class="bb"><ul class="small">
-        <li>Hardware-in-the-loop tests on servo arrays</li>
-        <li>Training under mobility and unseen localization error</li>
-        <li>SINR/rate-aware, multi-AP objectives</li>
-        <li>Run a placed layout with the learned controller (the dashed arrow)</li>
-      </ul></div></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- old 49 -->
 <section data-id="five-questions" data-min="1.25">
   <h2 class="title">Five questions, answered</h2>
@@ -1432,7 +1411,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <tr><td class="k">WHERE</td><td><b>Where to install is a decision of its own</b>: a reflector configured once and placed jointly with the APs met the priority-coverage target with one fewer AP (seed mean, small margins).</td></tr>
       <tr><td class="k">WHICH</td><td><b>Match the method to the problem.</b> Geometry for one static user or as a warm start; learned policies for run-time multi-user control; direct optimization (PSO + gradient refinement) for once-per-building placement.</td></tr>
     </tbody></table>
-    <div class="takeaway">Together, the answers cover both stages, where to install and how to operate, through one focal-point interface and without pilot-based CSI estimation (ray-traced simulation); closing the loop between them is the next step.</div>
+    <div class="takeaway">In ray-traced simulations, focal points let us use spatial information for both placement and steering, without estimating a channel for every tile.</div>
   </div>
 </section>
 
@@ -1561,6 +1540,26 @@ section[data-id="bk-p2040"] table.bt td,section[data-id="bk-p2040"] table.bt th{
 section[data-id="bk-bisector-3d"] img{height:390px}
 </style>
 
+
+<section class="backup" data-id="limits-next">
+  <h2 class="title">Limitations and next steps</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Limitations</div><div class="bb"><ul class="small">
+        <li>Ray-traced simulation only; no fabricated-array validation</li>
+        <li>Received power, not rate; no interference model</li>
+        <li>Few scenes, user counts, seeds, and mounting walls</li>
+        <li>Path length and phase not controlled; no position-tracking geometric baseline for learned control</li>
+      </ul></div></div></div>
+      <div class="col"><div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Next steps</div><div class="bb"><ul class="small">
+        <li>Hardware-in-the-loop tests on servo arrays</li>
+        <li>Training under mobility and unseen localization error</li>
+        <li>SINR/rate-aware, multi-AP objectives</li>
+        <li>Run a placed layout with the learned controller (the dashed arrow)</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+</section>
 
 <section class="backup" data-id="threads">
   <h2 class="title">Research and technical innovation</h2>

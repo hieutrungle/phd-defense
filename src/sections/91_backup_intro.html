@@ -13,6 +13,29 @@ section[data-id="bk-bisector-3d"] img{height:390px}
 </style>
 
 
+<section class="backup" data-id="limits-next">
+  <h2 class="title">Limitations and next steps</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Limitations</div><div class="bb"><ul class="small">
+        <li>Ray-traced simulation only; no fabricated-array validation</li>
+        <li>Received power, not rate; no interference model</li>
+        <li>Few scenes, user counts, seeds, and mounting walls</li>
+        <li>Path length and phase not controlled; no position-tracking geometric baseline for learned control</li>
+      </ul></div></div></div>
+      <div class="col"><div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Next steps</div><div class="bb"><ul class="small">
+        <li>Hardware-in-the-loop tests on servo arrays</li>
+        <li>Training under mobility and unseen localization error</li>
+        <li>SINR/rate-aware, multi-AP objectives</li>
+        <li>Run a placed layout with the learned controller (the dashed arrow)</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.</p>
+  </aside>
+</section>
+
 <section class="backup" data-id="threads">
   <h2 class="title">Research and technical innovation</h2>
   <div class="body">

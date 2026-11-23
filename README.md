@@ -62,4 +62,4 @@ pip install pillow && python tools/make_pdf.py      # defense_slides_html_backup
 4. → / Space next (fragments and animation steps first), ← back, **B** or **.** black screen; **G** jumps to any slide by number or words.
 5. The on-screen arrows and the contents tab appear when the mouse moves and fade out after 2.5 s, so they are invisible while you present with a clicker or the keyboard.
 
-Main talk: 62 timed slides, 42.00 min of speaker notes (Intro 12.75, Learning 15.50, Placement 13.75 min), followed by 25 backup slides.
+Main talk: 61 timed slides, 41.50 min of speaker notes (Intro 12.75, Learning 15.50, Placement 13.25 min), followed by 26 backup slides.

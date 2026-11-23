@@ -1598,30 +1598,6 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
   </aside>
 </section>
 
-<!-- old 48 -->
-<section data-id="limits-next" data-min="0.5">
-  <h2 class="title">Limitations and next steps</h2>
-  <div class="body">
-    <div class="cols stretch" style="--cols:1fr 1fr">
-      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Limitations</div><div class="bb"><ul class="small">
-        <li>Ray-traced simulation only; no fabricated-array validation</li>
-        <li>Received power, not rate; no interference model</li>
-        <li>Few scenes, user counts, seeds, and mounting walls</li>
-        <li>Path length and phase not controlled; no position-tracking geometric baseline for learned control</li>
-      </ul></div></div></div>
-      <div class="col"><div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Next steps</div><div class="bb"><ul class="small">
-        <li>Hardware-in-the-loop tests on servo arrays</li>
-        <li>Training under mobility and unseen localization error</li>
-        <li>SINR/rate-aware, multi-AP objectives</li>
-        <li>Run a placed layout with the learned controller (the dashed arrow)</li>
-      </ul></div></div></div>
-    </div>
-  </div>
-  <aside class="notes"><p class="timing"><b>[0.5 min | 37:15&ndash;37:45]</b></p>
-    <p>All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.</p>
-  </aside>
-</section>
-
 <!-- old 49 -->
 <section data-id="five-questions" data-min="1.25">
   <h2 class="title">Five questions, answered</h2>
@@ -1633,12 +1609,12 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <tr><td class="k">WHERE</td><td><b>Where to install is a decision of its own</b>: a reflector configured once and placed jointly with the APs met the priority-coverage target with one fewer AP (seed mean, small margins).</td></tr>
       <tr><td class="k">WHICH</td><td><b>Match the method to the problem.</b> Geometry for one static user or as a warm start; learned policies for run-time multi-user control; direct optimization (PSO + gradient refinement) for once-per-building placement.</td></tr>
     </tbody></table>
-    <div class="takeaway">Together, the answers cover both stages, where to install and how to operate, through one focal-point interface and without pilot-based CSI estimation (ray-traced simulation); closing the loop between them is the next step.</div>
+    <div class="takeaway">In ray-traced simulations, focal points let us use spatial information for both placement and steering, without estimating a channel for every tile.</div>
   </div>
-  <aside class="notes"><p class="timing"><b>[1.25 min | 37:45&ndash;39:00]</b></p>
+  <aside class="notes"><p class="timing"><b>[1.25 min | 37:15&ndash;38:30]</b></p>
     <p>I'll return to the user around the corner. If we know where that user is, the bisector rule tells us how to orient a tile. A focal point lets us use that same construction even when the best place to aim is a decision we need to learn.</p>
     <p>With several users, we can learn a local steering policy for each segment. When the segments see the room from different angles, it also pays to learn their assignments. Before installation, when the building is known and the mounting sites are still open, we can optimize the layout directly.</p>
-    <p>Across these studies, the reflector decisions use positions at run time or a site model at planning time. The price of avoiding per-element channel estimation is that localization and model accuracy now matter. The next test is to bring placement and control together in a physical room.</p>
+    <p>My main conclusion is that spatial information can guide both decisions. In our simulations, a building model tells us where to install the hardware, and user positions tell us where to steer it. Focal points connect those two tasks. With an accurate model and reliable positions, we can do both without estimating a separate channel for every tile.</p>
   </aside>
 </section>
 
@@ -1660,8 +1636,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <div class="tiny gray" style="margin-top:8px">U.S. National Science Foundation (NSF) Award Nos. 2549087, 2549088 &middot; Research Council of Finland Decision Nos. 380594, 380600 &middot; <a href="https://vines-formula3.github.io/" target="_blank" rel="noopener">vines-formula3.github.io</a></div>
     </div></div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.75 min | 39:00&ndash;39:45]</b></p>
-    <p>One opportunity to run that test is FORMULA3. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.</p>
+  <aside class="notes"><p class="timing"><b>[0.75 min | 38:30&ndash;39:15]</b></p>
+    <p>FORMULA3 is a funded project that gives us an opportunity to take this work from simulation into a physical room. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.</p>
     <p>The hexagonal panel on the right is where this dissertation connects to that effort. We already have a way to convert a desired focal point into tile orientations. A physical panel lets us test how well that geometry predicts the signal in a room.</p>
   </aside>
 </section>
@@ -1685,7 +1661,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       </div>
     </div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.5 min | 39:45&ndash;40:15]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.5 min | 39:15&ndash;39:45]</b></p>
     <p>In the front photo you can see the nineteen hexagonal metal tiles. In the back photo you can see the wiring for the servos that turn them. The controller is mounted on the stand, so the array can be moved around a room. This is the prototype that FORMULA3 will use to test ideas evaluated here in simulation.</p>
   </aside>
 </section>
@@ -1706,7 +1682,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
     <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.75 min | 40:15&ndash;41:00]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.75 min | 39:45&ndash;40:30]</b></p>
     <p>The four rows show what the project can build on. The ray-tracing pipeline can generate channel data for scenes with metallic reflectors. The learned controllers can use that data to study when to redirect a beam or reassign a user. The localization experiments tell us what accuracy to aim for when sensing supplies the user positions.</p>
     <p>The final row brings those pieces into a room. With a movable panel, we can test a planned mounting location and measure what happens when the controller actually turns the tiles.</p>
   </aside>
@@ -1725,7 +1701,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <li><span class="me">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; <span class="st">submitted to <em>IEEE Open J. Commun. Soc.</em>, 2026 (under review)</span>.</li>
     </ol>
       </div>
-  <aside class="notes"><p class="timing"><b>[0.5 min | 41:00&ndash;41:30]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.5 min | 40:30&ndash;41:00]</b></p>
     <p>The geometric focusing study appeared at the 2024 Vehicular Technology Conference. Our multi-agent control study appeared in IEEE Transactions on Machine Learning in Communications and Networking. The hierarchical work also has a conference paper accepted at GLOBECOM. The slide lists the related submissions under review, including the joint placement study.</p>
   </aside>
 </section>
@@ -1744,7 +1720,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <li>A. Nasari, <span class="me">H. Le</span>, R. Lawrence, Z. He, X. Yang, M. Krell, A. Tsyplikhin, <em>et al.</em>, &ldquo;Benchmarking the performance of accelerators on national cyberinfrastructure resources for artificial intelligence/machine learning workloads,&rdquo; in <em>Proc. PEARC '22</em>, 2022, pp.&nbsp;1&ndash;9.</li>
     </ol>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.25 min | 41:30&ndash;41:45]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.25 min | 41:00&ndash;41:15]</b></p>
     <p>During my Ph.D., I also contributed to eight papers beyond the reflector work. They include scientific data compression, machine-learning accelerators, and digital twins for first responders.</p>
   </aside>
 </section>
@@ -1766,7 +1742,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       </div>
     </div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.25 min | 41:45&ndash;42:00]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.25 min | 41:15&ndash;41:30]</b></p>
     <p>Thank you to my committee, especially Professors Ekin and Tao, and to my collaborators, Mostafa Ibrahim and Oguz Bedir. Thank you all for your time. I'd be happy to take your questions.</p>
   </aside>
 </section>
@@ -1787,6 +1763,29 @@ section[data-id="bk-p2040"] table.bt td,section[data-id="bk-p2040"] table.bt th{
 section[data-id="bk-bisector-3d"] img{height:390px}
 </style>
 
+
+<section class="backup" data-id="limits-next">
+  <h2 class="title">Limitations and next steps</h2>
+  <div class="body">
+    <div class="cols stretch" style="--cols:1fr 1fr">
+      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Limitations</div><div class="bb"><ul class="small">
+        <li>Ray-traced simulation only; no fabricated-array validation</li>
+        <li>Received power, not rate; no interference model</li>
+        <li>Few scenes, user counts, seeds, and mounting walls</li>
+        <li>Path length and phase not controlled; no position-tracking geometric baseline for learned control</li>
+      </ul></div></div></div>
+      <div class="col"><div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Next steps</div><div class="bb"><ul class="small">
+        <li>Hardware-in-the-loop tests on servo arrays</li>
+        <li>Training under mobility and unseen localization error</li>
+        <li>SINR/rate-aware, multi-AP objectives</li>
+        <li>Run a placed layout with the learned controller (the dashed arrow)</li>
+      </ul></div></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.</p>
+  </aside>
+</section>
 
 <section class="backup" data-id="threads">
   <h2 class="title">Research and technical innovation</h2>

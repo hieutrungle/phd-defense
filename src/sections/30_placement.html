@@ -424,30 +424,6 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
   </aside>
 </section>
 
-<!-- old 48 -->
-<section data-id="limits-next" data-min="0.5">
-  <h2 class="title">Limitations and next steps</h2>
-  <div class="body">
-    <div class="cols stretch" style="--cols:1fr 1fr">
-      <div class="col"><div class="block" style="height:calc(100% - 14px)"><div class="bt">Limitations</div><div class="bb"><ul class="small">
-        <li>Ray-traced simulation only; no fabricated-array validation</li>
-        <li>Received power, not rate; no interference model</li>
-        <li>Few scenes, user counts, seeds, and mounting walls</li>
-        <li>Path length and phase not controlled; no position-tracking geometric baseline for learned control</li>
-      </ul></div></div></div>
-      <div class="col"><div class="alertblock" style="height:calc(100% - 14px)"><div class="bt">Next steps</div><div class="bb"><ul class="small">
-        <li>Hardware-in-the-loop tests on servo arrays</li>
-        <li>Training under mobility and unseen localization error</li>
-        <li>SINR/rate-aware, multi-AP objectives</li>
-        <li>Run a placed layout with the learned controller (the dashed arrow)</li>
-      </ul></div></div></div>
-    </div>
-  </div>
-  <aside class="notes">
-    <p>All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.</p>
-  </aside>
-</section>
-
 <!-- old 49 -->
 <section data-id="five-questions" data-min="1.25">
   <h2 class="title">Five questions, answered</h2>
@@ -459,12 +435,12 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <tr><td class="k">WHERE</td><td><b>Where to install is a decision of its own</b>: a reflector configured once and placed jointly with the APs met the priority-coverage target with one fewer AP (seed mean, small margins).</td></tr>
       <tr><td class="k">WHICH</td><td><b>Match the method to the problem.</b> Geometry for one static user or as a warm start; learned policies for run-time multi-user control; direct optimization (PSO + gradient refinement) for once-per-building placement.</td></tr>
     </tbody></table>
-    <div class="takeaway">Together, the answers cover both stages, where to install and how to operate, through one focal-point interface and without pilot-based CSI estimation (ray-traced simulation); closing the loop between them is the next step.</div>
+    <div class="takeaway">In ray-traced simulations, focal points let us use spatial information for both placement and steering, without estimating a channel for every tile.</div>
   </div>
   <aside class="notes">
     <p>I'll return to the user around the corner. If we know where that user is, the bisector rule tells us how to orient a tile. A focal point lets us use that same construction even when the best place to aim is a decision we need to learn.</p>
     <p>With several users, we can learn a local steering policy for each segment. When the segments see the room from different angles, it also pays to learn their assignments. Before installation, when the building is known and the mounting sites are still open, we can optimize the layout directly.</p>
-    <p>Across these studies, the reflector decisions use positions at run time or a site model at planning time. The price of avoiding per-element channel estimation is that localization and model accuracy now matter. The next test is to bring placement and control together in a physical room.</p>
+    <p>My main conclusion is that spatial information can guide both decisions. In our simulations, a building model tells us where to install the hardware, and user positions tell us where to steer it. Focal points connect those two tasks. With an accurate model and reliable positions, we can do both without estimating a separate channel for every tile.</p>
   </aside>
 </section>
 
@@ -487,7 +463,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div></div>
   </div>
   <aside class="notes">
-    <p>One opportunity to run that test is FORMULA3. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.</p>
+    <p>FORMULA3 is a funded project that gives us an opportunity to take this work from simulation into a physical room. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.</p>
     <p>The hexagonal panel on the right is where this dissertation connects to that effort. We already have a way to convert a desired focal point into tile orientations. A physical panel lets us test how well that geometry predicts the signal in a room.</p>
   </aside>
 </section>

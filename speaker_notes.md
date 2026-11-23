@@ -1,6 +1,6 @@
 # Speaker notes and timing
 
-Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
+Total: 41.50 min, 61 timed slides (window 40-45 min, pace <= 140 wpm).
 
 | # | slide | min | window | words | wpm |
 |---|---|---|---|---|---|
@@ -58,14 +58,13 @@ Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
 | 52 | HRBB: the same one-AP shift, with a smaller margin | 0.5 | 35:15-35:45 | 70 | 140 |
 | 53 | Coverage maps: PSO+GD vs. weighted k -means | 0.75 | 35:45-36:30 | 80 | 107 |
 | 54 | The complete picture | 0.75 | 36:30-37:15 | 101 | 135 |
-| 55 | Limitations and next steps | 0.5 | 37:15-37:45 | 62 | 124 |
-| 56 | Five questions, answered | 1.25 | 37:45-39:00 | 144 | 115 |
-| 57 | What comes next: the FORMULA3 project | 0.75 | 39:00-39:45 | 87 | 116 |
-| 58 | The device FORMULA3 will use: a mechanical reflector array | 0.5 | 39:45-40:15 | 58 | 116 |
-| 59 | How this dissertation feeds into FORMULA3 | 0.75 | 40:15-41:00 | 87 | 116 |
-| 60 | Publications from this dissertation | 0.5 | 41:00-41:30 | 50 | 100 |
-| 61 | Other publications during the Ph.D. | 0.25 | 41:30-41:45 | 26 | 104 |
-| 62 | Thank you | 0.25 | 41:45-42:00 | 32 | 128 |
+| 55 | Five questions, answered | 1.25 | 37:15-38:30 | 155 | 124 |
+| 56 | What comes next: the FORMULA3 project | 0.75 | 38:30-39:15 | 99 | 132 |
+| 57 | The device FORMULA3 will use: a mechanical reflector array | 0.5 | 39:15-39:45 | 58 | 116 |
+| 58 | How this dissertation feeds into FORMULA3 | 0.75 | 39:45-40:30 | 87 | 116 |
+| 59 | Publications from this dissertation | 0.5 | 40:30-41:00 | 50 | 100 |
+| 60 | Other publications during the Ph.D. | 0.25 | 41:00-41:15 | 26 | 104 |
+| 61 | Thank you | 0.25 | 41:15-41:30 | 32 | 128 |
 
 ## 1. title  [1.25 min | 0:00-1:15]
 
@@ -357,47 +356,47 @@ Each method answers a different engineering question. At the bottom, geometry gi
 
 On the left, we plan the installation. Particle swarm optimization searches candidate layouts, then gradient descent refines the best one. In both buildings, adding the reflector let us meet the coverage target with one fewer access point, averaged across five runs.
 
-## 55. Limitations and next steps  [0.5 min | 37:15-37:45]
-
-All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.
-
-## 56. Five questions, answered  [1.25 min | 37:45-39:00]
+## 55. Five questions, answered  [1.25 min | 37:15-38:30]
 
 I'll return to the user around the corner. If we know where that user is, the bisector rule tells us how to orient a tile. A focal point lets us use that same construction even when the best place to aim is a decision we need to learn.
 
 With several users, we can learn a local steering policy for each segment. When the segments see the room from different angles, it also pays to learn their assignments. Before installation, when the building is known and the mounting sites are still open, we can optimize the layout directly.
 
-Across these studies, the reflector decisions use positions at run time or a site model at planning time. The price of avoiding per-element channel estimation is that localization and model accuracy now matter. The next test is to bring placement and control together in a physical room.
+My main conclusion is that spatial information can guide both decisions. In our simulations, a building model tells us where to install the hardware, and user positions tell us where to steer it. Focal points connect those two tasks. With an accurate model and reliable positions, we can do both without estimating a separate channel for every tile.
 
-## 57. What comes next: the FORMULA3 project  [0.75 min | 39:00-39:45]
+## 56. What comes next: the FORMULA3 project  [0.75 min | 38:30-39:15]
 
-One opportunity to run that test is FORMULA3. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.
+FORMULA3 is a funded project that gives us an opportunity to take this work from simulation into a physical room. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.
 
 The hexagonal panel on the right is where this dissertation connects to that effort. We already have a way to convert a desired focal point into tile orientations. A physical panel lets us test how well that geometry predicts the signal in a room.
 
-## 58. The device FORMULA3 will use: a mechanical reflector array  [0.5 min | 39:45-40:15]
+## 57. The device FORMULA3 will use: a mechanical reflector array  [0.5 min | 39:15-39:45]
 
 In the front photo you can see the nineteen hexagonal metal tiles. In the back photo you can see the wiring for the servos that turn them. The controller is mounted on the stand, so the array can be moved around a room. This is the prototype that FORMULA3 will use to test ideas evaluated here in simulation.
 
-## 59. How this dissertation feeds into FORMULA3  [0.75 min | 40:15-41:00]
+## 58. How this dissertation feeds into FORMULA3  [0.75 min | 39:45-40:30]
 
 The four rows show what the project can build on. The ray-tracing pipeline can generate channel data for scenes with metallic reflectors. The learned controllers can use that data to study when to redirect a beam or reassign a user. The localization experiments tell us what accuracy to aim for when sensing supplies the user positions.
 
 The final row brings those pieces into a room. With a movable panel, we can test a planned mounting location and measure what happens when the controller actually turns the tiles.
 
-## 60. Publications from this dissertation  [0.5 min | 41:00-41:30]
+## 59. Publications from this dissertation  [0.5 min | 40:30-41:00]
 
 The geometric focusing study appeared at the 2024 Vehicular Technology Conference. Our multi-agent control study appeared in IEEE Transactions on Machine Learning in Communications and Networking. The hierarchical work also has a conference paper accepted at GLOBECOM. The slide lists the related submissions under review, including the joint placement study.
 
-## 61. Other publications during the Ph.D.  [0.25 min | 41:30-41:45]
+## 60. Other publications during the Ph.D.  [0.25 min | 41:00-41:15]
 
 During my Ph.D., I also contributed to eight papers beyond the reflector work. They include scientific data compression, machine-learning accelerators, and digital twins for first responders.
 
-## 62. Thank you  [0.25 min | 41:45-42:00]
+## 61. Thank you  [0.25 min | 41:15-41:30]
 
 Thank you to my committee, especially Professors Ekin and Tao, and to my collaborators, Mostafa Ibrahim and Oguz Bedir. Thank you all for your time. I'd be happy to take your questions.
 
 ## Backup slides for questions
+
+### 62. Limitations and next steps
+
+All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.
 
 ### 63. Research and technical innovation
 
