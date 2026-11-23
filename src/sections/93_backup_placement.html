@@ -51,8 +51,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: propagation parameters for placement. The tile pitch is about 4 to 5 wavelengths at 5.18 GHz, so each tile acts as a specular facet, not a subwavelength reflectarray element.</p>
-    <p>Materials follow ITU-R P.2040. All interaction types are enabled in the radio-map solver.</p>
+    <p>The placement study uses 5.18 gigahertz, a wavelength of about 5.8 centimeters. The tile pitch is four to five wavelengths, and we model each tile as a specular facet. We trace one million rays per transmitter and evaluate received power on a one-meter grid at a height of 1.5 meters. The material table gives the electrical properties used for the tiles, walls, floor, and ceiling.</p>
   </aside>
 </section>
 
@@ -93,9 +92,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: optimizer and baseline settings. Inertia decreases linearly; the cognitive and social coefficients follow a time-varying schedule.</p>
-    <p>The methods are compared at their own operating costs, not at an equal number of evaluations. Weighted k-means illustrates the effect of ignoring site-specific propagation.</p>
-    <p>One learning rate for all coordinates: about 2 cm per step for an AP, but about 2% of the admissible wall span per step for the reflector.</p>
+    <p>The swarm evaluates fifty layouts over 35 iterations. We then refine the best layout for thirty steps, giving 1,780 radio-map evaluations per run. Early in the search, particles favor their own best layouts. Later they put more weight on the swarm's best. The genetic algorithm uses the same population and generation counts. The random baselines use different budgets, so the comparison reflects each method at the operating cost shown here.</p>
   </aside>
 </section>
 
@@ -126,9 +123,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </table>
   </div>
   <aside class="notes">
-    <p>Backup: full table of coverage statistics at three APs in Office.</p>
-    <p>The priority-region minimum is the least precise statistic: minus 65.2 plus or minus 3.0 dBm for PSO+GD with the PRS, set by a single cell. Target satisfaction is judged by P5, which lies 7.7 dB above the target.</p>
-    <p>Bold marks the largest mean in each column, not statistical significance.</p>
+    <p>This table gives the mean and standard deviation across five runs. With three access points and the reflector, the proposed method reaches a priority P5 of minus 57.3 dBm, or 7.7 decibels above the target. The minimum varies more from run to run because one grid cell determines it. Bold type identifies the largest mean in a column. The statistical comparisons are a separate analysis.</p>
   </aside>
 </section>
 
@@ -145,7 +140,9 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
       </ul></div>
     </div>
   </div>
-  <aside class="notes"><p>These are the distributions behind that table, for one seed. With the reflector, PSO+GD leaves at most 2 percent of priority locations below minus 65 dBm, against about 3 percent without it. The minimum rises from about minus 74.5 to about minus 65 dBm, while the median falls by about 1 dB: energy is redirected into shadowed locations rather than raised everywhere.</p></aside>
+  <aside class="notes">
+    <p>These distributions come from one Office run. Follow the dashed line at minus 65 dBm. With the reflector, at most two percent of priority locations fall below that line, compared with about three percent without it. The minimum gains roughly nine decibels while the median falls by about one. In this run the main benefit was to the weakest locations.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-place-ablation">
@@ -168,9 +165,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: global-search choice and the refinement ablation. The results do not show that either global search is better; the benefit of joint planning with refinement holds for both.</p>
-    <p>Refinement helps more when a reflector is present. One possible explanation is variable scaling: the same learning rate moves the normalized reflector coordinates much farther than the AP coordinates in meters.</p>
-    <p>No GA-only run was made, so the GA+GD versus PSO-only gap does not isolate refinement after GA.</p>
+    <p>We can isolate the effect of local refinement by starting with swarm search in both cases. Adding gradient steps improves priority P5 by 4.1 decibels with the reflector. Without it, the estimated gain is 1.6 decibels and the confidence interval includes zero. Comparing the two refined methods asks a different question. The swarm leads the genetic algorithm by 1.6 decibels, with a p-value of 0.10 across five runs. These data give limited evidence for choosing between the two global searches.</p>
   </aside>
 </section>
 
@@ -188,9 +183,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: AP-count sweep in Office. The objective falls steeply up to three APs and then flattens.</p>
-    <p>Once both configurations meet the target, the reflector mainly adds RSSI margin. The persistent benefit is consistent with the perimeter rooms remaining shadowed by partition walls as ceiling APs are added.</p>
-    <p>The PSO-only two-AP band with the PRS spans the target, from minus 67.1 to minus 64.9 dBm.</p>
+    <p>In the Office, the proposed method crosses the target at two access points with a reflector and three without. Genetic search followed by refinement also reaches it with two, although its margin is only 0.2 decibels. Swarm search alone needs three in both cases. Farther to the right, both layouts meet the target. There the reflector's benefit shows up as additional signal margin.</p>
   </aside>
 </section>
 
@@ -211,8 +204,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: second floorplan. The one-AP reduction also appears here, but with a smaller margin; it indicates a reduction rather than a reliably deployable one-AP configuration.</p>
-    <p>The reflector's value shrinks once an AP can see the priority region directly. Two geometries do not establish this as a general design rule.</p>
+    <p>The lab floor has one large priority block near the center. With one access point, the reflector adds about three decibels to priority P5. By four access points, that advantage is below one decibel. An access point placed inside the central room can already serve much of the priority area directly. If we score the entire floor, the mean crosses the target with two access points and a reflector, or three access points alone.</p>
   </aside>
 </section>
 
@@ -236,7 +228,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </ul>
   </div>
   <aside class="notes">
-    <p>Backup: one Office placement per method. APs are red; the color scale runs from minus 80 to minus 40 dBm.</p>
+    <p>The red dots are access points. Compare the two corridor junctions used by swarm search on the left with the weaker southeast rooms under weighted k-means in the third map. A distance-based method can place an access point near a room while leaving a wall between them. All four layouts have a reflector on the north wall, but they choose different positions along it.</p>
   </aside>
 </section>
 
@@ -260,8 +252,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: what the ray-traced reflector model does and does not capture, and how the runs were executed.</p>
-    <p>The focal-point geometry aligns reflection directions but not path lengths, so the narrowband power fluctuates around the incoherent sum.</p>
+    <p>For the placement maps, we sum the powers of the traced paths incoherently. That approximates power averaged over small-scale fading. A narrowband receiver at one exact point can measure a higher or lower value because path phases matter there. We also model each tile as a planar reflecting facet and omit diffraction at its edges. Measurements or a full-wave model would let us quantify those approximations. Computationally, we reuse each loaded scene across many radio-map evaluations.</p>
   </aside>
 </section>
 

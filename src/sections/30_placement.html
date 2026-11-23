@@ -54,7 +54,7 @@ section[data-id="formula3-device"] .block li{margin:.45em 0}
 section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon);text-align:center;line-height:1.1;margin-bottom:28px}
 </style>
 
-<section class="divider" data-id="div-place" data-num="6" data-title="Joint AP and Reflector Placement" data-part="WHERE" data-question="Where should the access points and the reflector be installed?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; submitted to <i>IEEE Open J. Commun. Soc.</i>, 2026 (under review).</p></div><aside class="notes"><p>Section divider: placement. Move on.</p></aside></section>
+<section class="divider" data-id="div-place" data-num="6" data-title="Joint AP and Reflector Placement" data-part="WHERE" data-question="Where should the access points and the reflector be installed?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; submitted to <i>IEEE Open J. Commun. Soc.</i>, 2026 (under review).</p></div><aside class="notes"></aside></section>
 
 <!-- old 38 -->
 <section data-id="replace-ap" data-min="0.75">
@@ -79,10 +79,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>So far the AP and the reflector were installed in advance, so the gain was bounded by where they were mounted. This part asks where they should go.</p>
-    <p>It is the same tile array and focal-point steering. Mechanical steering does not depend on the band, so we study indoor Wi-Fi at 5.18 gigahertz, where walls set the AP count; each extra AP costs cabling, power, a license and channel budget.</p>
-    <p>Positions become design variables, and the reflector, a passive reflective surface, is configured once at installation.</p>
-    <p>Two questions: (a) better priority coverage at a fixed AP count, and (b) one fewer AP?</p>
+    <p>Suppose we're planning Wi-Fi for a building before any hardware goes in. We can choose the access point locations, where to mount one reflector, and how to orient its tiles. In this study the carrier is 5.18 gigahertz, and the tile settings stay fixed after installation.</p>
+    <p>I'll ask two questions. With the same number of access points, can the reflector improve coverage in the rooms that need it most? And if it does, can we meet the coverage target with one fewer access point?</p>
   </aside>
 </section>
 
@@ -108,9 +106,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Two university floorplans. Office, 30 by 30 meters, has its highest-priority rooms on the perimeter behind walls. HRBB, a 40 by 40 meter lab floor, has a central priority block.</p>
-    <p>The operator supplies the priority map: rooms that must be served weigh more than corridors. Weights only shape the objective; reported RSSI is unweighted.</p>
-    <p>The target: priority-region fifth percentile at least minus 65 dBm.</p>
+    <p>In the Office floor plan, the high-priority rooms sit along the perimeter. In the HRBB lab, they form a central block. The colored maps tell the optimizer which rooms to emphasize. We evaluate the actual signal strength there. Our target is a fifth percentile, or P5, of minus 65 dBm. That means roughly 95 percent of priority locations reach that level or higher.</p>
   </aside>
 </section>
 
@@ -140,10 +136,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Everything we can choose goes into one continuous design vector, Theta.</p>
-    <p>Each AP sits on the ceiling. We optimize its horizontal position and an orientation vector normalized to a downward boresight, which avoids the singularities of Euler angles.</p>
-    <p>The reflector, 63 hexagonal tiles over 2 by 2 meters, slides along one preselected wall through two normalized coordinates.</p>
-    <p>Its tiles are steered by a virtual source and a virtual target: each tile normal bisects the directions to them, so placing them at the AP and a user recovers the bisector rule. Six focal coordinates replace 126 tile angles, so Theta has 5N plus 8 coordinates.</p>
+    <p>A candidate layout specifies where each ceiling access point sits and which way it points. It also specifies where the reflector sits on a preselected wall. We can move the panel along that wall and change its aim.</p>
+    <p>The two blue points in the diagram determine that aim. For each tile, we use one point as a virtual source and the other as a virtual target. The tile normal bisects those two directions. Six coordinates specify the orientation of all 63 tiles, so the optimizer can search over the entire panel without choosing 126 angles individually.</p>
   </aside>
 </section>
 
@@ -175,9 +169,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Each location is served by its strongest AP, and its power maps to a penalty that grows as power drops.</p>
-    <p>An average hides holes and a hard minimum is not smooth, so the main term is a priority-weighted soft worst case; a larger weight acts like a lower RSSI.</p>
-    <p>A small sigmoid term discourages sacrificing the rest of the floor.</p>
+    <p>Imagine a layout with strong coverage in the corridor and a weak signal in a priority room. A floor average can hide that room. We take the strongest access point at each location, convert weak power into a penalty, and use a weighted, smooth approximation to the worst penalty. A smaller, floor-wide term rewards layouts that bring more locations above the service threshold.</p>
   </aside>
 </section>
 
@@ -206,9 +198,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>The objective is differentiable for a fixed set of paths, but a small move of an AP or the reflector can create or remove paths at a visibility boundary, and walls split the design space into separated good regions.</p>
-    <p>So we use two phases. First, particle swarm optimization; each particle is a complete layout scored by a full radio map. PSO moves whole configurations, whereas GA crossover could split an AP from the reflector it works with.</p>
-    <p>Then the best particle is refined with Adam steps through the differentiable ray tracer. One run costs about 180 seconds of serial GPU work.</p>
+    <p>Moving an access point a short distance along a corridor can open a path through a doorway. On one side of that doorway, a local gradient has little information about the layout on the other side. That's why we start with a global search.</p>
+    <p>We use particle swarm optimization, or PSO. Each particle represents a complete layout, and a ray-traced power map gives it a score. Then we take the best layout and refine it with Adam, using gradients through the ray tracer. A run takes about three minutes of serial GPU work.</p>
   </aside>
 </section>
 
@@ -220,9 +211,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <p class="foot gray center">Schematic floorplan and toy propagation model, not simulation output. Each particle = one layout: three APs, reflector position, focal target.</p>
   </div>
   <aside class="notes">
-    <p>Here is the intuition, as a schematic. Each color is one particle, a full layout of three APs and the reflector.</p>
-    <p>Every iteration, a particle keeps part of its velocity and is pulled toward its own best layout, the hollow rings, and toward the swarm's best, the large AP icons. The heat map is the coverage of that best layout, and the inset curve its objective.</p>
-    <p>Once the swarm settles, the label switches to gradient refinement: small deterministic steps move the best layout locally to lift the weakest priority rooms.</p>
+    <p>Follow one color on the floor plan. Its three access point markers belong to one candidate layout, together with a reflector position and a focal target. The hollow rings mark that particle's best positions so far. The large access point symbols show the swarm's best layout, and the heat map belongs to that layout.</p>
+    <p>When the second phase lights up, only the best layout is being refined. Watch the small movements on the map and the objective on the right. This animation uses a simplified propagation model to show the search process.</p>
   </aside>
 </section>
 
@@ -258,8 +248,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Five baselines each remove or replace one component. GA+GD swaps the global search. PSO-only skips refinement. Random+GD removes global search. Weighted k-means ignores walls. Random sampling is the floor.</p>
-    <p>Each configuration runs with five seeds, one to seven APs, both floorplans, with and without the reflector. I report mean, P5 and minimum RSSI, with Welch tests and 95 percent intervals.</p>
+    <p>We test both floor plans with one to seven access points, with and without the reflector, using five random seeds per configuration. The comparisons isolate different choices. A genetic algorithm replaces the swarm. Swarm search alone removes refinement. Weighted k-means places access points by distance and priority, ignoring walls. We also compare random layouts with and without refinement. Each method runs at its own computational cost.</p>
   </aside>
 </section>
 
@@ -288,9 +277,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>One representative run: Office, three APs, with the reflector.</p>
-    <p>Left, the objective. GA+GD is ahead early but levels off around iteration 20, and PSO+GD overtakes it by iteration 36. Random+GD improves but plateaus higher, so the starting point matters.</p>
-    <p>Right, the priority-region P5. After the phase boundary at iteration 35, gradient refinement lifts PSO+GD from about minus 61 to minus 57 dBm, while PSO-only stays flat. Both phases contribute; the seed averages come next.</p>
+    <p>This is one run in the Office with three access points and a reflector. On the left, a lower objective is better. The genetic algorithm leads early, then levels off. The swarm catches it around iteration 36.</p>
+    <p>On the right, higher is better because the vertical axis is the fifth percentile of received power. At the dotted line, the swarm search ends. Refining its best layout lifts P5 from about minus 61 to minus 57 dBm. The flat swarm-only trace shows where the same search would have stopped.</p>
   </aside>
 </section>
 
@@ -333,11 +321,9 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="takeaway">The gain is largest at the weakest locations, and how much of it is realized depends on the planning method.</div>
   </div>
   <aside class="notes">
-    <p>Question (a). With three APs in Office, adding one jointly optimized reflector raises priority-region P5 from minus 62.1 to minus 57.3 dBm, a 4.8 dB gain with a confidence interval of 3.1 to 6.5.</p>
-    <p>The minimum gains 9.5 dB, more than P5 or the mean, so the reflector mostly redirects energy into shadowed locations. Floor-wide mean, P5 and minimum improve too, so priority coverage does not come at the expense of the floor.</p>
-    <p>The bar chart compares methods that all have the same reflector. PSO+GD and GA+GD gain 4.8 and 4.1 dB; the other methods gain between 1 and 2.8 dB. Installing the reflector alone does not deliver the benefit.</p>
-    <p>Gradient refinement adds 4.1 dB with the reflector but only 1.6 dB, not significant, without it. One possible explanation: with a shared learning rate, refinement can move the reflector much farther than the APs.</p>
-    <p>PSO+GD and GA+GD are not significantly different.</p>
+    <p>Start with the priority rooms in the top half of the table. We keep three access points and average over five runs. With the access points alone, the fifth percentile is minus 62.1 dBm. When we optimize the reflector and access points together, it rises to minus 57.3. The gain is 4.8 decibels, with a 95 percent confidence interval from 3.1 to 6.5.</p>
+    <p>The weakest priority location gains even more, about 9.5 decibels. The floor-wide statistics below also improve. So the benefit reaches the locations we set out to help.</p>
+    <p>The bars on the right ask a different question. How much does the same reflector help under different planning methods? The two methods combining global search and gradient refinement show the largest gains. With five runs, the data don't establish a difference between those two methods.</p>
   </aside>
 </section>
 
@@ -360,8 +346,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Question (b): does the gain mean fewer APs? These panels sweep one to seven APs in Office against the minus 65 dBm line.</p>
-    <p>PSO+GD needs three APs without the reflector and two with it: minus 62.9 versus minus 65.4 dBm at two APs, a 2.1 dB margin. PSO-only needs three either way, so refinement is necessary. Per seed: 4 of 5 versus 1 of 5.</p>
+    <p>The dashed line is our coverage target. In the Office, follow the swarm-plus-refinement curve across the two panels. Without the reflector it takes three access points to cross that line. With the reflector, two are enough on average. At two access points, four of five runs met the target with the reflector. One of five met it without.</p>
   </aside>
 </section>
 
@@ -385,8 +370,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>The second floorplan shows the same shift. In HRBB, one AP plus the reflector reaches minus 64.3 dBm, a 0.7 dB margin, where two APs are needed without it; 3 of 5 seeds meet the target versus none.</p>
-    <p>With five seeds the Fisher tests are not significant, so this is a seed-mean result with small margins, not a deployment guarantee.</p>
+    <p>In the lab, one access point plus the reflector reaches minus 64.3 dBm on average. That's just 0.7 decibels above the target. Without the reflector, the mean crosses the line at two access points. At one access point, three of five runs succeeded with the reflector and none without. With five runs, that difference in success counts is statistically inconclusive.</p>
   </aside>
 </section>
 
@@ -415,13 +399,12 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="transition"><div class="ans"><b>Answered (WHERE):</b> joint AP and reflector planning met the priority target with one fewer AP in both layouts (seed mean, small margins).</div><div class="arrow"></div><div class="opens"><b>Opens (WHICH):</b> how do placement and operation fit together, and which method fits which problem? &rarr; conclusions.</div></div>
   </div>
   <aside class="notes">
-    <p>The maps show where the gain comes from. PSO+GD places APs in a west room and at two corridor junctions and reaches shadowed rooms through corridors and doorways; the reflector serves the north rooms. Weighted k-means follows Euclidean distance and leaves the southeast dark.</p>
-    <p>The limits: strongest-server received power only, so the AP saving is a coverage statement, not a cost statement; five seeds, two floorplans, one preselected wall, known geometry.</p>
-    <p>Within those limits, joint planning removed one AP in both layouts, as a seed mean with small margins. That answers where.</p>
+    <p>The red dots show where the access points ended up. In the left map, two sit near corridor junctions, where paths can reach several rooms through doorways. The right map uses weighted k-means. A nearby access point can still be on the wrong side of a wall, as the darker southeast rooms illustrate.</p>
+    <p>These are strongest-server power maps. They tell us about coverage. To translate one fewer access point into a deployment decision, we'd also need interference, traffic demand, and installed cost. We tested two floor plans with one candidate wall on each.</p>
   </aside>
 </section>
 
-<section class="divider" data-id="div-which" data-num="7" data-title="Conclusions" data-part="WHICH" data-question="Which method fits which problem, and what does the whole work answer?"><aside class="notes"><p>Section divider: conclusions. Move on.</p></aside></section>
+<section class="divider" data-id="div-which" data-num="7" data-title="Conclusions" data-part="WHICH" data-question="Which method fits which problem, and what does the whole work answer?"><aside class="notes"></aside></section>
 
 <!-- old 47 -->
 <section data-id="complete-picture" data-min="0.75">
@@ -431,10 +414,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <div class="which-ov"><div>Geometry: static user</div><div>RL: run-time control</div><div>PSO+GD: placement</div></div></figure>
   </div>
   <aside class="notes">
-    <p>Back to the map from the start, now with the answers filled in. Each part has its own band and scene, so these gains are not compared across parts.</p>
-    <p>What: geometry alone raises path gain by 53.0 and 87.5 dB for one static user.</p>
-    <p>How: multi-agent learning adds 20.7 dB over a static flat reflector, and learning the assignment lifts four users from minus 72.46 to minus 66.62 dBm over a fixed split.</p>
-    <p>Where: with three APs, placement raises priority P5 by 4.8 dB, and one fewer AP meets the target, as a seed mean.</p>
+    <p>Read this map in the order an engineer would use it. Before installation, the site model helps choose access point and reflector locations. In the Office, that choice raised the fifth percentile in priority rooms by 4.8 decibels with three access points. Once the hardware is installed, the decision changes. As users move, the controller chooses who each segment serves and where it aims.</p>
+    <p>The common interface is the focal point. The planning and control results come from separate experiments at different frequencies. The dashed arrow is how we would connect them in a single deployment.</p>
   </aside>
 </section>
 
@@ -458,8 +439,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>The limits apply to every part: ray-traced simulation only, received power rather than rate, few scenarios. Phase is not controlled, and learned control was not compared with a position-tracking geometric rule.</p>
-    <p>Next: hardware-in-the-loop tests, training under mobility, rate-aware objectives, and running a placed layout with the learned controller, the dashed arrow.</p>
+    <p>All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.</p>
   </aside>
 </section>
 
@@ -477,13 +457,9 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="takeaway">Together, the answers cover both stages, where to install and how to operate, through one focal-point interface and without pilot-based CSI estimation (ray-traced simulation); closing the loop between them is the next step.</div>
   </div>
   <aside class="notes">
-    <p>To sum up, what the five answers say together.</p>
-    <p>Why: spatial information is enough. Every part decides from user positions at run time or a site model at planning, never from pilot-based channel estimation; the price is decimeter-level localization and an accurate site model.</p>
-    <p>What: the focal point is the interface shared by the geometric rule, both learned controllers and the placement optimizer.</p>
-    <p>How: learned decentralized policies work within servo limits for several moving users, and when segments differ in geometry, learning the assignment beats a fixed split and the geometric heuristic.</p>
-    <p>Where: installation is a decision of its own; a jointly placed reflector met the priority-coverage target with one fewer access point.</p>
-    <p>Which: geometry for a static user or a warm start, learned policies at run time, direct optimization once per building.</p>
-    <p>Together these cover installing and operating the reflectors through one interface, in simulation; closing the loop between the two stages and hardware validation come next.</p>
+    <p>I'll return to the user around the corner. If we know where that user is, the bisector rule tells us how to orient a tile. A focal point lets us use that same construction even when the best place to aim is a decision we need to learn.</p>
+    <p>With several users, we can learn a local steering policy for each segment. When the segments see the room from different angles, it also pays to learn their assignments. Before installation, when the building is known and the mounting sites are still open, we can optimize the layout directly.</p>
+    <p>Across these studies, the reflector decisions use positions at run time or a site model at planning time. The price of avoiding per-element channel estimation is that localization and model accuracy now matter. The next test is to bring placement and control together in a physical room.</p>
   </aside>
 </section>
 
@@ -506,8 +482,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div></div>
   </div>
   <aside class="notes">
-    <p>This work does not stop here. It continues in FORMULA3, a joint project of the NSF and the Research Council of Finland in the VINES program: about 1.54 million dollars across five universities in the United States and Finland, from October 2026 to September 2029.</p>
-    <p>Its programmable wireless environments combine RIS with metallic reflector arrays, the hexagonal tile panels on the right. That element builds directly on this dissertation's reflector-array work.</p>
+    <p>One opportunity to run that test is FORMULA3. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.</p>
+    <p>The hexagonal panel on the right is where this dissertation connects to that effort. We already have a way to convert a desired focal point into tile orientations. A physical panel lets us test how well that geometry predicts the signal in a room.</p>
   </aside>
 </section>
 <section data-id="formula3-device" data-min="0.5">
@@ -531,8 +507,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>This is the physical device. It is a metallic reflector array with nineteen hexagonal tiles; servos behind the panel turn each tile, and the controller box on the stand drives them.</p>
-    <p>The arrays in this dissertation were simulated. FORMULA3 will use this device to take focal-point control and placement into real rooms.</p>
+    <p>In the front photo you can see the nineteen hexagonal metal tiles. In the back photo you can see the wiring for the servos that turn them. The controller is mounted on the stand, so the array can be moved around a room. This is the prototype that FORMULA3 will use to test ideas evaluated here in simulation.</p>
   </aside>
 </section>
 
@@ -553,10 +528,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
   </div>
   <aside class="notes">
-    <p>Here is how this dissertation feeds into the project's four thrusts. The ray-traced reflector pipeline is a starting point for channel characterization and dataset generation.</p>
-    <p>The CSI-free learned control and the hierarchical allocation are early instances of the second thrust: reconfiguring surfaces and reassigning users.</p>
-    <p>The robustness and localization findings inform the third thrust, where sensing supplies the positions. And the hardware model with joint placement feeds validation and the planning of programmable environments.</p>
-    <p>These are the foundations it builds on; the project's own results are still to come.</p>
+    <p>The four rows show what the project can build on. The ray-tracing pipeline can generate channel data for scenes with metallic reflectors. The learned controllers can use that data to study when to redirect a beam or reassign a user. The localization experiments tell us what accuracy to aim for when sensing supplies the user positions.</p>
+    <p>The final row brings those pieces into a room. With a movable panel, we can test a planned mounting location and measure what happens when the controller actually turns the tiles.</p>
   </aside>
 </section>
 
@@ -574,9 +547,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </ol>
       </div>
   <aside class="notes">
-    <p>The VTC Fall 2024 paper covers geometric focusing, and the TMLCN article covers flat MARL; the flat-MARL conference paper is under review at ICC 2027.</p>
-    <p>For hierarchical MARL, the journal version is under review at TMLCN and the conference version will be presented at GLOBECOM in December.</p>
-    <p>The placement paper is under review at the Open Journal of the Communications Society. Other publications are in the backup.</p>
+    <p>The geometric focusing study appeared at the 2024 Vehicular Technology Conference. Our multi-agent control study appeared in IEEE Transactions on Machine Learning in Communications and Networking. The hierarchical work also has a conference paper accepted at GLOBECOM. The slide lists the related submissions under review, including the joint placement study.</p>
   </aside>
 </section>
 
@@ -595,7 +566,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </ol>
   </div>
   <aside class="notes">
-    <p>Beyond the dissertation, I contributed to eight other papers, mainly with the High Performance Computing group: scientific data compression, AI accelerators, and digital twins for first responders.</p>
+    <p>During my Ph.D., I also contributed to eight papers beyond the reflector work. They include scientific data compression, machine-learning accelerators, and digital twins for first responders.</p>
   </aside>
 </section>
 
@@ -617,6 +588,6 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Thank you to Prof. Ekin and Prof. Tao, the committee, my collaborators, and DOE and NSF for funding. I am happy to take questions.</p>
+    <p>Thank you to my committee, especially Professors Ekin and Tao, and to my collaborators, Mostafa Ibrahim and Oguz Bedir. Thank you all for your time. I'd be happy to take your questions.</p>
   </aside>
 </section>

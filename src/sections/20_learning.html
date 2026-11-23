@@ -49,7 +49,7 @@ section[data-id] .lr-stretchblock>.bb{flex:1;display:flex;flex-direction:column;
 section[data-id="rob-size"] .midnum{font-size:25px}
 </style>
 
-<section class="divider" data-id="div-marl" data-num="4" data-title="Multi-Agent RL Control" data-part="HOW" data-question="How can learned agents steer the array for moving users?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Signal Whisperers: Enhancing wireless reception using DRL-guided reflector arrays,&rdquo; <i>IEEE Trans. Mach. Learn. Commun. Netw.</i>, vol.&nbsp;4, pp.&nbsp;265&ndash;281, 2026.</p><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Bypassing the CSI bottleneck: MARL-driven spatial control for reflector arrays,&rdquo; arXiv:2604.05162, 2026; submitted to IEEE ICC 2027 (under review).</p></div><aside class="notes"><p>Section divider: learned control for several moving users. Move on.</p></aside></section>
+<section class="divider" data-id="div-marl" data-num="4" data-title="Multi-Agent RL Control" data-part="HOW" data-question="How can learned agents steer the array for moving users?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Signal Whisperers: Enhancing wireless reception using DRL-guided reflector arrays,&rdquo; <i>IEEE Trans. Mach. Learn. Commun. Netw.</i>, vol.&nbsp;4, pp.&nbsp;265&ndash;281, 2026.</p><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Bypassing the CSI bottleneck: MARL-driven spatial control for reflector arrays,&rdquo; arXiv:2604.05162, 2026; submitted to IEEE ICC 2027 (under review).</p></div><aside class="notes"></aside></section>
 
 <!-- ============================== ANIMATION A2b: focal-point abstraction ============================== -->
 <section data-id="anim-focal" data-min="0.75">
@@ -62,9 +62,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Learned control and placement build on one abstraction. Instead of the user position, all tiles of a segment aim at a shared virtual focal point.</p>
-    <p>Here the array has three segments, each with its own focal point. When a focal point moves, all tiles of its segment re-orient together through the bisector rule; the front view shows their tilt.</p>
-    <p>Click: a segment of n tiles is controlled by three coordinates instead of 2n angles. For 63 tiles and three segments that is 126 angles versus nine coordinates. Learned control learns these focal points; placement optimizes them.</p>
+    <p>Follow the blue crosshair in the top view. It's a virtual focal point, a target we are free to move in three dimensions. Its height is shown by the size of the ring. In the front view, watch the blue tiles turn as that point moves. Each tile computes its own angle, but all the blue tiles aim at the same target.</p>
+    <p>That's the control interface. With three segments, we choose just nine focal coordinates. The bisector rule converts those into the 126 angles of the 63 tiles.</p>
   </aside>
 </section>
 
@@ -95,12 +94,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Multi-user control becomes a cooperative multi-agent MDP. The array is split into L disjoint segments, three here, and each agent controls one segment's focal point.</p>
-    <p>The global state holds the user positions, the fixed segment centers, and the current focal points. Each agent observes only its own segment: the position of its assigned user, its center, and its focal point. The assigned user is fixed in advance; this matters later.</p>
-    <p>The action is a bounded focal-point displacement, so the tiles move smoothly.</p>
-    <p>All agents share one reward, the mean received power of the users. Power is used only in training, so at run time the agents need positions only.</p>
-    <p>Focal points and tile angles are clipped to their limits, so every action is feasible. This is how learning answers the geometric limits: it acts within servo limits, optimizes received power, and serves several users.</p>
-    <p>The abstraction cuts the control dimension from two angles per tile, 126 angles for 63 tiles, to three coordinates per segment, 9 for three segments: fourteen times fewer.</p>
+    <p>Consider one control step from the point of view of the blue segment. Its agent observes three positions. The first tells it where its assigned user is. The other two tell it where its segment sits and where it is aiming now. Its action is a displacement of the focal point in three dimensions. We bound each component of that displacement, keep the focal point within its allowed region, and clip the resulting tile angles to the servo limits.</p>
+    <p>We formulate this as a cooperative multi-agent Markov decision process. During training, all agents get the same reward, the mean received signal strength across the users. A move that helps one user can therefore affect the reward for the whole team. At deployment each agent chooses its move from local positions. The user assigned to that segment stays fixed for this first controller.</p>
   </aside>
 </section>
 
@@ -112,10 +107,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="fragment foot gray" data-anim-step="1" style="margin:8px 0 0 0;text-align:center">Here each user's columns span the whole aperture; with arrays on different walls, the assignment would matter.</p>
   </div>
   <aside class="notes">
-    <p>Here is the controller in motion. The access point has no direct path to the users; the corner array reflects into the hallway.</p>
-    <p>Each color is one agent. Its columns are fixed: user one always owns columns one, four and seven.</p>
-    <p>When the users move, each agent shifts its focal point toward its user in bounded steps, the dashed box, and the tiles re-orient so the reflected beams follow.</p>
-    <p>Click: the assignment never changes. Here that costs little, because each user's columns span the whole aperture; on arrays on different walls it would matter.</p>
+    <p>Watch user one and the blue crosshair in the hallway. When the user moves, the dashed box shows how far the agent can move its focal point in one step. The reflected beam follows as the tiles turn.</p>
+    <p>Now look at the front of the array on the right. Columns one, four, and seven stay blue throughout. Their angles change, but they always serve user one. This animation illustrates the distinction between learning where a segment should aim and deciding which user it should serve.</p>
   </aside>
 </section>
 
@@ -150,9 +143,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>The agents are trained with MAPPO, multi-agent proximal policy optimization, under centralized training with decentralized execution, which addresses non-stationarity.</p>
-    <p>In training, the centralized critic sees the global state and reward and supplies advantages. At deployment the critic is discarded; each actor maps its local observation to a focal-point move, with no communication.</p>
-    <p>The objective has three terms. The clipped surrogate takes the smaller of the ratio-weighted advantage and its clipped version, so one batch cannot move a policy far. The value loss fits the critic to the observed return, and the entropy bonus keeps the agents exploring focal points.</p>
+    <p>We train the agents with multi-agent proximal policy optimization, or MAPPO. The diagram shows centralized training with decentralized execution. During training, a shared critic sees every user's position, every segment center, and every focal point. It helps estimate whether a move produced a better return than expected while the other agents were also learning.</p>
+    <p>In the objective below, clipping limits the incentive for a large policy update. The value loss trains the critic, and the entropy bonus encourages exploration. At deployment, each segment runs its own actor using only its local observation.</p>
   </aside>
 </section>
 
@@ -177,9 +169,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>The scene is an L-shaped hallway at 60&nbsp;GHz. A four-antenna access point transmits 5&nbsp;dBm, and the 63-tile array sits at the corner.</p>
-    <p>Three users are in the shadowed region, the yellow rectangle, and a 1.8&nbsp;m wooden obstacle blocks the remaining direct paths.</p>
-    <p>Each episode starts from random tile angles within plus or minus 30 degrees.</p>
+    <p>Here is the 60 gigahertz hallway we use to evaluate the controller. The access point transmits at five dBm. The 63-tile reflector sits at the corner, and the three users share the shadowed region beyond the wooden obstacle. We start each training episode with random tile angles inside the thirty-degree servo range.</p>
   </aside>
 </section>
 
@@ -202,8 +192,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Three controllers: multi-agent focusing, a single agent choosing all focal points, and a multi-agent version that shares one azimuth per column, a cheaper array.</p>
-    <p>The multi-agent controller converges to about 42, the other two near 27. A plausible reason: each agent faces a smaller problem. The column-based one trains stably, so the method fits a lower-cost array.</p>
+    <p>All three curves show training reward. The blue curve rises fastest and settles near 42. This controller gives each user an agent and lets each tile take the angle its focal point requires. One agent steering all focal points finishes near 27. So does the simpler array that shares one azimuth per column. The next question is what that difference buys in received power.</p>
   </aside>
 </section>
 
@@ -227,11 +216,9 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </ul>
   </div>
   <aside class="notes">
-    <p>These are RSSI maps of the hallway during evaluation, with the RSSI-map average of each configuration underneath. The users are the magenta dots.</p>
-    <p>With no reflector the average is minus 108.2&nbsp;dBm. A static flat reflector raises it by 18.1&nbsp;dB to minus 90.1&nbsp;dBm.</p>
-    <p>Compare the flat panel, where power spreads along the corridor, with the narrow beams the learned controllers form toward each user. Single-agent focusing reaches minus 74.22, the column-based controller minus 72.71, and multi-agent beam-focusing minus 69.4&nbsp;dBm.</p>
-    <p>That is 38.8&nbsp;dB above no reflector, 20.7&nbsp;dB above the static flat reflector, and 4.8&nbsp;dB above the single-agent controller. The baselines are static reflectors and learned variants; a position-tracking geometric rule was not run here.</p>
-    <p>The video shows the multi-agent controller with moving users. Users move every four simulation steps, with a three-step adaptation window, an assumed allowance for mechanical latency. After a move, the controller typically recovers within one step.</p>
+    <p>The pink dots mark the users. Compare the second map, the static flat reflector, with the fifth, multi-agent focusing. The flat panel sends energy down the hallway. With learned focusing, you can see narrower bands passing through the users.</p>
+    <p>The values beneath the maps give the average RSSI, the received signal strength indicator, in dBm. The flat reflector gives minus 90.1 dBm, and multi-agent focusing gives minus 69.4 dBm. That's a 20.7 decibel improvement. Giving one agent control of all the focal points is a closer comparison. The multi-agent controller gains about 4.8 decibels there.</p>
+    <p>In the video, users change position every four simulation steps. That leaves three steps for adjustment, and the controller typically recovers within one. These comparisons cover static reflectors and learned controllers. A geometric controller that continuously tracks the users would be a separate benchmark.</p>
   </aside>
 </section>
 
@@ -253,8 +240,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Three robustness checks, one per slide. Here and on the next slide the metric is the temporal-average RSSI at the users over the 300-step trace.</p>
-    <p>The three-user policy runs unchanged with two, three and four users: minus 67.33, minus 67.60 and minus 68.33&nbsp;dBm, a 1&nbsp;dB drop from two to four users, since fewer users means more tiles per user.</p>
+    <p>Now we measure RSSI at the users and average it over 300 steps. We trained the policy with three users, then ran it with two, three, and four users using the same weights. Going from two users to four costs about one decibel on average. Each user now shares the same reflector aperture with more people.</p>
   </aside>
 </section>
 
@@ -274,8 +260,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Second check: arrays from 45 to 99 tiles, again without retraining.</p>
-    <p>RSSI rises monotonically with size, from minus 68.43 to minus 66.80&nbsp;dBm, with diminishing returns. Because the agents act on focal points rather than individual tiles, the same policy runs on every array size.</p>
+    <p>This time we keep the users and change the size of the reflector. Going from 45 tiles to 99 raises average RSSI by about 1.6 decibels, with smaller gains as we add more tiles. We can reuse the same policy across these sizes because its action is still a three-dimensional focal-point move.</p>
   </aside>
 </section>
 
@@ -295,8 +280,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Third check: Gaussian noise on the user positions, in both training and evaluation. The plot shows the deployed controller over the 300-step trace at each noise level.</p>
-    <p>Up to 0.3&nbsp;m, RSSI stays within 0.54&nbsp;dB of the noise-free case; at 0.5 and 1.0&nbsp;m it is about 4.6&nbsp;dB lower. UWB or mmWave radar can provide sub-meter accuracy.</p>
+    <p>How accurate do the user positions need to be? Here we add Gaussian error to the positions and train at the same noise level we use for evaluation. The dashed lines show average RSSI. At a standard deviation of thirty centimeters, we're within about half a decibel of the noise-free case. At fifty centimeters and one meter, the loss is about 4.6 decibels.</p>
   </aside>
 </section>
 
@@ -321,15 +305,13 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="transition"><div class="ans"><b>Answered (HOW):</b> decentralized agents steer focal points from user positions, trained on received power: +20.7&nbsp;dB over a static flat reflector.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> when segments differ in geometry, which segment should serve which user, and when should that change? &rarr; hierarchical MARL.</div></div>
   </div>
   <aside class="notes">
-    <p>To summarize: decentralized agents steer focal points from user positions, well above static reflectors.</p>
-    <p>One structural choice was fixed in advance: which tiles serve which user. Columns 1, 4 and 7 always serve user 1.</p>
-    <p>In this hallway that costs nothing measurable: two groupings give the same minus 67.60&nbsp;dBm, because each user's tiles span the whole aperture.</p>
-    <p>It matters when segments differ in geometry, such as arrays on different walls. Choosing it is a discrete problem: K users and L segments give K to the power L options, 27 in this three-user hallway. Next: which segment serves which user, and when.</p>
+    <p>In this hallway, the blue columns span the width of the array. The green and orange columns do too. We tried a second grouping and got the same average RSSI, minus 67.6 dBm. So these two ways of dividing this particular panel made little difference.</p>
+    <p>Now imagine putting one panel on each of two different walls. From one wall a segment might have a clear path to a user, while from the other it faces a sharp turn. In that room, who gets which segment becomes a meaningful decision.</p>
   </aside>
 </section>
 
 <!-- =================================================================== -->
-<section class="divider" data-id="div-hmarl" data-num="5" data-title="Hierarchical Multi-Agent RL" data-part="HOW" data-question="How should several users share the array, and when should the assignment change?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Learning to Reflect: Hierarchical multi-agent reinforcement learning for CSI-free mmWave beam-focusing,&rdquo; arXiv:2603.07370, 2026; under review, <i>IEEE Trans. Mach. Learn. Commun. Netw.</i></p><p><span class="dme">H. Le</span>, M. Ibrahim, O. Bedir, J. Tao, and S. Ekin, &ldquo;Learning to Focus: CSI-free hierarchical MARL for reconfigurable reflectors,&rdquo; arXiv:2604.05165, 2026; accepted, IEEE GLOBECOM 2026, Macau.</p></div><aside class="notes"><p>Section divider: learned allocation on a slower timescale. Move on.</p></aside></section>
+<section class="divider" data-id="div-hmarl" data-num="5" data-title="Hierarchical Multi-Agent RL" data-part="HOW" data-question="How should several users share the array, and when should the assignment change?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Learning to Reflect: Hierarchical multi-agent reinforcement learning for CSI-free mmWave beam-focusing,&rdquo; arXiv:2603.07370, 2026; under review, <i>IEEE Trans. Mach. Learn. Commun. Netw.</i></p><p><span class="dme">H. Le</span>, M. Ibrahim, O. Bedir, J. Tao, and S. Ekin, &ldquo;Learning to Focus: CSI-free hierarchical MARL for reconfigurable reflectors,&rdquo; arXiv:2604.05165, 2026; accepted, IEEE GLOBECOM 2026, Macau.</p></div><aside class="notes"></aside></section>
 
 <!-- ============================ Fixed -> learned ============================ -->
 <section data-id="fixed-to-learned" data-min="0.5">
@@ -355,8 +337,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="takeaway">Make the user-to-segment assignment a learned decision on its own, slower timescale.</div>
   </div>
   <aside class="notes">
-    <p>Now two corner arrays serve the room, so the partition matters.</p>
-    <p>There are two decisions: which user each segment serves, discrete and coupled; and where each segment focuses, continuous and servo-limited. The assignment space grows as K to the power L: with four users and four segments, 256 options. So the assignment becomes a learned decision on its own, slower timescale.</p>
+    <p>With two arrays in different corners, there are two coupled decisions. Choosing a user for a segment is discrete. Moving its focal point is continuous and limited by the servos. Four segments can each choose any of four users, giving 256 joint assignments. Several segments can choose the same person and leave someone else relying on residual multipath.</p>
   </aside>
 </section>
 
@@ -379,9 +360,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>The hierarchy has two levels. At the top, a centralized allocator reads the global state: all user positions, segment centroids and current focal points. Every T slots, ten in the experiments, it emits an assignment vector, one user index per segment, which is broadcast and held for the window.</p>
-    <p>Below, one agent per segment moves its focal point every slot. It sees only nine numbers: its assigned user's position, its own centroid and its focal point. Segments do not communicate.</p>
-    <p>At run time both levels see positions only; power is only the training reward. The timeline is drawn with T of four; experiments use ten.</p>
+    <p>Read the timeline as two clocks. The upper clock belongs to the allocator. It sees the user positions, segment centers, and current focal points, then assigns one user to each segment. That assignment holds until the next upper tick. The diagram uses four slots to make the timing visible. The experiments use ten.</p>
+    <p>The lower clock ticks every slot. Each segment updates its aim using its assigned user's position, its own center, and its current focal point. Between allocation decisions, it can track that user independently.</p>
   </aside>
 </section>
 
@@ -393,9 +373,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="foot gray center" style="margin:8px 0 0 0">Segment colors show the assignment; the allocation rule drawn here is a simple position-based stand-in for the learned allocator.</p>
   </div>
   <aside class="notes">
-    <p>Here are both timescales together. Two corner arrays, each split into two segments; three users walk paths that cross.</p>
-    <p>Watch the timeline on the right. Every slot, each segment nudges its focal point a bounded step toward its user, the fast level.</p>
-    <p>Every T slots, ten in the experiments, the allocator decides again which user each segment serves; a segment that changes color swings its beam to its new user. Between those decisions the assignment is held, so segments are not thrown around while users cross.</p>
+    <p>Pick one of the three users. Its color tells you which segments are serving it, and the crosshair shows where a segment is aiming. As the user moves, the segment can adjust that aim every slot.</p>
+    <p>Watch the upper row of the timeline. At each mark, ten slots apart, the allocator can change the assignment. When a segment changes color, its beam turns toward a different user. This animation uses a position-based rule to illustrate the timing. The next slide shows how we train the two levels.</p>
   </aside>
 </section>
 
@@ -417,9 +396,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="foot" style="margin:0">$\tilde P_k$: shifted received power (dBm); $P_{\mathrm{sc}}$: scale (backup). Unlike flat MARL (clipping), a move that would push any tile past its limit is <b>rejected</b>.</p>
   </div>
   <aside class="notes">
-    <p>Both levels serve one discounted objective, each with a reward suited to its decision.</p>
-    <p>The allocator's reward is a log utility averaged over all users. Unlike flat MARL's mean, one strong user cannot mask an unserved one, and a decibel gained by a weak user is worth more. Because its decision is held for T slots, it is trained on macro-steps: the discounted return inside each window.</p>
-    <p>Each segment is rewarded with its assigned user's shifted power plus a progress term, potential-based shaping. One change from flat MARL: a move that would push any tile past its limit is rejected rather than clipped.</p>
+    <p>On the left, the allocator scores an assignment across all users. We average a log utility over the users. Because that utility has diminishing returns, improving a weak signal can earn more reward than adding the same decibel to an already strong signal. We accumulate the discounted reward over the slots for which the assignment holds.</p>
+    <p>On the right, each segment gets feedback every slot. It earns credit for its user's received power and for improvement since the last slot. If the proposed move would take even one tile beyond its servo limit, the segment holds its position.</p>
   </aside>
 </section>
 
@@ -450,8 +428,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Segments train with MAPPO, as in flat MARL; the allocator uses PPO on the macro timescale with its own critic and a factorized head.</p>
-    <p>Exploring 256 assignments is slow, so early on a geometric prior, from positions only, is added to the logits, then switched off. Prior strength gives three variants: none, warm start, and infinite, a pure heuristic.</p>
+    <p>The segment agents still train with MAPPO. The allocator uses PPO and scores the candidate users for each segment. Early in training, we add a geometric compatibility prior to those scores, the logits. Shorter distances and smaller bend angles get more weight. We then set the prior's weight to zero. That gives us a way to guide early exploration while keeping the reward objective fixed.</p>
   </aside>
 </section>
 
@@ -481,9 +458,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>The wireless setup is mostly the same as in the flat study: 60&nbsp;GHz, a 5&nbsp;dBm access point, 63-tile arrays, and servo limits of plus or minus 30 degrees.</p>
-    <p>Two things change. The scene is a larger conference room with the access point outside, so every user is non-line-of-sight. And there are two corner arrays, each split into two segments. Two or four users move 30&nbsp;cm every slot for 300 slots.</p>
-    <p>Six controllers are compared. HMARL-C is ours: a learned allocator with a geometric warm start. HMARL-NC drops the warm start. Compat-only uses that geometric rule alone: each segment takes its best-aligned user. Static-MARL is the flat controller retrained here with a fixed assignment. Centralized is one agent steering all focal points, a bound since its reward and learner differ. Random redraws the assignment every slot, a floor.</p>
+    <p>The access point is outside this conference room. The wall blocks the direct path, and the two corner reflectors give us four steerable segments. We keep the 60 gigahertz carrier and the thirty-degree servo limit. Users stay still within each training episode. At evaluation, two or four users move thirty centimeters every slot for 300 slots.</p>
+    <p>The first three rows isolate the role of geometry. We compare a learned allocator with the geometric warm start, the same allocator trained without it, and the geometric rule on its own. The remaining rows give us fixed assignments, a single controller steering all focal points, and random assignments. The centralized controller also uses a different reward and learner.</p>
   </aside>
 </section>
 
@@ -548,10 +524,9 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Now the four users are walking. Higher on this plot means a stronger signal. Follow the red line first. Each reflector segment can still aim, but it has to keep serving the same person. Imagine that person walks behind a wall. The segment keeps aiming at them even as their signal fades.</p>
-    <p>The blue line is our learned allocator. It can hand that user over to a different segment. Look at the four-user column in the table. That flexibility gives us nearly six decibels more signal on average than the fixed assignment. The blue line also has shallower dips as people move.</p>
-    <p>Even the strongest alternative, the rule based on geometry, trails by nearly two decibels. Two neighboring segments can both pick the same person under that rule, leaving someone else without a segment.</p>
-    <p><i>If asked about the red line, its legend says minus 72.26 dBm. The table reports minus 72.46 dBm, the value used for the comparison.</i></p>
+    <p>Now the four users are moving. The vertical axis is received signal strength, so higher is better. Follow the red curve first. Each segment can still steer, but it keeps the same user even when the path to that user deteriorates. The learned allocator, in blue, can reassign the segment as the geometry changes.</p>
+    <p>The four-user column gives the averages over the run. The fixed assignment gives about minus 72.5 dBm. The learned assignment gives about minus 66.6. That's nearly six decibels, and the blue trace also fluctuates less.</p>
+    <p>The closest competitor is the geometry-only rule. It can change assignments too, but neighboring segments can independently select the same user. The learned allocator finishes about 1.9 decibels ahead of that rule. The maps on the next slide show where the reflected energy goes in one of those time slots.</p>
   </aside>
 </section>
 
@@ -569,8 +544,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="tiny gray center" style="margin:0">RSSI maps at evaluation slot 294; values are user averages at that slot, not 300-slot run means.</p>
   </div>
   <aside class="notes">
-    <p>Look at the pink dots. Those are the four users, shown at the same instant in all three maps. In the left map, the bright streaks pass right through them. Without the warm start, the beams spread out in the middle map. With one central controller, they're harder to pick out.</p>
-    <p>In the video, watch how the beams turn as the users walk.</p>
+    <p>The pink dots are the four users at the same instant, slot 294. On the left, the bright bands from the warm-started controller pass through the users. In the middle, training without the prior gives a wider spread. On the right, the centralized controller shows less focusing. The video lets you follow those beams as the users move.</p>
   </aside>
 </section>
 
@@ -595,8 +569,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>How long should a segment stay with the same user? If we let it switch every slot, a new user can look like the old one suddenly jumped. Wait a hundred slots, and the allocator gets just one decision per training episode.</p>
-    <p>The blue curve did best here, with a decision every ten slots. The two longest intervals were still improving when training ended.</p>
+    <p>How often should we reconsider the assignment? If it can change every slot, the local agent can mistake a new user for a sudden jump in position. At the other extreme, a hundred-slot interval gives the allocator just one decision per episode. Ten slots, the blue curve, gave the highest reward here. The two longest intervals were still improving when training ended.</p>
   </aside>
 </section>
 
@@ -613,7 +586,6 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> learning the assignment raises 4-user mean RSSI from $-72.46$&nbsp;dBm (fixed split) to $-66.62$&nbsp;dBm, +1.88&nbsp;dB over the best geometric heuristic.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
   </div>
   <aside class="notes">
-    <p>In this room, letting the segments switch users gave us nearly six decibels over a fixed assignment. We did that with the reflectors already on the walls.</p>
-    <p>What if we add tiles in the same spot? More than doubling the tile count gave us a median gain of just 1.3 decibels. Where, then, should we install the reflectors and the access point?</p>
+    <p>In this room, learning who serves whom improved four-user mean RSSI by nearly six decibels over a fixed assignment. Adding hardware at the same site gave a smaller return in a separate two-user test. Going from 45 tiles to 99 raised the median by about 1.3 decibels. That suggests a different design question. What if we can choose the mounting site itself?</p>
   </aside>
 </section>

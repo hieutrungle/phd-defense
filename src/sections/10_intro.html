@@ -137,8 +137,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
   <div class="committee"><span class="lab">Chair:</span><span>Prof. Sabit Ekin</span><span class="lab">Co-chair:</span><span>Prof. Jian Tao</span><span class="lab">Committee board:</span><span>Prof. Erchin Serpedin</span><span></span><span>Prof. Arya Menon</span></div>
   <div class="logos"><img src="assets/img/logos/tamu-horizontal-maroon.png" alt="Texas A&amp;M University"><img class="tw" src="assets/img/logos/texas-wireless-2026.png" alt="Texas Wireless"></div>
   <aside class="notes">
-    <p>Good morning. Thank you to my committee chair, Prof. Ekin, my co-chair, Prof. Tao, and the committee members for being here.</p>
-    <p>This talk is about how mechanically reconfigurable metallic reflectors can be controlled and placed from spatial information, meaning positions and a site model, without pilot-based channel estimation.</p>
+    <p>Good morning. Thank you to my committee and to everyone joining us. Imagine a receiver just around a corner. Its position is known, but a wall blocks the direct signal. My dissertation asks how we can use that position to steer a metallic reflector, and how we can decide where the reflector belongs in the first place.</p>
   </aside>
 </section>
 
@@ -157,11 +156,11 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </ol>
   </div>
   <aside class="notes">
-    <p>Seven parts. After the introduction, they answer five questions: why this approach, what geometry gives, how to steer the array, where to install it, and which method fits which problem.</p>
+    <p>I'll start with the physics of one reflection. Then I'll add several users, let them move, and finally step back to ask where we should install the hardware.</p>
   </aside>
 </section>
 
-<section class="divider" data-num="1" data-title="About Me"><aside class="notes"><p>Section divider: about me. Move on.</p></aside></section>
+<section class="divider" data-num="1" data-title="About Me"><aside class="notes"></aside></section>
 
 <!-- ============================== ABOUT ME ============================== -->
 <section data-id="aboutme" data-min="0.5">
@@ -189,9 +188,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>I am a Ph.D. candidate in Electrical Engineering at Texas A&amp;M, with Prof. Sabit Ekin as committee chair and Prof. Jian Tao as co-chair.</p>
-    <p>My research is on smart radio environments: I control and place mechanically reconfigurable metallic reflectors from spatial information, positions and a site model, rather than pilot-based channel estimation.</p>
-    <p>It sits where machine learning, reinforcement learning, wireless communication and optimization meet.</p>
+    <p>I'm Hieu Le, a Ph.D. candidate in electrical engineering at Texas A&amp;M. My committee chair is Professor Sabit Ekin, and my co-chair is Professor Jian Tao. My work brings together two perspectives. As a wireless engineer, I want to know which paths can carry energy to a user. As a machine-learning researcher, I want to know which decisions a controller can learn from those paths.</p>
   </aside>
 </section>
 
@@ -216,8 +213,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>My professional experience, most recent first. After graduation I will return to Uber as a Machine Learning Engineer, starting in 2027.</p>
-    <p>Since 2021 I have been a research assistant at Texas A&amp;M, where this work was done. This summer I interned at Uber on Rider Pricing and Incentives; in fall 2025 at Qualcomm in San Diego; and in 2024 I worked at the High Performance Computing Center.</p>
+    <p>I've worked on this research at Texas A&amp;M since 2021. Along the way, I worked at the High Performance Computing Center, interned at Qualcomm in San Diego, and joined Uber's Rider Pricing and Incentives team for a summer. After graduation, I'll return to Uber as a machine learning engineer in 2027.</p>
   </aside>
 </section>
 
@@ -237,13 +233,13 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>This work was supported in part by the Department of Energy Early Career Research Program, award DE-SC0023957, and by the National Science Foundation, grants 2549088 and 2535873.</p>
+    <p>I'd like to acknowledge the Department of Energy's Early Career Research Program and the National Science Foundation. Both supported this research, and their award numbers are on the slide.</p>
   </aside>
 </section>
 
 <!-- ============================== FORMULA3 MAP (new) ============================== -->
 
-<section class="divider" data-num="2" data-title="Motivation and Objectives" data-part="WHY" data-question="Why steer reflectors from spatial information instead of channel estimates?"><aside class="notes"><p>Section divider: why steer reflectors from spatial information instead of channel estimates?</p></aside></section>
+<section class="divider" data-num="2" data-title="Motivation and Objectives" data-part="WHY" data-question="Why steer reflectors from spatial information instead of channel estimates?"><aside class="notes"></aside></section>
 
 <!-- ============================== MMWAVE ============================== -->
 <section data-id="mmwave" data-min="0.5">
@@ -261,8 +257,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="tiny gray credit">Image credit: spectrummattersindeed.blogspot.com/2020/01/why-millimeter-wave-is-essential-for-5g.html</div>
   </div>
   <aside class="notes">
-    <p>Each wireless generation carries more demanding applications: augmented reality, autonomous systems, large-scale IoT. Engineers have two levers: more bandwidth, or better signal quality.</p>
-    <p>The large contiguous channels are at millimeter-wave frequencies, where propagation is mostly line of sight.</p>
+    <p>Consider an augmented reality headset. Sending more data over its wireless link requires more bandwidth, better signal quality, or both. Millimeter-wave bands are attractive because they offer wide, contiguous channels. The challenge comes when the person wearing that headset walks out of the transmitter's line of sight.</p>
   </aside>
 </section>
 
@@ -281,8 +276,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="tiny gray credit">Image credit: cdn.codeground.org/nsr/downloads/researchareas/2022May_6G_Spectrum.pdf</div>
   </div>
   <aside class="notes">
-    <p>This chart shows the trade-off: higher frequency, more bandwidth, smaller coverage.</p>
-    <p>The price is higher path loss, weak penetration and frequent blockage. Usually the environment is a fixed channel to compensate for; this dissertation asks what happens if part of it becomes controllable.</p>
+    <p>On this chart, the high-frequency bands offer the widest channels and the shortest coverage. At millimeter-wave frequencies, a wall can attenuate the direct signal enough to erase the benefit of that extra bandwidth. That led me to ask whether we could change the path the signal takes through the building.</p>
   </aside>
 </section>
 
@@ -298,8 +292,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="takeaway">In all three, links are blocked by structure, so coverage depends on reaching non-line-of-sight (NLOS) users.</div>
   </div>
   <aside class="notes">
-    <p>Three settings motivate this work: data centers, where metal racks block signals; nuclear facilities, where telemetry must work behind shielding; and industrial plants, with robots in cluttered geometry.</p>
-    <p>In all three, structure blocks the direct path, so coverage depends on reaching non-line-of-sight users. The scenes later in the talk are generic indoor geometries with this blockage.</p>
+    <p>A row of metal racks in a data center can block a receiver only a few meters away. Thick shielding around a sensor in a nuclear facility creates a similar problem. So does machinery between a factory robot and its access point. The hallways and rooms in my simulations isolate what these settings have in common. A nearby user can still be out of sight.</p>
   </aside>
 </section>
 
@@ -340,8 +333,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>The core challenge in one picture: in an L-shaped corridor the corner blocks the direct path, and the user around the corner sits in a dead zone.</p>
-    <p>The usual answer is more access points, more power, or more processing, each adding cost. The first remedy returns in placement. The alternative: a controllable surface at the corner creates a reflected path into the dead zone.</p>
+    <p>Follow the dashed line from the access point, or AP, to the user. It runs into the inside corner. We could install a second AP beyond that corner. The green path shows another possibility. A reflector that can see both ends of the link can redirect energy down the second hallway. The question is how to aim it.</p>
   </aside>
 </section>
 
@@ -356,9 +348,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>Why avoid channel estimation? On the left is an electronic RIS with N elements serving K users. To configure it, the controller needs the cascaded channel through every element to every user, so pilot time grows with N times K.</p>
-    <p>Watch the bar: the channel stays coherent only for a fixed window. As the surface grows, pilots fill more of it and little time is left for data.</p>
-    <p>On the right, a mechanical reflector array is steered from user positions. Its control input stays small, independent of the number of tiles. This is schematic, not a measurement.</p>
+    <p>Watch the orange part of the bar on the left. It represents time spent sending pilots to estimate channel state information, or CSI. In this example, the controller estimates a channel through each surface element to each user. As the grid gets finer, that number grows as elements times users. The channel is stable for only a limited time, so the green part available for data shrinks.</p>
+    <p>On the right, adding tiles still leaves us with the same three user positions. That's the information our controller uses to steer the surface.</p>
   </aside>
 </section>
 
@@ -379,9 +370,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="takeaway">The burden shifts from channel estimation to <b>localization</b> (run time) and the <b>site model</b> (planning).</div>
   </div>
   <aside class="notes">
-    <p>The standard controllable surface, the electronic RIS, faces three barriers: unit cells designed for one band; the cascaded channel through every element, which we just saw; and bias power to hold its state.</p>
-    <p>Our alternative is a metallic array of servo-rotated tiles, large compared with the wavelength, so they act as mirrors across bands.</p>
-    <p>At run time the controller uses only user positions; received power serves as the training reward. The tiles draw no power once positioned. The trade-off is slower reconfiguration, which suits quasi-static indoor scenes.</p>
+    <p>An electronic reconfigurable intelligent surface, or RIS, steers a wave by changing the phase response of its elements. The array on the right steers it by physically turning metal tiles. Each tile is large compared with the wavelength, so we can calculate its orientation using the law of reflection.</p>
+    <p>This changes the engineering trade-off. The tiles need power to move and can hold their position afterward. Mechanical motion takes time, so slowly changing indoor links are a natural starting point. Steering also depends on knowing where the users are.</p>
   </aside>
 </section>
 
@@ -392,13 +382,12 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <img src="assets/img/crops/intro_goal_map.png" alt="Overview map: WHY thesis; WHERE to install; HOW to steer; WHAT foundations; WHICH method">
   </div>
   <aside class="notes">
-    <p>The thesis, at the top: spatial information, meaning AP and tile positions, user-position estimates and a site model, is enough to configure, control and place these reflectors without pilot-based channel estimation. That is what spatial intelligence means here; the cost moves to localization and site-model accuracy.</p>
-    <p>The numbers give the talk order: what geometry achieves, how to operate the array, then where to install it, because the controllers take the mounting sites as given. The map itself is in system order.</p>
-    <p>The two stages share the focal-point interface. They were studied separately, and coupling them, the dashed arrow, is future work.</p>
+    <p>There are two different engineering decisions in this diagram. On the left, before installation, we have a building model. We need to choose where the access points and the reflector go. On the right, the hardware is already on the wall and a user moves. We need to decide where to aim next.</p>
+    <p>Both decisions use a focal point, a location in space toward which we steer the reflected signal. I'll first show how geometry turns that point into tile angles. Then I'll cover control and placement. I evaluate these stages separately in simulation. The dashed link is the experiment that would connect them.</p>
   </aside>
 </section>
 
-<section class="divider" data-num="3" data-title="Foundations" data-part="WHAT" data-question="What hardware, and what does geometry alone achieve?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Guiding wireless signals with arrays of metallic linear Fresnel reflectors: A low-cost, frequency-versatile, and practical approach,&rdquo; in <i>Proc. IEEE 100th Veh. Technol. Conf. (VTC2024-Fall)</i>, Washington, DC, USA, 2024, pp.&nbsp;1&ndash;7.</p></div><aside class="notes"><p>Section divider: what hardware and abstraction, and what does geometry alone achieve?</p></aside></section>
+<section class="divider" data-num="3" data-title="Foundations" data-part="WHAT" data-question="What hardware, and what does geometry alone achieve?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Guiding wireless signals with arrays of metallic linear Fresnel reflectors: A low-cost, frequency-versatile, and practical approach,&rdquo; in <i>Proc. IEEE 100th Veh. Technol. Conf. (VTC2024-Fall)</i>, Washington, DC, USA, 2024, pp.&nbsp;1&ndash;7.</p></div><aside class="notes"></aside></section>
 
 <!-- ============================== HARDWARE ============================== -->
 <section data-id="hardware" data-min="0.75">
@@ -421,9 +410,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>The hardware throughout is a metallic linear Fresnel reflector array: a grid of metallic tiles, each rotated in elevation and azimuth.</p>
-    <p>It redirects the wave by ordinary specular reflection, so it needs no RF circuitry. In the top view, each tile is angled so its reflection from the access point lands on the user.</p>
-    <p>The geometric study uses ten by seven square tiles, a 1.4 by 2.0 meter device, with unconstrained rotation.</p>
+    <p>Think of each metal tile as a small, steerable mirror for radio waves. It rotates about two axes. The top view on the left shows why neighboring tiles need slightly different angles. They see the access point and the receiver from slightly different positions.</p>
+    <p>For the first study, we modeled a linear Fresnel reflector array with seventy square tiles. Each tile is twenty centimeters on a side. Here we let them rotate freely so we can measure what the geometry alone can achieve.</p>
   </aside>
 </section>
 
@@ -443,10 +431,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>How is each tile oriented? This is a top view: the access point on the left, a row of tiles on the wall, and a user walking along the hallway.</p>
-    <p>Call the tile center A, the access point B and the user C. By the law of reflection the tile normal must bisect the unit vectors toward the access point and toward the user. As the user moves, every tile turns, and all reflected rays still converge on the user.</p>
-    <p>First click: the dashed normals, with equal angles on each side. Only positions enter this rule; there is no channel estimate.</p>
-    <p>Second click: real servos have a limited range. When the user walks back toward the access point side, some tiles would need more than 30 degrees. They clip, turn red, and their rays miss.</p>
+    <p>Pick one tile along the wall. From its center, draw one line toward the access point and another toward the user. The dashed line halfway between them is the tile normal, the direction perpendicular to its face. With that orientation, the incoming and outgoing angles are equal. That's the bisector rule.</p>
+    <p>As the user moves, each tile computes its own normal, and the reflected rays meet at the user's new position. Now watch for a red tile. Its required angle has passed the thirty-degree servo limit. The tile stops turning, and you can see its ray miss the user. That is a physical constraint the controller will have to respect.</p>
   </aside>
 </section>
 
@@ -466,7 +452,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>One automated pipeline: Blender builds the scene and sets the tile angles from the target positions; Sionna RT traces it with ITU-R P.2040 materials.</p>
+    <p>We test that construction in a ray tracer. Blender defines the walls, users, access point, and tile orientations. We use the ITU material model to specify how permittivity and conductivity vary with frequency. NVIDIA Sionna RT then traces paths through the scene. That gives us path gain here and, later, the received power we use to train the controllers.</p>
   </aside>
 </section>
 
@@ -493,8 +479,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>Is the geometric rule alone worth pursuing? A 28 GHz downlink to one user in two concrete hallways, with the ten-by-seven array, known positions and unconstrained rotation.</p>
-    <p>Three cases: no reflector; a simple reflector, every tile at 45 degrees; and beam-focusing with the bisector rule. The T-shaped hallway uses two arrays. Nine non-line-of-sight locations, the green spheres.</p>
+    <p>Our first experiment is a 28 gigahertz downlink to one user. The green markers are the nine receiver locations we test in each hallway. We compare three configurations at the same locations. We leave the corner empty, install tiles all set to 45 degrees, or aim each tile using the bisector rule. The T-shaped hallway needs two reflectors in sequence.</p>
   </aside>
 </section>
 
@@ -524,9 +509,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>The L-shaped hallway first. These are path-gain maps 1.5 meters above the floor: no reflector, simple reflector, beam-focusing.</p>
-    <p>The corner blocks the direct path, and the gain at the user is minus 125.61 dB. The simple reflector adds about 26 dB.</p>
-    <p>Beam-focusing reaches minus 72.57 dB: 53.0 dB above no reflector and 27.0 dB above the simple reflector. The bright band on the right is the tile paths converging at the user, the same picture as the animation, now in the ray tracer.</p>
+    <p>Find the green receiver marker near the bottom of each map. Its position is identical in all three. With the corner empty, very little power reaches that point. Setting every tile to 45 degrees sends some energy down the hall. In the rightmost map, aiming the tiles individually brings the bright band through the receiver.</p>
+    <p>At that location, focusing improves path gain by 53 decibels over the empty corner. Even against the simple reflector in the middle, the gain is about 27 decibels.</p>
   </aside>
 </section>
 
@@ -556,9 +540,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes">
-    <p>The T-shaped hallway needs two reflections in sequence, so there are two arrays and the bisector rule is applied twice.</p>
-    <p>Without reflectors the gain at the user is minus 156.35 dB. Simple reflectors reach minus 109.20.</p>
-    <p>Beam-focusing with both arrays reaches minus 68.88 dB, an 87.5 dB improvement over no reflector and 40.3 dB above the simple reflectors. The focused band turns twice and lands in the side branch.</p>
+    <p>In the T-shaped hallway, the receiver sits in the side branch. Follow the bright band in the rightmost map. The first array directs energy toward the second, and the second turns it into the branch. We apply the same reflection rule twice.</p>
+    <p>The starting link here is especially weak, about minus 156 decibels of path gain. Focusing brings it to about minus 69. That gives the 87.5 decibel improvement in the title. Against two simple reflectors, the improvement is about 40 decibels.</p>
   </aside>
 </section>
 
@@ -580,7 +563,9 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
       </div>
     </div>
   </div>
-  <aside class="notes"><p>Here is the geometric rule in motion. At every user position along the hallway, the bisector rule recomputes all tile orientations, and the ray-traced path-gain map shows the focused band following the user: around one corner in the L-shaped hallway, and through two reflections into the side branch in the T-shaped hallway. Each frame is still a static solution for one user at a known position.</p></aside>
+  <aside class="notes">
+    <p>Follow the green receiver in either video. At each new position we recalculate the tile angles, and the bright band moves with it. On the left, one reflection reaches around the corner. On the right, it takes two. Each frame is a separate static solution with a known user position and unrestricted tile rotation.</p>
+  </aside>
 </section>
 
 <!-- ============================== LIMITS (transition WHAT -> HOW) ============================== -->
@@ -594,7 +579,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="transition"><div class="ans"><b>Answered (WHAT):</b> the tile array and the bisector rule steer signals around corners: +53.0 / +87.5 dB for one static user.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> how to act within servo limits, optimize received power rather than geometric alignment, and serve several moving users? &rarr; learned focal points.</div></div>
   </div>
   <aside class="notes">
-    <p>The study also exposes two limits. First, servo limits: the rule assumes unconstrained rotation, as the red tiles in the animation showed.</p>
-    <p>Second, it serves one user at a known position. The next part keeps the bisector rule but learns the focal points, within servo limits, trained on received power, for several moving users. Its baselines are static reflectors and learned variants, not a position-tracking geometric rule.</p>
+    <p>Geometry answers a specific question. If I know where one receiver is and the tiles can turn far enough, I know how to direct a path toward it. A real panel has limits, as we saw when the tiles turned red. And if three users share the panel, aiming everything at one of them leaves the other two out of the decision.</p>
+    <p>I'll keep the bisector rule for setting tile angles. The decision I want to learn is where each part of the array should aim to improve received power across the users.</p>
   </aside>
 </section>

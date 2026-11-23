@@ -147,8 +147,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
   <div class="committee"><span class="lab">Chair:</span><span>Prof. Sabit Ekin</span><span class="lab">Co-chair:</span><span>Prof. Jian Tao</span><span class="lab">Committee board:</span><span>Prof. Erchin Serpedin</span><span></span><span>Prof. Arya Menon</span></div>
   <div class="logos"><img src="assets/img/logos/tamu-horizontal-maroon.png" alt="Texas A&amp;M University"><img class="tw" src="assets/img/logos/texas-wireless-2026.png" alt="Texas Wireless"></div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 0:00&ndash;0:30]</b></p>
-    <p>Good morning. Thank you to my committee chair, Prof. Ekin, my co-chair, Prof. Tao, and the committee members for being here.</p>
-    <p>This talk is about how mechanically reconfigurable metallic reflectors can be controlled and placed from spatial information, meaning positions and a site model, without pilot-based channel estimation.</p>
+    <p>Good morning. Thank you to my committee and to everyone joining us. Imagine a receiver just around a corner. Its position is known, but a wall blocks the direct signal. My dissertation asks how we can use that position to steer a metallic reflector, and how we can decide where the reflector belongs in the first place.</p>
   </aside>
 </section>
 
@@ -167,11 +166,11 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </ol>
   </div>
   <aside class="notes"><p class="timing"><b>[0.25 min | 0:30&ndash;0:45]</b></p>
-    <p>Seven parts. After the introduction, they answer five questions: why this approach, what geometry gives, how to steer the array, where to install it, and which method fits which problem.</p>
+    <p>I'll start with the physics of one reflection. Then I'll add several users, let them move, and finally step back to ask where we should install the hardware.</p>
   </aside>
 </section>
 
-<section class="divider" data-num="1" data-title="About Me"><aside class="notes"><p>Section divider: about me. Move on.</p></aside></section>
+<section class="divider" data-num="1" data-title="About Me"><aside class="notes"></aside></section>
 
 <!-- ============================== ABOUT ME ============================== -->
 <section data-id="aboutme" data-min="0.5">
@@ -199,9 +198,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 0:45&ndash;1:15]</b></p>
-    <p>I am a Ph.D. candidate in Electrical Engineering at Texas A&amp;M, with Prof. Sabit Ekin as committee chair and Prof. Jian Tao as co-chair.</p>
-    <p>My research is on smart radio environments: I control and place mechanically reconfigurable metallic reflectors from spatial information, positions and a site model, rather than pilot-based channel estimation.</p>
-    <p>It sits where machine learning, reinforcement learning, wireless communication and optimization meet.</p>
+    <p>I'm Hieu Le, a Ph.D. candidate in electrical engineering at Texas A&amp;M. My committee chair is Professor Sabit Ekin, and my co-chair is Professor Jian Tao. My work brings together two perspectives. As a wireless engineer, I want to know which paths can carry energy to a user. As a machine-learning researcher, I want to know which decisions a controller can learn from those paths.</p>
   </aside>
 </section>
 
@@ -226,8 +223,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 1:15&ndash;1:45]</b></p>
-    <p>My professional experience, most recent first. After graduation I will return to Uber as a Machine Learning Engineer, starting in 2027.</p>
-    <p>Since 2021 I have been a research assistant at Texas A&amp;M, where this work was done. This summer I interned at Uber on Rider Pricing and Incentives; in fall 2025 at Qualcomm in San Diego; and in 2024 I worked at the High Performance Computing Center.</p>
+    <p>I've worked on this research at Texas A&amp;M since 2021. Along the way, I worked at the High Performance Computing Center, interned at Qualcomm in San Diego, and joined Uber's Rider Pricing and Incentives team for a summer. After graduation, I'll return to Uber as a machine learning engineer in 2027.</p>
   </aside>
 </section>
 
@@ -247,13 +243,13 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.25 min | 1:45&ndash;2:00]</b></p>
-    <p>This work was supported in part by the Department of Energy Early Career Research Program, award DE-SC0023957, and by the National Science Foundation, grants 2549088 and 2535873.</p>
+    <p>I'd like to acknowledge the Department of Energy's Early Career Research Program and the National Science Foundation. Both supported this research, and their award numbers are on the slide.</p>
   </aside>
 </section>
 
 <!-- ============================== FORMULA3 MAP (new) ============================== -->
 
-<section class="divider" data-num="2" data-title="Motivation and Objectives" data-part="WHY" data-question="Why steer reflectors from spatial information instead of channel estimates?"><aside class="notes"><p>Section divider: why steer reflectors from spatial information instead of channel estimates?</p></aside></section>
+<section class="divider" data-num="2" data-title="Motivation and Objectives" data-part="WHY" data-question="Why steer reflectors from spatial information instead of channel estimates?"><aside class="notes"></aside></section>
 
 <!-- ============================== MMWAVE ============================== -->
 <section data-id="mmwave" data-min="0.5">
@@ -271,8 +267,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="tiny gray credit">Image credit: spectrummattersindeed.blogspot.com/2020/01/why-millimeter-wave-is-essential-for-5g.html</div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 2:00&ndash;2:30]</b></p>
-    <p>Each wireless generation carries more demanding applications: augmented reality, autonomous systems, large-scale IoT. Engineers have two levers: more bandwidth, or better signal quality.</p>
-    <p>The large contiguous channels are at millimeter-wave frequencies, where propagation is mostly line of sight.</p>
+    <p>Consider an augmented reality headset. Sending more data over its wireless link requires more bandwidth, better signal quality, or both. Millimeter-wave bands are attractive because they offer wide, contiguous channels. The challenge comes when the person wearing that headset walks out of the transmitter's line of sight.</p>
   </aside>
 </section>
 
@@ -291,8 +286,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="tiny gray credit">Image credit: cdn.codeground.org/nsr/downloads/researchareas/2022May_6G_Spectrum.pdf</div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 2:30&ndash;3:00]</b></p>
-    <p>This chart shows the trade-off: higher frequency, more bandwidth, smaller coverage.</p>
-    <p>The price is higher path loss, weak penetration and frequent blockage. Usually the environment is a fixed channel to compensate for; this dissertation asks what happens if part of it becomes controllable.</p>
+    <p>On this chart, the high-frequency bands offer the widest channels and the shortest coverage. At millimeter-wave frequencies, a wall can attenuate the direct signal enough to erase the benefit of that extra bandwidth. That led me to ask whether we could change the path the signal takes through the building.</p>
   </aside>
 </section>
 
@@ -308,8 +302,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="takeaway">In all three, links are blocked by structure, so coverage depends on reaching non-line-of-sight (NLOS) users.</div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 3:00&ndash;3:30]</b></p>
-    <p>Three settings motivate this work: data centers, where metal racks block signals; nuclear facilities, where telemetry must work behind shielding; and industrial plants, with robots in cluttered geometry.</p>
-    <p>In all three, structure blocks the direct path, so coverage depends on reaching non-line-of-sight users. The scenes later in the talk are generic indoor geometries with this blockage.</p>
+    <p>A row of metal racks in a data center can block a receiver only a few meters away. Thick shielding around a sensor in a nuclear facility creates a similar problem. So does machinery between a factory robot and its access point. The hallways and rooms in my simulations isolate what these settings have in common. A nearby user can still be out of sight.</p>
   </aside>
 </section>
 
@@ -350,8 +343,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 3:30&ndash;4:00]</b></p>
-    <p>The core challenge in one picture: in an L-shaped corridor the corner blocks the direct path, and the user around the corner sits in a dead zone.</p>
-    <p>The usual answer is more access points, more power, or more processing, each adding cost. The first remedy returns in placement. The alternative: a controllable surface at the corner creates a reflected path into the dead zone.</p>
+    <p>Follow the dashed line from the access point, or AP, to the user. It runs into the inside corner. We could install a second AP beyond that corner. The green path shows another possibility. A reflector that can see both ends of the link can redirect energy down the second hallway. The question is how to aim it.</p>
   </aside>
 </section>
 
@@ -366,9 +358,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 4:00&ndash;4:45]</b></p>
-    <p>Why avoid channel estimation? On the left is an electronic RIS with N elements serving K users. To configure it, the controller needs the cascaded channel through every element to every user, so pilot time grows with N times K.</p>
-    <p>Watch the bar: the channel stays coherent only for a fixed window. As the surface grows, pilots fill more of it and little time is left for data.</p>
-    <p>On the right, a mechanical reflector array is steered from user positions. Its control input stays small, independent of the number of tiles. This is schematic, not a measurement.</p>
+    <p>Watch the orange part of the bar on the left. It represents time spent sending pilots to estimate channel state information, or CSI. In this example, the controller estimates a channel through each surface element to each user. As the grid gets finer, that number grows as elements times users. The channel is stable for only a limited time, so the green part available for data shrinks.</p>
+    <p>On the right, adding tiles still leaves us with the same three user positions. That's the information our controller uses to steer the surface.</p>
   </aside>
 </section>
 
@@ -389,9 +380,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="takeaway">The burden shifts from channel estimation to <b>localization</b> (run time) and the <b>site model</b> (planning).</div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 4:45&ndash;5:30]</b></p>
-    <p>The standard controllable surface, the electronic RIS, faces three barriers: unit cells designed for one band; the cascaded channel through every element, which we just saw; and bias power to hold its state.</p>
-    <p>Our alternative is a metallic array of servo-rotated tiles, large compared with the wavelength, so they act as mirrors across bands.</p>
-    <p>At run time the controller uses only user positions; received power serves as the training reward. The tiles draw no power once positioned. The trade-off is slower reconfiguration, which suits quasi-static indoor scenes.</p>
+    <p>An electronic reconfigurable intelligent surface, or RIS, steers a wave by changing the phase response of its elements. The array on the right steers it by physically turning metal tiles. Each tile is large compared with the wavelength, so we can calculate its orientation using the law of reflection.</p>
+    <p>This changes the engineering trade-off. The tiles need power to move and can hold their position afterward. Mechanical motion takes time, so slowly changing indoor links are a natural starting point. Steering also depends on knowing where the users are.</p>
   </aside>
 </section>
 
@@ -402,13 +392,12 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <img src="assets/img/crops/intro_goal_map.png" alt="Overview map: WHY thesis; WHERE to install; HOW to steer; WHAT foundations; WHICH method">
   </div>
   <aside class="notes"><p class="timing"><b>[1 min | 5:30&ndash;6:30]</b></p>
-    <p>The thesis, at the top: spatial information, meaning AP and tile positions, user-position estimates and a site model, is enough to configure, control and place these reflectors without pilot-based channel estimation. That is what spatial intelligence means here; the cost moves to localization and site-model accuracy.</p>
-    <p>The numbers give the talk order: what geometry achieves, how to operate the array, then where to install it, because the controllers take the mounting sites as given. The map itself is in system order.</p>
-    <p>The two stages share the focal-point interface. They were studied separately, and coupling them, the dashed arrow, is future work.</p>
+    <p>There are two different engineering decisions in this diagram. On the left, before installation, we have a building model. We need to choose where the access points and the reflector go. On the right, the hardware is already on the wall and a user moves. We need to decide where to aim next.</p>
+    <p>Both decisions use a focal point, a location in space toward which we steer the reflected signal. I'll first show how geometry turns that point into tile angles. Then I'll cover control and placement. I evaluate these stages separately in simulation. The dashed link is the experiment that would connect them.</p>
   </aside>
 </section>
 
-<section class="divider" data-num="3" data-title="Foundations" data-part="WHAT" data-question="What hardware, and what does geometry alone achieve?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Guiding wireless signals with arrays of metallic linear Fresnel reflectors: A low-cost, frequency-versatile, and practical approach,&rdquo; in <i>Proc. IEEE 100th Veh. Technol. Conf. (VTC2024-Fall)</i>, Washington, DC, USA, 2024, pp.&nbsp;1&ndash;7.</p></div><aside class="notes"><p>Section divider: what hardware and abstraction, and what does geometry alone achieve?</p></aside></section>
+<section class="divider" data-num="3" data-title="Foundations" data-part="WHAT" data-question="What hardware, and what does geometry alone achieve?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Guiding wireless signals with arrays of metallic linear Fresnel reflectors: A low-cost, frequency-versatile, and practical approach,&rdquo; in <i>Proc. IEEE 100th Veh. Technol. Conf. (VTC2024-Fall)</i>, Washington, DC, USA, 2024, pp.&nbsp;1&ndash;7.</p></div><aside class="notes"></aside></section>
 
 <!-- ============================== HARDWARE ============================== -->
 <section data-id="hardware" data-min="0.75">
@@ -431,9 +420,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 6:30&ndash;7:15]</b></p>
-    <p>The hardware throughout is a metallic linear Fresnel reflector array: a grid of metallic tiles, each rotated in elevation and azimuth.</p>
-    <p>It redirects the wave by ordinary specular reflection, so it needs no RF circuitry. In the top view, each tile is angled so its reflection from the access point lands on the user.</p>
-    <p>The geometric study uses ten by seven square tiles, a 1.4 by 2.0 meter device, with unconstrained rotation.</p>
+    <p>Think of each metal tile as a small, steerable mirror for radio waves. It rotates about two axes. The top view on the left shows why neighboring tiles need slightly different angles. They see the access point and the receiver from slightly different positions.</p>
+    <p>For the first study, we modeled a linear Fresnel reflector array with seventy square tiles. Each tile is twenty centimeters on a side. Here we let them rotate freely so we can measure what the geometry alone can achieve.</p>
   </aside>
 </section>
 
@@ -453,10 +441,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[1 min | 7:15&ndash;8:15]</b></p>
-    <p>How is each tile oriented? This is a top view: the access point on the left, a row of tiles on the wall, and a user walking along the hallway.</p>
-    <p>Call the tile center A, the access point B and the user C. By the law of reflection the tile normal must bisect the unit vectors toward the access point and toward the user. As the user moves, every tile turns, and all reflected rays still converge on the user.</p>
-    <p>First click: the dashed normals, with equal angles on each side. Only positions enter this rule; there is no channel estimate.</p>
-    <p>Second click: real servos have a limited range. When the user walks back toward the access point side, some tiles would need more than 30 degrees. They clip, turn red, and their rays miss.</p>
+    <p>Pick one tile along the wall. From its center, draw one line toward the access point and another toward the user. The dashed line halfway between them is the tile normal, the direction perpendicular to its face. With that orientation, the incoming and outgoing angles are equal. That's the bisector rule.</p>
+    <p>As the user moves, each tile computes its own normal, and the reflected rays meet at the user's new position. Now watch for a red tile. Its required angle has passed the thirty-degree servo limit. The tile stops turning, and you can see its ray miss the user. That is a physical constraint the controller will have to respect.</p>
   </aside>
 </section>
 
@@ -476,7 +462,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 8:15&ndash;8:45]</b></p>
-    <p>One automated pipeline: Blender builds the scene and sets the tile angles from the target positions; Sionna RT traces it with ITU-R P.2040 materials.</p>
+    <p>We test that construction in a ray tracer. Blender defines the walls, users, access point, and tile orientations. We use the ITU material model to specify how permittivity and conductivity vary with frequency. NVIDIA Sionna RT then traces paths through the scene. That gives us path gain here and, later, the received power we use to train the controllers.</p>
   </aside>
 </section>
 
@@ -503,8 +489,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 8:45&ndash;9:15]</b></p>
-    <p>Is the geometric rule alone worth pursuing? A 28 GHz downlink to one user in two concrete hallways, with the ten-by-seven array, known positions and unconstrained rotation.</p>
-    <p>Three cases: no reflector; a simple reflector, every tile at 45 degrees; and beam-focusing with the bisector rule. The T-shaped hallway uses two arrays. Nine non-line-of-sight locations, the green spheres.</p>
+    <p>Our first experiment is a 28 gigahertz downlink to one user. The green markers are the nine receiver locations we test in each hallway. We compare three configurations at the same locations. We leave the corner empty, install tiles all set to 45 degrees, or aim each tile using the bisector rule. The T-shaped hallway needs two reflectors in sequence.</p>
   </aside>
 </section>
 
@@ -534,9 +519,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 9:15&ndash;10:00]</b></p>
-    <p>The L-shaped hallway first. These are path-gain maps 1.5 meters above the floor: no reflector, simple reflector, beam-focusing.</p>
-    <p>The corner blocks the direct path, and the gain at the user is minus 125.61 dB. The simple reflector adds about 26 dB.</p>
-    <p>Beam-focusing reaches minus 72.57 dB: 53.0 dB above no reflector and 27.0 dB above the simple reflector. The bright band on the right is the tile paths converging at the user, the same picture as the animation, now in the ray tracer.</p>
+    <p>Find the green receiver marker near the bottom of each map. Its position is identical in all three. With the corner empty, very little power reaches that point. Setting every tile to 45 degrees sends some energy down the hall. In the rightmost map, aiming the tiles individually brings the bright band through the receiver.</p>
+    <p>At that location, focusing improves path gain by 53 decibels over the empty corner. Even against the simple reflector in the middle, the gain is about 27 decibels.</p>
   </aside>
 </section>
 
@@ -566,9 +550,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 10:00&ndash;10:45]</b></p>
-    <p>The T-shaped hallway needs two reflections in sequence, so there are two arrays and the bisector rule is applied twice.</p>
-    <p>Without reflectors the gain at the user is minus 156.35 dB. Simple reflectors reach minus 109.20.</p>
-    <p>Beam-focusing with both arrays reaches minus 68.88 dB, an 87.5 dB improvement over no reflector and 40.3 dB above the simple reflectors. The focused band turns twice and lands in the side branch.</p>
+    <p>In the T-shaped hallway, the receiver sits in the side branch. Follow the bright band in the rightmost map. The first array directs energy toward the second, and the second turns it into the branch. We apply the same reflection rule twice.</p>
+    <p>The starting link here is especially weak, about minus 156 decibels of path gain. Focusing brings it to about minus 69. That gives the 87.5 decibel improvement in the title. Against two simple reflectors, the improvement is about 40 decibels.</p>
   </aside>
 </section>
 
@@ -590,7 +573,9 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
       </div>
     </div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.5 min | 10:45&ndash;11:15]</b></p><p>Here is the geometric rule in motion. At every user position along the hallway, the bisector rule recomputes all tile orientations, and the ray-traced path-gain map shows the focused band following the user: around one corner in the L-shaped hallway, and through two reflections into the side branch in the T-shaped hallway. Each frame is still a static solution for one user at a known position.</p></aside>
+  <aside class="notes"><p class="timing"><b>[0.5 min | 10:45&ndash;11:15]</b></p>
+    <p>Follow the green receiver in either video. At each new position we recalculate the tile angles, and the bright band moves with it. On the left, one reflection reaches around the corner. On the right, it takes two. Each frame is a separate static solution with a known user position and unrestricted tile rotation.</p>
+  </aside>
 </section>
 
 <!-- ============================== LIMITS (transition WHAT -> HOW) ============================== -->
@@ -604,8 +589,8 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <div class="transition"><div class="ans"><b>Answered (WHAT):</b> the tile array and the bisector rule steer signals around corners: +53.0 / +87.5 dB for one static user.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> how to act within servo limits, optimize received power rather than geometric alignment, and serve several moving users? &rarr; learned focal points.</div></div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 11:15&ndash;12:00]</b></p>
-    <p>The study also exposes two limits. First, servo limits: the rule assumes unconstrained rotation, as the red tiles in the animation showed.</p>
-    <p>Second, it serves one user at a known position. The next part keeps the bisector rule but learns the focal points, within servo limits, trained on received power, for several moving users. Its baselines are static reflectors and learned variants, not a position-tracking geometric rule.</p>
+    <p>Geometry answers a specific question. If I know where one receiver is and the tiles can turn far enough, I know how to direct a path toward it. A real panel has limits, as we saw when the tiles turned red. And if three users share the panel, aiming everything at one of them leaves the other two out of the decision.</p>
+    <p>I'll keep the bisector rule for setting tile angles. The decision I want to learn is where each part of the array should aim to improve received power across the users.</p>
   </aside>
 </section>
 
@@ -660,7 +645,7 @@ section[data-id] .lr-stretchblock>.bb{flex:1;display:flex;flex-direction:column;
 section[data-id="rob-size"] .midnum{font-size:25px}
 </style>
 
-<section class="divider" data-id="div-marl" data-num="4" data-title="Multi-Agent RL Control" data-part="HOW" data-question="How can learned agents steer the array for moving users?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Signal Whisperers: Enhancing wireless reception using DRL-guided reflector arrays,&rdquo; <i>IEEE Trans. Mach. Learn. Commun. Netw.</i>, vol.&nbsp;4, pp.&nbsp;265&ndash;281, 2026.</p><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Bypassing the CSI bottleneck: MARL-driven spatial control for reflector arrays,&rdquo; arXiv:2604.05162, 2026; submitted to IEEE ICC 2027 (under review).</p></div><aside class="notes"><p>Section divider: learned control for several moving users. Move on.</p></aside></section>
+<section class="divider" data-id="div-marl" data-num="4" data-title="Multi-Agent RL Control" data-part="HOW" data-question="How can learned agents steer the array for moving users?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Signal Whisperers: Enhancing wireless reception using DRL-guided reflector arrays,&rdquo; <i>IEEE Trans. Mach. Learn. Commun. Netw.</i>, vol.&nbsp;4, pp.&nbsp;265&ndash;281, 2026.</p><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Bypassing the CSI bottleneck: MARL-driven spatial control for reflector arrays,&rdquo; arXiv:2604.05162, 2026; submitted to IEEE ICC 2027 (under review).</p></div><aside class="notes"></aside></section>
 
 <!-- ============================== ANIMATION A2b: focal-point abstraction ============================== -->
 <section data-id="anim-focal" data-min="0.75">
@@ -673,9 +658,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 12:00&ndash;12:45]</b></p>
-    <p>Learned control and placement build on one abstraction. Instead of the user position, all tiles of a segment aim at a shared virtual focal point.</p>
-    <p>Here the array has three segments, each with its own focal point. When a focal point moves, all tiles of its segment re-orient together through the bisector rule; the front view shows their tilt.</p>
-    <p>Click: a segment of n tiles is controlled by three coordinates instead of 2n angles. For 63 tiles and three segments that is 126 angles versus nine coordinates. Learned control learns these focal points; placement optimizes them.</p>
+    <p>Follow the blue crosshair in the top view. It's a virtual focal point, a target we are free to move in three dimensions. Its height is shown by the size of the ring. In the front view, watch the blue tiles turn as that point moves. Each tile computes its own angle, but all the blue tiles aim at the same target.</p>
+    <p>That's the control interface. With three segments, we choose just nine focal coordinates. The bisector rule converts those into the 126 angles of the 63 tiles.</p>
   </aside>
 </section>
 
@@ -706,12 +690,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[1.25 min | 12:45&ndash;14:00]</b></p>
-    <p>Multi-user control becomes a cooperative multi-agent MDP. The array is split into L disjoint segments, three here, and each agent controls one segment's focal point.</p>
-    <p>The global state holds the user positions, the fixed segment centers, and the current focal points. Each agent observes only its own segment: the position of its assigned user, its center, and its focal point. The assigned user is fixed in advance; this matters later.</p>
-    <p>The action is a bounded focal-point displacement, so the tiles move smoothly.</p>
-    <p>All agents share one reward, the mean received power of the users. Power is used only in training, so at run time the agents need positions only.</p>
-    <p>Focal points and tile angles are clipped to their limits, so every action is feasible. This is how learning answers the geometric limits: it acts within servo limits, optimizes received power, and serves several users.</p>
-    <p>The abstraction cuts the control dimension from two angles per tile, 126 angles for 63 tiles, to three coordinates per segment, 9 for three segments: fourteen times fewer.</p>
+    <p>Consider one control step from the point of view of the blue segment. Its agent observes three positions. The first tells it where its assigned user is. The other two tell it where its segment sits and where it is aiming now. Its action is a displacement of the focal point in three dimensions. We bound each component of that displacement, keep the focal point within its allowed region, and clip the resulting tile angles to the servo limits.</p>
+    <p>We formulate this as a cooperative multi-agent Markov decision process. During training, all agents get the same reward, the mean received signal strength across the users. A move that helps one user can therefore affect the reward for the whole team. At deployment each agent chooses its move from local positions. The user assigned to that segment stays fixed for this first controller.</p>
   </aside>
 </section>
 
@@ -723,10 +703,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="fragment foot gray" data-anim-step="1" style="margin:8px 0 0 0;text-align:center">Here each user's columns span the whole aperture; with arrays on different walls, the assignment would matter.</p>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 14:00&ndash;14:45]</b></p>
-    <p>Here is the controller in motion. The access point has no direct path to the users; the corner array reflects into the hallway.</p>
-    <p>Each color is one agent. Its columns are fixed: user one always owns columns one, four and seven.</p>
-    <p>When the users move, each agent shifts its focal point toward its user in bounded steps, the dashed box, and the tiles re-orient so the reflected beams follow.</p>
-    <p>Click: the assignment never changes. Here that costs little, because each user's columns span the whole aperture; on arrays on different walls it would matter.</p>
+    <p>Watch user one and the blue crosshair in the hallway. When the user moves, the dashed box shows how far the agent can move its focal point in one step. The reflected beam follows as the tiles turn.</p>
+    <p>Now look at the front of the array on the right. Columns one, four, and seven stay blue throughout. Their angles change, but they always serve user one. This animation illustrates the distinction between learning where a segment should aim and deciding which user it should serve.</p>
   </aside>
 </section>
 
@@ -761,9 +739,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 14:45&ndash;15:30]</b></p>
-    <p>The agents are trained with MAPPO, multi-agent proximal policy optimization, under centralized training with decentralized execution, which addresses non-stationarity.</p>
-    <p>In training, the centralized critic sees the global state and reward and supplies advantages. At deployment the critic is discarded; each actor maps its local observation to a focal-point move, with no communication.</p>
-    <p>The objective has three terms. The clipped surrogate takes the smaller of the ratio-weighted advantage and its clipped version, so one batch cannot move a policy far. The value loss fits the critic to the observed return, and the entropy bonus keeps the agents exploring focal points.</p>
+    <p>We train the agents with multi-agent proximal policy optimization, or MAPPO. The diagram shows centralized training with decentralized execution. During training, a shared critic sees every user's position, every segment center, and every focal point. It helps estimate whether a move produced a better return than expected while the other agents were also learning.</p>
+    <p>In the objective below, clipping limits the incentive for a large policy update. The value loss trains the critic, and the entropy bonus encourages exploration. At deployment, each segment runs its own actor using only its local observation.</p>
   </aside>
 </section>
 
@@ -788,9 +765,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 15:30&ndash;16:00]</b></p>
-    <p>The scene is an L-shaped hallway at 60&nbsp;GHz. A four-antenna access point transmits 5&nbsp;dBm, and the 63-tile array sits at the corner.</p>
-    <p>Three users are in the shadowed region, the yellow rectangle, and a 1.8&nbsp;m wooden obstacle blocks the remaining direct paths.</p>
-    <p>Each episode starts from random tile angles within plus or minus 30 degrees.</p>
+    <p>Here is the 60 gigahertz hallway we use to evaluate the controller. The access point transmits at five dBm. The 63-tile reflector sits at the corner, and the three users share the shadowed region beyond the wooden obstacle. We start each training episode with random tile angles inside the thirty-degree servo range.</p>
   </aside>
 </section>
 
@@ -813,8 +788,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 16:00&ndash;16:30]</b></p>
-    <p>Three controllers: multi-agent focusing, a single agent choosing all focal points, and a multi-agent version that shares one azimuth per column, a cheaper array.</p>
-    <p>The multi-agent controller converges to about 42, the other two near 27. A plausible reason: each agent faces a smaller problem. The column-based one trains stably, so the method fits a lower-cost array.</p>
+    <p>All three curves show training reward. The blue curve rises fastest and settles near 42. This controller gives each user an agent and lets each tile take the angle its focal point requires. One agent steering all focal points finishes near 27. So does the simpler array that shares one azimuth per column. The next question is what that difference buys in received power.</p>
   </aside>
 </section>
 
@@ -838,11 +812,9 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </ul>
   </div>
   <aside class="notes"><p class="timing"><b>[1.25 min | 16:30&ndash;17:45]</b></p>
-    <p>These are RSSI maps of the hallway during evaluation, with the RSSI-map average of each configuration underneath. The users are the magenta dots.</p>
-    <p>With no reflector the average is minus 108.2&nbsp;dBm. A static flat reflector raises it by 18.1&nbsp;dB to minus 90.1&nbsp;dBm.</p>
-    <p>Compare the flat panel, where power spreads along the corridor, with the narrow beams the learned controllers form toward each user. Single-agent focusing reaches minus 74.22, the column-based controller minus 72.71, and multi-agent beam-focusing minus 69.4&nbsp;dBm.</p>
-    <p>That is 38.8&nbsp;dB above no reflector, 20.7&nbsp;dB above the static flat reflector, and 4.8&nbsp;dB above the single-agent controller. The baselines are static reflectors and learned variants; a position-tracking geometric rule was not run here.</p>
-    <p>The video shows the multi-agent controller with moving users. Users move every four simulation steps, with a three-step adaptation window, an assumed allowance for mechanical latency. After a move, the controller typically recovers within one step.</p>
+    <p>The pink dots mark the users. Compare the second map, the static flat reflector, with the fifth, multi-agent focusing. The flat panel sends energy down the hallway. With learned focusing, you can see narrower bands passing through the users.</p>
+    <p>The values beneath the maps give the average RSSI, the received signal strength indicator, in dBm. The flat reflector gives minus 90.1 dBm, and multi-agent focusing gives minus 69.4 dBm. That's a 20.7 decibel improvement. Giving one agent control of all the focal points is a closer comparison. The multi-agent controller gains about 4.8 decibels there.</p>
+    <p>In the video, users change position every four simulation steps. That leaves three steps for adjustment, and the controller typically recovers within one. These comparisons cover static reflectors and learned controllers. A geometric controller that continuously tracks the users would be a separate benchmark.</p>
   </aside>
 </section>
 
@@ -864,8 +836,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 17:45&ndash;18:15]</b></p>
-    <p>Three robustness checks, one per slide. Here and on the next slide the metric is the temporal-average RSSI at the users over the 300-step trace.</p>
-    <p>The three-user policy runs unchanged with two, three and four users: minus 67.33, minus 67.60 and minus 68.33&nbsp;dBm, a 1&nbsp;dB drop from two to four users, since fewer users means more tiles per user.</p>
+    <p>Now we measure RSSI at the users and average it over 300 steps. We trained the policy with three users, then ran it with two, three, and four users using the same weights. Going from two users to four costs about one decibel on average. Each user now shares the same reflector aperture with more people.</p>
   </aside>
 </section>
 
@@ -885,8 +856,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 18:15&ndash;18:45]</b></p>
-    <p>Second check: arrays from 45 to 99 tiles, again without retraining.</p>
-    <p>RSSI rises monotonically with size, from minus 68.43 to minus 66.80&nbsp;dBm, with diminishing returns. Because the agents act on focal points rather than individual tiles, the same policy runs on every array size.</p>
+    <p>This time we keep the users and change the size of the reflector. Going from 45 tiles to 99 raises average RSSI by about 1.6 decibels, with smaller gains as we add more tiles. We can reuse the same policy across these sizes because its action is still a three-dimensional focal-point move.</p>
   </aside>
 </section>
 
@@ -906,8 +876,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 18:45&ndash;19:15]</b></p>
-    <p>Third check: Gaussian noise on the user positions, in both training and evaluation. The plot shows the deployed controller over the 300-step trace at each noise level.</p>
-    <p>Up to 0.3&nbsp;m, RSSI stays within 0.54&nbsp;dB of the noise-free case; at 0.5 and 1.0&nbsp;m it is about 4.6&nbsp;dB lower. UWB or mmWave radar can provide sub-meter accuracy.</p>
+    <p>How accurate do the user positions need to be? Here we add Gaussian error to the positions and train at the same noise level we use for evaluation. The dashed lines show average RSSI. At a standard deviation of thirty centimeters, we're within about half a decibel of the noise-free case. At fifty centimeters and one meter, the loss is about 4.6 decibels.</p>
   </aside>
 </section>
 
@@ -932,15 +901,13 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="transition"><div class="ans"><b>Answered (HOW):</b> decentralized agents steer focal points from user positions, trained on received power: +20.7&nbsp;dB over a static flat reflector.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> when segments differ in geometry, which segment should serve which user, and when should that change? &rarr; hierarchical MARL.</div></div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 19:15&ndash;20:00]</b></p>
-    <p>To summarize: decentralized agents steer focal points from user positions, well above static reflectors.</p>
-    <p>One structural choice was fixed in advance: which tiles serve which user. Columns 1, 4 and 7 always serve user 1.</p>
-    <p>In this hallway that costs nothing measurable: two groupings give the same minus 67.60&nbsp;dBm, because each user's tiles span the whole aperture.</p>
-    <p>It matters when segments differ in geometry, such as arrays on different walls. Choosing it is a discrete problem: K users and L segments give K to the power L options, 27 in this three-user hallway. Next: which segment serves which user, and when.</p>
+    <p>In this hallway, the blue columns span the width of the array. The green and orange columns do too. We tried a second grouping and got the same average RSSI, minus 67.6 dBm. So these two ways of dividing this particular panel made little difference.</p>
+    <p>Now imagine putting one panel on each of two different walls. From one wall a segment might have a clear path to a user, while from the other it faces a sharp turn. In that room, who gets which segment becomes a meaningful decision.</p>
   </aside>
 </section>
 
 <!-- =================================================================== -->
-<section class="divider" data-id="div-hmarl" data-num="5" data-title="Hierarchical Multi-Agent RL" data-part="HOW" data-question="How should several users share the array, and when should the assignment change?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Learning to Reflect: Hierarchical multi-agent reinforcement learning for CSI-free mmWave beam-focusing,&rdquo; arXiv:2603.07370, 2026; under review, <i>IEEE Trans. Mach. Learn. Commun. Netw.</i></p><p><span class="dme">H. Le</span>, M. Ibrahim, O. Bedir, J. Tao, and S. Ekin, &ldquo;Learning to Focus: CSI-free hierarchical MARL for reconfigurable reflectors,&rdquo; arXiv:2604.05165, 2026; accepted, IEEE GLOBECOM 2026, Macau.</p></div><aside class="notes"><p>Section divider: learned allocation on a slower timescale. Move on.</p></aside></section>
+<section class="divider" data-id="div-hmarl" data-num="5" data-title="Hierarchical Multi-Agent RL" data-part="HOW" data-question="How should several users share the array, and when should the assignment change?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Learning to Reflect: Hierarchical multi-agent reinforcement learning for CSI-free mmWave beam-focusing,&rdquo; arXiv:2603.07370, 2026; under review, <i>IEEE Trans. Mach. Learn. Commun. Netw.</i></p><p><span class="dme">H. Le</span>, M. Ibrahim, O. Bedir, J. Tao, and S. Ekin, &ldquo;Learning to Focus: CSI-free hierarchical MARL for reconfigurable reflectors,&rdquo; arXiv:2604.05165, 2026; accepted, IEEE GLOBECOM 2026, Macau.</p></div><aside class="notes"></aside></section>
 
 <!-- ============================ Fixed -> learned ============================ -->
 <section data-id="fixed-to-learned" data-min="0.5">
@@ -966,8 +933,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="takeaway">Make the user-to-segment assignment a learned decision on its own, slower timescale.</div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 20:00&ndash;20:30]</b></p>
-    <p>Now two corner arrays serve the room, so the partition matters.</p>
-    <p>There are two decisions: which user each segment serves, discrete and coupled; and where each segment focuses, continuous and servo-limited. The assignment space grows as K to the power L: with four users and four segments, 256 options. So the assignment becomes a learned decision on its own, slower timescale.</p>
+    <p>With two arrays in different corners, there are two coupled decisions. Choosing a user for a segment is discrete. Moving its focal point is continuous and limited by the servos. Four segments can each choose any of four users, giving 256 joint assignments. Several segments can choose the same person and leave someone else relying on residual multipath.</p>
   </aside>
 </section>
 
@@ -990,9 +956,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 20:30&ndash;21:15]</b></p>
-    <p>The hierarchy has two levels. At the top, a centralized allocator reads the global state: all user positions, segment centroids and current focal points. Every T slots, ten in the experiments, it emits an assignment vector, one user index per segment, which is broadcast and held for the window.</p>
-    <p>Below, one agent per segment moves its focal point every slot. It sees only nine numbers: its assigned user's position, its own centroid and its focal point. Segments do not communicate.</p>
-    <p>At run time both levels see positions only; power is only the training reward. The timeline is drawn with T of four; experiments use ten.</p>
+    <p>Read the timeline as two clocks. The upper clock belongs to the allocator. It sees the user positions, segment centers, and current focal points, then assigns one user to each segment. That assignment holds until the next upper tick. The diagram uses four slots to make the timing visible. The experiments use ten.</p>
+    <p>The lower clock ticks every slot. Each segment updates its aim using its assigned user's position, its own center, and its current focal point. Between allocation decisions, it can track that user independently.</p>
   </aside>
 </section>
 
@@ -1004,9 +969,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="foot gray center" style="margin:8px 0 0 0">Segment colors show the assignment; the allocation rule drawn here is a simple position-based stand-in for the learned allocator.</p>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 21:15&ndash;22:00]</b></p>
-    <p>Here are both timescales together. Two corner arrays, each split into two segments; three users walk paths that cross.</p>
-    <p>Watch the timeline on the right. Every slot, each segment nudges its focal point a bounded step toward its user, the fast level.</p>
-    <p>Every T slots, ten in the experiments, the allocator decides again which user each segment serves; a segment that changes color swings its beam to its new user. Between those decisions the assignment is held, so segments are not thrown around while users cross.</p>
+    <p>Pick one of the three users. Its color tells you which segments are serving it, and the crosshair shows where a segment is aiming. As the user moves, the segment can adjust that aim every slot.</p>
+    <p>Watch the upper row of the timeline. At each mark, ten slots apart, the allocator can change the assignment. When a segment changes color, its beam turns toward a different user. This animation uses a position-based rule to illustrate the timing. The next slide shows how we train the two levels.</p>
   </aside>
 </section>
 
@@ -1028,9 +992,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="foot" style="margin:0">$\tilde P_k$: shifted received power (dBm); $P_{\mathrm{sc}}$: scale (backup). Unlike flat MARL (clipping), a move that would push any tile past its limit is <b>rejected</b>.</p>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 22:00&ndash;22:45]</b></p>
-    <p>Both levels serve one discounted objective, each with a reward suited to its decision.</p>
-    <p>The allocator's reward is a log utility averaged over all users. Unlike flat MARL's mean, one strong user cannot mask an unserved one, and a decibel gained by a weak user is worth more. Because its decision is held for T slots, it is trained on macro-steps: the discounted return inside each window.</p>
-    <p>Each segment is rewarded with its assigned user's shifted power plus a progress term, potential-based shaping. One change from flat MARL: a move that would push any tile past its limit is rejected rather than clipped.</p>
+    <p>On the left, the allocator scores an assignment across all users. We average a log utility over the users. Because that utility has diminishing returns, improving a weak signal can earn more reward than adding the same decibel to an already strong signal. We accumulate the discounted reward over the slots for which the assignment holds.</p>
+    <p>On the right, each segment gets feedback every slot. It earns credit for its user's received power and for improvement since the last slot. If the proposed move would take even one tile beyond its servo limit, the segment holds its position.</p>
   </aside>
 </section>
 
@@ -1061,8 +1024,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 22:45&ndash;23:15]</b></p>
-    <p>Segments train with MAPPO, as in flat MARL; the allocator uses PPO on the macro timescale with its own critic and a factorized head.</p>
-    <p>Exploring 256 assignments is slow, so early on a geometric prior, from positions only, is added to the logits, then switched off. Prior strength gives three variants: none, warm start, and infinite, a pure heuristic.</p>
+    <p>The segment agents still train with MAPPO. The allocator uses PPO and scores the candidate users for each segment. Early in training, we add a geometric compatibility prior to those scores, the logits. Shorter distances and smaller bend angles get more weight. We then set the prior's weight to zero. That gives us a way to guide early exploration while keeping the reward objective fixed.</p>
   </aside>
 </section>
 
@@ -1092,9 +1054,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[1 min | 23:15&ndash;24:15]</b></p>
-    <p>The wireless setup is mostly the same as in the flat study: 60&nbsp;GHz, a 5&nbsp;dBm access point, 63-tile arrays, and servo limits of plus or minus 30 degrees.</p>
-    <p>Two things change. The scene is a larger conference room with the access point outside, so every user is non-line-of-sight. And there are two corner arrays, each split into two segments. Two or four users move 30&nbsp;cm every slot for 300 slots.</p>
-    <p>Six controllers are compared. HMARL-C is ours: a learned allocator with a geometric warm start. HMARL-NC drops the warm start. Compat-only uses that geometric rule alone: each segment takes its best-aligned user. Static-MARL is the flat controller retrained here with a fixed assignment. Centralized is one agent steering all focal points, a bound since its reward and learner differ. Random redraws the assignment every slot, a floor.</p>
+    <p>The access point is outside this conference room. The wall blocks the direct path, and the two corner reflectors give us four steerable segments. We keep the 60 gigahertz carrier and the thirty-degree servo limit. Users stay still within each training episode. At evaluation, two or four users move thirty centimeters every slot for 300 slots.</p>
+    <p>The first three rows isolate the role of geometry. We compare a learned allocator with the geometric warm start, the same allocator trained without it, and the geometric rule on its own. The remaining rows give us fixed assignments, a single controller steering all focal points, and random assignments. The centralized controller also uses a different reward and learner.</p>
   </aside>
 </section>
 
@@ -1159,10 +1120,9 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[1.25 min | 24:45&ndash;26:00]</b></p>
-    <p>Now the four users are walking. Higher on this plot means a stronger signal. Follow the red line first. Each reflector segment can still aim, but it has to keep serving the same person. Imagine that person walks behind a wall. The segment keeps aiming at them even as their signal fades.</p>
-    <p>The blue line is our learned allocator. It can hand that user over to a different segment. Look at the four-user column in the table. That flexibility gives us nearly six decibels more signal on average than the fixed assignment. The blue line also has shallower dips as people move.</p>
-    <p>Even the strongest alternative, the rule based on geometry, trails by nearly two decibels. Two neighboring segments can both pick the same person under that rule, leaving someone else without a segment.</p>
-    <p><i>If asked about the red line, its legend says minus 72.26 dBm. The table reports minus 72.46 dBm, the value used for the comparison.</i></p>
+    <p>Now the four users are moving. The vertical axis is received signal strength, so higher is better. Follow the red curve first. Each segment can still steer, but it keeps the same user even when the path to that user deteriorates. The learned allocator, in blue, can reassign the segment as the geometry changes.</p>
+    <p>The four-user column gives the averages over the run. The fixed assignment gives about minus 72.5 dBm. The learned assignment gives about minus 66.6. That's nearly six decibels, and the blue trace also fluctuates less.</p>
+    <p>The closest competitor is the geometry-only rule. It can change assignments too, but neighboring segments can independently select the same user. The learned allocator finishes about 1.9 decibels ahead of that rule. The maps on the next slide show where the reflected energy goes in one of those time slots.</p>
   </aside>
 </section>
 
@@ -1180,8 +1140,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="tiny gray center" style="margin:0">RSSI maps at evaluation slot 294; values are user averages at that slot, not 300-slot run means.</p>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 26:00&ndash;26:30]</b></p>
-    <p>Look at the pink dots. Those are the four users, shown at the same instant in all three maps. In the left map, the bright streaks pass right through them. Without the warm start, the beams spread out in the middle map. With one central controller, they're harder to pick out.</p>
-    <p>In the video, watch how the beams turn as the users walk.</p>
+    <p>The pink dots are the four users at the same instant, slot 294. On the left, the bright bands from the warm-started controller pass through the users. In the middle, training without the prior gives a wider spread. On the right, the centralized controller shows less focusing. The video lets you follow those beams as the users move.</p>
   </aside>
 </section>
 
@@ -1206,8 +1165,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 26:30&ndash;27:00]</b></p>
-    <p>How long should a segment stay with the same user? If we let it switch every slot, a new user can look like the old one suddenly jumped. Wait a hundred slots, and the allocator gets just one decision per training episode.</p>
-    <p>The blue curve did best here, with a decision every ten slots. The two longest intervals were still improving when training ended.</p>
+    <p>How often should we reconsider the assignment? If it can change every slot, the local agent can mistake a new user for a sudden jump in position. At the other extreme, a hundred-slot interval gives the allocator just one decision per episode. Ten slots, the blue curve, gave the highest reward here. The two longest intervals were still improving when training ended.</p>
   </aside>
 </section>
 
@@ -1224,8 +1182,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> learning the assignment raises 4-user mean RSSI from $-72.46$&nbsp;dBm (fixed split) to $-66.62$&nbsp;dBm, +1.88&nbsp;dB over the best geometric heuristic.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 27:00&ndash;27:30]</b></p>
-    <p>In this room, letting the segments switch users gave us nearly six decibels over a fixed assignment. We did that with the reflectors already on the walls.</p>
-    <p>What if we add tiles in the same spot? More than doubling the tile count gave us a median gain of just 1.3 decibels. Where, then, should we install the reflectors and the access point?</p>
+    <p>In this room, learning who serves whom improved four-user mean RSSI by nearly six decibels over a fixed assignment. Adding hardware at the same site gave a smaller return in a separate two-user test. Going from 45 tiles to 99 raised the median by about 1.3 decibels. That suggests a different design question. What if we can choose the mounting site itself?</p>
   </aside>
 </section>
 
@@ -1285,7 +1242,7 @@ section[data-id="formula3-device"] .block li{margin:.45em 0}
 section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon);text-align:center;line-height:1.1;margin-bottom:28px}
 </style>
 
-<section class="divider" data-id="div-place" data-num="6" data-title="Joint AP and Reflector Placement" data-part="WHERE" data-question="Where should the access points and the reflector be installed?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; submitted to <i>IEEE Open J. Commun. Soc.</i>, 2026 (under review).</p></div><aside class="notes"><p>Section divider: placement. Move on.</p></aside></section>
+<section class="divider" data-id="div-place" data-num="6" data-title="Joint AP and Reflector Placement" data-part="WHERE" data-question="Where should the access points and the reflector be installed?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; submitted to <i>IEEE Open J. Commun. Soc.</i>, 2026 (under review).</p></div><aside class="notes"></aside></section>
 
 <!-- old 38 -->
 <section data-id="replace-ap" data-min="0.75">
@@ -1310,10 +1267,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 27:30&ndash;28:15]</b></p>
-    <p>So far the AP and the reflector were installed in advance, so the gain was bounded by where they were mounted. This part asks where they should go.</p>
-    <p>It is the same tile array and focal-point steering. Mechanical steering does not depend on the band, so we study indoor Wi-Fi at 5.18 gigahertz, where walls set the AP count; each extra AP costs cabling, power, a license and channel budget.</p>
-    <p>Positions become design variables, and the reflector, a passive reflective surface, is configured once at installation.</p>
-    <p>Two questions: (a) better priority coverage at a fixed AP count, and (b) one fewer AP?</p>
+    <p>Suppose we're planning Wi-Fi for a building before any hardware goes in. We can choose the access point locations, where to mount one reflector, and how to orient its tiles. In this study the carrier is 5.18 gigahertz, and the tile settings stay fixed after installation.</p>
+    <p>I'll ask two questions. With the same number of access points, can the reflector improve coverage in the rooms that need it most? And if it does, can we meet the coverage target with one fewer access point?</p>
   </aside>
 </section>
 
@@ -1339,9 +1294,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 28:15&ndash;28:45]</b></p>
-    <p>Two university floorplans. Office, 30 by 30 meters, has its highest-priority rooms on the perimeter behind walls. HRBB, a 40 by 40 meter lab floor, has a central priority block.</p>
-    <p>The operator supplies the priority map: rooms that must be served weigh more than corridors. Weights only shape the objective; reported RSSI is unweighted.</p>
-    <p>The target: priority-region fifth percentile at least minus 65 dBm.</p>
+    <p>In the Office floor plan, the high-priority rooms sit along the perimeter. In the HRBB lab, they form a central block. The colored maps tell the optimizer which rooms to emphasize. We evaluate the actual signal strength there. Our target is a fifth percentile, or P5, of minus 65 dBm. That means roughly 95 percent of priority locations reach that level or higher.</p>
   </aside>
 </section>
 
@@ -1371,10 +1324,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 28:45&ndash;29:30]</b></p>
-    <p>Everything we can choose goes into one continuous design vector, Theta.</p>
-    <p>Each AP sits on the ceiling. We optimize its horizontal position and an orientation vector normalized to a downward boresight, which avoids the singularities of Euler angles.</p>
-    <p>The reflector, 63 hexagonal tiles over 2 by 2 meters, slides along one preselected wall through two normalized coordinates.</p>
-    <p>Its tiles are steered by a virtual source and a virtual target: each tile normal bisects the directions to them, so placing them at the AP and a user recovers the bisector rule. Six focal coordinates replace 126 tile angles, so Theta has 5N plus 8 coordinates.</p>
+    <p>A candidate layout specifies where each ceiling access point sits and which way it points. It also specifies where the reflector sits on a preselected wall. We can move the panel along that wall and change its aim.</p>
+    <p>The two blue points in the diagram determine that aim. For each tile, we use one point as a virtual source and the other as a virtual target. The tile normal bisects those two directions. Six coordinates specify the orientation of all 63 tiles, so the optimizer can search over the entire panel without choosing 126 angles individually.</p>
   </aside>
 </section>
 
@@ -1406,9 +1357,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 29:30&ndash;30:00]</b></p>
-    <p>Each location is served by its strongest AP, and its power maps to a penalty that grows as power drops.</p>
-    <p>An average hides holes and a hard minimum is not smooth, so the main term is a priority-weighted soft worst case; a larger weight acts like a lower RSSI.</p>
-    <p>A small sigmoid term discourages sacrificing the rest of the floor.</p>
+    <p>Imagine a layout with strong coverage in the corridor and a weak signal in a priority room. A floor average can hide that room. We take the strongest access point at each location, convert weak power into a penalty, and use a weighted, smooth approximation to the worst penalty. A smaller, floor-wide term rewards layouts that bring more locations above the service threshold.</p>
   </aside>
 </section>
 
@@ -1437,9 +1386,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 30:00&ndash;30:45]</b></p>
-    <p>The objective is differentiable for a fixed set of paths, but a small move of an AP or the reflector can create or remove paths at a visibility boundary, and walls split the design space into separated good regions.</p>
-    <p>So we use two phases. First, particle swarm optimization; each particle is a complete layout scored by a full radio map. PSO moves whole configurations, whereas GA crossover could split an AP from the reflector it works with.</p>
-    <p>Then the best particle is refined with Adam steps through the differentiable ray tracer. One run costs about 180 seconds of serial GPU work.</p>
+    <p>Moving an access point a short distance along a corridor can open a path through a doorway. On one side of that doorway, a local gradient has little information about the layout on the other side. That's why we start with a global search.</p>
+    <p>We use particle swarm optimization, or PSO. Each particle represents a complete layout, and a ray-traced power map gives it a score. Then we take the best layout and refine it with Adam, using gradients through the ray tracer. A run takes about three minutes of serial GPU work.</p>
   </aside>
 </section>
 
@@ -1451,9 +1399,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <p class="foot gray center">Schematic floorplan and toy propagation model, not simulation output. Each particle = one layout: three APs, reflector position, focal target.</p>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 30:45&ndash;31:30]</b></p>
-    <p>Here is the intuition, as a schematic. Each color is one particle, a full layout of three APs and the reflector.</p>
-    <p>Every iteration, a particle keeps part of its velocity and is pulled toward its own best layout, the hollow rings, and toward the swarm's best, the large AP icons. The heat map is the coverage of that best layout, and the inset curve its objective.</p>
-    <p>Once the swarm settles, the label switches to gradient refinement: small deterministic steps move the best layout locally to lift the weakest priority rooms.</p>
+    <p>Follow one color on the floor plan. Its three access point markers belong to one candidate layout, together with a reflector position and a focal target. The hollow rings mark that particle's best positions so far. The large access point symbols show the swarm's best layout, and the heat map belongs to that layout.</p>
+    <p>When the second phase lights up, only the best layout is being refined. Watch the small movements on the map and the objective on the right. This animation uses a simplified propagation model to show the search process.</p>
   </aside>
 </section>
 
@@ -1489,8 +1436,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 31:30&ndash;32:00]</b></p>
-    <p>Five baselines each remove or replace one component. GA+GD swaps the global search. PSO-only skips refinement. Random+GD removes global search. Weighted k-means ignores walls. Random sampling is the floor.</p>
-    <p>Each configuration runs with five seeds, one to seven APs, both floorplans, with and without the reflector. I report mean, P5 and minimum RSSI, with Welch tests and 95 percent intervals.</p>
+    <p>We test both floor plans with one to seven access points, with and without the reflector, using five random seeds per configuration. The comparisons isolate different choices. A genetic algorithm replaces the swarm. Swarm search alone removes refinement. Weighted k-means places access points by distance and priority, ignoring walls. We also compare random layouts with and without refinement. Each method runs at its own computational cost.</p>
   </aside>
 </section>
 
@@ -1519,9 +1465,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 32:00&ndash;32:45]</b></p>
-    <p>One representative run: Office, three APs, with the reflector.</p>
-    <p>Left, the objective. GA+GD is ahead early but levels off around iteration 20, and PSO+GD overtakes it by iteration 36. Random+GD improves but plateaus higher, so the starting point matters.</p>
-    <p>Right, the priority-region P5. After the phase boundary at iteration 35, gradient refinement lifts PSO+GD from about minus 61 to minus 57 dBm, while PSO-only stays flat. Both phases contribute; the seed averages come next.</p>
+    <p>This is one run in the Office with three access points and a reflector. On the left, a lower objective is better. The genetic algorithm leads early, then levels off. The swarm catches it around iteration 36.</p>
+    <p>On the right, higher is better because the vertical axis is the fifth percentile of received power. At the dotted line, the swarm search ends. Refining its best layout lifts P5 from about minus 61 to minus 57 dBm. The flat swarm-only trace shows where the same search would have stopped.</p>
   </aside>
 </section>
 
@@ -1564,11 +1509,9 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="takeaway">The gain is largest at the weakest locations, and how much of it is realized depends on the planning method.</div>
   </div>
   <aside class="notes"><p class="timing"><b>[1.25 min | 32:45&ndash;34:00]</b></p>
-    <p>Question (a). With three APs in Office, adding one jointly optimized reflector raises priority-region P5 from minus 62.1 to minus 57.3 dBm, a 4.8 dB gain with a confidence interval of 3.1 to 6.5.</p>
-    <p>The minimum gains 9.5 dB, more than P5 or the mean, so the reflector mostly redirects energy into shadowed locations. Floor-wide mean, P5 and minimum improve too, so priority coverage does not come at the expense of the floor.</p>
-    <p>The bar chart compares methods that all have the same reflector. PSO+GD and GA+GD gain 4.8 and 4.1 dB; the other methods gain between 1 and 2.8 dB. Installing the reflector alone does not deliver the benefit.</p>
-    <p>Gradient refinement adds 4.1 dB with the reflector but only 1.6 dB, not significant, without it. One possible explanation: with a shared learning rate, refinement can move the reflector much farther than the APs.</p>
-    <p>PSO+GD and GA+GD are not significantly different.</p>
+    <p>Start with the priority rooms in the top half of the table. We keep three access points and average over five runs. With the access points alone, the fifth percentile is minus 62.1 dBm. When we optimize the reflector and access points together, it rises to minus 57.3. The gain is 4.8 decibels, with a 95 percent confidence interval from 3.1 to 6.5.</p>
+    <p>The weakest priority location gains even more, about 9.5 decibels. The floor-wide statistics below also improve. So the benefit reaches the locations we set out to help.</p>
+    <p>The bars on the right ask a different question. How much does the same reflector help under different planning methods? The two methods combining global search and gradient refinement show the largest gains. With five runs, the data don't establish a difference between those two methods.</p>
   </aside>
 </section>
 
@@ -1591,8 +1534,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 34:00&ndash;34:30]</b></p>
-    <p>Question (b): does the gain mean fewer APs? These panels sweep one to seven APs in Office against the minus 65 dBm line.</p>
-    <p>PSO+GD needs three APs without the reflector and two with it: minus 62.9 versus minus 65.4 dBm at two APs, a 2.1 dB margin. PSO-only needs three either way, so refinement is necessary. Per seed: 4 of 5 versus 1 of 5.</p>
+    <p>The dashed line is our coverage target. In the Office, follow the swarm-plus-refinement curve across the two panels. Without the reflector it takes three access points to cross that line. With the reflector, two are enough on average. At two access points, four of five runs met the target with the reflector. One of five met it without.</p>
   </aside>
 </section>
 
@@ -1616,8 +1558,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 34:30&ndash;35:00]</b></p>
-    <p>The second floorplan shows the same shift. In HRBB, one AP plus the reflector reaches minus 64.3 dBm, a 0.7 dB margin, where two APs are needed without it; 3 of 5 seeds meet the target versus none.</p>
-    <p>With five seeds the Fisher tests are not significant, so this is a seed-mean result with small margins, not a deployment guarantee.</p>
+    <p>In the lab, one access point plus the reflector reaches minus 64.3 dBm on average. That's just 0.7 decibels above the target. Without the reflector, the mean crosses the line at two access points. At one access point, three of five runs succeeded with the reflector and none without. With five runs, that difference in success counts is statistically inconclusive.</p>
   </aside>
 </section>
 
@@ -1646,13 +1587,12 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="transition"><div class="ans"><b>Answered (WHERE):</b> joint AP and reflector planning met the priority target with one fewer AP in both layouts (seed mean, small margins).</div><div class="arrow"></div><div class="opens"><b>Opens (WHICH):</b> how do placement and operation fit together, and which method fits which problem? &rarr; conclusions.</div></div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 35:00&ndash;35:45]</b></p>
-    <p>The maps show where the gain comes from. PSO+GD places APs in a west room and at two corridor junctions and reaches shadowed rooms through corridors and doorways; the reflector serves the north rooms. Weighted k-means follows Euclidean distance and leaves the southeast dark.</p>
-    <p>The limits: strongest-server received power only, so the AP saving is a coverage statement, not a cost statement; five seeds, two floorplans, one preselected wall, known geometry.</p>
-    <p>Within those limits, joint planning removed one AP in both layouts, as a seed mean with small margins. That answers where.</p>
+    <p>The red dots show where the access points ended up. In the left map, two sit near corridor junctions, where paths can reach several rooms through doorways. The right map uses weighted k-means. A nearby access point can still be on the wrong side of a wall, as the darker southeast rooms illustrate.</p>
+    <p>These are strongest-server power maps. They tell us about coverage. To translate one fewer access point into a deployment decision, we'd also need interference, traffic demand, and installed cost. We tested two floor plans with one candidate wall on each.</p>
   </aside>
 </section>
 
-<section class="divider" data-id="div-which" data-num="7" data-title="Conclusions" data-part="WHICH" data-question="Which method fits which problem, and what does the whole work answer?"><aside class="notes"><p>Section divider: conclusions. Move on.</p></aside></section>
+<section class="divider" data-id="div-which" data-num="7" data-title="Conclusions" data-part="WHICH" data-question="Which method fits which problem, and what does the whole work answer?"><aside class="notes"></aside></section>
 
 <!-- old 47 -->
 <section data-id="complete-picture" data-min="0.75">
@@ -1662,10 +1602,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <div class="which-ov"><div>Geometry: static user</div><div>RL: run-time control</div><div>PSO+GD: placement</div></div></figure>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 35:45&ndash;36:30]</b></p>
-    <p>Back to the map from the start, now with the answers filled in. Each part has its own band and scene, so these gains are not compared across parts.</p>
-    <p>What: geometry alone raises path gain by 53.0 and 87.5 dB for one static user.</p>
-    <p>How: multi-agent learning adds 20.7 dB over a static flat reflector, and learning the assignment lifts four users from minus 72.46 to minus 66.62 dBm over a fixed split.</p>
-    <p>Where: with three APs, placement raises priority P5 by 4.8 dB, and one fewer AP meets the target, as a seed mean.</p>
+    <p>Read this map in the order an engineer would use it. Before installation, the site model helps choose access point and reflector locations. In the Office, that choice raised the fifth percentile in priority rooms by 4.8 decibels with three access points. Once the hardware is installed, the decision changes. As users move, the controller chooses who each segment serves and where it aims.</p>
+    <p>The common interface is the focal point. The planning and control results come from separate experiments at different frequencies. The dashed arrow is how we would connect them in a single deployment.</p>
   </aside>
 </section>
 
@@ -1689,8 +1627,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 36:30&ndash;37:00]</b></p>
-    <p>The limits apply to every part: ray-traced simulation only, received power rather than rate, few scenarios. Phase is not controlled, and learned control was not compared with a position-tracking geometric rule.</p>
-    <p>Next: hardware-in-the-loop tests, training under mobility, rate-aware objectives, and running a placed layout with the learned controller, the dashed arrow.</p>
+    <p>All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.</p>
   </aside>
 </section>
 
@@ -1708,13 +1645,9 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="takeaway">Together, the answers cover both stages, where to install and how to operate, through one focal-point interface and without pilot-based CSI estimation (ray-traced simulation); closing the loop between them is the next step.</div>
   </div>
   <aside class="notes"><p class="timing"><b>[1.25 min | 37:00&ndash;38:15]</b></p>
-    <p>To sum up, what the five answers say together.</p>
-    <p>Why: spatial information is enough. Every part decides from user positions at run time or a site model at planning, never from pilot-based channel estimation; the price is decimeter-level localization and an accurate site model.</p>
-    <p>What: the focal point is the interface shared by the geometric rule, both learned controllers and the placement optimizer.</p>
-    <p>How: learned decentralized policies work within servo limits for several moving users, and when segments differ in geometry, learning the assignment beats a fixed split and the geometric heuristic.</p>
-    <p>Where: installation is a decision of its own; a jointly placed reflector met the priority-coverage target with one fewer access point.</p>
-    <p>Which: geometry for a static user or a warm start, learned policies at run time, direct optimization once per building.</p>
-    <p>Together these cover installing and operating the reflectors through one interface, in simulation; closing the loop between the two stages and hardware validation come next.</p>
+    <p>I'll return to the user around the corner. If we know where that user is, the bisector rule tells us how to orient a tile. A focal point lets us use that same construction even when the best place to aim is a decision we need to learn.</p>
+    <p>With several users, we can learn a local steering policy for each segment. When the segments see the room from different angles, it also pays to learn their assignments. Before installation, when the building is known and the mounting sites are still open, we can optimize the layout directly.</p>
+    <p>Across these studies, the reflector decisions use positions at run time or a site model at planning time. The price of avoiding per-element channel estimation is that localization and model accuracy now matter. The next test is to bring placement and control together in a physical room.</p>
   </aside>
 </section>
 
@@ -1737,8 +1670,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div></div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 38:15&ndash;39:00]</b></p>
-    <p>This work does not stop here. It continues in FORMULA3, a joint project of the NSF and the Research Council of Finland in the VINES program: about 1.54 million dollars across five universities in the United States and Finland, from October 2026 to September 2029.</p>
-    <p>Its programmable wireless environments combine RIS with metallic reflector arrays, the hexagonal tile panels on the right. That element builds directly on this dissertation's reflector-array work.</p>
+    <p>One opportunity to run that test is FORMULA3. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.</p>
+    <p>The hexagonal panel on the right is where this dissertation connects to that effort. We already have a way to convert a desired focal point into tile orientations. A physical panel lets us test how well that geometry predicts the signal in a room.</p>
   </aside>
 </section>
 <section data-id="formula3-device" data-min="0.5">
@@ -1762,8 +1695,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 39:00&ndash;39:30]</b></p>
-    <p>This is the physical device. It is a metallic reflector array with nineteen hexagonal tiles; servos behind the panel turn each tile, and the controller box on the stand drives them.</p>
-    <p>The arrays in this dissertation were simulated. FORMULA3 will use this device to take focal-point control and placement into real rooms.</p>
+    <p>In the front photo you can see the nineteen hexagonal metal tiles. In the back photo you can see the wiring for the servos that turn them. The controller is mounted on the stand, so the array can be moved around a room. This is the prototype that FORMULA3 will use to test ideas evaluated here in simulation.</p>
   </aside>
 </section>
 
@@ -1784,10 +1716,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 39:30&ndash;40:15]</b></p>
-    <p>Here is how this dissertation feeds into the project's four thrusts. The ray-traced reflector pipeline is a starting point for channel characterization and dataset generation.</p>
-    <p>The CSI-free learned control and the hierarchical allocation are early instances of the second thrust: reconfiguring surfaces and reassigning users.</p>
-    <p>The robustness and localization findings inform the third thrust, where sensing supplies the positions. And the hardware model with joint placement feeds validation and the planning of programmable environments.</p>
-    <p>These are the foundations it builds on; the project's own results are still to come.</p>
+    <p>The four rows show what the project can build on. The ray-tracing pipeline can generate channel data for scenes with metallic reflectors. The learned controllers can use that data to study when to redirect a beam or reassign a user. The localization experiments tell us what accuracy to aim for when sensing supplies the user positions.</p>
+    <p>The final row brings those pieces into a room. With a movable panel, we can test a planned mounting location and measure what happens when the controller actually turns the tiles.</p>
   </aside>
 </section>
 
@@ -1805,9 +1735,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </ol>
       </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 40:15&ndash;40:45]</b></p>
-    <p>The VTC Fall 2024 paper covers geometric focusing, and the TMLCN article covers flat MARL; the flat-MARL conference paper is under review at ICC 2027.</p>
-    <p>For hierarchical MARL, the journal version is under review at TMLCN and the conference version will be presented at GLOBECOM in December.</p>
-    <p>The placement paper is under review at the Open Journal of the Communications Society. Other publications are in the backup.</p>
+    <p>The geometric focusing study appeared at the 2024 Vehicular Technology Conference. Our multi-agent control study appeared in IEEE Transactions on Machine Learning in Communications and Networking. The hierarchical work also has a conference paper accepted at GLOBECOM. The slide lists the related submissions under review, including the joint placement study.</p>
   </aside>
 </section>
 
@@ -1826,7 +1754,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </ol>
   </div>
   <aside class="notes"><p class="timing"><b>[0.25 min | 40:45&ndash;41:00]</b></p>
-    <p>Beyond the dissertation, I contributed to eight other papers, mainly with the High Performance Computing group: scientific data compression, AI accelerators, and digital twins for first responders.</p>
+    <p>During my Ph.D., I also contributed to eight papers beyond the reflector work. They include scientific data compression, machine-learning accelerators, and digital twins for first responders.</p>
   </aside>
 </section>
 
@@ -1848,11 +1776,11 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.25 min | 41:00&ndash;41:15]</b></p>
-    <p>Thank you to Prof. Ekin and Prof. Tao, the committee, my collaborators, and DOE and NSF for funding. I am happy to take questions.</p>
+    <p>Thank you to my committee, especially Professors Ekin and Tao, and to my collaborators, Mostafa Ibrahim and Oguz Bedir. Thank you all for your time. I'd be happy to take your questions.</p>
   </aside>
 </section>
 
-<section class="divider" data-id="div-backup" data-title="Backup Slides"><aside class="notes"><p>Backup slides for questions.</p></aside></section>
+<section class="divider" data-id="div-backup" data-title="Backup Slides"><aside class="notes"></aside></section>
 
 <!-- ===================================================================
      Track: Intro and foundations - backup slides (untimed)
@@ -1900,8 +1828,7 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>The research has four technical parts, each with its own part of the talk.</p>
-    <p>First, geometry: the bisector rule and focal points steer the tiles from positions alone. Second, multi-agent learning: each agent moves one virtual focal point. Third, a hierarchy: an allocator decides which segment serves which user. Fourth, placement: where the access points and the reflector go.</p>
+    <p>Four decisions connect the studies. Geometry tells us how to turn a tile. A local policy chooses where a segment aims. A higher-level policy decides which user that segment serves. The placement optimizer chooses where the access points and reflector go before operation begins. Focal points give all four methods a way to specify the reflection they want.</p>
   </aside>
 </section>
 
@@ -1919,8 +1846,7 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>Received signal strength at the nine locations, with a 10 watt transmitter and free space as reference.</p>
-    <p>In the L-shaped hallway, beam-focusing, the purple curve, is highest at all nine locations, even above free space. A plausible reason is that the 1.4 by 2.0 meter aperture redirects all tile paths toward one receiver.</p>
+    <p>The horizontal axis indexes nine receiver locations around the corner. The purple curve is geometric focusing, and the blue curve is the free-space reference for the same ten-watt transmitter. Focusing gives the strongest received signal at all nine locations. A plausible explanation is the size of the reflecting aperture. The tiles intercept energy over a 1.4 by 2 meter surface and redirect it toward one receiver.</p>
   </aside>
 </section>
 
@@ -1938,8 +1864,7 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>In the T-shaped hallway, beam-focusing is again the best reflector case at every location, but it falls below free space at locations 2 and 5.</p>
-    <p>A likely explanation, not verified in the original study, is that the rule aligns path directions but not path lengths, so the phases are uncontrolled.</p>
+    <p>At all nine positions in the T-shaped hallway, focusing gives the strongest signal among the reflector configurations. At positions two and five, the free-space reference is still higher. The bisector rule aligns the directions of the reflected paths. Their lengths can differ, so their phases can differ at the receiver. That's a possible explanation for the dips. A phase-resolved comparison would be needed to test it.</p>
   </aside>
 </section>
 
@@ -1967,7 +1892,9 @@ section[data-id="bk-bisector-3d"] img{height:390px}
       </div>
     </div>
   </div>
-  <aside class="notes"><p>Backup. Material constants from ITU-R Recommendation P.2040 as listed in the dissertation. Plasterboard and ceiling-board constants are not tabulated in the dissertation.</p></aside>
+  <aside class="notes">
+    <p>We use ITU Recommendation P.2040 to assign electrical properties to the scene materials. The two equations give relative permittivity and conductivity as functions of carrier frequency. For example, the concrete permittivity here is constant, while its conductivity increases with frequency. The first hallway uses concrete for its walls, ceiling, and floor. The 60 gigahertz study also models plasterboard, ceiling board, and a wooden obstacle.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-bisector-3d">
@@ -1985,7 +1912,9 @@ section[data-id="bk-bisector-3d"] img{height:390px}
       </div>
     </div>
   </div>
-  <aside class="notes"><p>Backup. The 3D form of the bisector rule: the normal is the sum of unit vectors toward the AP and the UE (or focal point); converting it to spherical coordinates gives the tile elevation and azimuth.</p></aside>
+  <aside class="notes">
+    <p>Start at point A, the center of a tile. Form a unit vector toward the access point and another toward the receiver. Their sum points along the required surface normal. Its direction gives the two angles the tile needs. With focal-point control, we use the virtual target in place of the receiver when we form the second vector.</p>
+  </aside>
 </section>
 
 <!-- Backup slides, learning parts (untimed). Sources: old backup_ch2-4.tex (MAPPO hyperparameters, tile grouping) and backup_ch5.tex. -->
@@ -2016,7 +1945,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </tbody>
     </table>
   </div>
-  <aside class="notes"><p>Backup. MAPPO settings of the flat MARL study (dissertation Chapter 4, hyperparameter table); training runs for 3,000 episodes.</p></aside>
+  <aside class="notes">
+    <p>The actor and critic each have two hidden layers with 256 neurons per layer. We collect a thousand on-policy transitions at a time and update in minibatches of 200. PPO uses a clipping parameter of 0.2, and Adam uses a constant learning rate of two times ten to the minus four. Each training run lasts three thousand episodes.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-tile-grouping">
@@ -2030,7 +1961,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
         <p class="small" style="margin-top:8px"><b>Reward</b> $P_{r,k}\cdot d^{\,n}$, $n=2,3,4$: $-67.60$, $-67.32$, $-67.70$&nbsp;dBm (range 0.38&nbsp;dB)</p></div>
     </div>
   </div>
-  <aside class="notes"><p>Backup. Two sensitivity analyses. The tile grouping among agents does not change the temporal-average RSSI (minus 67.60&nbsp;dBm for both). Distance-normalized reward variants differ by at most 0.38&nbsp;dB; per-minibatch advantage normalization in PPO is one plausible contributor, but it does not fully explain the result because the distance factors change the relative weighting of users.</p></aside>
+  <aside class="notes">
+    <p>The left plot compares two ways of grouping the same 63 tiles. Interleaved columns and a staggered pattern both give minus 67.6 dBm on average. On the right we change how strongly distance weights the reward during training. The average RSSI varies by only 0.38 decibels across the three exponents. These are sensitivity checks for the three-user hallway.</p>
+  </aside>
 </section>
 
 
@@ -2048,7 +1981,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </ul>
     </div>
   </div>
-  <aside class="notes"><p>The approach is not tied to four users. Configured and trained the same way for two users, it keeps the same ranking, with narrower margins: HMARL-C is 1.14&nbsp;dB above Compat-only and 2.59&nbsp;dB above Centralized. With only 16 assignments, most serving both users, allocation has less to choose. If asked: the legend shows minus 67.28; the table gives minus 67.29&nbsp;dBm.</p></aside>
+  <aside class="notes">
+    <p>For two users we trained the same hierarchical architecture with the appropriate number of assignments. Four segments now have sixteen possible assignments, and most serve both users. The warm-started allocator leads again, by 1.14 decibels over the geometric rule and 2.59 over the centralized controller. In the video, you can see the four segments redirect their beams as the two users move.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="aperture">
@@ -2066,7 +2001,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
   </div>
   <aside class="notes">
-    <p>Two operating-regime sweeps, both with two users. First, aperture: going from 45 to 99 tiles, 2.2 times the area, raises the median RSSI by only about 1.3&nbsp;dB. The array saturates because one tile past its servo limit rejects the whole segment update.</p>
+    <p>At the midpoint of these cumulative distributions, going from 45 tiles to 99 buys about 1.3 decibels. The 63-tile array already captures about two thirds of that gain. One constraint here is that a move must be feasible for every tile in the segment. Adding tiles increases the aperture, but it can also give the segment more servo limits to satisfy.</p>
   </aside>
 </section>
 
@@ -2085,7 +2020,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
   </div>
   <aside class="notes">
-    <p>Second, localization, where the burden now sits. Performance is near-optimal up to about 10&nbsp;cm and loses several dB at 0.3 to 0.5&nbsp;m, with error-matched training. Flat MARL tolerated about 0.3&nbsp;m in a different setting, so the two are not directly comparable; together they say decimeter-level.</p>
+    <p>These curves show the two-user controller trained and tested at matching levels of position error. Around ten centimeters of error, performance stays close to the noise-free case. By thirty to fifty centimeters, we lose several decibels. The flat hallway controller tolerated larger errors in its own setting. The different scenes and controllers make a single universal accuracy threshold hard to justify.</p>
   </aside>
 </section>
 
@@ -2098,7 +2033,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:14px">The aperture is passive and every controlled tile reaches every user, so there is no fixed power budget to divide; the per-user loss is consistent with <em>competition for steering range</em>, though no experiment separates the two.</p>
   </div>
-  <aside class="notes"><p>Backup: what happens when the user count doubles. Per-user RSSI: the median drops by about 2.5&nbsp;dB from two to four users; the HMARL-C run means differ by 1.16&nbsp;dB, because the distributions differ in shape. Aggregate power is slightly higher with four users, up to about 1&nbsp;dB. The CDFs come from the 300-slot HMARL-C deployment runs.</p></aside>
+  <aside class="notes">
+    <p>Read the left plot at the halfway mark. When we go from two users to four, the median signal for an individual user falls by about 2.5 decibels. The right plot sums received power across the users, and that total rises slightly. Serving more people can therefore raise the aggregate while reducing what a typical user receives. The available steering range is one plausible contributor.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-reward">
@@ -2117,7 +2054,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </div>
     </div>
   </div>
-  <aside class="notes"><p>Backup: reward design. Training was repeated with the linear received power scaled by the user's distance to the power n, n from 0 to 4, before conversion to dBm, which progressively favors distant users. The five deployment CDFs nearly coincide: medians span 0.81&nbsp;dB. The offset P-off of 80&nbsp;dB is the smallest round value that keeps the shifted power non-negative over the observed minus 60 to minus 80&nbsp;dBm range, but it also sets how strongly the log utility favors weak users; that weighting was not swept.</p></aside>
+  <aside class="notes">
+    <p>We varied the distance weighting in the training reward. Increasing the exponent gives distant users more weight, yet the median deployment RSSI spans just 0.81 decibels across these runs. The power offset plays a different role. With the 80 decibel offset we used, improving a link at minus 75 dBm carries about 2.7 times the marginal reward of improving one at minus 65. The offset was held fixed in these experiments.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-focal">
@@ -2138,7 +2077,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:12px">This counts control variables; no tile-level controller was trained, so it is not a measured saving in samples or wall-clock time.</p>
   </div>
-  <aside class="notes"><p>Backup: control dimension. The focal point turns 252 tile angles into 12 focal coordinates, a 21-fold reduction: 2 arrays of 63 tiles give 252 angles, and 4 segments give 12 coordinates. The flat study's reduction was fourteen-fold. The assignment space does not shrink: 16 options with two users and 256 with four. The factorized allocator head emits L times K logits, 16 for four segments and four users, one softmax per segment.</p></aside>
+  <aside class="notes">
+    <p>Two arrays with 63 tiles each would require 252 individual angle commands. Four focal points specify the same four segments with twelve continuous coordinates. That's a 21-fold reduction in the number of control variables. The discrete problem is still there. With four users there are 256 joint assignments, but the network only needs to output four user scores for each of the four segments. These counts describe the policy interface. Measuring a training speedup would require a tile-level baseline.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-params">
@@ -2174,7 +2115,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:12px">High-level network: attention + two 128-neuron heads. Low-level actors and shared critic: 2 layers, 256 neurons.</p>
   </div>
-  <aside class="notes"><p>Backup: parameter table of the hierarchical study (dissertation Chapter 5), for questions about the setup. Walls and floors are concrete and ceilings wood (ITU-R P.2040-4); the AP and each user have a single antenna element; users are at 1.5&nbsp;m height. The two segments of an array are 0.96&nbsp;m apart and the two arrays 15.18&nbsp;m apart.</p></aside>
+  <aside class="notes">
+    <p>Each training episode lasts a hundred slots. The high-level allocator makes ten decisions in that time, and each segment can move its focal point every slot. We allow thirty centimeters per coordinate per slot and a thirty-degree servo range. During evaluation the users move thirty centimeters per slot as well. The allocator uses attention, while the segment actors and their shared critic use two hidden layers of 256 neurons.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-slot">
@@ -2190,7 +2133,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:10px">Either way, mechanical rotation time and quasi-static geometry confine deployment to low-mobility indoor use; fixing the slot duration requires hardware-in-the-loop validation.</p>
   </div>
-  <aside class="notes"><p>Backup: if asked how fast the users move in real time. There is no physical slot duration in this study; two consistent readings exist, and which constraint binds depends on hardware that has not yet been tested in the loop.</p></aside>
+  <aside class="notes">
+    <p>A slot is one control update. The simulation specifies a displacement of thirty centimeters per slot and leaves the physical duration open. If position estimates arrive once a second, that's a slow walk of 0.3 meters per second. If updates take only tens of milliseconds, the same displacement represents much faster motion. To assign a physical speed to the experiment, we'd need to measure both localization latency and how long the loaded servos take to turn.</p>
+  </aside>
 </section>
 
 <!-- ===================== Backup: placement + other publications - track: Placement and close ===================== -->
@@ -2246,8 +2191,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: propagation parameters for placement. The tile pitch is about 4 to 5 wavelengths at 5.18 GHz, so each tile acts as a specular facet, not a subwavelength reflectarray element.</p>
-    <p>Materials follow ITU-R P.2040. All interaction types are enabled in the radio-map solver.</p>
+    <p>The placement study uses 5.18 gigahertz, a wavelength of about 5.8 centimeters. The tile pitch is four to five wavelengths, and we model each tile as a specular facet. We trace one million rays per transmitter and evaluate received power on a one-meter grid at a height of 1.5 meters. The material table gives the electrical properties used for the tiles, walls, floor, and ceiling.</p>
   </aside>
 </section>
 
@@ -2288,9 +2232,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: optimizer and baseline settings. Inertia decreases linearly; the cognitive and social coefficients follow a time-varying schedule.</p>
-    <p>The methods are compared at their own operating costs, not at an equal number of evaluations. Weighted k-means illustrates the effect of ignoring site-specific propagation.</p>
-    <p>One learning rate for all coordinates: about 2 cm per step for an AP, but about 2% of the admissible wall span per step for the reflector.</p>
+    <p>The swarm evaluates fifty layouts over 35 iterations. We then refine the best layout for thirty steps, giving 1,780 radio-map evaluations per run. Early in the search, particles favor their own best layouts. Later they put more weight on the swarm's best. The genetic algorithm uses the same population and generation counts. The random baselines use different budgets, so the comparison reflects each method at the operating cost shown here.</p>
   </aside>
 </section>
 
@@ -2321,9 +2263,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </table>
   </div>
   <aside class="notes">
-    <p>Backup: full table of coverage statistics at three APs in Office.</p>
-    <p>The priority-region minimum is the least precise statistic: minus 65.2 plus or minus 3.0 dBm for PSO+GD with the PRS, set by a single cell. Target satisfaction is judged by P5, which lies 7.7 dB above the target.</p>
-    <p>Bold marks the largest mean in each column, not statistical significance.</p>
+    <p>This table gives the mean and standard deviation across five runs. With three access points and the reflector, the proposed method reaches a priority P5 of minus 57.3 dBm, or 7.7 decibels above the target. The minimum varies more from run to run because one grid cell determines it. Bold type identifies the largest mean in a column. The statistical comparisons are a separate analysis.</p>
   </aside>
 </section>
 
@@ -2340,7 +2280,9 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
       </ul></div>
     </div>
   </div>
-  <aside class="notes"><p>These are the distributions behind that table, for one seed. With the reflector, PSO+GD leaves at most 2 percent of priority locations below minus 65 dBm, against about 3 percent without it. The minimum rises from about minus 74.5 to about minus 65 dBm, while the median falls by about 1 dB: energy is redirected into shadowed locations rather than raised everywhere.</p></aside>
+  <aside class="notes">
+    <p>These distributions come from one Office run. Follow the dashed line at minus 65 dBm. With the reflector, at most two percent of priority locations fall below that line, compared with about three percent without it. The minimum gains roughly nine decibels while the median falls by about one. In this run the main benefit was to the weakest locations.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-place-ablation">
@@ -2363,9 +2305,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: global-search choice and the refinement ablation. The results do not show that either global search is better; the benefit of joint planning with refinement holds for both.</p>
-    <p>Refinement helps more when a reflector is present. One possible explanation is variable scaling: the same learning rate moves the normalized reflector coordinates much farther than the AP coordinates in meters.</p>
-    <p>No GA-only run was made, so the GA+GD versus PSO-only gap does not isolate refinement after GA.</p>
+    <p>We can isolate the effect of local refinement by starting with swarm search in both cases. Adding gradient steps improves priority P5 by 4.1 decibels with the reflector. Without it, the estimated gain is 1.6 decibels and the confidence interval includes zero. Comparing the two refined methods asks a different question. The swarm leads the genetic algorithm by 1.6 decibels, with a p-value of 0.10 across five runs. These data give limited evidence for choosing between the two global searches.</p>
   </aside>
 </section>
 
@@ -2383,9 +2323,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: AP-count sweep in Office. The objective falls steeply up to three APs and then flattens.</p>
-    <p>Once both configurations meet the target, the reflector mainly adds RSSI margin. The persistent benefit is consistent with the perimeter rooms remaining shadowed by partition walls as ceiling APs are added.</p>
-    <p>The PSO-only two-AP band with the PRS spans the target, from minus 67.1 to minus 64.9 dBm.</p>
+    <p>In the Office, the proposed method crosses the target at two access points with a reflector and three without. Genetic search followed by refinement also reaches it with two, although its margin is only 0.2 decibels. Swarm search alone needs three in both cases. Farther to the right, both layouts meet the target. There the reflector's benefit shows up as additional signal margin.</p>
   </aside>
 </section>
 
@@ -2406,8 +2344,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: second floorplan. The one-AP reduction also appears here, but with a smaller margin; it indicates a reduction rather than a reliably deployable one-AP configuration.</p>
-    <p>The reflector's value shrinks once an AP can see the priority region directly. Two geometries do not establish this as a general design rule.</p>
+    <p>The lab floor has one large priority block near the center. With one access point, the reflector adds about three decibels to priority P5. By four access points, that advantage is below one decibel. An access point placed inside the central room can already serve much of the priority area directly. If we score the entire floor, the mean crosses the target with two access points and a reflector, or three access points alone.</p>
   </aside>
 </section>
 
@@ -2431,7 +2368,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </ul>
   </div>
   <aside class="notes">
-    <p>Backup: one Office placement per method. APs are red; the color scale runs from minus 80 to minus 40 dBm.</p>
+    <p>The red dots are access points. Compare the two corridor junctions used by swarm search on the left with the weaker southeast rooms under weighted k-means in the third map. A distance-based method can place an access point near a room while leaving a wall between them. All four layouts have a reflector on the north wall, but they choose different positions along it.</p>
   </aside>
 </section>
 
@@ -2455,8 +2392,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>Backup: what the ray-traced reflector model does and does not capture, and how the runs were executed.</p>
-    <p>The focal-point geometry aligns reflection directions but not path lengths, so the narrowband power fluctuates around the incoherent sum.</p>
+    <p>For the placement maps, we sum the powers of the traced paths incoherently. That approximates power averaged over small-scale fading. A narrowband receiver at one exact point can measure a higher or lower value because path phases matter there. We also model each tile as a planar reflecting facet and omit diffraction at its edges. Measurements or a full-wave model would let us quantify those approximations. Computationally, we reuse each loaded scene across many radio-map evaluations.</p>
   </aside>
 </section>
 

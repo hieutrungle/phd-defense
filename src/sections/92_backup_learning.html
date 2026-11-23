@@ -26,7 +26,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </tbody>
     </table>
   </div>
-  <aside class="notes"><p>Backup. MAPPO settings of the flat MARL study (dissertation Chapter 4, hyperparameter table); training runs for 3,000 episodes.</p></aside>
+  <aside class="notes">
+    <p>The actor and critic each have two hidden layers with 256 neurons per layer. We collect a thousand on-policy transitions at a time and update in minibatches of 200. PPO uses a clipping parameter of 0.2, and Adam uses a constant learning rate of two times ten to the minus four. Each training run lasts three thousand episodes.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-tile-grouping">
@@ -40,7 +42,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
         <p class="small" style="margin-top:8px"><b>Reward</b> $P_{r,k}\cdot d^{\,n}$, $n=2,3,4$: $-67.60$, $-67.32$, $-67.70$&nbsp;dBm (range 0.38&nbsp;dB)</p></div>
     </div>
   </div>
-  <aside class="notes"><p>Backup. Two sensitivity analyses. The tile grouping among agents does not change the temporal-average RSSI (minus 67.60&nbsp;dBm for both). Distance-normalized reward variants differ by at most 0.38&nbsp;dB; per-minibatch advantage normalization in PPO is one plausible contributor, but it does not fully explain the result because the distance factors change the relative weighting of users.</p></aside>
+  <aside class="notes">
+    <p>The left plot compares two ways of grouping the same 63 tiles. Interleaved columns and a staggered pattern both give minus 67.6 dBm on average. On the right we change how strongly distance weights the reward during training. The average RSSI varies by only 0.38 decibels across the three exponents. These are sensitivity checks for the three-user hallway.</p>
+  </aside>
 </section>
 
 
@@ -58,7 +62,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </ul>
     </div>
   </div>
-  <aside class="notes"><p>The approach is not tied to four users. Configured and trained the same way for two users, it keeps the same ranking, with narrower margins: HMARL-C is 1.14&nbsp;dB above Compat-only and 2.59&nbsp;dB above Centralized. With only 16 assignments, most serving both users, allocation has less to choose. If asked: the legend shows minus 67.28; the table gives minus 67.29&nbsp;dBm.</p></aside>
+  <aside class="notes">
+    <p>For two users we trained the same hierarchical architecture with the appropriate number of assignments. Four segments now have sixteen possible assignments, and most serve both users. The warm-started allocator leads again, by 1.14 decibels over the geometric rule and 2.59 over the centralized controller. In the video, you can see the four segments redirect their beams as the two users move.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="aperture">
@@ -76,7 +82,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
   </div>
   <aside class="notes">
-    <p>Two operating-regime sweeps, both with two users. First, aperture: going from 45 to 99 tiles, 2.2 times the area, raises the median RSSI by only about 1.3&nbsp;dB. The array saturates because one tile past its servo limit rejects the whole segment update.</p>
+    <p>At the midpoint of these cumulative distributions, going from 45 tiles to 99 buys about 1.3 decibels. The 63-tile array already captures about two thirds of that gain. One constraint here is that a move must be feasible for every tile in the segment. Adding tiles increases the aperture, but it can also give the segment more servo limits to satisfy.</p>
   </aside>
 </section>
 
@@ -95,7 +101,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
   </div>
   <aside class="notes">
-    <p>Second, localization, where the burden now sits. Performance is near-optimal up to about 10&nbsp;cm and loses several dB at 0.3 to 0.5&nbsp;m, with error-matched training. Flat MARL tolerated about 0.3&nbsp;m in a different setting, so the two are not directly comparable; together they say decimeter-level.</p>
+    <p>These curves show the two-user controller trained and tested at matching levels of position error. Around ten centimeters of error, performance stays close to the noise-free case. By thirty to fifty centimeters, we lose several decibels. The flat hallway controller tolerated larger errors in its own setting. The different scenes and controllers make a single universal accuracy threshold hard to justify.</p>
   </aside>
 </section>
 
@@ -108,7 +114,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:14px">The aperture is passive and every controlled tile reaches every user, so there is no fixed power budget to divide; the per-user loss is consistent with <em>competition for steering range</em>, though no experiment separates the two.</p>
   </div>
-  <aside class="notes"><p>Backup: what happens when the user count doubles. Per-user RSSI: the median drops by about 2.5&nbsp;dB from two to four users; the HMARL-C run means differ by 1.16&nbsp;dB, because the distributions differ in shape. Aggregate power is slightly higher with four users, up to about 1&nbsp;dB. The CDFs come from the 300-slot HMARL-C deployment runs.</p></aside>
+  <aside class="notes">
+    <p>Read the left plot at the halfway mark. When we go from two users to four, the median signal for an individual user falls by about 2.5 decibels. The right plot sums received power across the users, and that total rises slightly. Serving more people can therefore raise the aggregate while reducing what a typical user receives. The available steering range is one plausible contributor.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-reward">
@@ -127,7 +135,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </div>
     </div>
   </div>
-  <aside class="notes"><p>Backup: reward design. Training was repeated with the linear received power scaled by the user's distance to the power n, n from 0 to 4, before conversion to dBm, which progressively favors distant users. The five deployment CDFs nearly coincide: medians span 0.81&nbsp;dB. The offset P-off of 80&nbsp;dB is the smallest round value that keeps the shifted power non-negative over the observed minus 60 to minus 80&nbsp;dBm range, but it also sets how strongly the log utility favors weak users; that weighting was not swept.</p></aside>
+  <aside class="notes">
+    <p>We varied the distance weighting in the training reward. Increasing the exponent gives distant users more weight, yet the median deployment RSSI spans just 0.81 decibels across these runs. The power offset plays a different role. With the 80 decibel offset we used, improving a link at minus 75 dBm carries about 2.7 times the marginal reward of improving one at minus 65. The offset was held fixed in these experiments.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-focal">
@@ -148,7 +158,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:12px">This counts control variables; no tile-level controller was trained, so it is not a measured saving in samples or wall-clock time.</p>
   </div>
-  <aside class="notes"><p>Backup: control dimension. The focal point turns 252 tile angles into 12 focal coordinates, a 21-fold reduction: 2 arrays of 63 tiles give 252 angles, and 4 segments give 12 coordinates. The flat study's reduction was fourteen-fold. The assignment space does not shrink: 16 options with two users and 256 with four. The factorized allocator head emits L times K logits, 16 for four segments and four users, one softmax per segment.</p></aside>
+  <aside class="notes">
+    <p>Two arrays with 63 tiles each would require 252 individual angle commands. Four focal points specify the same four segments with twelve continuous coordinates. That's a 21-fold reduction in the number of control variables. The discrete problem is still there. With four users there are 256 joint assignments, but the network only needs to output four user scores for each of the four segments. These counts describe the policy interface. Measuring a training speedup would require a tile-level baseline.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-params">
@@ -184,7 +196,9 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:12px">High-level network: attention + two 128-neuron heads. Low-level actors and shared critic: 2 layers, 256 neurons.</p>
   </div>
-  <aside class="notes"><p>Backup: parameter table of the hierarchical study (dissertation Chapter 5), for questions about the setup. Walls and floors are concrete and ceilings wood (ITU-R P.2040-4); the AP and each user have a single antenna element; users are at 1.5&nbsp;m height. The two segments of an array are 0.96&nbsp;m apart and the two arrays 15.18&nbsp;m apart.</p></aside>
+  <aside class="notes">
+    <p>Each training episode lasts a hundred slots. The high-level allocator makes ten decisions in that time, and each segment can move its focal point every slot. We allow thirty centimeters per coordinate per slot and a thirty-degree servo range. During evaluation the users move thirty centimeters per slot as well. The allocator uses attention, while the segment actors and their shared critic use two hidden layers of 256 neurons.</p>
+  </aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-slot">
@@ -200,5 +214,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:10px">Either way, mechanical rotation time and quasi-static geometry confine deployment to low-mobility indoor use; fixing the slot duration requires hardware-in-the-loop validation.</p>
   </div>
-  <aside class="notes"><p>Backup: if asked how fast the users move in real time. There is no physical slot duration in this study; two consistent readings exist, and which constraint binds depends on hardware that has not yet been tested in the loop.</p></aside>
+  <aside class="notes">
+    <p>A slot is one control update. The simulation specifies a displacement of thirty centimeters per slot and leaves the physical duration open. If position estimates arrive once a second, that's a slow walk of 0.3 meters per second. If updates take only tens of milliseconds, the same displacement represents much faster motion. To assign a physical speed to the experiment, we'd need to measure both localization latency and how long the loaded servos take to turn.</p>
+  </aside>
 </section>
