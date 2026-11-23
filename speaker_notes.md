@@ -18,13 +18,13 @@ Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 12 | Dissertation goal and research questions | 1 | 5:30-6:30 | 101 | 101 |
 | 13 | Hardware: metallic linear Fresnel reflector (LFR) arrays | 0.75 | 6:30-7:15 | 72 | 96 |
 | 14 | Bisector rule: each tile normal splits AP and user directions | 1 | 7:15-8:15 | 135 | 135 |
-| 15 | Focal-point abstraction: a segment is steered by 3 coordinates | 0.75 | 8:15-9:00 | 97 | 129 |
-| 16 | Ray-traced testbed: Blender scenes + NVIDIA Sionna RT | 0.5 | 9:00-9:30 | 61 | 122 |
-| 17 | Geometric beam-focusing in NLOS hallways at 28 GHz | 0.5 | 9:30-10:00 | 57 | 114 |
-| 18 | L-shaped hallway: beam-focusing +53.0 dB path gain at the UE | 0.75 | 10:00-10:45 | 83 | 111 |
-| 19 | T-shaped hallway: beam-focusing +87.5 dB path gain at the UE | 0.75 | 10:45-11:30 | 69 | 92 |
-| 20 | Beam-focusing follows the UE: L- and T-shaped hallways | 0.5 | 11:30-12:00 | 66 | 132 |
-| 21 | Limits of the geometric rule motivate learned control | 0.75 | 12:00-12:45 | 97 | 129 |
+| 15 | Ray-traced testbed: Blender scenes + NVIDIA Sionna RT | 0.5 | 8:15-8:45 | 61 | 122 |
+| 16 | Geometric beam-focusing in NLOS hallways at 28 GHz | 0.5 | 8:45-9:15 | 57 | 114 |
+| 17 | L-shaped hallway: beam-focusing +53.0 dB path gain at the UE | 0.75 | 9:15-10:00 | 83 | 111 |
+| 18 | T-shaped hallway: beam-focusing +87.5 dB path gain at the UE | 0.75 | 10:00-10:45 | 69 | 92 |
+| 19 | Beam-focusing follows the UE: L- and T-shaped hallways | 0.5 | 10:45-11:15 | 66 | 132 |
+| 20 | Limits of the geometric rule motivate learned control | 0.75 | 11:15-12:00 | 97 | 129 |
+| 21 | Focal-point abstraction: a segment is steered by 3 coordinates | 0.75 | 12:00-12:45 | 96 | 128 |
 | 22 | MA-MDP: each agent moves the focal point of one segment | 1.25 | 12:45-14:00 | 164 | 131 |
 | 23 | Flat MARL in motion: fixed columns, moving focal points | 0.75 | 14:00-14:45 | 94 | 125 |
 | 24 | Training with MAPPO under CTDE | 0.75 | 14:45-15:30 | 104 | 139 |
@@ -124,33 +124,33 @@ The hardware throughout is a metallic linear Fresnel reflector array: a grid of 
 
 How is each tile oriented? This is a top view: the access point on the left, a row of tiles on the wall, and a user walking along the hallway. Call the tile center A, the access point B and the user C. By the law of reflection the tile normal must bisect the unit vectors toward the access point and toward the user. As the user moves, every tile turns, and all reflected rays still converge on the user. First click: the dashed normals, with equal angles on each side. Only positions enter this rule; there is no channel estimate. Second click: real servos have a limited range. When the user walks back toward the access point side, some tiles would need more than 30 degrees. They clip, turn red, and their rays miss.
 
-## 15. Focal-point abstraction: a segment is steered by 3 coordinates  [0.75 min | 8:15-9:00]
+## 15. Ray-traced testbed: Blender scenes + NVIDIA Sionna RT  [0.5 min | 8:15-8:45]
 
-The rest of the dissertation builds on one abstraction. Instead of the user position, all tiles of a segment aim at a shared virtual focal point. Here the array has three segments, each with its own focal point. When a focal point moves, all tiles of its segment re-orient together through the bisector rule; the front view shows their tilt. Click: a segment of n tiles is controlled by three coordinates instead of 2n angles. For 63 tiles and three segments that is 126 angles versus nine coordinates. Learned control learns these focal points; placement optimizes them.
+One automated pipeline: Blender builds the scene and sets the tile angles from the target positions; Sionna RT traces it with ITU-R P.2040 materials. The bands are 28 GHz for geometry, 60 for learned control and 5.18 for placement. Each study has its own scene and baselines, so I do not compare decibel gains across parts. Every result is ray-traced simulation.
 
-## 16. Ray-traced testbed: Blender scenes + NVIDIA Sionna RT  [0.5 min | 9:00-9:30]
-
-One automated pipeline: Blender builds the scene and sets the tile angles from the focal points; Sionna RT traces it with ITU-R P.2040 materials. The bands are 28 GHz for geometry, 60 for learned control and 5.18 for placement. Each study has its own scene and baselines, so I do not compare decibel gains across parts. Every result is ray-traced simulation.
-
-## 17. Geometric beam-focusing in NLOS hallways at 28 GHz  [0.5 min | 9:30-10:00]
+## 16. Geometric beam-focusing in NLOS hallways at 28 GHz  [0.5 min | 8:45-9:15]
 
 Is the geometric rule alone worth pursuing? A 28 GHz downlink to one user in two concrete hallways, with the ten-by-seven array, known positions and unconstrained rotation. Three cases: no reflector; a simple reflector, every tile at 45 degrees; and beam-focusing with the bisector rule. The T-shaped hallway uses two arrays. Nine non-line-of-sight locations, the green spheres.
 
-## 18. L-shaped hallway: beam-focusing +53.0 dB path gain at the UE  [0.75 min | 10:00-10:45]
+## 17. L-shaped hallway: beam-focusing +53.0 dB path gain at the UE  [0.75 min | 9:15-10:00]
 
 The L-shaped hallway first. These are path-gain maps 1.5 meters above the floor: no reflector, simple reflector, beam-focusing. The corner blocks the direct path, and the gain at the user is minus 125.61 dB. The simple reflector adds about 26 dB. Beam-focusing reaches minus 72.57 dB: 53.0 dB above no reflector and 27.0 dB above the simple reflector. The bright band on the right is the tile paths converging at the user, the same picture as the animation, now in the ray tracer.
 
-## 19. T-shaped hallway: beam-focusing +87.5 dB path gain at the UE  [0.75 min | 10:45-11:30]
+## 18. T-shaped hallway: beam-focusing +87.5 dB path gain at the UE  [0.75 min | 10:00-10:45]
 
 The T-shaped hallway needs two reflections in sequence, so there are two arrays and the bisector rule is applied twice. Without reflectors the gain at the user is minus 156.35 dB. Simple reflectors reach minus 109.20. Beam-focusing with both arrays reaches minus 68.88 dB, an 87.5 dB improvement over no reflector and 40.3 dB above the simple reflectors. The focused band turns twice and lands in the side branch.
 
-## 20. Beam-focusing follows the UE: L- and T-shaped hallways  [0.5 min | 11:30-12:00]
+## 19. Beam-focusing follows the UE: L- and T-shaped hallways  [0.5 min | 10:45-11:15]
 
 Here is the geometric rule in motion. At every user position along the hallway, the bisector rule recomputes all tile orientations, and the ray-traced path-gain map shows the focused band following the user: around one corner in the L-shaped hallway, and through two reflections into the side branch in the T-shaped hallway. Each frame is still a static solution for one user at a known position.
 
-## 21. Limits of the geometric rule motivate learned control  [0.75 min | 12:00-12:45]
+## 20. Limits of the geometric rule motivate learned control  [0.75 min | 11:15-12:00]
 
 The study also exposes three limits. First, servo limits: the rule assumes unconstrained rotation, as the red tiles in the animation showed. Second, phase: it aligns directions but not path lengths, a likely cause of the shortfall at T-shaped locations 2 and 5. No later part controls phase; it stays a limitation. Third, it serves one user at a known position. The next part keeps the bisector rule but learns the focal points, within servo limits, trained on received power, for several moving users. Its baselines are static reflectors and learned variants, not a position-tracking geometric rule.
+
+## 21. Focal-point abstraction: a segment is steered by 3 coordinates  [0.75 min | 12:00-12:45]
+
+Learned control and placement build on one abstraction. Instead of the user position, all tiles of a segment aim at a shared virtual focal point. Here the array has three segments, each with its own focal point. When a focal point moves, all tiles of its segment re-orient together through the bisector rule; the front view shows their tilt. Click: a segment of n tiles is controlled by three coordinates instead of 2n angles. For 63 tiles and three segments that is 126 angles versus nine coordinates. Learned control learns these focal points; placement optimizes them.
 
 ## 22. MA-MDP: each agent moves the focal point of one segment  [1.25 min | 12:45-14:00]
 

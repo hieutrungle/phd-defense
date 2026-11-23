@@ -51,6 +51,23 @@ section[data-id="rob-size"] .midnum{font-size:25px}
 
 <section class="divider" data-id="div-marl" data-num="4" data-title="Multi-Agent RL Control" data-part="HOW" data-question="How can learned agents steer the array for moving users?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Signal Whisperers: Enhancing wireless reception using DRL-guided reflector arrays,&rdquo; <i>IEEE Trans. Mach. Learn. Commun. Netw.</i>, vol.&nbsp;4, pp.&nbsp;265&ndash;281, 2026.</p><p><span class="dme">H. Le</span>, O. Bedir, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Bypassing the CSI bottleneck: MARL-driven spatial control for reflector arrays,&rdquo; arXiv:2604.05162, 2026; submitted to IEEE ICC 2027 (under review).</p></div><aside class="notes"><p>Section divider: learned control for several moving users. Move on.</p></aside></section>
 
+<!-- ============================== ANIMATION A2b: focal-point abstraction ============================== -->
+<section data-id="anim-focal" data-min="0.75">
+  <h2 class="title">Focal-point abstraction: a segment is steered by 3 coordinates</h2>
+  <div class="body">
+    <div class="anim" style="height:430px"><canvas data-anim="focal"></canvas><div class="illus">Illustrative</div></div>
+    <div class="row">
+      <div>All tiles of segment $l$ aim at one virtual <b>focal point</b> $f_l \in \mathbb{R}^3$ instead of the user; angles are clipped to servo limits.</div>
+      <div class="fragment" data-anim-step="1">$2N_rN_c$ tile angles become $3L$ focal coordinates. Learned control and placement set the focal points.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Learned control and placement build on one abstraction. Instead of the user position, all tiles of a segment aim at a shared virtual focal point.</p>
+    <p>Here the array has three segments, each with its own focal point. When a focal point moves, all tiles of its segment re-orient together through the bisector rule; the front view shows their tilt.</p>
+    <p>Click: a segment of n tiles is controlled by three coordinates instead of 2n angles. For 63 tiles and three segments that is 126 angles versus nine coordinates. Learned control learns these focal points; placement optimizes them.</p>
+  </aside>
+</section>
+
 <!-- ============================ MA-MDP ============================ -->
 <section data-id="mamdp" data-min="1.25">
   <h2 class="title">MA-MDP: each agent moves the focal point of one segment</h2>
