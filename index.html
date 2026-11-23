@@ -1299,10 +1299,10 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       </div>
       <div class="col">
         <ul class="small">
-          <li>AP $n$: position $\mathbf{p}_n$ at ceiling height $h_{\mathrm{ceil}}=3.8$&nbsp;m; downward boresight $\mathbf{o}_n=\mathbf{v}_n/\|\mathbf{v}_n\|_2$</li>
-          <li>Reflector centroid $(u_{\mathrm{ref}},v_{\mathrm{ref}})\in[0,1]^2$ on the mounting region $\mathcal{M}_{\mathrm{wall}}$ of one preselected wall</li>
-          <li>Virtual source $\mathbf{f}_1$, virtual target $\mathbf{f}_2$, set once at installation: 6 coordinates instead of $2N_rN_c=126$ tile angles</li>
-          <li>Feasible set $\mathcal{M}$: floorplan bounds, $d_{\min}=5$&nbsp;m AP separation (clipping, push-apart); tile angles clipped to $\pm30^\circ$</li>
+          <li>Each AP: position on the ceiling (3.8&nbsp;m) and pointing direction</li>
+          <li>Reflector position: can <b>move along a preselected wall</b></li>
+          <li>Reflector control: <b>2 focal points</b> (6 coordinates instead of 126 tile angles)</li>
+          <li>Constraints: inside the floorplan, APs at least 5&nbsp;m apart, tile angles within $\pm30^\circ$</li>
         </ul>
         <div class="block" style="margin-top:12px"><div class="bt">Joint design vector ($5N+8$ free coordinates)</div><div class="bb">
           $$\boldsymbol{\Theta}=\{\mathbf{p}_1,\mathbf{v}_1,\ldots,\mathbf{p}_N,\mathbf{v}_N,u_{\mathrm{ref}},v_{\mathrm{ref}},\mathbf{f}_1,\mathbf{f}_2\}$$
