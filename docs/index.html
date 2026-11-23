@@ -322,7 +322,7 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
 </section>
 
 <!-- ============================== ANIMATION A1: CSI bottleneck (new) ============================== -->
-<section data-id="anim-csi" data-min="0.75">
+<section data-id="anim-csi" data-min="1.5">
   <h2 class="title">The CSI bottleneck: pilots grow with elements &times; users</h2>
   <div class="body">
     <div class="anim" style="height:400px"><canvas data-anim="csi"></canvas><div class="illus">Illustrative</div></div>
@@ -330,23 +330,6 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
       <div><b>Electronic RIS:</b> the cascaded channel of every element to every user must be estimated; pilot time grows with $N \times K$ and eats the coherence window.</div>
       <div class="good fragment" data-anim-step="1"><b>Mechanical reflector array:</b> the controller needs only the $K$ user positions; its input does not grow with the number of tiles $N$.</div>
     </div>
-  </div>
-</section>
-
-<!-- ============================== RIS vs MRA ============================== -->
-<section data-id="ris-vs-mra" data-min="0.75">
-  <h2 class="title">Electronic RIS vs. metallic reflector arrays</h2>
-  <div class="body">
-    <table class="bt">
-      <thead><tr><th style="width:17%"></th><th style="width:39%">Electronic RIS</th><th>Metallic reflector array (this work)</th></tr></thead>
-      <tbody>
-        <tr><td><b>Steering</b></td><td>PIN or varactor phase shifters per element</td><td>Servo-rotated metallic tiles, specular reflection</td></tr>
-        <tr class="alt"><td><b>Band</b></td><td>Unit cells designed for one band</td><td>Tiles large vs. wavelength: same geometry across bands</td></tr>
-        <tr><td><b>Control input</b></td><td>Cascaded CSI per element; pilots grow with elements &times; users</td><td>Run time: user positions only; training: received power as the reward; <span class="alert">no pilot-based CSI estimation</span></td></tr>
-        <tr class="alt"><td><b>Power</b></td><td>Bias voltage to hold the state</td><td>None once positioned; only while actuators move</td></tr>
-        <tr><td><b>Limitation</b></td><td>Hardware cost and CSI overhead at scale</td><td>Slower reconfiguration: quasi-static indoor scenes</td></tr>
-      </tbody>
-    </table>
     <div class="takeaway">The burden shifts from channel estimation to <b>localization</b> (run time) and the <b>site model</b> (planning).</div>
   </div>
 </section>
@@ -1603,6 +1586,22 @@ section[data-id="bk-bisector-3d"] img{height:390px}
         <div class="q"><b>WHERE:</b> install the access points and the reflector</div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="backup" data-id="ris-vs-mra">
+  <h2 class="title">Electronic RIS vs. metallic reflector arrays</h2>
+  <div class="body">
+    <table class="bt">
+      <thead><tr><th style="width:17%"></th><th style="width:39%">Electronic RIS</th><th>Metallic reflector array (this work)</th></tr></thead>
+      <tbody>
+        <tr><td><b>Steering</b></td><td>PIN or varactor phase shifters per element</td><td>Servo-rotated metallic tiles, specular reflection</td></tr>
+        <tr class="alt"><td><b>Band</b></td><td>Unit cells designed for one band</td><td>Tiles large vs. wavelength: same geometry across bands</td></tr>
+        <tr><td><b>Control input</b></td><td>Cascaded CSI per element; pilots grow with elements &times; users</td><td>Run time: user positions only; training: received power as the reward; <span class="alert">no pilot-based CSI estimation</span></td></tr>
+        <tr class="alt"><td><b>Power</b></td><td>Bias voltage to hold the state</td><td>None once positioned; only while actuators move</td></tr>
+        <tr><td><b>Limitation</b></td><td>Hardware cost and CSI overhead at scale</td><td>Slower reconfiguration: quasi-static indoor scenes</td></tr>
+      </tbody>
+    </table>
   </div>
 </section>
 

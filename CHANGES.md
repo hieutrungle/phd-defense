@@ -52,6 +52,8 @@ Old Beamer deck: 52 timed slides, 45:00. New HTML deck: **70 timed slides, 44:15
 | 66 (FORMULA3) | Award line now "U.S. National Science Foundation (NSF) Award Nos. 2549087, 2549088" |
 | 3, 70 | "Advisor (Chair)" replaced by Chair / Co-Chair throughout (About me, its note, Thank you), matching the title slide and the dissertation title page |
 | 8 (was 9) | Black rule removed from the top of the frequency-vs-coverage chart (cropped copy `freq_coverage_noline.png`) |
+| 10 (CSI bottleneck) + old 11 (Electronic RIS vs. metallic reflector arrays) | Combined: the old slide 11 moved to backup unchanged except its takeaway, which is now on slide 10 ("The burden shifts from channel estimation to localization (run time) and the site model (planning)."). Slide 10 speaker note = its own two paragraphs followed by the two paragraphs of the old slide 11 note, unchanged; slide 10 now 1.5 min (0.75 + 0.75), so the total stays 42.00 min. The backup copy has a one-line note. Main talk 63 → 62 slides; footer numbers after 10 shift down by one in the main talk |
+| Repository | Removed a `node_modules` symlink that an earlier commit (6697dc5) had added by mistake; `.gitignore` now ignores `node_modules` whether it is a folder or a link |
 
 Footer numbers 7–65 moved down by one (the second FORMULA3 slide left the introduction).
 

@@ -1,5 +1,5 @@
 # local-only tooling (restore with: npm install && npx @puppeteer/browsers install chrome-headless-shell@stable --path .browsers)
-node_modules/
+node_modules
 .browsers/
 # local scratch
 .bak*/

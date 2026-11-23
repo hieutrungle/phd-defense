@@ -48,6 +48,25 @@ section[data-id="bk-bisector-3d"] img{height:390px}
   </aside>
 </section>
 
+<section class="backup" data-id="ris-vs-mra">
+  <h2 class="title">Electronic RIS vs. metallic reflector arrays</h2>
+  <div class="body">
+    <table class="bt">
+      <thead><tr><th style="width:17%"></th><th style="width:39%">Electronic RIS</th><th>Metallic reflector array (this work)</th></tr></thead>
+      <tbody>
+        <tr><td><b>Steering</b></td><td>PIN or varactor phase shifters per element</td><td>Servo-rotated metallic tiles, specular reflection</td></tr>
+        <tr class="alt"><td><b>Band</b></td><td>Unit cells designed for one band</td><td>Tiles large vs. wavelength: same geometry across bands</td></tr>
+        <tr><td><b>Control input</b></td><td>Cascaded CSI per element; pilots grow with elements &times; users</td><td>Run time: user positions only; training: received power as the reward; <span class="alert">no pilot-based CSI estimation</span></td></tr>
+        <tr class="alt"><td><b>Power</b></td><td>Bias voltage to hold the state</td><td>None once positioned; only while actuators move</td></tr>
+        <tr><td><b>Limitation</b></td><td>Hardware cost and CSI overhead at scale</td><td>Slower reconfiguration: quasi-static indoor scenes</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes">
+    <p>Backup: side-by-side comparison of an electronic RIS and the metallic reflector array: steering, band, control input, power and the main limitation. The main talk covers this in the narration of the CSI-bottleneck slide.</p>
+  </aside>
+</section>
+
 <section class="backup rssi" data-id="L-rssi">
   <h2 class="title">L-shaped hallway: RSSI at nine UE locations</h2>
   <div class="body">
