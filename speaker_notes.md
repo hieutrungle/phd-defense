@@ -49,7 +49,7 @@ Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
 | 43 | Two floorplans with operator-defined priority maps | 0.5 | 29:00-29:30 | 63 | 126 |
 | 44 | Design vector: AP poses, wall position, focal points | 0.75 | 29:30-30:15 | 96 | 128 |
 | 45 | Objective: soft worst case plus floor-wide coverage | 0.5 | 30:15-30:45 | 63 | 126 |
-| 46 | Two-phase method: PSO search, then gradient refinement | 0.75 | 30:45-31:30 | 93 | 124 |
+| 46 | Two-phase method: PSO search, then gradient refinement | 0.75 | 30:45-31:30 | 75 | 100 |
 | 47 | Intuition: a swarm of layouts, then gradient refinement | 0.75 | 31:30-32:15 | 92 | 123 |
 | 48 | Compared methods and evaluation protocol | 0.5 | 32:15-32:45 | 66 | 132 |
 | 49 | Convergence of a representative run | 0.75 | 32:45-33:30 | 88 | 117 |
@@ -309,9 +309,9 @@ Imagine a layout with strong coverage in the corridor and a weak signal in a pri
 
 ## 46. Two-phase method: PSO search, then gradient refinement  [0.75 min | 30:45-31:30]
 
-Moving an access point a short distance along a corridor can open a path through a doorway. On one side of that doorway, a local gradient has little information about the layout on the other side. That's why we start with a global search.
+The coverage landscape is not convex. Walls and doorways create many local minima, so gradient descent alone settles at a nearby minimum and usually misses the best layout. That's why we start with a global search.
 
-We use particle swarm optimization, or PSO. Each particle represents a complete layout, and a ray-traced power map gives it a score. Then we take the best layout and refine it with Adam, using gradients through the ray tracer. A run takes about three minutes of serial GPU work.
+We use particle swarm optimization, or PSO. Each particle represents a complete layout, and a ray-traced power map gives it a score. Then we take the best layout and refine it with Adam, using gradients through the ray tracer.
 
 ## 47. Intuition: a swarm of layouts, then gradient refinement  [0.75 min | 31:30-32:15]
 

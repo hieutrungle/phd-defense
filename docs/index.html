@@ -1188,13 +1188,13 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
 <section data-id="two-phase" data-min="0.75">
   <h2 class="title">Two-phase method: PSO search, then gradient refinement</h2>
   <div class="body">
-    <div class="cols" style="--cols:35% 1fr">
+    <div class="cols" style="--cols:27% 1fr;align-items:center">
       <div class="col">
-        <p style="margin:0 0 4px 0;font-size:24px"><b>Why gradients alone fall short</b></p>
+        <p style="margin:0 0 4px 0;font-size:24px"><b>Why not gradients alone?</b></p>
         <ul class="small">
-          <li>Paths appear and vanish at visibility boundaries</li>
-          <li>Walls split the design space into separate good regions</li>
-          <li>Each location's gradient reaches only its serving AP</li>
+          <li>The coverage landscape is <b>not convex</b>: many local minima</li>
+          <li>Gradient descent alone settles at a nearby minimum and usually misses the best layout</li>
+          <li><b>PSO</b> first finds a good coarse position</li>
         </ul>
         <p style="margin:14px 0 4px 0;font-size:24px"><b>PSO+GD</b></p>
         <ul class="small">
@@ -1203,8 +1203,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
         </ul>
       </div>
       <div class="col">
-        <figure><img src="assets/img/ch6/detailed-workflow-01.png" alt="Two-phase workflow: PSO then gradient refinement" style="width:100%"></figure>
-        <div class="block" style="margin-top:14px"><div class="bt">Computational cost per run</div><div class="bb small">About 180&nbsp;s of serial work per run on one RTX 5070&nbsp;Ti GPU (swarm and gradient phases; settings in backup)</div></div>
+        <figure><img src="assets/img/ch6/detailed-workflow-crop.png" alt="Two-phase workflow: PSO then gradient refinement" style="width:100%"></figure>
       </div>
     </div>
   </div>
