@@ -706,12 +706,12 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[1.25 min | 12:45&ndash;14:00]</b></p>
-    <p>Multi-user control becomes a cooperative multi-agent MDP. The array is split into $L$ disjoint segments, and each agent controls one segment's focal point.</p>
-    <p>The global state holds the user positions, the fixed segment centers, and the current focal points. Each agent observes only its own segment: the position of its assigned user, its center, and its focal point. The assigned user is fixed in advance; this will matter at the end of the part.</p>
+    <p>Multi-user control becomes a cooperative multi-agent MDP. The array is split into L disjoint segments, three here, and each agent controls one segment's focal point.</p>
+    <p>The global state holds the user positions, the fixed segment centers, and the current focal points. Each agent observes only its own segment: the position of its assigned user, its center, and its focal point. The assigned user is fixed in advance; this matters later.</p>
     <p>The action is a bounded focal-point displacement, so the tiles move smoothly.</p>
     <p>All agents share one reward, the mean received power of the users. Power is used only in training, so at run time the agents need positions only.</p>
     <p>Focal points and tile angles are clipped to their limits, so every action is feasible. This is how learning answers the geometric limits: it acts within servo limits, optimizes received power, and serves several users.</p>
-    <p>The abstraction cuts the control dimension from $2N_rN_c$ angles to $3L$ coordinates, fourteen times fewer here.</p>
+    <p>The abstraction cuts the control dimension from two angles per tile, 126 angles for 63 tiles, to three coordinates per segment, 9 for three segments: fourteen times fewer.</p>
   </aside>
 </section>
 
@@ -839,8 +839,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   </div>
   <aside class="notes"><p class="timing"><b>[1.25 min | 16:30&ndash;17:45]</b></p>
     <p>These are RSSI maps of the hallway during evaluation, with the RSSI-map average of each configuration underneath. The users are the magenta dots.</p>
-    <p>With no reflector the average is $-108.2$&nbsp;dBm. A static flat reflector raises it by 18.1&nbsp;dB to $-90.1$&nbsp;dBm.</p>
-    <p>Compare the flat panel, where power spreads along the corridor, with the narrow beams the learned controllers form toward each user. Single-agent focusing reaches $-74.22$, the column-based controller $-72.71$, and multi-agent beam-focusing $-69.4$&nbsp;dBm.</p>
+    <p>With no reflector the average is minus 108.2&nbsp;dBm. A static flat reflector raises it by 18.1&nbsp;dB to minus 90.1&nbsp;dBm.</p>
+    <p>Compare the flat panel, where power spreads along the corridor, with the narrow beams the learned controllers form toward each user. Single-agent focusing reaches minus 74.22, the column-based controller minus 72.71, and multi-agent beam-focusing minus 69.4&nbsp;dBm.</p>
     <p>That is 38.8&nbsp;dB above no reflector, 20.7&nbsp;dB above the static flat reflector, and 4.8&nbsp;dB above the single-agent controller. The baselines are static reflectors and learned variants; a position-tracking geometric rule was not run here.</p>
     <p>The video shows the multi-agent controller with moving users. Users move every four simulation steps, with a three-step adaptation window, an assumed allowance for mechanical latency. After a move, the controller typically recovers within one step.</p>
   </aside>
@@ -865,7 +865,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 17:45&ndash;18:15]</b></p>
     <p>Three robustness checks, one per slide. Here and on the next slide the metric is the temporal-average RSSI at the users over the 300-step trace.</p>
-    <p>The three-user policy runs unchanged with two, three and four users: $-67.33$, $-67.60$ and $-68.33$&nbsp;dBm, a 1&nbsp;dB drop from two to four users, since fewer users means more tiles per user.</p>
+    <p>The three-user policy runs unchanged with two, three and four users: minus 67.33, minus 67.60 and minus 68.33&nbsp;dBm, a 1&nbsp;dB drop from two to four users, since fewer users means more tiles per user.</p>
   </aside>
 </section>
 
@@ -886,7 +886,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 18:15&ndash;18:45]</b></p>
     <p>Second check: arrays from 45 to 99 tiles, again without retraining.</p>
-    <p>RSSI rises monotonically with size, from $-68.43$ to $-66.80$&nbsp;dBm, with diminishing returns. Because the agents act on focal points rather than individual tiles, the same policy runs on every array size.</p>
+    <p>RSSI rises monotonically with size, from minus 68.43 to minus 66.80&nbsp;dBm, with diminishing returns. Because the agents act on focal points rather than individual tiles, the same policy runs on every array size.</p>
   </aside>
 </section>
 
@@ -932,10 +932,10 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="transition"><div class="ans"><b>Answered (HOW):</b> decentralized agents steer focal points from user positions, trained on received power: +20.7&nbsp;dB over a static flat reflector.</div><div class="arrow"></div><div class="opens"><b>Opens (HOW):</b> when segments differ in geometry, which segment should serve which user, and when should that change? &rarr; hierarchical MARL.</div></div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 19:15&ndash;20:00]</b></p>
-    <p>To summarize: decentralized agents steer focal points from user positions, trained on received power, well above static reflectors.</p>
+    <p>To summarize: decentralized agents steer focal points from user positions, well above static reflectors.</p>
     <p>One structural choice was fixed in advance: which tiles serve which user. Columns 1, 4 and 7 always serve user 1.</p>
-    <p>In this hallway that costs nothing measurable: two groupings give the same $-67.60$&nbsp;dBm, because each user's tiles span the whole aperture.</p>
-    <p>It matters when segments differ in geometry, for example arrays on different walls, or when users and segments differ in number. Choosing it is a discrete problem with $K^L$ options. That opens the next question: which segment serves which user, and when.</p>
+    <p>In this hallway that costs nothing measurable: two groupings give the same minus 67.60&nbsp;dBm, because each user's tiles span the whole aperture.</p>
+    <p>It matters when segments differ in geometry, such as arrays on different walls. Choosing it is a discrete problem: K users and L segments give K to the power L options, 27 in this three-user hallway. Next: which segment serves which user, and when.</p>
   </aside>
 </section>
 
@@ -966,8 +966,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="takeaway">Make the user-to-segment assignment a learned decision on its own, slower timescale.</div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 20:00&ndash;20:30]</b></p>
-    <p>Now two corner arrays serve the room, so a user can be reached by segments with very different geometry; the partition matters.</p>
-    <p>There are two decisions: which user each segment serves, discrete and coupled; and where each segment focuses, continuous and servo-limited. The assignment space grows as $K^L$, 256 options with four users. So the assignment becomes a learned decision on its own, slower timescale.</p>
+    <p>Now two corner arrays serve the room, so the partition matters.</p>
+    <p>There are two decisions: which user each segment serves, discrete and coupled; and where each segment focuses, continuous and servo-limited. The assignment space grows as K to the power L: with four users and four segments, 256 options. So the assignment becomes a learned decision on its own, slower timescale.</p>
   </aside>
 </section>
 
@@ -990,9 +990,9 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 20:30&ndash;21:15]</b></p>
-    <p>The hierarchy has two levels. At the top, a centralized allocator reads the global state: all user positions, segment centroids and current focal points. Every $T$ slots it emits an assignment vector $b$, one user index per segment, which is broadcast and held for the window.</p>
+    <p>The hierarchy has two levels. At the top, a centralized allocator reads the global state: all user positions, segment centroids and current focal points. Every T slots, ten in the experiments, it emits an assignment vector, one user index per segment, which is broadcast and held for the window.</p>
     <p>Below, one agent per segment moves its focal point every slot. It sees only nine numbers: its assigned user's position, its own centroid and its focal point. Segments do not communicate.</p>
-    <p>At run time both levels see positions only; power is only the training reward. The timeline is drawn with $T$ of four; experiments use ten.</p>
+    <p>At run time both levels see positions only; power is only the training reward. The timeline is drawn with T of four; experiments use ten.</p>
   </aside>
 </section>
 
@@ -1006,7 +1006,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   <aside class="notes"><p class="timing"><b>[0.75 min | 21:15&ndash;22:00]</b></p>
     <p>Here are both timescales together. Two corner arrays, each split into two segments; three users walk paths that cross.</p>
     <p>Watch the timeline on the right. Every slot, each segment nudges its focal point a bounded step toward its user, the fast level.</p>
-    <p>Every $T$ slots the allocator decides again which user each segment serves; a segment that changes color swings its beam to its new user. Between those decisions the assignment is held, so segments are not thrown around while users cross.</p>
+    <p>Every T slots, ten in the experiments, the allocator decides again which user each segment serves; a segment that changes color swings its beam to its new user. Between those decisions the assignment is held, so segments are not thrown around while users cross.</p>
   </aside>
 </section>
 
@@ -1029,7 +1029,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 22:00&ndash;22:45]</b></p>
     <p>Both levels serve one discounted objective, each with a reward suited to its decision.</p>
-    <p>The allocator's reward is a log utility averaged over all users. Unlike flat MARL's mean, one strong user cannot mask an unserved one, and a decibel gained by a weak user is worth more. Because its decision is held for $T$ slots, it is trained on macro-steps: the discounted return inside each window.</p>
+    <p>The allocator's reward is a log utility averaged over all users. Unlike flat MARL's mean, one strong user cannot mask an unserved one, and a decibel gained by a weak user is worth more. Because its decision is held for T slots, it is trained on macro-steps: the discounted return inside each window.</p>
     <p>Each segment is rewarded with its assigned user's shifted power plus a progress term, potential-based shaping. One change from flat MARL: a move that would push any tile past its limit is rejected rather than clipped.</p>
   </aside>
 </section>
@@ -1159,10 +1159,10 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   </div>
   <aside class="notes"><p class="timing"><b>[1.25 min | 24:15&ndash;25:30]</b></p>
     <p>Main result, with users now moving every slot. The ordering matches training.</p>
-    <p>With four users, choosing the assignment raises mean RSSI from $-72.46$&nbsp;dBm with the fixed split to $-66.62$&nbsp;dBm, within this scene. That is also 1.88&nbsp;dB above the strongest baseline, the geometric heuristic, our one geometry head-to-head, and 7.94&nbsp;dB above Centralized, a bound since it differs in architecture, reward and learner.</p>
+    <p>With four users, choosing the assignment raises mean RSSI from minus 72.46&nbsp;dBm with the fixed split to minus 66.62&nbsp;dBm, within this scene. That is also 1.88&nbsp;dB above the strongest baseline, the geometric heuristic, our one geometry head-to-head, and 7.94&nbsp;dB above Centralized, a bound since it differs in architecture, reward and learner.</p>
     <p>With four users HMARL-C is also the most stable: 0.71&nbsp;dB standard deviation, against 1.39 to 1.74&nbsp;dB for the baselines.</p>
     <p>The dips have two causes. Static-MARL keeps focusing on its assigned user after that path degrades; releasing the segment is the expected mechanism that removes those dips. Compat-only gives neighboring segments nearly identical scores, so they pick the same user and leave another one unassigned.</p>
-    <p>If asked: the plot legend shows $-72.26$ for Static-MARL; the tabulated value is $-72.46$&nbsp;dBm.</p>
+    <p>If asked: the plot legend shows minus 72.26 for Static-MARL; the tabulated value is minus 72.46&nbsp;dBm.</p>
   </aside>
 </section>
 
@@ -1205,7 +1205,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 26:00&ndash;26:30]</b></p>
-    <p>$T$ sets the ratio of the two timescales, and the result peaks at ten slots. At $T$ of one a segment cannot tell a reassignment from a jump, and the hierarchy collapses toward a flat policy. At large $T$ the allocator decides from stale states; those curves are lower bounds.</p>
+    <p>T, the number of slots between allocations, sets the ratio of the two timescales, and the result peaks at ten slots. At T of one a segment cannot tell a reassignment from a jump, and the hierarchy collapses toward a flat policy. At large T the allocator decides from stale states; those curves are lower bounds.</p>
   </aside>
 </section>
 
@@ -1222,7 +1222,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> learning the assignment raises 4-user mean RSSI from $-72.46$&nbsp;dBm (fixed split) to $-66.62$&nbsp;dBm, +1.88&nbsp;dB over the best geometric heuristic.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 26:30&ndash;27:00]</b></p>
-    <p>Learning the assignment lifts four users from $-72.46$ to $-66.62$&nbsp;dBm over a fixed split in this scene, and beats the best geometric heuristic.</p>
+    <p>Learning the assignment lifts four users from minus 72.46 to minus 66.62&nbsp;dBm over a fixed split in this scene, and beats the best geometric heuristic.</p>
     <p>But adding tiles at the same site saturates, and both controllers take the access point and array positions as given. The next part asks where they should be installed.</p>
   </aside>
 </section>
@@ -2028,7 +2028,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
         <p class="small" style="margin-top:8px"><b>Reward</b> $P_{r,k}\cdot d^{\,n}$, $n=2,3,4$: $-67.60$, $-67.32$, $-67.70$&nbsp;dBm (range 0.38&nbsp;dB)</p></div>
     </div>
   </div>
-  <aside class="notes"><p>Backup. Two sensitivity analyses. The tile grouping among agents does not change the temporal-average RSSI ($-67.60$&nbsp;dBm for both). Distance-normalized reward variants differ by at most 0.38&nbsp;dB; per-minibatch advantage normalization in PPO is one plausible contributor, but it does not fully explain the result because the distance factors change the relative weighting of users.</p></aside>
+  <aside class="notes"><p>Backup. Two sensitivity analyses. The tile grouping among agents does not change the temporal-average RSSI (minus 67.60&nbsp;dBm for both). Distance-normalized reward variants differ by at most 0.38&nbsp;dB; per-minibatch advantage normalization in PPO is one plausible contributor, but it does not fully explain the result because the distance factors change the relative weighting of users.</p></aside>
 </section>
 
 
@@ -2046,7 +2046,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </ul>
     </div>
   </div>
-  <aside class="notes"><p>The approach is not tied to four users. Configured and trained the same way for two users, it keeps the same ranking, with narrower margins: HMARL-C is 1.14&nbsp;dB above Compat-only and 2.59&nbsp;dB above Centralized. With only 16 assignments, most serving both users, allocation has less to choose. If asked: the legend shows $-67.28$; the table gives $-67.29$&nbsp;dBm.</p></aside>
+  <aside class="notes"><p>The approach is not tied to four users. Configured and trained the same way for two users, it keeps the same ranking, with narrower margins: HMARL-C is 1.14&nbsp;dB above Compat-only and 2.59&nbsp;dB above Centralized. With only 16 assignments, most serving both users, allocation has less to choose. If asked: the legend shows minus 67.28; the table gives minus 67.29&nbsp;dBm.</p></aside>
 </section>
 
 <section class="backup" data-id="aperture">
@@ -2115,7 +2115,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </div>
     </div>
   </div>
-  <aside class="notes"><p>Backup: reward design. Training was repeated with the linear received power scaled by $d_k^n$ before conversion to dBm, which progressively favors distant users. The five deployment CDFs nearly coincide: medians span 0.81&nbsp;dB. $P_{\mathrm{off}} = 80$&nbsp;dB is the smallest round value that keeps the shifted power non-negative over the observed $-60$ to $-80$&nbsp;dBm range, but it also sets how strongly the log utility favors weak users; that weighting was not swept.</p></aside>
+  <aside class="notes"><p>Backup: reward design. Training was repeated with the linear received power scaled by the user's distance to the power n, n from 0 to 4, before conversion to dBm, which progressively favors distant users. The five deployment CDFs nearly coincide: medians span 0.81&nbsp;dB. The offset P-off of 80&nbsp;dB is the smallest round value that keeps the shifted power non-negative over the observed minus 60 to minus 80&nbsp;dBm range, but it also sets how strongly the log utility favors weak users; that weighting was not swept.</p></aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-focal">
@@ -2136,7 +2136,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:12px">This counts control variables; no tile-level controller was trained, so it is not a measured saving in samples or wall-clock time.</p>
   </div>
-  <aside class="notes"><p>Backup: control dimension. The focal point turns 252 tile angles into 12 focal coordinates, a 21-fold reduction; the same factor $R_{\text{complexity}}$ as in the flat study. The assignment space does not shrink: 16 options with two users and 256 with four. The factorized allocator head emits $LK$ logits, one softmax per segment.</p></aside>
+  <aside class="notes"><p>Backup: control dimension. The focal point turns 252 tile angles into 12 focal coordinates, a 21-fold reduction: 2 arrays of 63 tiles give 252 angles, and 4 segments give 12 coordinates. The flat study's reduction was fourteen-fold. The assignment space does not shrink: 16 options with two users and 256 with four. The factorized allocator head emits L times K logits, 16 for four segments and four users, one softmax per segment.</p></aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-params">

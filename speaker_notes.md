@@ -25,27 +25,27 @@ Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 19 | Beam-focusing follows the UE: L- and T-shaped hallways | 0.5 | 10:45-11:15 | 66 | 132 |
 | 20 | Limits of the geometric rule motivate learned control | 0.75 | 11:15-12:00 | 67 | 89 |
 | 21 | Focal-point abstraction: a segment is steered by 3 coordinates | 0.75 | 12:00-12:45 | 96 | 128 |
-| 22 | MA-MDP: each agent moves the focal point of one segment | 1.25 | 12:45-14:00 | 164 | 131 |
+| 22 | MA-MDP: each agent moves the focal point of one segment | 1.25 | 12:45-14:00 | 172 | 138 |
 | 23 | Flat MARL in motion: fixed columns, moving focal points | 0.75 | 14:00-14:45 | 94 | 125 |
 | 24 | Training with MAPPO under CTDE | 0.75 | 14:45-15:30 | 99 | 132 |
 | 25 | Setup: 60 GHz L-shaped hallway with three users | 0.5 | 15:30-16:00 | 58 | 116 |
 | 26 | Multi-agent decomposition trains faster and higher | 0.5 | 16:00-16:30 | 57 | 114 |
-| 27 | Multi-agent focusing: +20.7 dB over a static flat reflector | 1.25 | 16:30-17:45 | 152 | 122 |
-| 28 | Robustness: user count | 0.5 | 17:45-18:15 | 59 | 118 |
-| 29 | Robustness: array size | 0.5 | 18:15-18:45 | 43 | 86 |
+| 27 | Multi-agent focusing: +20.7 dB over a static flat reflector | 1.25 | 16:30-17:45 | 155 | 124 |
+| 28 | Robustness: user count | 0.5 | 17:45-18:15 | 61 | 122 |
+| 29 | Robustness: array size | 0.5 | 18:15-18:45 | 45 | 90 |
 | 30 | Robustness: user-position noise | 0.5 | 18:45-19:15 | 59 | 118 |
-| 31 | Why flat MARL is not enough: a fixed tile-to-user assignment | 0.75 | 19:15-20:00 | 103 | 137 |
-| 32 | From fixed assignment to learned allocation | 0.5 | 20:00-20:30 | 66 | 132 |
-| 33 | Two-timescale hierarchy: slow allocation, fast focusing | 0.75 | 20:30-21:15 | 103 | 137 |
-| 34 | The hierarchy in motion: reassign every x slots, refocus every slot | 0.75 | 21:15-22:00 | 82 | 109 |
+| 31 | Why flat MARL is not enough: a fixed tile-to-user assignment | 0.75 | 19:15-20:00 | 102 | 136 |
+| 32 | From fixed assignment to learned allocation | 0.5 | 20:00-20:30 | 61 | 122 |
+| 33 | Two-timescale hierarchy: slow allocation, fast focusing | 0.75 | 20:30-21:15 | 105 | 140 |
+| 34 | The hierarchy in motion: reassign every T slots, refocus every slot | 0.75 | 21:15-22:00 | 86 | 115 |
 | 35 | HMA-MDP: one objective, a reward for each timescale | 0.75 | 22:00-22:45 | 103 | 137 |
 | 36 | Training under CTDE, with a geometric warm start | 0.5 | 22:45-23:15 | 59 | 118 |
 | 37 | Setup: ray-traced conference room and six controllers | 0.5 | 23:15-23:45 | 55 | 110 |
 | 38 | Training: the warm-started allocator converges highest | 0.5 | 23:45-24:15 | 48 | 96 |
-| 39 | Deployment with moving users (4 users) | 1.25 | 24:15-25:30 | 146 | 117 |
+| 39 | Deployment with moving users (4 users) | 1.25 | 24:15-25:30 | 150 | 120 |
 | 40 | Where the energy goes (4 users) | 0.5 | 25:30-26:00 | 42 | 84 |
-| 41 | How often to reallocate? An interior optimum at x slots (4 users) | 0.5 | 26:00-26:30 | 50 | 100 |
-| 42 | What allocation buys, and what it cannot fix | 0.5 | 26:30-27:00 | 53 | 106 |
+| 41 | How often to reallocate? An interior optimum at T=10 slots (4 users) | 0.5 | 26:00-26:30 | 56 | 112 |
+| 42 | What allocation buys, and what it cannot fix | 0.5 | 26:30-27:00 | 55 | 110 |
 | 43 | Can a passive reflector replace an access point? | 0.75 | 27:00-27:45 | 102 | 136 |
 | 44 | Two floorplans with operator-defined priority maps | 0.5 | 27:45-28:15 | 64 | 128 |
 | 45 | Design vector: AP poses, wall position, focal points | 0.75 | 28:15-29:00 | 104 | 139 |
@@ -154,7 +154,7 @@ Learned control and placement build on one abstraction. Instead of the user posi
 
 ## 22. MA-MDP: each agent moves the focal point of one segment  [1.25 min | 12:45-14:00]
 
-Multi-user control becomes a cooperative multi-agent MDP. The array is split into x disjoint segments, and each agent controls one segment's focal point. The global state holds the user positions, the fixed segment centers, and the current focal points. Each agent observes only its own segment: the position of its assigned user, its center, and its focal point. The assigned user is fixed in advance; this will matter at the end of the part. The action is a bounded focal-point displacement, so the tiles move smoothly. All agents share one reward, the mean received power of the users. Power is used only in training, so at run time the agents need positions only. Focal points and tile angles are clipped to their limits, so every action is feasible. This is how learning answers the geometric limits: it acts within servo limits, optimizes received power, and serves several users. The abstraction cuts the control dimension from x angles to x coordinates, fourteen times fewer here.
+Multi-user control becomes a cooperative multi-agent MDP. The array is split into L disjoint segments, three here, and each agent controls one segment's focal point. The global state holds the user positions, the fixed segment centers, and the current focal points. Each agent observes only its own segment: the position of its assigned user, its center, and its focal point. The assigned user is fixed in advance; this matters later. The action is a bounded focal-point displacement, so the tiles move smoothly. All agents share one reward, the mean received power of the users. Power is used only in training, so at run time the agents need positions only. Focal points and tile angles are clipped to their limits, so every action is feasible. This is how learning answers the geometric limits: it acts within servo limits, optimizes received power, and serves several users. The abstraction cuts the control dimension from two angles per tile, 126 angles for 63 tiles, to three coordinates per segment, 9 for three segments: fourteen times fewer.
 
 ## 23. Flat MARL in motion: fixed columns, moving focal points  [0.75 min | 14:00-14:45]
 
@@ -174,15 +174,15 @@ Three controllers: multi-agent focusing, a single agent choosing all focal point
 
 ## 27. Multi-agent focusing: +20.7 dB over a static flat reflector  [1.25 min | 16:30-17:45]
 
-These are RSSI maps of the hallway during evaluation, with the RSSI-map average of each configuration underneath. The users are the magenta dots. With no reflector the average is x dBm. A static flat reflector raises it by 18.1 dB to x dBm. Compare the flat panel, where power spreads along the corridor, with the narrow beams the learned controllers form toward each user. Single-agent focusing reaches x , the column-based controller x , and multi-agent beam-focusing x dBm. That is 38.8 dB above no reflector, 20.7 dB above the static flat reflector, and 4.8 dB above the single-agent controller. The baselines are static reflectors and learned variants; a position-tracking geometric rule was not run here. The video shows the multi-agent controller with moving users. Users move every four simulation steps, with a three-step adaptation window, an assumed allowance for mechanical latency. After a move, the controller typically recovers within one step.
+These are RSSI maps of the hallway during evaluation, with the RSSI-map average of each configuration underneath. The users are the magenta dots. With no reflector the average is minus 108.2 dBm. A static flat reflector raises it by 18.1 dB to minus 90.1 dBm. Compare the flat panel, where power spreads along the corridor, with the narrow beams the learned controllers form toward each user. Single-agent focusing reaches minus 74.22, the column-based controller minus 72.71, and multi-agent beam-focusing minus 69.4 dBm. That is 38.8 dB above no reflector, 20.7 dB above the static flat reflector, and 4.8 dB above the single-agent controller. The baselines are static reflectors and learned variants; a position-tracking geometric rule was not run here. The video shows the multi-agent controller with moving users. Users move every four simulation steps, with a three-step adaptation window, an assumed allowance for mechanical latency. After a move, the controller typically recovers within one step.
 
 ## 28. Robustness: user count  [0.5 min | 17:45-18:15]
 
-Three robustness checks, one per slide. Here and on the next slide the metric is the temporal-average RSSI at the users over the 300-step trace. The three-user policy runs unchanged with two, three and four users: x , x and x dBm, a 1 dB drop from two to four users, since fewer users means more tiles per user.
+Three robustness checks, one per slide. Here and on the next slide the metric is the temporal-average RSSI at the users over the 300-step trace. The three-user policy runs unchanged with two, three and four users: minus 67.33, minus 67.60 and minus 68.33 dBm, a 1 dB drop from two to four users, since fewer users means more tiles per user.
 
 ## 29. Robustness: array size  [0.5 min | 18:15-18:45]
 
-Second check: arrays from 45 to 99 tiles, again without retraining. RSSI rises monotonically with size, from x to x dBm, with diminishing returns. Because the agents act on focal points rather than individual tiles, the same policy runs on every array size.
+Second check: arrays from 45 to 99 tiles, again without retraining. RSSI rises monotonically with size, from minus 68.43 to minus 66.80 dBm, with diminishing returns. Because the agents act on focal points rather than individual tiles, the same policy runs on every array size.
 
 ## 30. Robustness: user-position noise  [0.5 min | 18:45-19:15]
 
@@ -190,23 +190,23 @@ Third check: Gaussian noise on the user positions, in both training and evaluati
 
 ## 31. Why flat MARL is not enough: a fixed tile-to-user assignment  [0.75 min | 19:15-20:00]
 
-To summarize: decentralized agents steer focal points from user positions, trained on received power, well above static reflectors. One structural choice was fixed in advance: which tiles serve which user. Columns 1, 4 and 7 always serve user 1. In this hallway that costs nothing measurable: two groupings give the same x dBm, because each user's tiles span the whole aperture. It matters when segments differ in geometry, for example arrays on different walls, or when users and segments differ in number. Choosing it is a discrete problem with x options. That opens the next question: which segment serves which user, and when.
+To summarize: decentralized agents steer focal points from user positions, well above static reflectors. One structural choice was fixed in advance: which tiles serve which user. Columns 1, 4 and 7 always serve user 1. In this hallway that costs nothing measurable: two groupings give the same minus 67.60 dBm, because each user's tiles span the whole aperture. It matters when segments differ in geometry, such as arrays on different walls. Choosing it is a discrete problem: K users and L segments give K to the power L options, 27 in this three-user hallway. Next: which segment serves which user, and when.
 
 ## 32. From fixed assignment to learned allocation  [0.5 min | 20:00-20:30]
 
-Now two corner arrays serve the room, so a user can be reached by segments with very different geometry; the partition matters. There are two decisions: which user each segment serves, discrete and coupled; and where each segment focuses, continuous and servo-limited. The assignment space grows as x , 256 options with four users. So the assignment becomes a learned decision on its own, slower timescale.
+Now two corner arrays serve the room, so the partition matters. There are two decisions: which user each segment serves, discrete and coupled; and where each segment focuses, continuous and servo-limited. The assignment space grows as K to the power L: with four users and four segments, 256 options. So the assignment becomes a learned decision on its own, slower timescale.
 
 ## 33. Two-timescale hierarchy: slow allocation, fast focusing  [0.75 min | 20:30-21:15]
 
-The hierarchy has two levels. At the top, a centralized allocator reads the global state: all user positions, segment centroids and current focal points. Every x slots it emits an assignment vector x , one user index per segment, which is broadcast and held for the window. Below, one agent per segment moves its focal point every slot. It sees only nine numbers: its assigned user's position, its own centroid and its focal point. Segments do not communicate. At run time both levels see positions only; power is only the training reward. The timeline is drawn with x of four; experiments use ten.
+The hierarchy has two levels. At the top, a centralized allocator reads the global state: all user positions, segment centroids and current focal points. Every T slots, ten in the experiments, it emits an assignment vector, one user index per segment, which is broadcast and held for the window. Below, one agent per segment moves its focal point every slot. It sees only nine numbers: its assigned user's position, its own centroid and its focal point. Segments do not communicate. At run time both levels see positions only; power is only the training reward. The timeline is drawn with T of four; experiments use ten.
 
-## 34. The hierarchy in motion: reassign every x slots, refocus every slot  [0.75 min | 21:15-22:00]
+## 34. The hierarchy in motion: reassign every T slots, refocus every slot  [0.75 min | 21:15-22:00]
 
-Here are both timescales together. Two corner arrays, each split into two segments; three users walk paths that cross. Watch the timeline on the right. Every slot, each segment nudges its focal point a bounded step toward its user, the fast level. Every x slots the allocator decides again which user each segment serves; a segment that changes color swings its beam to its new user. Between those decisions the assignment is held, so segments are not thrown around while users cross.
+Here are both timescales together. Two corner arrays, each split into two segments; three users walk paths that cross. Watch the timeline on the right. Every slot, each segment nudges its focal point a bounded step toward its user, the fast level. Every T slots, ten in the experiments, the allocator decides again which user each segment serves; a segment that changes color swings its beam to its new user. Between those decisions the assignment is held, so segments are not thrown around while users cross.
 
 ## 35. HMA-MDP: one objective, a reward for each timescale  [0.75 min | 22:00-22:45]
 
-Both levels serve one discounted objective, each with a reward suited to its decision. The allocator's reward is a log utility averaged over all users. Unlike flat MARL's mean, one strong user cannot mask an unserved one, and a decibel gained by a weak user is worth more. Because its decision is held for x slots, it is trained on macro-steps: the discounted return inside each window. Each segment is rewarded with its assigned user's shifted power plus a progress term, potential-based shaping. One change from flat MARL: a move that would push any tile past its limit is rejected rather than clipped.
+Both levels serve one discounted objective, each with a reward suited to its decision. The allocator's reward is a log utility averaged over all users. Unlike flat MARL's mean, one strong user cannot mask an unserved one, and a decibel gained by a weak user is worth more. Because its decision is held for T slots, it is trained on macro-steps: the discounted return inside each window. Each segment is rewarded with its assigned user's shifted power plus a progress term, potential-based shaping. One change from flat MARL: a move that would push any tile past its limit is rejected rather than clipped.
 
 ## 36. Training under CTDE, with a geometric warm start  [0.5 min | 22:45-23:15]
 
@@ -222,19 +222,19 @@ HMARL-C converges highest in both configurations. With two users the methods clu
 
 ## 39. Deployment with moving users (4 users)  [1.25 min | 24:15-25:30]
 
-Main result, with users now moving every slot. The ordering matches training. With four users, choosing the assignment raises mean RSSI from x dBm with the fixed split to x dBm, within this scene. That is also 1.88 dB above the strongest baseline, the geometric heuristic, our one geometry head-to-head, and 7.94 dB above Centralized, a bound since it differs in architecture, reward and learner. With four users HMARL-C is also the most stable: 0.71 dB standard deviation, against 1.39 to 1.74 dB for the baselines. The dips have two causes. Static-MARL keeps focusing on its assigned user after that path degrades; releasing the segment is the expected mechanism that removes those dips. Compat-only gives neighboring segments nearly identical scores, so they pick the same user and leave another one unassigned. If asked: the plot legend shows x for Static-MARL; the tabulated value is x dBm.
+Main result, with users now moving every slot. The ordering matches training. With four users, choosing the assignment raises mean RSSI from minus 72.46 dBm with the fixed split to minus 66.62 dBm, within this scene. That is also 1.88 dB above the strongest baseline, the geometric heuristic, our one geometry head-to-head, and 7.94 dB above Centralized, a bound since it differs in architecture, reward and learner. With four users HMARL-C is also the most stable: 0.71 dB standard deviation, against 1.39 to 1.74 dB for the baselines. The dips have two causes. Static-MARL keeps focusing on its assigned user after that path degrades; releasing the segment is the expected mechanism that removes those dips. Compat-only gives neighboring segments nearly identical scores, so they pick the same user and leave another one unassigned. If asked: the plot legend shows minus 72.26 for Static-MARL; the tabulated value is minus 72.46 dBm.
 
 ## 40. Where the energy goes (4 users)  [0.5 min | 25:30-26:00]
 
 Snapshots at evaluation slot 294, users as magenta dots. HMARL-C forms narrow beams through the users, HMARL-NC spreads wider, and Centralized shows little focusing. These are single-slot averages, not run means. The video shows the learned allocator re-steering segments as users move.
 
-## 41. How often to reallocate? An interior optimum at x slots (4 users)  [0.5 min | 26:00-26:30]
+## 41. How often to reallocate? An interior optimum at T=10 slots (4 users)  [0.5 min | 26:00-26:30]
 
-x sets the ratio of the two timescales, and the result peaks at ten slots. At x of one a segment cannot tell a reassignment from a jump, and the hierarchy collapses toward a flat policy. At large x the allocator decides from stale states; those curves are lower bounds.
+T, the number of slots between allocations, sets the ratio of the two timescales, and the result peaks at ten slots. At T of one a segment cannot tell a reassignment from a jump, and the hierarchy collapses toward a flat policy. At large T the allocator decides from stale states; those curves are lower bounds.
 
 ## 42. What allocation buys, and what it cannot fix  [0.5 min | 26:30-27:00]
 
-Learning the assignment lifts four users from x to x dBm over a fixed split in this scene, and beats the best geometric heuristic. But adding tiles at the same site saturates, and both controllers take the access point and array positions as given. The next part asks where they should be installed.
+Learning the assignment lifts four users from minus 72.46 to minus 66.62 dBm over a fixed split in this scene, and beats the best geometric heuristic. But adding tiles at the same site saturates, and both controllers take the access point and array positions as given. The next part asks where they should be installed.
 
 ## 43. Can a passive reflector replace an access point?  [0.75 min | 27:00-27:45]
 

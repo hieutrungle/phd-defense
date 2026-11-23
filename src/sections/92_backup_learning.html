@@ -40,7 +40,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
         <p class="small" style="margin-top:8px"><b>Reward</b> $P_{r,k}\cdot d^{\,n}$, $n=2,3,4$: $-67.60$, $-67.32$, $-67.70$&nbsp;dBm (range 0.38&nbsp;dB)</p></div>
     </div>
   </div>
-  <aside class="notes"><p>Backup. Two sensitivity analyses. The tile grouping among agents does not change the temporal-average RSSI ($-67.60$&nbsp;dBm for both). Distance-normalized reward variants differ by at most 0.38&nbsp;dB; per-minibatch advantage normalization in PPO is one plausible contributor, but it does not fully explain the result because the distance factors change the relative weighting of users.</p></aside>
+  <aside class="notes"><p>Backup. Two sensitivity analyses. The tile grouping among agents does not change the temporal-average RSSI (minus 67.60&nbsp;dBm for both). Distance-normalized reward variants differ by at most 0.38&nbsp;dB; per-minibatch advantage normalization in PPO is one plausible contributor, but it does not fully explain the result because the distance factors change the relative weighting of users.</p></aside>
 </section>
 
 
@@ -58,7 +58,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </ul>
     </div>
   </div>
-  <aside class="notes"><p>The approach is not tied to four users. Configured and trained the same way for two users, it keeps the same ranking, with narrower margins: HMARL-C is 1.14&nbsp;dB above Compat-only and 2.59&nbsp;dB above Centralized. With only 16 assignments, most serving both users, allocation has less to choose. If asked: the legend shows $-67.28$; the table gives $-67.29$&nbsp;dBm.</p></aside>
+  <aside class="notes"><p>The approach is not tied to four users. Configured and trained the same way for two users, it keeps the same ranking, with narrower margins: HMARL-C is 1.14&nbsp;dB above Compat-only and 2.59&nbsp;dB above Centralized. With only 16 assignments, most serving both users, allocation has less to choose. If asked: the legend shows minus 67.28; the table gives minus 67.29&nbsp;dBm.</p></aside>
 </section>
 
 <section class="backup" data-id="aperture">
@@ -127,7 +127,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
       </div>
     </div>
   </div>
-  <aside class="notes"><p>Backup: reward design. Training was repeated with the linear received power scaled by $d_k^n$ before conversion to dBm, which progressively favors distant users. The five deployment CDFs nearly coincide: medians span 0.81&nbsp;dB. $P_{\mathrm{off}} = 80$&nbsp;dB is the smallest round value that keeps the shifted power non-negative over the observed $-60$ to $-80$&nbsp;dBm range, but it also sets how strongly the log utility favors weak users; that weighting was not swept.</p></aside>
+  <aside class="notes"><p>Backup: reward design. Training was repeated with the linear received power scaled by the user's distance to the power n, n from 0 to 4, before conversion to dBm, which progressively favors distant users. The five deployment CDFs nearly coincide: medians span 0.81&nbsp;dB. The offset P-off of 80&nbsp;dB is the smallest round value that keeps the shifted power non-negative over the observed minus 60 to minus 80&nbsp;dBm range, but it also sets how strongly the log utility favors weak users; that weighting was not swept.</p></aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-focal">
@@ -148,7 +148,7 @@ section[data-id] .lr-panel{border:1px solid var(--rule);border-radius:8px;backgr
     </div>
     <p class="small" style="margin-top:12px">This counts control variables; no tile-level controller was trained, so it is not a measured saving in samples or wall-clock time.</p>
   </div>
-  <aside class="notes"><p>Backup: control dimension. The focal point turns 252 tile angles into 12 focal coordinates, a 21-fold reduction; the same factor $R_{\text{complexity}}$ as in the flat study. The assignment space does not shrink: 16 options with two users and 256 with four. The factorized allocator head emits $LK$ logits, one softmax per segment.</p></aside>
+  <aside class="notes"><p>Backup: control dimension. The focal point turns 252 tile angles into 12 focal coordinates, a 21-fold reduction: 2 arrays of 63 tiles give 252 angles, and 4 segments give 12 coordinates. The flat study's reduction was fourteen-fold. The assignment space does not shrink: 16 options with two users and 256 with four. The factorized allocator head emits L times K logits, 16 for four segments and four users, one softmax per segment.</p></aside>
 </section>
 
 <section class="backup" data-id="bk-hmarl-params">

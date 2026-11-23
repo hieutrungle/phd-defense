@@ -10,9 +10,19 @@ notes, or any slide exceeds 140 words per minute.
 import re, sys, glob, html, os
 ROOT=os.path.dirname(os.path.abspath(__file__))
 WPM_MAX=140; TOTAL_MIN=(40.0,45.0)
+
+def _plainmath(s):
+    """LaTeX math in titles/notes -> readable plain text for speaker_notes.md (never a bare placeholder)."""
+    s=re.sub(r'\\(?:mathrm|mathbf|text|operatorname)\{([^}]*)\}',r'\1',s)
+    rep={r'\times':'×',r'\le':'≤',r'\ge':'≥',r'\approx':'≈',r'\pm':'±',r'\to':'→',r'\rightarrow':'→',r'\cdot':'·',r'\,':' ',r'\!':'',r'\;':' '}
+    for k,v in rep.items(): s=s.replace(k,v)
+    s=re.sub(r'\\([a-zA-Z]+)',r'\1',s)      # \alpha -> alpha
+    s=s.replace('{','').replace('}','').replace('-','−') if re.fullmatch(r'\s*-?[\d.]+\s*',s) else s.replace('{','').replace('}','')
+    return ' '+' '.join(s.split())+' '
+
 def fmt(s): return f"{int(s//60)}:{int(round(s%60)):02d}"
 def text_of(h):
-    h=re.sub(r'<[^>]+>',' ',h); h=html.unescape(h); h=re.sub(r'\$[^$]*\$',' x ',h); return ' '.join(h.split())
+    h=re.sub(r'<[^>]+>',' ',h); h=html.unescape(h); h=re.sub(r'\$([^$]*)\$',lambda m: _plainmath(m.group(1)),h); return ' '.join(h.split())
 def main(check=True):
     parts=sorted(glob.glob(os.path.join(ROOT,'src','sections','*.html')))
     body='\n'.join(open(p,encoding='utf-8').read() for p in parts)
