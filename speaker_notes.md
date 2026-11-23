@@ -4,7 +4,7 @@ Total: 42.00 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 
 | # | slide | min | window | words | wpm |
 |---|---|---|---|---|---|
-| 1 | title | 1.25 | 0:00-1:15 | 156 | 125 |
+| 1 | title | 1.25 | 0:00-1:15 | 151 | 121 |
 | 2 | Outline | 0.25 | 1:15-1:30 | 28 | 112 |
 | 3 | About me | 0.5 | 1:30-2:00 | 61 | 122 |
 | 4 | Professional experience | 0.5 | 2:00-2:30 | 51 | 102 |
@@ -72,7 +72,7 @@ Total: 42.00 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 
 Good morning, everyone. My name is Hieu T. Le, and I'm a Ph.D. candidate in electrical engineering at Texas A&M University. Thank you for joining me for my dissertation defense.
 
-I'd like to begin by thanking my committee. Professor Sabit Ekin, thank you for chairing my committee and for guiding my research throughout my Ph.D. Professor Jian Tao, thank you for your advice and support as my co-chair. Professor Erchin Serpedin, thank you for the time you've devoted to reviewing my dissertation. And Professor Arya Menon, thank you for serving on my committee and for being here today.
+I'd like to begin by thanking my committee. Professor Sabit Ekin, thank you for chairing my committee and for guiding my research throughout my Ph.D. Professor Jian Tao, thank you for your advice and support as my co-chair. Professor Erchin Serpedin and Professor Arya Menon, thank you both for serving on my committee and for the time you've taken to review my dissertation.
 
 My dissertation is titled Spatial Intelligence for Smart Radio Environments . It starts with a familiar problem. A user walks around a corner, and a wall blocks the direct signal. If we know where the user is, how can we steer a metallic reflector to reach them? And where should we install that reflector in the first place?
 
