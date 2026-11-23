@@ -45,7 +45,7 @@ Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
 | 39 | Where the energy goes (4 users) | 0.5 | 26:45-27:15 | 58 | 116 |
 | 40 | How often to reallocate? An interior optimum at T=10 slots (4 users) | 0.5 | 27:15-27:45 | 62 | 124 |
 | 41 | What allocation buys, and what it cannot fix | 0.5 | 27:45-28:15 | 62 | 124 |
-| 42 | Can a passive reflector replace an access point? | 0.75 | 28:15-29:00 | 84 | 112 |
+| 42 | Can a passive reflector replace an access point? | 0.75 | 28:15-29:00 | 75 | 100 |
 | 43 | Two floorplans with operator-defined priority maps | 0.5 | 29:00-29:30 | 63 | 126 |
 | 44 | Design vector: AP poses, wall position, focal points | 0.75 | 29:30-30:15 | 96 | 128 |
 | 45 | Objective: soft worst case plus floor-wide coverage | 0.5 | 30:15-30:45 | 63 | 126 |
@@ -289,7 +289,7 @@ In this room, learning who serves whom improved four-user mean RSSI by nearly si
 
 ## 42. Can a passive reflector replace an access point?  [0.75 min | 28:15-29:00]
 
-Suppose we're planning Wi-Fi for a building before any hardware goes in. We can choose the access point locations, where to mount one reflector, and how to orient its tiles. In this study the carrier is 5.18 gigahertz, and the tile settings stay fixed after installation.
+Suppose we're planning Wi-Fi for a building before any hardware goes in. We can choose the access point locations, where to mount one reflector, and how to orient its tiles. The tile settings stay fixed after installation.
 
 I'll ask two questions. With the same number of access points, can the reflector improve coverage in the rooms that need it most? And if it does, can we meet the coverage target with one fewer access point?
 
