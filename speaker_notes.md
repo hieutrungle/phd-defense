@@ -102,7 +102,9 @@ On this chart, the high-frequency bands offer the widest channels and the shorte
 
 ## 8. Target applications: dense, shielded indoor environments  [0.5 min | 3:45-4:15]
 
-A row of metal racks in a data center can block a receiver only a few meters away. Thick shielding around a sensor in a nuclear facility creates a similar problem. So does machinery between a factory robot and its access point. The hallways and rooms in my simulations isolate what these settings have in common. A nearby user can still be out of sight.
+Data centers need high-speed links between racks. In nuclear facilities, sensors send readings from behind thick shielding. In industrial plants, robots need to stay connected as they move between machines.
+
+In all three settings, a wall or a piece of equipment can block the direct path, even over a short distance. To reach those non-line-of-sight users, we need another path. A reflector can provide one.
 
 ## 9. Indoor mmWave links are blocked by structure  [0.5 min | 4:15-4:45]
 
