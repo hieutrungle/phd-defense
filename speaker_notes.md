@@ -6,7 +6,7 @@ Total: 42.00 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 |---|---|---|---|---|---|
 | 1 | title | 1.25 | 0:00-1:15 | 156 | 125 |
 | 2 | Outline | 0.25 | 1:15-1:30 | 28 | 112 |
-| 3 | About me | 0.5 | 1:30-2:00 | 55 | 110 |
+| 3 | About me | 0.5 | 1:30-2:00 | 61 | 122 |
 | 4 | Professional experience | 0.5 | 2:00-2:30 | 51 | 102 |
 | 5 | Sponsored research | 0.25 | 2:30-2:45 | 29 | 116 |
 | 6 | Growing demand points to mmWave bandwidth | 0.5 | 2:45-3:15 | 47 | 94 |
@@ -82,7 +82,7 @@ I'll start with the physics of one reflection. Then I'll add several users, let 
 
 ## 3. About me  [0.5 min | 1:30-2:00]
 
-My research brings together wireless communication, machine learning, and optimization. I use ray tracing to study which paths can carry energy to a user. Then I use reinforcement learning to decide how to steer a reflector as users move, and optimization to choose where to install it. The physics of the room shapes both decisions.
+My research focuses on smart radio environments. I study how we can use a room's geometry and the users' positions to steer radio waves with metallic reflectors. Ray tracing lets me model the paths through the room. I use reinforcement learning to steer an installed reflector as users move, and optimization to choose where the access points and reflectors should go.
 
 ## 4. Professional experience  [0.5 min | 2:00-2:30]
 
