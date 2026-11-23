@@ -221,43 +221,6 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
   </aside>
 </section>
 
-<!-- ============================== RESEARCH THREADS ============================== -->
-<section data-id="threads" data-min="0.5">
-  <h2 class="title">Research and technical innovation</h2>
-  <div class="body">
-    <div class="cards">
-      <div class="card">
-        <div class="ic"><svg width="64" height="40" viewBox="0 0 64 40"><g stroke="#500000" stroke-width="3.2" stroke-linecap="round"><line x1="10" y1="34" x2="20" y2="27"/><line x1="26" y1="34" x2="36" y2="27"/><line x1="42" y1="34" x2="52" y2="27"/></g><polyline points="4,6 31,30 58,6" fill="none" stroke="#9a5a5a" stroke-width="1.6"/><path d="M58 6 l-7 1.5 l3.5 3.5z" fill="#9a5a5a"/></svg></div>
-        <h3>Geometric foundations</h3>
-        <div>Bisector rule and focal points steer metallic tiles from positions alone.</div>
-        <div class="q"><b>WHAT:</b> what geometry alone achieves</div>
-      </div>
-      <div class="card">
-        <div class="ic"><img src="assets/img/proposal/image9.png" alt=""></div>
-        <h3>Flat MARL control</h3>
-        <div>Multi-agent RL that maps servo-actuated tile orientations to a few virtual focal points.</div>
-        <div class="q"><b>HOW:</b> steer the array for moving users</div>
-      </div>
-      <div class="card">
-        <div class="ic"><img src="assets/img/proposal/image10.png" alt=""></div>
-        <h3>Hierarchical MARL</h3>
-        <div>Two-timescale allocator + MAPPO segment agents, with no pilot-based CSI estimation.</div>
-        <div class="q"><b>HOW:</b> share the array among several users</div>
-      </div>
-      <div class="card">
-        <div class="ic"><img src="assets/img/proposal/image11.png" alt=""></div>
-        <h3>Joint placement</h3>
-        <div>Access points and a reflector placed jointly: PSO global search + gradient refinement through a differentiable ray tracer.</div>
-        <div class="q"><b>WHERE:</b> install the access points and the reflector</div>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">
-    <p>The research has four technical parts, each with its own part of the talk.</p>
-    <p>First, geometry: the bisector rule and focal points steer the tiles from positions alone. Second, multi-agent learning: each agent moves one virtual focal point. Third, a hierarchy: an allocator decides which segment serves which user. Fourth, placement: where the access points and the reflector go.</p>
-  </aside>
-</section>
-
 <!-- ============================== FORMULA3 (new; folds in sponsored research) ============================== -->
 <section data-id="sponsors" data-min="0.25">
   <h2 class="title">Sponsored research</h2>
@@ -419,26 +382,6 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <p>The standard controllable surface, the electronic RIS, faces three barriers: unit cells designed for one band; the cascaded channel through every element, which we just saw; and bias power to hold its state.</p>
     <p>Our alternative is a metallic array of servo-rotated tiles, large compared with the wavelength, so they act as mirrors across bands.</p>
     <p>At run time the controller uses only user positions; received power serves as the training reward. The tiles draw no power once positioned. The trade-off is slower reconfiguration, which suits quasi-static indoor scenes.</p>
-  </aside>
-</section>
-
-<!-- ============================== GAPS ============================== -->
-<section data-id="gaps" data-min="0.5">
-  <h2 class="title">Three gaps this work addresses</h2>
-  <div class="body">
-    <table class="bt">
-      <thead><tr><th style="width:44%">What prior work does</th><th>What is missing</th><th style="width:11%" class="center">Part</th></tr></thead>
-      <tbody>
-        <tr><td>Learned control of reflecting surfaces configures electronic RIS from full, partial or statistical CSI; metallic reflectors are static or one steered plate</td><td><b>Learned, localization-driven control</b> of a segmented, mechanically reconfigurable array</td><td class="part">HOW</td></tr>
-        <tr class="alt"><td>User-association and hierarchical RIS controllers assign whole surfaces; the flat controller fixes the mapping</td><td><b>Which segment serves which user</b>, as a decision of its own</td><td class="part">HOW</td></tr>
-        <tr><td>AP and reflector sites are chosen from discrete candidates or for fixed transmitters, with simple path-loss models</td><td><b>Joint, continuous AP and reflector placement</b> with site-specific propagation, judged on lower-tail coverage</td><td class="part">WHERE</td></tr>
-      </tbody>
-    </table>
-    <div class="takeaway">First, <b>WHAT</b> geometry alone achieves; then the three gaps, in order.</div>
-  </div>
-  <aside class="notes">
-    <p>Three gaps, one per technical part. First, learned control targets electronic RIS configured from channel information; learned, localization-driven control of a segmented mechanical array is open.</p>
-    <p>Second, which segment serves which user is a decision of its own. Third, access points and reflectors are rarely placed jointly with site-specific propagation.</p>
   </aside>
 </section>
 
@@ -608,26 +551,6 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
   </aside>
 </section>
 
-<!-- ============================== SPLIT: L-shaped RSSI ============================== -->
-<section class="rssi" data-id="L-rssi" data-min="0.5">
-  <h2 class="title">L-shaped hallway: RSSI at nine UE locations</h2>
-  <div class="body">
-    <div class="cols" style="--cols:58% 1fr;align-items:center">
-      <div class="col"><figure><img src="assets/img/ch3/p1-L_sig_str1.png" alt="RSSI at nine locations, L-shaped hallway"><figcaption>10 W (40 dBm) transmitter; free space as reference</figcaption></figure></div>
-      <div class="col">
-        <ul>
-          <li>Beam-focusing is <b>highest at all nine locations</b>, above free space</li>
-          <li>Plausible reason: the 1.4 m &times; 2.0 m aperture redirects all tile paths toward one receiver</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">
-    <p>Received signal strength at the nine locations, with a 10 watt transmitter and free space as reference.</p>
-    <p>In the L-shaped hallway, beam-focusing, the purple curve, is highest at all nine locations, even above free space. A plausible reason is that the 1.4 by 2.0 meter aperture redirects all tile paths toward one receiver.</p>
-  </aside>
-</section>
-
 <!-- ============================== SPLIT: T-shaped path gain ============================== -->
 <section class="pgain" data-id="T-gain" data-min="0.75">
   <h2 class="title">T-shaped hallway: beam-focusing +87.5 dB path gain at the UE</h2>
@@ -657,26 +580,6 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <p>The T-shaped hallway needs two reflections in sequence, so there are two arrays and the bisector rule is applied twice.</p>
     <p>Without reflectors the gain at the user is minus 156.35 dB. Simple reflectors reach minus 109.20.</p>
     <p>Beam-focusing with both arrays reaches minus 68.88 dB, an 87.5 dB improvement over no reflector and 40.3 dB above the simple reflectors. The focused band turns twice and lands in the side branch.</p>
-  </aside>
-</section>
-
-<!-- ============================== SPLIT: T-shaped RSSI ============================== -->
-<section class="rssi" data-id="T-rssi" data-min="0.5">
-  <h2 class="title">T-shaped hallway: RSSI at nine UE locations</h2>
-  <div class="body">
-    <div class="cols" style="--cols:58% 1fr;align-items:center">
-      <div class="col"><figure><img src="assets/img/ch3/p1-T_sig_str1.png" alt="RSSI at nine locations, T-shaped hallway"><figcaption>10 W (40 dBm) transmitter; free space as reference</figcaption></figure></div>
-      <div class="col">
-        <ul>
-          <li>Best reflector case at all nine locations, but <b>below free space at locations 2 and 5</b></li>
-          <li>Likely explanation, not verified in the original study: the rule aligns path directions but not lengths, so phases are uncontrolled</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">
-    <p>In the T-shaped hallway, beam-focusing is again the best reflector case at every location, but it falls below free space at locations 2 and 5.</p>
-    <p>A likely explanation, not verified in the original study, is that the rule aligns path directions but not path lengths, so the phases are uncontrolled.</p>
   </aside>
 </section>
 

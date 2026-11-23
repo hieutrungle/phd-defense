@@ -133,6 +133,21 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
 </section>
 
 <!-- old 67 -->
+<section class="backup" data-id="place-cdf">
+  <h2 class="title">Where the gain goes: the lower tail (Office, 3 APs)</h2>
+  <div class="body">
+    <div class="cols" style="--cols:62% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch6/fig5H_cdf.png" alt="Office RSSI CDFs"><figcaption>Empirical RSSI CDFs, seed 0. (a)&ndash;(b) with PRS, all and priority regions; (c)&ndash;(d) without PRS; dashed: $-65$&nbsp;dBm</figcaption></figure></div>
+      <div class="col"><ul class="small">
+        <li>PSO+GD, priority regions: at most 2% below $-65$&nbsp;dBm with PRS, about 3% without</li>
+        <li>Minimum rises from about $-74.5$ to about $-65$&nbsp;dBm; median falls by about 1&nbsp;dB</li>
+        <li>With PRS, fraction below $-65$&nbsp;dBm: GA+GD 2%, PSO-only 3%, weighted $k$-means 4%, random+GD 5%, random 22%</li>
+      </ul></div>
+    </div>
+  </div>
+  <aside class="notes"><p>These are the distributions behind that table, for one seed. With the reflector, PSO+GD leaves at most 2 percent of priority locations below minus 65 dBm, against about 3 percent without it. The minimum rises from about minus 74.5 to about minus 65 dBm, while the median falls by about 1 dB: energy is redirected into shadowed locations rather than raised everywhere.</p></aside>
+</section>
+
 <section class="backup" data-id="bk-place-ablation">
   <h2 class="title">Placement: PSO vs. GA and gradient refinement</h2>
   <div class="body">

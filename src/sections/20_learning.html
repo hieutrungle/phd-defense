@@ -580,64 +580,6 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   </aside>
 </section>
 
-<!-- ============================ T ablation ============================ -->
-<section data-id="hmarl-deploy-2ue" data-min="0.5">
-  <h2 class="title">Flexible across user counts: the same ranking with 2 users</h2>
-  <div class="body">
-    <div class="chaptag">Same hierarchical architecture and training, configured for 2 users (16 possible assignments instead of 256)</div>
-    <div class="cols" style="--cols:47% 210px 1fr;align-items:center">
-      <figure><img src="assets/img/ch5/eval_2ue_methods.png" alt="RSSI over 300 slots, two users, five controllers"><figcaption>Two users, 300 slots, users move 30&nbsp;cm/slot; 5 seeds</figcaption></figure>
-      <figure><div class="vidbox"><video src="media/alct_2ue_0.mp4" data-autoplay muted loop playsinline></video></div><figcaption>Learned allocator, 2-user run</figcaption></figure>
-      <ul class="small lr-panel" style="margin:0;padding-left:40px">
-        <li>HMARL-C: +1.14&nbsp;dB vs. Compat-only, +2.59&nbsp;dB vs. Centralized</li>
-        <li>Only 16 assignments, most serve both users: narrower margins</li>
-        <li>Static-MARL dips: a fixed assignment cannot release a degraded path</li>
-      </ul>
-    </div>
-  </div>
-  <aside class="notes"><p>The approach is not tied to four users. Configured and trained the same way for two users, it keeps the same ranking, with narrower margins: HMARL-C is 1.14&nbsp;dB above Compat-only and 2.59&nbsp;dB above Centralized. With only 16 assignments, most serving both users, allocation has less to choose. If asked: the legend shows $-67.28$; the table gives $-67.29$&nbsp;dBm.</p></aside>
-</section>
-
-<!-- ============================ Aperture (split of old 36) ============================ -->
-<section data-id="aperture" data-min="0.5">
-  <h2 class="title">Operating regime: aperture (2 users)</h2>
-  <div class="body">
-    <div class="cols" style="--cols:58% 1fr;align-items:center">
-      <figure><img src="assets/img/ch5/eval_2ue_reflector_size.png" alt="RSSI CDF under HMARL-C for arrays of 5, 7, 9 and 11 rows"><figcaption>RSSI CDF under HMARL-C for 5, 7, 9, 11 rows</figcaption></figure>
-      <div class="col lr-panel">
-        <div class="center"><div class="midnum">&asymp;1.3 dB</div><span class="numcap">median gain for 45 &rarr; 99 tiles (2.2&times;)</span></div>
-        <ul class="small" style="margin-top:14px">
-          <li>7 rows (63 tiles) gives about two thirds of that span</li>
-          <li>Saturation: servo limits + feasibility rule</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">
-    <p>Two operating-regime sweeps, both with two users. First, aperture: going from 45 to 99 tiles, 2.2 times the area, raises the median RSSI by only about 1.3&nbsp;dB. The array saturates because one tile past its servo limit rejects the whole segment update.</p>
-  </aside>
-</section>
-
-<!-- ============================ Localization (split of old 36) ============================ -->
-<section data-id="localization" data-min="0.5">
-  <h2 class="title">Operating regime: localization (2 users)</h2>
-  <div class="body">
-    <div class="cols" style="--cols:58% 1fr;align-items:center">
-      <figure><img src="assets/img/ch5/eval_2ue_noise_obs.png" alt="RSSI CDF for localization error 0, 0.1, 0.3, 0.5, 1.0 and 2.0 m"><figcaption>RSSI CDF for $\sigma_{\mathrm{error}}\in\{0,0.1,0.3,0.5,1.0,2.0\}$&nbsp;m</figcaption></figure>
-      <div class="col lr-panel">
-        <div class="center"><div class="midnum">$\sigma_{\mathrm{error}}\approx0.1$ m</div><span class="numcap">near-optimal up to here</span></div>
-        <ul class="small" style="margin-top:14px">
-          <li>Several-dB loss at 0.3&ndash;0.5&nbsp;m; larger at 1.0 and 2.0&nbsp;m</li>
-          <li>Flat study tolerated &asymp;0.3&nbsp;m in a different setting; not directly comparable. Together: <b>decimeter-level</b></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">
-    <p>Second, localization, where the burden now sits. Performance is near-optimal up to about 10&nbsp;cm and loses several dB at 0.3 to 0.5&nbsp;m, with error-matched training. Flat MARL tolerated about 0.3&nbsp;m in a different setting, so the two are not directly comparable; together they say decimeter-level.</p>
-  </aside>
-</section>
-
 <!-- ============================ Summary + transition ============================ -->
 <section data-id="alloc-buys" data-min="0.5">
   <h2 class="title">What allocation buys, and what it cannot fix</h2>

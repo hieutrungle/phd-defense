@@ -13,6 +13,80 @@ section[data-id="bk-bisector-3d"] img{height:390px}
 </style>
 
 
+<section class="backup" data-id="threads">
+  <h2 class="title">Research and technical innovation</h2>
+  <div class="body">
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg width="64" height="40" viewBox="0 0 64 40"><g stroke="#500000" stroke-width="3.2" stroke-linecap="round"><line x1="10" y1="34" x2="20" y2="27"/><line x1="26" y1="34" x2="36" y2="27"/><line x1="42" y1="34" x2="52" y2="27"/></g><polyline points="4,6 31,30 58,6" fill="none" stroke="#9a5a5a" stroke-width="1.6"/><path d="M58 6 l-7 1.5 l3.5 3.5z" fill="#9a5a5a"/></svg></div>
+        <h3>Geometric foundations</h3>
+        <div>Bisector rule and focal points steer metallic tiles from positions alone.</div>
+        <div class="q"><b>WHAT:</b> what geometry alone achieves</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image9.png" alt=""></div>
+        <h3>Flat MARL control</h3>
+        <div>Multi-agent RL that maps servo-actuated tile orientations to a few virtual focal points.</div>
+        <div class="q"><b>HOW:</b> steer the array for moving users</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image10.png" alt=""></div>
+        <h3>Hierarchical MARL</h3>
+        <div>Two-timescale allocator + MAPPO segment agents, with no pilot-based CSI estimation.</div>
+        <div class="q"><b>HOW:</b> share the array among several users</div>
+      </div>
+      <div class="card">
+        <div class="ic"><img src="assets/img/proposal/image11.png" alt=""></div>
+        <h3>Joint placement</h3>
+        <div>Access points and a reflector placed jointly: PSO global search + gradient refinement through a differentiable ray tracer.</div>
+        <div class="q"><b>WHERE:</b> install the access points and the reflector</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>The research has four technical parts, each with its own part of the talk.</p>
+    <p>First, geometry: the bisector rule and focal points steer the tiles from positions alone. Second, multi-agent learning: each agent moves one virtual focal point. Third, a hierarchy: an allocator decides which segment serves which user. Fourth, placement: where the access points and the reflector go.</p>
+  </aside>
+</section>
+
+<section class="backup rssi" data-id="L-rssi">
+  <h2 class="title">L-shaped hallway: RSSI at nine UE locations</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch3/p1-L_sig_str1.png" alt="RSSI at nine locations, L-shaped hallway"><figcaption>10 W (40 dBm) transmitter; free space as reference</figcaption></figure></div>
+      <div class="col">
+        <ul>
+          <li>Beam-focusing is <b>highest at all nine locations</b>, above free space</li>
+          <li>Plausible reason: the 1.4 m &times; 2.0 m aperture redirects all tile paths toward one receiver</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Received signal strength at the nine locations, with a 10 watt transmitter and free space as reference.</p>
+    <p>In the L-shaped hallway, beam-focusing, the purple curve, is highest at all nine locations, even above free space. A plausible reason is that the 1.4 by 2.0 meter aperture redirects all tile paths toward one receiver.</p>
+  </aside>
+</section>
+
+<section class="backup rssi" data-id="T-rssi">
+  <h2 class="title">T-shaped hallway: RSSI at nine UE locations</h2>
+  <div class="body">
+    <div class="cols" style="--cols:58% 1fr;align-items:center">
+      <div class="col"><figure><img src="assets/img/ch3/p1-T_sig_str1.png" alt="RSSI at nine locations, T-shaped hallway"><figcaption>10 W (40 dBm) transmitter; free space as reference</figcaption></figure></div>
+      <div class="col">
+        <ul>
+          <li>Best reflector case at all nine locations, but <b>below free space at locations 2 and 5</b></li>
+          <li>Likely explanation, not verified in the original study: the rule aligns path directions but not lengths, so phases are uncontrolled</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>In the T-shaped hallway, beam-focusing is again the best reflector case at every location, but it falls below free space at locations 2 and 5.</p>
+    <p>A likely explanation, not verified in the original study, is that the rule aligns path directions but not path lengths, so the phases are uncontrolled.</p>
+  </aside>
+</section>
+
 <section class="backup" data-id="bk-p2040">
   <h2 class="title">ITU-R P.2040 material model</h2>
   <div class="body">
