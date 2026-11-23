@@ -16,7 +16,7 @@ Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 10 | The CSI bottleneck: pilots grow with elements × users | 0.75 | 4:00-4:45 | 97 | 129 |
 | 11 | Electronic RIS vs. metallic reflector arrays | 0.75 | 4:45-5:30 | 87 | 116 |
 | 12 | Dissertation goal and research questions | 1 | 5:30-6:30 | 101 | 101 |
-| 13 | Hardware: metallic linear Fresnel reflector (LFR) arrays | 0.75 | 6:30-7:15 | 90 | 120 |
+| 13 | Hardware: metallic linear Fresnel reflector (LFR) arrays | 0.75 | 6:30-7:15 | 72 | 96 |
 | 14 | Bisector rule: each tile normal splits AP and user directions | 1 | 7:15-8:15 | 135 | 135 |
 | 15 | Focal-point abstraction: a segment is steered by 3 coordinates | 0.75 | 8:15-9:00 | 97 | 129 |
 | 16 | Ray-traced testbed: Blender scenes + NVIDIA Sionna RT | 0.5 | 9:00-9:30 | 61 | 122 |
@@ -118,7 +118,7 @@ The thesis, at the top: spatial information, meaning AP and tile positions, user
 
 ## 13. Hardware: metallic linear Fresnel reflector (LFR) arrays  [0.75 min | 6:30-7:15]
 
-The hardware throughout is a metallic linear Fresnel reflector array: a grid of metallic tiles, each rotated in elevation and azimuth. It redirects the wave by ordinary specular reflection, so it needs no RF circuitry. In the top view, each tile is angled so its reflection from the access point lands on the user. The geometric study uses ten by seven square tiles, a 1.4 by 2.0 meter device, with unconstrained rotation. The learning and placement studies use 63 hexagonal tiles, with servos limited to plus or minus 30 degrees.
+The hardware throughout is a metallic linear Fresnel reflector array: a grid of metallic tiles, each rotated in elevation and azimuth. It redirects the wave by ordinary specular reflection, so it needs no RF circuitry. In the top view, each tile is angled so its reflection from the access point lands on the user. The geometric study uses ten by seven square tiles, a 1.4 by 2.0 meter device, with unconstrained rotation.
 
 ## 14. Bisector rule: each tile normal splits AP and user directions  [1 min | 7:15-8:15]
 
