@@ -18,7 +18,7 @@ Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 12 | Dissertation goal and research questions | 1 | 5:30-6:30 | 101 | 101 |
 | 13 | Hardware: metallic linear Fresnel reflector (LFR) arrays | 0.75 | 6:30-7:15 | 72 | 96 |
 | 14 | Bisector rule: each tile normal splits AP and user directions | 1 | 7:15-8:15 | 135 | 135 |
-| 15 | Ray-traced testbed: Blender scenes + NVIDIA Sionna RT | 0.5 | 8:15-8:45 | 61 | 122 |
+| 15 | Ray-traced testbed: Blender scenes + NVIDIA Sionna RT | 0.5 | 8:15-8:45 | 24 | 48 |
 | 16 | Geometric beam-focusing in NLOS hallways at 28 GHz | 0.5 | 8:45-9:15 | 57 | 114 |
 | 17 | L-shaped hallway: beam-focusing +53.0 dB path gain at the UE | 0.75 | 9:15-10:00 | 83 | 111 |
 | 18 | T-shaped hallway: beam-focusing +87.5 dB path gain at the UE | 0.75 | 10:00-10:45 | 69 | 92 |
@@ -126,7 +126,7 @@ How is each tile oriented? This is a top view: the access point on the left, a r
 
 ## 15. Ray-traced testbed: Blender scenes + NVIDIA Sionna RT  [0.5 min | 8:15-8:45]
 
-One automated pipeline: Blender builds the scene and sets the tile angles from the target positions; Sionna RT traces it with ITU-R P.2040 materials. The bands are 28 GHz for geometry, 60 for learned control and 5.18 for placement. Each study has its own scene and baselines, so I do not compare decibel gains across parts. Every result is ray-traced simulation.
+One automated pipeline: Blender builds the scene and sets the tile angles from the target positions; Sionna RT traces it with ITU-R P.2040 materials.
 
 ## 16. Geometric beam-focusing in NLOS hallways at 28 GHz  [0.5 min | 8:45-9:15]
 
