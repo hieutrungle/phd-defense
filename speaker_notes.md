@@ -33,7 +33,7 @@ Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 27 | Multi-agent focusing: +20.7 dB over a static flat reflector | 1.25 | 16:30-17:45 | 152 | 122 |
 | 28 | Robustness: user count | 0.5 | 17:45-18:15 | 59 | 118 |
 | 29 | Robustness: array size | 0.5 | 18:15-18:45 | 43 | 86 |
-| 30 | Robustness: user-position noise | 0.5 | 18:45-19:15 | 53 | 106 |
+| 30 | Robustness: user-position noise | 0.5 | 18:45-19:15 | 59 | 118 |
 | 31 | Why flat MARL is not enough: a fixed tile-to-user assignment | 0.75 | 19:15-20:00 | 103 | 137 |
 | 32 | From fixed assignment to learned allocation | 0.5 | 20:00-20:30 | 66 | 132 |
 | 33 | Two-timescale hierarchy: slow allocation, fast focusing | 0.75 | 20:30-21:15 | 103 | 137 |
@@ -186,7 +186,7 @@ Second check: arrays from 45 to 99 tiles, again without retraining. RSSI rises m
 
 ## 30. Robustness: user-position noise  [0.5 min | 18:45-19:15]
 
-Third check: Gaussian noise on the user positions, in both training and evaluation. The plot shows training under each noise level. Up to 0.3 m, RSSI stays within 0.54 dB of the noise-free case; at 0.5 and 1.0 m it is about 4.6 dB lower. UWB or mmWave radar can provide sub-meter accuracy.
+Third check: Gaussian noise on the user positions, in both training and evaluation. The plot shows the deployed controller over the 300-step trace at each noise level. Up to 0.3 m, RSSI stays within 0.54 dB of the noise-free case; at 0.5 and 1.0 m it is about 4.6 dB lower. UWB or mmWave radar can provide sub-meter accuracy.
 
 ## 31. Why flat MARL is not enough: a fixed tile-to-user assignment  [0.75 min | 19:15-20:00]
 

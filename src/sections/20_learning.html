@@ -284,7 +284,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   <div class="body">
     <div class="chaptag">Gaussian noise $\sigma$ on user positions in training and evaluation (noise-matched training). Results: temporal-average RSSI at the users over the 300-step trace.</div>
     <div class="cols" style="--cols:62% 1fr;align-items:center">
-      <figure class="figbig"><img src="assets/img/ch4/p2-training_noise.png" alt="Training reward under position noise of 0, 0.1, 0.3, 0.5 and 1.0 m"><figcaption>Training reward under position noise</figcaption></figure>
+      <figure class="figbig"><img src="assets/img/ch4/p2-pos_noise_eval.png" alt="Deployed RSSI over 300 time steps without noise and with position noise of 0.1, 0.3, 0.5 and 1.0 m; dashed lines are temporal averages"><figcaption>Deployment: RSSI vs. time step under position noise (0.1&ndash;1.0&nbsp;m)</figcaption></figure>
       <div class="col lr-panel">
         <div class="center"><div class="midnum">$\sigma\le0.3$&nbsp;m</div><span class="numcap">within 0.54&nbsp;dB of noise-free</span></div>
         <ul class="small" style="margin-top:16px">
@@ -295,7 +295,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Third check: Gaussian noise on the user positions, in both training and evaluation. The plot shows training under each noise level.</p>
+    <p>Third check: Gaussian noise on the user positions, in both training and evaluation. The plot shows the deployed controller over the 300-step trace at each noise level.</p>
     <p>Up to 0.3&nbsp;m, RSSI stays within 0.54&nbsp;dB of the noise-free case; at 0.5 and 1.0&nbsp;m it is about 4.6&nbsp;dB lower. UWB or mmWave radar can provide sub-meter accuracy.</p>
   </aside>
 </section>
