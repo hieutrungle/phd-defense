@@ -12,7 +12,7 @@ Total: 42.00 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 6 | Growing demand points to mmWave bandwidth | 0.5 | 2:45-3:15 | 47 | 94 |
 | 7 | More bandwidth at mmWave, but less coverage | 0.5 | 3:15-3:45 | 50 | 100 |
 | 8 | Target applications: dense, shielded indoor environments | 0.5 | 3:45-4:15 | 65 | 130 |
-| 9 | Indoor mmWave links are blocked by structure | 0.5 | 4:15-4:45 | 58 | 116 |
+| 9 | Indoor mmWave links are blocked by structure | 0.5 | 4:15-4:45 | 64 | 128 |
 | 10 | The CSI bottleneck: pilots grow with elements × users | 0.75 | 4:45-5:30 | 91 | 121 |
 | 11 | Electronic RIS vs. metallic reflector arrays | 0.75 | 5:30-6:15 | 89 | 119 |
 | 12 | Dissertation goal and research questions | 1 | 6:15-7:15 | 104 | 104 |
@@ -108,7 +108,9 @@ In all three settings, a wall or a piece of equipment can block the direct path,
 
 ## 9. Indoor mmWave links are blocked by structure  [0.5 min | 4:15-4:45]
 
-Follow the dashed line from the access point, or AP, to the user. It runs into the inside corner. We could install a second AP beyond that corner. The green path shows another possibility. A reflector that can see both ends of the link can redirect energy down the second hallway. The question is how to aim it.
+The green square marks the user. The dashed line shows why the signal is weak there. The wall blocks the direct path from the access point.
+
+We could install a second access point around the corner to cover that hallway. Or we could use our reflector at the bend. The green arrows show how it redirects the signal toward the user to improve coverage.
 
 ## 10. The CSI bottleneck: pilots grow with elements × users  [0.75 min | 4:45-5:30]
 
