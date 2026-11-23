@@ -14,7 +14,7 @@ Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
 | 8 | Target applications: dense, shielded indoor environments | 0.5 | 3:45-4:15 | 65 | 130 |
 | 9 | Indoor mmWave links are blocked by structure | 0.5 | 4:15-4:45 | 64 | 128 |
 | 10 | The CSI bottleneck: pilots grow with elements × users | 1.5 | 4:45-6:15 | 180 | 120 |
-| 11 | Dissertation goal and research questions | 1 | 6:15-7:15 | 104 | 104 |
+| 11 | Dissertation goal and research questions | 1 | 6:15-7:15 | 132 | 132 |
 | 12 | Hardware: metallic linear Fresnel reflector (LFR) arrays | 0.75 | 7:15-8:00 | 83 | 111 |
 | 13 | Bisector rule: each tile normal splits AP and user directions | 1 | 8:00-9:00 | 110 | 110 |
 | 14 | Ray-traced testbed: Blender scenes + NVIDIA Sionna RT | 0.5 | 9:00-9:30 | 59 | 118 |
@@ -123,9 +123,11 @@ This changes the engineering trade-off. The tiles need power to move and can hol
 
 ## 11. Dissertation goal and research questions  [1 min | 6:15-7:15]
 
-There are two different engineering decisions in this diagram. On the left, before installation, we have a building model. We need to choose where the access points and the reflector go. On the right, the hardware is already on the wall and a user moves. We need to decide where to aim next.
+At the top, why use spatial information? Estimating a channel for every tile takes pilot time. My goal is to place and steer reflectors using positions and a model of the building.
 
-Both decisions use a focal point, a location in space toward which we steer the reflected signal. I'll first show how geometry turns that point into tile angles. Then I'll cover control and placement. I evaluate these stages separately in simulation. The dashed link is the experiment that would connect them.
+On the left, where should we install the access points and the reflector? Could a well-placed reflector meet the coverage target with one fewer access point? On the right, once the reflector is installed, how should we assign segments to users and adjust their focal points as those users move?
+
+At the bottom left, what can geometry alone achieve? A focal point tells us how to angle the tiles, but the motors can only turn so far. At the bottom right, which method fits each decision? I use geometry for focusing, reinforcement learning for multi-user control, and optimization for placement.
 
 ## 12. Hardware: metallic linear Fresnel reflector (LFR) arrays  [0.75 min | 7:15-8:00]
 

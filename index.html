@@ -377,8 +377,9 @@ section[data-id="geo-limits"] .block .bb{font-size:22px;line-height:1.3}
     <img src="assets/img/crops/intro_goal_map.png" alt="Overview map: WHY thesis; WHERE to install; HOW to steer; WHAT foundations; WHICH method">
   </div>
   <aside class="notes"><p class="timing"><b>[1 min | 6:15&ndash;7:15]</b></p>
-    <p>There are two different engineering decisions in this diagram. On the left, before installation, we have a building model. We need to choose where the access points and the reflector go. On the right, the hardware is already on the wall and a user moves. We need to decide where to aim next.</p>
-    <p>Both decisions use a focal point, a location in space toward which we steer the reflected signal. I'll first show how geometry turns that point into tile angles. Then I'll cover control and placement. I evaluate these stages separately in simulation. The dashed link is the experiment that would connect them.</p>
+    <p>At the top, why use spatial information? Estimating a channel for every tile takes pilot time. My goal is to place and steer reflectors using positions and a model of the building.</p>
+    <p>On the left, where should we install the access points and the reflector? Could a well-placed reflector meet the coverage target with one fewer access point? On the right, once the reflector is installed, how should we assign segments to users and adjust their focal points as those users move?</p>
+    <p>At the bottom left, what can geometry alone achieve? A focal point tells us how to angle the tiles, but the motors can only turn so far. At the bottom right, which method fits each decision? I use geometry for focusing, reinforcement learning for multi-user control, and optimization for placement.</p>
   </aside>
 </section>
 
