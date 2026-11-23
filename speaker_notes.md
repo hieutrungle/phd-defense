@@ -56,7 +56,7 @@ Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
 | 50 | At three APs, the reflector raises priority P5 by 4.8 dB | 1.25 | 33:30-34:45 | 136 | 109 |
 | 51 | Office: with the reflector, one fewer AP meets the target (seed mean) | 0.5 | 34:45-35:15 | 58 | 116 |
 | 52 | HRBB: the same one-AP shift, with a smaller margin | 0.5 | 35:15-35:45 | 70 | 140 |
-| 53 | Coverage maps and limitations | 0.75 | 35:45-36:30 | 93 | 124 |
+| 53 | Coverage maps: PSO+GD vs. weighted k -means | 0.75 | 35:45-36:30 | 80 | 107 |
 | 54 | The complete picture | 0.75 | 36:30-37:15 | 96 | 128 |
 | 55 | Limitations and next steps | 0.5 | 37:15-37:45 | 62 | 124 |
 | 56 | Five questions, answered | 1.25 | 37:45-39:00 | 144 | 115 |
@@ -345,11 +345,11 @@ The dashed line is our coverage target. In the Office, follow the swarm-plus-ref
 
 In the lab, one access point plus the reflector reaches minus 64.3 dBm on average. That's just 0.7 decibels above the target. Without the reflector, the mean crosses the line at two access points. At one access point, three of five runs succeeded with the reflector and none without. With five runs, that difference in success counts is statistically inconclusive. Still, in both buildings the reflector saves one access point.
 
-## 53. Coverage maps and limitations  [0.75 min | 35:45-36:30]
+## 53. Coverage maps: PSO+GD vs. weighted k -means  [0.75 min | 35:45-36:30]
 
-The red dots show where the access points ended up. In the left map, two sit near corridor junctions, where paths can reach several rooms through doorways. The right map uses weighted k-means. A nearby access point can still be on the wrong side of a wall, as the darker southeast rooms illustrate.
+The red dots show where the access points ended up. In the left map, from our method, two sit near corridor junctions, where paths can reach several rooms through doorways. Our method scores every candidate layout with the ray tracer, so it sees the walls.
 
-These are strongest-server power maps. They tell us about coverage. To translate one fewer access point into a deployment decision, we'd also need interference, traffic demand, and installed cost. We tested two floor plans with one candidate wall on each.
+The right map uses weighted k-means, which uses only distance and priority and ignores walls. A nearby access point can still be on the wrong side of a wall, as the darker southeast rooms illustrate.
 
 ## 54. The complete picture  [0.75 min | 36:30-37:15]
 

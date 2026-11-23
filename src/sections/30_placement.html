@@ -381,9 +381,9 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
 
 <!-- old 46 -->
 <section data-id="coverage-limits" data-min="0.75">
-  <h2 class="title">Coverage maps and limitations</h2>
+  <h2 class="title">Coverage maps: PSO+GD vs. weighted $k$-means</h2>
   <div class="body">
-    <div class="cols" style="--cols:53% 1fr">
+    <div class="cols" style="--cols:53% 1fr;align-items:center">
       <div class="col">
         <div class="maps">
           <figure><img src="assets/img/ch6/split_cov_pso_small.png" alt="PSO+GD coverage map"><figcaption>PSO+GD</figcaption></figure>
@@ -391,21 +391,21 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
           <img class="sc" src="assets/img/ch6/color-scale.png" alt="color scale">
         </div>
         <p class="foot gray" style="margin:4px 0 6px 0">Office, 3 APs (red), PRS on the north wall; color scale $-80$ to $-40$&nbsp;dBm</p>
-        <p class="small" style="margin:0">PSO+GD reaches shadowed rooms through corridors and doorways; weighted $k$-means leaves southeast shadows.</p>
       </div>
       <div class="col">
-        <div class="alertblock" style="margin-top:0"><div class="bt">Limitations</div><div class="bb"><ul class="small">
-          <li>Strongest-server received power only: no interference, SINR, capacity, or installed cost</li>
-          <li>Five seeds, two floorplans, one preselected wall per floor (an unquantified PRS advantage)</li>
-          <li>Known geometry, incoherent power sum, no measured reflector; new search per floorplan</li>
+        <div class="block" style="margin-top:0"><div class="bt">Why PSO+GD covers more</div><div class="bb"><ul class="small">
+          <li><b>PSO+GD</b> scores every candidate layout with the ray tracer, so it sees the walls</li>
+          <li>It places APs near <b>corridor junctions</b>, where signals reach several rooms through doorways</li>
+          <li><b>Weighted $k$-means</b> uses only distance and priority and ignores walls</li>
+          <li>A nearby AP can sit on the <b>wrong side of a wall</b>: the darker southeast rooms</li>
         </ul></div></div>
       </div>
     </div>
     <div class="transition"><div class="ans"><b>Answered (WHERE):</b> joint AP and reflector planning met the priority target with one fewer AP in both layouts (seed mean, small margins).</div><div class="arrow"></div><div class="opens"><b>Opens (WHICH):</b> how do placement and operation fit together, and which method fits which problem? &rarr; conclusions.</div></div>
   </div>
   <aside class="notes">
-    <p>The red dots show where the access points ended up. In the left map, two sit near corridor junctions, where paths can reach several rooms through doorways. The right map uses weighted k-means. A nearby access point can still be on the wrong side of a wall, as the darker southeast rooms illustrate.</p>
-    <p>These are strongest-server power maps. They tell us about coverage. To translate one fewer access point into a deployment decision, we'd also need interference, traffic demand, and installed cost. We tested two floor plans with one candidate wall on each.</p>
+    <p>The red dots show where the access points ended up. In the left map, from our method, two sit near corridor junctions, where paths can reach several rooms through doorways. Our method scores every candidate layout with the ray tracer, so it sees the walls.</p>
+    <p>The right map uses weighted k-means, which uses only distance and priority and ignores walls. A nearby access point can still be on the wrong side of a wall, as the darker southeast rooms illustrate.</p>
   </aside>
 </section>
 
