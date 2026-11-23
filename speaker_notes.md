@@ -55,7 +55,7 @@ Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
 | 49 | Convergence of a representative run | 0.75 | 32:45-33:30 | 88 | 117 |
 | 50 | At three APs, the reflector raises priority P5 by 4.8 dB | 1.25 | 33:30-34:45 | 136 | 109 |
 | 51 | Office: with the reflector, one fewer AP meets the target (seed mean) | 0.5 | 34:45-35:15 | 58 | 116 |
-| 52 | HRBB: the same one-AP shift, with a smaller margin | 0.5 | 35:15-35:45 | 60 | 120 |
+| 52 | HRBB: the same one-AP shift, with a smaller margin | 0.5 | 35:15-35:45 | 70 | 140 |
 | 53 | Coverage maps and limitations | 0.75 | 35:45-36:30 | 93 | 124 |
 | 54 | The complete picture | 0.75 | 36:30-37:15 | 96 | 128 |
 | 55 | Limitations and next steps | 0.5 | 37:15-37:45 | 62 | 124 |
@@ -343,7 +343,7 @@ The dashed line is our coverage target. In the Office, follow the swarm-plus-ref
 
 ## 52. HRBB: the same one-AP shift, with a smaller margin  [0.5 min | 35:15-35:45]
 
-In the lab, one access point plus the reflector reaches minus 64.3 dBm on average. That's just 0.7 decibels above the target. Without the reflector, the mean crosses the line at two access points. At one access point, three of five runs succeeded with the reflector and none without. With five runs, that difference in success counts is statistically inconclusive.
+In the lab, one access point plus the reflector reaches minus 64.3 dBm on average. That's just 0.7 decibels above the target. Without the reflector, the mean crosses the line at two access points. At one access point, three of five runs succeeded with the reflector and none without. With five runs, that difference in success counts is statistically inconclusive. Still, in both buildings the reflector saves one access point.
 
 ## 53. Coverage maps and limitations  [0.75 min | 35:45-36:30]
 
