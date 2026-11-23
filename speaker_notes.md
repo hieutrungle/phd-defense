@@ -57,7 +57,7 @@ Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
 | 51 | Office: with the reflector, one fewer AP meets the target (seed mean) | 0.5 | 34:45-35:15 | 58 | 116 |
 | 52 | HRBB: the same one-AP shift, with a smaller margin | 0.5 | 35:15-35:45 | 70 | 140 |
 | 53 | Coverage maps: PSO+GD vs. weighted k -means | 0.75 | 35:45-36:30 | 80 | 107 |
-| 54 | The complete picture | 0.75 | 36:30-37:15 | 96 | 128 |
+| 54 | The complete picture | 0.75 | 36:30-37:15 | 101 | 135 |
 | 55 | Limitations and next steps | 0.5 | 37:15-37:45 | 62 | 124 |
 | 56 | Five questions, answered | 1.25 | 37:45-39:00 | 144 | 115 |
 | 57 | What comes next: the FORMULA3 project | 0.75 | 39:00-39:45 | 87 | 116 |
@@ -353,9 +353,9 @@ The right map uses weighted k-means, which uses only distance and priority and i
 
 ## 54. The complete picture  [0.75 min | 36:30-37:15]
 
-Read this map in the order an engineer would use it. Before installation, the site model helps choose access point and reflector locations. In the Office, that choice raised the fifth percentile in priority rooms by 4.8 decibels with three access points. Once the hardware is installed, the decision changes. As users move, the controller chooses who each segment serves and where it aims.
+Each method answers a different engineering question. At the bottom, geometry gives the tile angles for a stationary user. On the right, multi-agent RL learns where each segment should aim as its assigned user moves. Hierarchical MARL also learns who each segment should serve. With four users, that improved mean received power by nearly six decibels over a fixed assignment.
 
-The common interface is the focal point. The planning and control results come from separate experiments at different frequencies. The dashed arrow is how we would connect them in a single deployment.
+On the left, we plan the installation. Particle swarm optimization searches candidate layouts, then gradient descent refines the best one. In both buildings, adding the reflector let us meet the coverage target with one fewer access point, averaged across five runs.
 
 ## 55. Limitations and next steps  [0.5 min | 37:15-37:45]
 
