@@ -23,7 +23,7 @@ Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 17 | L-shaped hallway: beam-focusing +53.0 dB path gain at the UE | 0.75 | 9:15-10:00 | 83 | 111 |
 | 18 | T-shaped hallway: beam-focusing +87.5 dB path gain at the UE | 0.75 | 10:00-10:45 | 69 | 92 |
 | 19 | Beam-focusing follows the UE: L- and T-shaped hallways | 0.5 | 10:45-11:15 | 66 | 132 |
-| 20 | Limits of the geometric rule motivate learned control | 0.75 | 11:15-12:00 | 97 | 129 |
+| 20 | Limits of the geometric rule motivate learned control | 0.75 | 11:15-12:00 | 67 | 89 |
 | 21 | Focal-point abstraction: a segment is steered by 3 coordinates | 0.75 | 12:00-12:45 | 96 | 128 |
 | 22 | MA-MDP: each agent moves the focal point of one segment | 1.25 | 12:45-14:00 | 164 | 131 |
 | 23 | Flat MARL in motion: fixed columns, moving focal points | 0.75 | 14:00-14:45 | 94 | 125 |
@@ -146,7 +146,7 @@ Here is the geometric rule in motion. At every user position along the hallway, 
 
 ## 20. Limits of the geometric rule motivate learned control  [0.75 min | 11:15-12:00]
 
-The study also exposes three limits. First, servo limits: the rule assumes unconstrained rotation, as the red tiles in the animation showed. Second, phase: it aligns directions but not path lengths, a likely cause of the shortfall at T-shaped locations 2 and 5. No later part controls phase; it stays a limitation. Third, it serves one user at a known position. The next part keeps the bisector rule but learns the focal points, within servo limits, trained on received power, for several moving users. Its baselines are static reflectors and learned variants, not a position-tracking geometric rule.
+The study also exposes two limits. First, servo limits: the rule assumes unconstrained rotation, as the red tiles in the animation showed. Second, it serves one user at a known position. The next part keeps the bisector rule but learns the focal points, within servo limits, trained on received power, for several moving users. Its baselines are static reflectors and learned variants, not a position-tracking geometric rule.
 
 ## 21. Focal-point abstraction: a segment is steered by 3 coordinates  [0.75 min | 12:00-12:45]
 
