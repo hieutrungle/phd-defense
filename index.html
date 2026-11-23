@@ -1126,8 +1126,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 24:15&ndash;24:45]</b></p>
-    <p>Follow the blue curve. That's the allocator we trained with an early hint about the room geometry. We switch the hint off at episode one thousand, and blue keeps its lead.</p>
-    <p>With four users, it finishes around 46 reward points. The purple curve, trained without the hint, finishes around 33. With two users, the gap is about five points. What happens when the users start moving?</p>
+    <p>The blue curve shows training with a geometric prior. We add a term to each assignment score that favors shorter distances and smaller bend angles. At episode one thousand, we set the prior's weight to zero.</p>
+    <p>The advantage persists. With four users, blue finishes at 46 reward points. The purple curve, trained without the prior, finishes near 33. With two users, the gap is about five points.</p>
   </aside>
 </section>
 

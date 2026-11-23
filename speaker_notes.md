@@ -41,7 +41,7 @@ Total: 41.25 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 35 | HMA-MDP: one objective, a reward for each timescale | 0.75 | 22:00-22:45 | 103 | 137 |
 | 36 | Training under CTDE, with a geometric warm start | 0.5 | 22:45-23:15 | 59 | 118 |
 | 37 | Setup: ray-traced conference room and six controllers | 1 | 23:15-24:15 | 140 | 140 |
-| 38 | Training: the warm-started allocator converges highest | 0.5 | 24:15-24:45 | 66 | 132 |
+| 38 | Training: the warm-started allocator converges highest | 0.5 | 24:15-24:45 | 67 | 134 |
 | 39 | Deployment with moving users (4 users) | 1.25 | 24:45-26:00 | 158 | 126 |
 | 40 | Where the energy goes (4 users) | 0.5 | 26:00-26:30 | 63 | 126 |
 | 41 | How often to reallocate? An interior optimum at T=10 slots (4 users) | 0.5 | 26:30-27:00 | 64 | 128 |
@@ -218,7 +218,7 @@ The wireless setup is mostly the same as in the flat study: 60 GHz, a 5 dBm acce
 
 ## 38. Training: the warm-started allocator converges highest  [0.5 min | 24:15-24:45]
 
-Follow the blue curve. That's the allocator we trained with an early hint about the room geometry. We switch the hint off at episode one thousand, and blue keeps its lead. With four users, it finishes around 46 reward points. The purple curve, trained without the hint, finishes around 33. With two users, the gap is about five points. What happens when the users start moving?
+The blue curve shows training with a geometric prior. We add a term to each assignment score that favors shorter distances and smaller bend angles. At episode one thousand, we set the prior's weight to zero. The advantage persists. With four users, blue finishes at 46 reward points. The purple curve, trained without the prior, finishes near 33. With two users, the gap is about five points.
 
 ## 39. Deployment with moving users (4 users)  [1.25 min | 24:45-26:00]
 
