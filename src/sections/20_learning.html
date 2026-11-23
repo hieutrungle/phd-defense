@@ -515,8 +515,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>HMARL-C converges highest in both configurations. With two users the methods cluster; with four users every adjacent pair separates.</p>
-    <p>The gap to the prior-free variant grows from 5.35 to 12.94 and persists after the prior is switched off, so the warm start changes which optimum the allocator reaches.</p>
+    <p>Follow the blue curve. That's the allocator we trained with an early hint about the room geometry. We switch the hint off at episode one thousand, and blue keeps its lead.</p>
+    <p>With four users, it finishes around 46 reward points. The purple curve, trained without the hint, finishes around 33. With two users, the gap is about five points. What happens when the users start moving?</p>
   </aside>
 </section>
 
@@ -548,11 +548,10 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>Main result, with users now moving every slot. The ordering matches training.</p>
-    <p>With four users, choosing the assignment raises mean RSSI from minus 72.46&nbsp;dBm with the fixed split to minus 66.62&nbsp;dBm, within this scene. That is also 1.88&nbsp;dB above the strongest baseline, the geometric heuristic, our one geometry head-to-head, and 7.94&nbsp;dB above Centralized, a bound since it differs in architecture, reward and learner.</p>
-    <p>With four users HMARL-C is also the most stable: 0.71&nbsp;dB standard deviation, against 1.39 to 1.74&nbsp;dB for the baselines.</p>
-    <p>The dips have two causes. Static-MARL keeps focusing on its assigned user after that path degrades; releasing the segment is the expected mechanism that removes those dips. Compat-only gives neighboring segments nearly identical scores, so they pick the same user and leave another one unassigned.</p>
-    <p>If asked: the plot legend shows minus 72.26 for Static-MARL; the tabulated value is minus 72.46&nbsp;dBm.</p>
+    <p>Now the four users are walking. Higher on this plot means a stronger signal. Follow the red line first. Each reflector segment can still aim, but it has to keep serving the same person. Imagine that person walks behind a wall. The segment keeps aiming at them even as their signal fades.</p>
+    <p>The blue line is our learned allocator. It can hand that user over to a different segment. Look at the four-user column in the table. That flexibility gives us nearly six decibels more signal on average than the fixed assignment. The blue line also has shallower dips as people move.</p>
+    <p>Even the strongest alternative, the rule based on geometry, trails by nearly two decibels. Two neighboring segments can both pick the same person under that rule, leaving someone else without a segment.</p>
+    <p><i>If asked about the red line, its legend says minus 72.26 dBm. The table reports minus 72.46 dBm, the value used for the comparison.</i></p>
   </aside>
 </section>
 
@@ -570,7 +569,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <p class="tiny gray center" style="margin:0">RSSI maps at evaluation slot 294; values are user averages at that slot, not 300-slot run means.</p>
   </div>
   <aside class="notes">
-    <p>Snapshots at evaluation slot 294, users as magenta dots. HMARL-C forms narrow beams through the users, HMARL-NC spreads wider, and Centralized shows little focusing. These are single-slot averages, not run means. The video shows the learned allocator re-steering segments as users move.</p>
+    <p>Look at the pink dots. Those are the four users, shown at the same instant in all three maps. In the left map, the bright streaks pass right through them. Without the warm start, the beams spread out in the middle map. With one central controller, they're harder to pick out.</p>
+    <p>In the video, watch how the beams turn as the users walk.</p>
   </aside>
 </section>
 
@@ -595,7 +595,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>T, the number of slots between allocations, sets the ratio of the two timescales, and the result peaks at ten slots. At T of one a segment cannot tell a reassignment from a jump, and the hierarchy collapses toward a flat policy. At large T the allocator decides from stale states; those curves are lower bounds.</p>
+    <p>How long should a segment stay with the same user? If we let it switch every slot, a new user can look like the old one suddenly jumped. Wait a hundred slots, and the allocator gets just one decision per training episode.</p>
+    <p>The blue curve did best here, with a decision every ten slots. The two longest intervals were still improving when training ended.</p>
   </aside>
 </section>
 
@@ -612,7 +613,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> learning the assignment raises 4-user mean RSSI from $-72.46$&nbsp;dBm (fixed split) to $-66.62$&nbsp;dBm, +1.88&nbsp;dB over the best geometric heuristic.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
   </div>
   <aside class="notes">
-    <p>Learning the assignment lifts four users from minus 72.46 to minus 66.62&nbsp;dBm over a fixed split in this scene, and beats the best geometric heuristic.</p>
-    <p>But adding tiles at the same site saturates, and both controllers take the access point and array positions as given. The next part asks where they should be installed.</p>
+    <p>In this room, letting the segments switch users gave us nearly six decibels over a fixed assignment. We did that with the reflectors already on the walls.</p>
+    <p>What if we add tiles in the same spot? More than doubling the tile count gave us a median gain of just 1.3 decibels. Where, then, should we install the reflectors and the access point?</p>
   </aside>
 </section>

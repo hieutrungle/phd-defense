@@ -41,11 +41,11 @@ Total: 41.25 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 35 | HMA-MDP: one objective, a reward for each timescale | 0.75 | 22:00-22:45 | 103 | 137 |
 | 36 | Training under CTDE, with a geometric warm start | 0.5 | 22:45-23:15 | 59 | 118 |
 | 37 | Setup: ray-traced conference room and six controllers | 1 | 23:15-24:15 | 140 | 140 |
-| 38 | Training: the warm-started allocator converges highest | 0.5 | 24:15-24:45 | 48 | 96 |
-| 39 | Deployment with moving users (4 users) | 1.25 | 24:45-26:00 | 150 | 120 |
-| 40 | Where the energy goes (4 users) | 0.5 | 26:00-26:30 | 42 | 84 |
-| 41 | How often to reallocate? An interior optimum at T=10 slots (4 users) | 0.5 | 26:30-27:00 | 56 | 112 |
-| 42 | What allocation buys, and what it cannot fix | 0.5 | 27:00-27:30 | 55 | 110 |
+| 38 | Training: the warm-started allocator converges highest | 0.5 | 24:15-24:45 | 66 | 132 |
+| 39 | Deployment with moving users (4 users) | 1.25 | 24:45-26:00 | 158 | 126 |
+| 40 | Where the energy goes (4 users) | 0.5 | 26:00-26:30 | 63 | 126 |
+| 41 | How often to reallocate? An interior optimum at T=10 slots (4 users) | 0.5 | 26:30-27:00 | 64 | 128 |
+| 42 | What allocation buys, and what it cannot fix | 0.5 | 27:00-27:30 | 62 | 124 |
 | 43 | Can a passive reflector replace an access point? | 0.75 | 27:30-28:15 | 102 | 136 |
 | 44 | Two floorplans with operator-defined priority maps | 0.5 | 28:15-28:45 | 64 | 128 |
 | 45 | Design vector: AP poses, wall position, focal points | 0.75 | 28:45-29:30 | 104 | 139 |
@@ -218,23 +218,23 @@ The wireless setup is mostly the same as in the flat study: 60 GHz, a 5 dBm acce
 
 ## 38. Training: the warm-started allocator converges highest  [0.5 min | 24:15-24:45]
 
-HMARL-C converges highest in both configurations. With two users the methods cluster; with four users every adjacent pair separates. The gap to the prior-free variant grows from 5.35 to 12.94 and persists after the prior is switched off, so the warm start changes which optimum the allocator reaches.
+Follow the blue curve. That's the allocator we trained with an early hint about the room geometry. We switch the hint off at episode one thousand, and blue keeps its lead. With four users, it finishes around 46 reward points. The purple curve, trained without the hint, finishes around 33. With two users, the gap is about five points. What happens when the users start moving?
 
 ## 39. Deployment with moving users (4 users)  [1.25 min | 24:45-26:00]
 
-Main result, with users now moving every slot. The ordering matches training. With four users, choosing the assignment raises mean RSSI from minus 72.46 dBm with the fixed split to minus 66.62 dBm, within this scene. That is also 1.88 dB above the strongest baseline, the geometric heuristic, our one geometry head-to-head, and 7.94 dB above Centralized, a bound since it differs in architecture, reward and learner. With four users HMARL-C is also the most stable: 0.71 dB standard deviation, against 1.39 to 1.74 dB for the baselines. The dips have two causes. Static-MARL keeps focusing on its assigned user after that path degrades; releasing the segment is the expected mechanism that removes those dips. Compat-only gives neighboring segments nearly identical scores, so they pick the same user and leave another one unassigned. If asked: the plot legend shows minus 72.26 for Static-MARL; the tabulated value is minus 72.46 dBm.
+Now the four users are walking. Higher on this plot means a stronger signal. Follow the red line first. Each reflector segment can still aim, but it has to keep serving the same person. Imagine that person walks behind a wall. The segment keeps aiming at them even as their signal fades. The blue line is our learned allocator. It can hand that user over to a different segment. Look at the four-user column in the table. That flexibility gives us nearly six decibels more signal on average than the fixed assignment. The blue line also has shallower dips as people move. Even the strongest alternative, the rule based on geometry, trails by nearly two decibels. Two neighboring segments can both pick the same person under that rule, leaving someone else without a segment. If asked about the red line, its legend says minus 72.26 dBm. The table reports minus 72.46 dBm, the value used for the comparison.
 
 ## 40. Where the energy goes (4 users)  [0.5 min | 26:00-26:30]
 
-Snapshots at evaluation slot 294, users as magenta dots. HMARL-C forms narrow beams through the users, HMARL-NC spreads wider, and Centralized shows little focusing. These are single-slot averages, not run means. The video shows the learned allocator re-steering segments as users move.
+Look at the pink dots. Those are the four users, shown at the same instant in all three maps. In the left map, the bright streaks pass right through them. Without the warm start, the beams spread out in the middle map. With one central controller, they're harder to pick out. In the video, watch how the beams turn as the users walk.
 
 ## 41. How often to reallocate? An interior optimum at T=10 slots (4 users)  [0.5 min | 26:30-27:00]
 
-T, the number of slots between allocations, sets the ratio of the two timescales, and the result peaks at ten slots. At T of one a segment cannot tell a reassignment from a jump, and the hierarchy collapses toward a flat policy. At large T the allocator decides from stale states; those curves are lower bounds.
+How long should a segment stay with the same user? If we let it switch every slot, a new user can look like the old one suddenly jumped. Wait a hundred slots, and the allocator gets just one decision per training episode. The blue curve did best here, with a decision every ten slots. The two longest intervals were still improving when training ended.
 
 ## 42. What allocation buys, and what it cannot fix  [0.5 min | 27:00-27:30]
 
-Learning the assignment lifts four users from minus 72.46 to minus 66.62 dBm over a fixed split in this scene, and beats the best geometric heuristic. But adding tiles at the same site saturates, and both controllers take the access point and array positions as given. The next part asks where they should be installed.
+In this room, letting the segments switch users gave us nearly six decibels over a fixed assignment. We did that with the reflectors already on the walls. What if we add tiles in the same spot? More than doubling the tile count gave us a median gain of just 1.3 decibels. Where, then, should we install the reflectors and the access point?
 
 ## 43. Can a passive reflector replace an access point?  [0.75 min | 27:30-28:15]
 
