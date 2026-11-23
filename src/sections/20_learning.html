@@ -456,7 +456,7 @@ section[data-id="rob-size"] .midnum{font-size:25px}
 </section>
 
 <!-- ============================ Setup ============================ -->
-<section data-id="hmarl-setup" data-min="0.5">
+<section data-id="hmarl-setup" data-min="1.0">
   <h2 class="title">Setup: ray-traced conference room and six controllers</h2>
   <div class="body">
     <div class="cols" style="--cols:27% 1fr">
@@ -481,8 +481,9 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes">
-    <p>A ray-traced conference room: the AP is outside, so every user is non-line-of-sight, and two corner arrays provide the controllable paths. In evaluation users move 30&nbsp;cm every slot for 300 slots.</p>
-    <p>Static-MARL is the flat architecture retrained here with a fixed assignment. Centralized also differs in reward and learner, so it is a bound.</p>
+    <p>The wireless setup is mostly the same as in the flat study: 60&nbsp;GHz, a 5&nbsp;dBm access point, 63-tile arrays, and servo limits of plus or minus 30 degrees.</p>
+    <p>Two things change. The scene is a larger conference room with the access point outside, so every user is non-line-of-sight. And there are two corner arrays, each split into two segments. Two or four users move 30&nbsp;cm every slot for 300 slots.</p>
+    <p>Six controllers are compared. HMARL-C is ours: a learned allocator with a geometric warm start. HMARL-NC drops the warm start. Compat-only uses that geometric rule alone: each segment takes its best-aligned user. Static-MARL is the flat controller retrained here with a fixed assignment. Centralized is one agent steering all focal points, a bound since its reward and learner differ. Random redraws the assignment every slot, a floor.</p>
   </aside>
 </section>
 

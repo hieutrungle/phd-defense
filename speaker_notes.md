@@ -1,6 +1,6 @@
 # Speaker notes and timing
 
-Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
+Total: 41.25 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 
 | # | slide | min | window | words | wpm |
 |---|---|---|---|---|---|
@@ -40,33 +40,33 @@ Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 34 | The hierarchy in motion: reassign every T slots, refocus every slot | 0.75 | 21:15-22:00 | 86 | 115 |
 | 35 | HMA-MDP: one objective, a reward for each timescale | 0.75 | 22:00-22:45 | 103 | 137 |
 | 36 | Training under CTDE, with a geometric warm start | 0.5 | 22:45-23:15 | 59 | 118 |
-| 37 | Setup: ray-traced conference room and six controllers | 0.5 | 23:15-23:45 | 55 | 110 |
-| 38 | Training: the warm-started allocator converges highest | 0.5 | 23:45-24:15 | 48 | 96 |
-| 39 | Deployment with moving users (4 users) | 1.25 | 24:15-25:30 | 150 | 120 |
-| 40 | Where the energy goes (4 users) | 0.5 | 25:30-26:00 | 42 | 84 |
-| 41 | How often to reallocate? An interior optimum at T=10 slots (4 users) | 0.5 | 26:00-26:30 | 56 | 112 |
-| 42 | What allocation buys, and what it cannot fix | 0.5 | 26:30-27:00 | 55 | 110 |
-| 43 | Can a passive reflector replace an access point? | 0.75 | 27:00-27:45 | 102 | 136 |
-| 44 | Two floorplans with operator-defined priority maps | 0.5 | 27:45-28:15 | 64 | 128 |
-| 45 | Design vector: AP poses, wall position, focal points | 0.75 | 28:15-29:00 | 104 | 139 |
-| 46 | Objective: soft worst case plus floor-wide coverage | 0.5 | 29:00-29:30 | 60 | 120 |
-| 47 | Two-phase method: PSO search, then gradient refinement | 0.75 | 29:30-30:15 | 101 | 135 |
-| 48 | Intuition: a swarm of layouts, then gradient refinement | 0.75 | 30:15-31:00 | 90 | 120 |
-| 49 | Compared methods and evaluation protocol | 0.5 | 31:00-31:30 | 60 | 120 |
-| 50 | Convergence of a representative run | 0.75 | 31:30-32:15 | 74 | 99 |
-| 51 | At three APs, the reflector raises priority P5 by 4.8 dB | 1.25 | 32:15-33:30 | 151 | 121 |
-| 52 | Office: with the reflector, one fewer AP meets the target (seed mean) | 0.5 | 33:30-34:00 | 65 | 130 |
-| 53 | HRBB: the same one-AP shift, with a smaller margin | 0.5 | 34:00-34:30 | 60 | 120 |
-| 54 | Coverage maps and limitations | 0.75 | 34:30-35:15 | 92 | 123 |
-| 55 | The complete picture | 0.75 | 35:15-36:00 | 95 | 127 |
-| 56 | Limitations and next steps | 0.5 | 36:00-36:30 | 51 | 102 |
-| 57 | Five questions, answered | 1.25 | 36:30-37:45 | 158 | 126 |
-| 58 | What comes next: the FORMULA3 project | 0.75 | 37:45-38:30 | 71 | 95 |
-| 59 | The device FORMULA3 will use: a mechanical reflector array | 0.5 | 38:30-39:00 | 52 | 104 |
-| 60 | How this dissertation feeds into FORMULA3 | 0.75 | 39:00-39:45 | 89 | 119 |
-| 61 | Publications from this dissertation | 0.5 | 39:45-40:15 | 67 | 134 |
-| 62 | Other publications during the Ph.D. | 0.25 | 40:15-40:30 | 27 | 108 |
-| 63 | Thank you | 0.25 | 40:30-40:45 | 24 | 96 |
+| 37 | Setup: ray-traced conference room and six controllers | 1 | 23:15-24:15 | 140 | 140 |
+| 38 | Training: the warm-started allocator converges highest | 0.5 | 24:15-24:45 | 48 | 96 |
+| 39 | Deployment with moving users (4 users) | 1.25 | 24:45-26:00 | 150 | 120 |
+| 40 | Where the energy goes (4 users) | 0.5 | 26:00-26:30 | 42 | 84 |
+| 41 | How often to reallocate? An interior optimum at T=10 slots (4 users) | 0.5 | 26:30-27:00 | 56 | 112 |
+| 42 | What allocation buys, and what it cannot fix | 0.5 | 27:00-27:30 | 55 | 110 |
+| 43 | Can a passive reflector replace an access point? | 0.75 | 27:30-28:15 | 102 | 136 |
+| 44 | Two floorplans with operator-defined priority maps | 0.5 | 28:15-28:45 | 64 | 128 |
+| 45 | Design vector: AP poses, wall position, focal points | 0.75 | 28:45-29:30 | 104 | 139 |
+| 46 | Objective: soft worst case plus floor-wide coverage | 0.5 | 29:30-30:00 | 60 | 120 |
+| 47 | Two-phase method: PSO search, then gradient refinement | 0.75 | 30:00-30:45 | 101 | 135 |
+| 48 | Intuition: a swarm of layouts, then gradient refinement | 0.75 | 30:45-31:30 | 90 | 120 |
+| 49 | Compared methods and evaluation protocol | 0.5 | 31:30-32:00 | 60 | 120 |
+| 50 | Convergence of a representative run | 0.75 | 32:00-32:45 | 74 | 99 |
+| 51 | At three APs, the reflector raises priority P5 by 4.8 dB | 1.25 | 32:45-34:00 | 151 | 121 |
+| 52 | Office: with the reflector, one fewer AP meets the target (seed mean) | 0.5 | 34:00-34:30 | 65 | 130 |
+| 53 | HRBB: the same one-AP shift, with a smaller margin | 0.5 | 34:30-35:00 | 60 | 120 |
+| 54 | Coverage maps and limitations | 0.75 | 35:00-35:45 | 92 | 123 |
+| 55 | The complete picture | 0.75 | 35:45-36:30 | 95 | 127 |
+| 56 | Limitations and next steps | 0.5 | 36:30-37:00 | 51 | 102 |
+| 57 | Five questions, answered | 1.25 | 37:00-38:15 | 158 | 126 |
+| 58 | What comes next: the FORMULA3 project | 0.75 | 38:15-39:00 | 71 | 95 |
+| 59 | The device FORMULA3 will use: a mechanical reflector array | 0.5 | 39:00-39:30 | 52 | 104 |
+| 60 | How this dissertation feeds into FORMULA3 | 0.75 | 39:30-40:15 | 89 | 119 |
+| 61 | Publications from this dissertation | 0.5 | 40:15-40:45 | 67 | 134 |
+| 62 | Other publications during the Ph.D. | 0.25 | 40:45-41:00 | 27 | 108 |
+| 63 | Thank you | 0.25 | 41:00-41:15 | 24 | 96 |
 
 ## 1. title  [0.5 min | 0:00-0:30]
 
@@ -212,110 +212,110 @@ Both levels serve one discounted objective, each with a reward suited to its dec
 
 Segments train with MAPPO, as in flat MARL; the allocator uses PPO on the macro timescale with its own critic and a factorized head. Exploring 256 assignments is slow, so early on a geometric prior, from positions only, is added to the logits, then switched off. Prior strength gives three variants: none, warm start, and infinite, a pure heuristic.
 
-## 37. Setup: ray-traced conference room and six controllers  [0.5 min | 23:15-23:45]
+## 37. Setup: ray-traced conference room and six controllers  [1 min | 23:15-24:15]
 
-A ray-traced conference room: the AP is outside, so every user is non-line-of-sight, and two corner arrays provide the controllable paths. In evaluation users move 30 cm every slot for 300 slots. Static-MARL is the flat architecture retrained here with a fixed assignment. Centralized also differs in reward and learner, so it is a bound.
+The wireless setup is mostly the same as in the flat study: 60 GHz, a 5 dBm access point, 63-tile arrays, and servo limits of plus or minus 30 degrees. Two things change. The scene is a larger conference room with the access point outside, so every user is non-line-of-sight. And there are two corner arrays, each split into two segments. Two or four users move 30 cm every slot for 300 slots. Six controllers are compared. HMARL-C is ours: a learned allocator with a geometric warm start. HMARL-NC drops the warm start. Compat-only uses that geometric rule alone: each segment takes its best-aligned user. Static-MARL is the flat controller retrained here with a fixed assignment. Centralized is one agent steering all focal points, a bound since its reward and learner differ. Random redraws the assignment every slot, a floor.
 
-## 38. Training: the warm-started allocator converges highest  [0.5 min | 23:45-24:15]
+## 38. Training: the warm-started allocator converges highest  [0.5 min | 24:15-24:45]
 
 HMARL-C converges highest in both configurations. With two users the methods cluster; with four users every adjacent pair separates. The gap to the prior-free variant grows from 5.35 to 12.94 and persists after the prior is switched off, so the warm start changes which optimum the allocator reaches.
 
-## 39. Deployment with moving users (4 users)  [1.25 min | 24:15-25:30]
+## 39. Deployment with moving users (4 users)  [1.25 min | 24:45-26:00]
 
 Main result, with users now moving every slot. The ordering matches training. With four users, choosing the assignment raises mean RSSI from minus 72.46 dBm with the fixed split to minus 66.62 dBm, within this scene. That is also 1.88 dB above the strongest baseline, the geometric heuristic, our one geometry head-to-head, and 7.94 dB above Centralized, a bound since it differs in architecture, reward and learner. With four users HMARL-C is also the most stable: 0.71 dB standard deviation, against 1.39 to 1.74 dB for the baselines. The dips have two causes. Static-MARL keeps focusing on its assigned user after that path degrades; releasing the segment is the expected mechanism that removes those dips. Compat-only gives neighboring segments nearly identical scores, so they pick the same user and leave another one unassigned. If asked: the plot legend shows minus 72.26 for Static-MARL; the tabulated value is minus 72.46 dBm.
 
-## 40. Where the energy goes (4 users)  [0.5 min | 25:30-26:00]
+## 40. Where the energy goes (4 users)  [0.5 min | 26:00-26:30]
 
 Snapshots at evaluation slot 294, users as magenta dots. HMARL-C forms narrow beams through the users, HMARL-NC spreads wider, and Centralized shows little focusing. These are single-slot averages, not run means. The video shows the learned allocator re-steering segments as users move.
 
-## 41. How often to reallocate? An interior optimum at T=10 slots (4 users)  [0.5 min | 26:00-26:30]
+## 41. How often to reallocate? An interior optimum at T=10 slots (4 users)  [0.5 min | 26:30-27:00]
 
 T, the number of slots between allocations, sets the ratio of the two timescales, and the result peaks at ten slots. At T of one a segment cannot tell a reassignment from a jump, and the hierarchy collapses toward a flat policy. At large T the allocator decides from stale states; those curves are lower bounds.
 
-## 42. What allocation buys, and what it cannot fix  [0.5 min | 26:30-27:00]
+## 42. What allocation buys, and what it cannot fix  [0.5 min | 27:00-27:30]
 
 Learning the assignment lifts four users from minus 72.46 to minus 66.62 dBm over a fixed split in this scene, and beats the best geometric heuristic. But adding tiles at the same site saturates, and both controllers take the access point and array positions as given. The next part asks where they should be installed.
 
-## 43. Can a passive reflector replace an access point?  [0.75 min | 27:00-27:45]
+## 43. Can a passive reflector replace an access point?  [0.75 min | 27:30-28:15]
 
 So far the AP and the reflector were installed in advance, so the gain was bounded by where they were mounted. This part asks where they should go. It is the same tile array and focal-point steering. Mechanical steering does not depend on the band, so we study indoor Wi-Fi at 5.18 gigahertz, where walls set the AP count; each extra AP costs cabling, power, a license and channel budget. Positions become design variables, and the reflector, a passive reflective surface, is configured once at installation. Two questions: (a) better priority coverage at a fixed AP count, and (b) one fewer AP?
 
-## 44. Two floorplans with operator-defined priority maps  [0.5 min | 27:45-28:15]
+## 44. Two floorplans with operator-defined priority maps  [0.5 min | 28:15-28:45]
 
 Two university floorplans. Office, 30 by 30 meters, has its highest-priority rooms on the perimeter behind walls. HRBB, a 40 by 40 meter lab floor, has a central priority block. The operator supplies the priority map: rooms that must be served weigh more than corridors. Weights only shape the objective; reported RSSI is unweighted. The target: priority-region fifth percentile at least minus 65 dBm.
 
-## 45. Design vector: AP poses, wall position, focal points  [0.75 min | 28:15-29:00]
+## 45. Design vector: AP poses, wall position, focal points  [0.75 min | 28:45-29:30]
 
 Everything we can choose goes into one continuous design vector, Theta. Each AP sits on the ceiling. We optimize its horizontal position and an orientation vector normalized to a downward boresight, which avoids the singularities of Euler angles. The reflector, 63 hexagonal tiles over 2 by 2 meters, slides along one preselected wall through two normalized coordinates. Its tiles are steered by a virtual source and a virtual target: each tile normal bisects the directions to them, so placing them at the AP and a user recovers the bisector rule. Six focal coordinates replace 126 tile angles, so Theta has 5N plus 8 coordinates.
 
-## 46. Objective: soft worst case plus floor-wide coverage  [0.5 min | 29:00-29:30]
+## 46. Objective: soft worst case plus floor-wide coverage  [0.5 min | 29:30-30:00]
 
 Each location is served by its strongest AP, and its power maps to a penalty that grows as power drops. An average hides holes and a hard minimum is not smooth, so the main term is a priority-weighted soft worst case; a larger weight acts like a lower RSSI. A small sigmoid term discourages sacrificing the rest of the floor.
 
-## 47. Two-phase method: PSO search, then gradient refinement  [0.75 min | 29:30-30:15]
+## 47. Two-phase method: PSO search, then gradient refinement  [0.75 min | 30:00-30:45]
 
 The objective is differentiable for a fixed set of paths, but a small move of an AP or the reflector can create or remove paths at a visibility boundary, and walls split the design space into separated good regions. So we use two phases. First, particle swarm optimization; each particle is a complete layout scored by a full radio map. PSO moves whole configurations, whereas GA crossover could split an AP from the reflector it works with. Then the best particle is refined with Adam steps through the differentiable ray tracer. One run costs about 180 seconds of serial GPU work.
 
-## 48. Intuition: a swarm of layouts, then gradient refinement  [0.75 min | 30:15-31:00]
+## 48. Intuition: a swarm of layouts, then gradient refinement  [0.75 min | 30:45-31:30]
 
 Here is the intuition, as a schematic. Each color is one particle, a full layout of three APs and the reflector. Every iteration, a particle keeps part of its velocity and is pulled toward its own best layout, the hollow rings, and toward the swarm's best, the large AP icons. The heat map is the coverage of that best layout, and the inset curve its objective. Once the swarm settles, the label switches to gradient refinement: small deterministic steps move the best layout locally to lift the weakest priority rooms.
 
-## 49. Compared methods and evaluation protocol  [0.5 min | 31:00-31:30]
+## 49. Compared methods and evaluation protocol  [0.5 min | 31:30-32:00]
 
 Five baselines each remove or replace one component. GA+GD swaps the global search. PSO-only skips refinement. Random+GD removes global search. Weighted k-means ignores walls. Random sampling is the floor. Each configuration runs with five seeds, one to seven APs, both floorplans, with and without the reflector. I report mean, P5 and minimum RSSI, with Welch tests and 95 percent intervals.
 
-## 50. Convergence of a representative run  [0.75 min | 31:30-32:15]
+## 50. Convergence of a representative run  [0.75 min | 32:00-32:45]
 
 One representative run: Office, three APs, with the reflector. Left, the objective. GA+GD is ahead early but levels off around iteration 20, and PSO+GD overtakes it by iteration 36. Random+GD improves but plateaus higher, so the starting point matters. Right, the priority-region P5. After the phase boundary at iteration 35, gradient refinement lifts PSO+GD from about minus 61 to minus 57 dBm, while PSO-only stays flat. Both phases contribute; the seed averages come next.
 
-## 51. At three APs, the reflector raises priority P5 by 4.8 dB  [1.25 min | 32:15-33:30]
+## 51. At three APs, the reflector raises priority P5 by 4.8 dB  [1.25 min | 32:45-34:00]
 
 Question (a). With three APs in Office, adding one jointly optimized reflector raises priority-region P5 from minus 62.1 to minus 57.3 dBm, a 4.8 dB gain with a confidence interval of 3.1 to 6.5. The minimum gains 9.5 dB, more than P5 or the mean, so the reflector mostly redirects energy into shadowed locations. Floor-wide mean, P5 and minimum improve too, so priority coverage does not come at the expense of the floor. The bar chart compares methods that all have the same reflector. PSO+GD and GA+GD gain 4.8 and 4.1 dB; the other methods gain between 1 and 2.8 dB. Installing the reflector alone does not deliver the benefit. Gradient refinement adds 4.1 dB with the reflector but only 1.6 dB, not significant, without it. One possible explanation: with a shared learning rate, refinement can move the reflector much farther than the APs. PSO+GD and GA+GD are not significantly different.
 
-## 52. Office: with the reflector, one fewer AP meets the target (seed mean)  [0.5 min | 33:30-34:00]
+## 52. Office: with the reflector, one fewer AP meets the target (seed mean)  [0.5 min | 34:00-34:30]
 
 Question (b): does the gain mean fewer APs? These panels sweep one to seven APs in Office against the minus 65 dBm line. PSO+GD needs three APs without the reflector and two with it: minus 62.9 versus minus 65.4 dBm at two APs, a 2.1 dB margin. PSO-only needs three either way, so refinement is necessary. Per seed: 4 of 5 versus 1 of 5.
 
-## 53. HRBB: the same one-AP shift, with a smaller margin  [0.5 min | 34:00-34:30]
+## 53. HRBB: the same one-AP shift, with a smaller margin  [0.5 min | 34:30-35:00]
 
 The second floorplan shows the same shift. In HRBB, one AP plus the reflector reaches minus 64.3 dBm, a 0.7 dB margin, where two APs are needed without it; 3 of 5 seeds meet the target versus none. With five seeds the Fisher tests are not significant, so this is a seed-mean result with small margins, not a deployment guarantee.
 
-## 54. Coverage maps and limitations  [0.75 min | 34:30-35:15]
+## 54. Coverage maps and limitations  [0.75 min | 35:00-35:45]
 
 The maps show where the gain comes from. PSO+GD places APs in a west room and at two corridor junctions and reaches shadowed rooms through corridors and doorways; the reflector serves the north rooms. Weighted k-means follows Euclidean distance and leaves the southeast dark. The limits: strongest-server received power only, so the AP saving is a coverage statement, not a cost statement; five seeds, two floorplans, one preselected wall, known geometry. Within those limits, joint planning removed one AP in both layouts, as a seed mean with small margins. That answers where.
 
-## 55. The complete picture  [0.75 min | 35:15-36:00]
+## 55. The complete picture  [0.75 min | 35:45-36:30]
 
 Back to the map from the start, now with the answers filled in. Each part has its own band and scene, so these gains are not compared across parts. What: geometry alone raises path gain by 53.0 and 87.5 dB for one static user. How: multi-agent learning adds 20.7 dB over a static flat reflector, and learning the assignment lifts four users from minus 72.46 to minus 66.62 dBm over a fixed split. Where: with three APs, placement raises priority P5 by 4.8 dB, and one fewer AP meets the target, as a seed mean.
 
-## 56. Limitations and next steps  [0.5 min | 36:00-36:30]
+## 56. Limitations and next steps  [0.5 min | 36:30-37:00]
 
 The limits apply to every part: ray-traced simulation only, received power rather than rate, few scenarios. Phase is not controlled, and learned control was not compared with a position-tracking geometric rule. Next: hardware-in-the-loop tests, training under mobility, rate-aware objectives, and running a placed layout with the learned controller, the dashed arrow.
 
-## 57. Five questions, answered  [1.25 min | 36:30-37:45]
+## 57. Five questions, answered  [1.25 min | 37:00-38:15]
 
 To sum up, what the five answers say together. Why: spatial information is enough. Every part decides from user positions at run time or a site model at planning, never from pilot-based channel estimation; the price is decimeter-level localization and an accurate site model. What: the focal point is the interface shared by the geometric rule, both learned controllers and the placement optimizer. How: learned decentralized policies work within servo limits for several moving users, and when segments differ in geometry, learning the assignment beats a fixed split and the geometric heuristic. Where: installation is a decision of its own; a jointly placed reflector met the priority-coverage target with one fewer access point. Which: geometry for a static user or a warm start, learned policies at run time, direct optimization once per building. Together these cover installing and operating the reflectors through one interface, in simulation; closing the loop between the two stages and hardware validation come next.
 
-## 58. What comes next: the FORMULA3 project  [0.75 min | 37:45-38:30]
+## 58. What comes next: the FORMULA3 project  [0.75 min | 38:15-39:00]
 
 This work does not stop here. It continues in FORMULA3, a joint project of the NSF and the Research Council of Finland in the VINES program: about 1.54 million dollars across five universities in the United States and Finland, from October 2026 to September 2029. Its programmable wireless environments combine RIS with metallic reflector arrays, the hexagonal tile panels on the right. That element builds directly on this dissertation's reflector-array work.
 
-## 59. The device FORMULA3 will use: a mechanical reflector array  [0.5 min | 38:30-39:00]
+## 59. The device FORMULA3 will use: a mechanical reflector array  [0.5 min | 39:00-39:30]
 
 This is the physical device. It is a metallic reflector array with nineteen hexagonal tiles; servos behind the panel turn each tile, and the controller box on the stand drives them. The arrays in this dissertation were simulated. FORMULA3 will use this device to take focal-point control and placement into real rooms.
 
-## 60. How this dissertation feeds into FORMULA3  [0.75 min | 39:00-39:45]
+## 60. How this dissertation feeds into FORMULA3  [0.75 min | 39:30-40:15]
 
 Here is how this dissertation feeds into the project's four thrusts. The ray-traced reflector pipeline is a starting point for channel characterization and dataset generation. The CSI-free learned control and the hierarchical allocation are early instances of the second thrust: reconfiguring surfaces and reassigning users. The robustness and localization findings inform the third thrust, where sensing supplies the positions. And the hardware model with joint placement feeds validation and the planning of programmable environments. These are the foundations it builds on; the project's own results are still to come.
 
-## 61. Publications from this dissertation  [0.5 min | 39:45-40:15]
+## 61. Publications from this dissertation  [0.5 min | 40:15-40:45]
 
 The VTC Fall 2024 paper covers geometric focusing, and the TMLCN article covers flat MARL; the flat-MARL conference paper is under review at ICC 2027. For hierarchical MARL, the journal version is under review at TMLCN and the conference version will be presented at GLOBECOM in December. The placement paper is under review at the Open Journal of the Communications Society. Other publications are in the backup.
 
-## 62. Other publications during the Ph.D.  [0.25 min | 40:15-40:30]
+## 62. Other publications during the Ph.D.  [0.25 min | 40:45-41:00]
 
 Beyond the dissertation, I contributed to eight other papers, mainly with the High Performance Computing group: scientific data compression, AI accelerators, and digital twins for first responders.
 
-## 63. Thank you  [0.25 min | 40:30-40:45]
+## 63. Thank you  [0.25 min | 41:00-41:15]
 
 Thank you to Prof. Ekin and Prof. Tao, the committee, my collaborators, and DOE and NSF for funding. I am happy to take questions.
