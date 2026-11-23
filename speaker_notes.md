@@ -51,7 +51,7 @@ Total: 42.00 min, 62 timed slides (window 40-45 min, pace <= 140 wpm).
 | 45 | Objective: soft worst case plus floor-wide coverage | 0.5 | 30:15-30:45 | 63 | 126 |
 | 46 | Two-phase method: PSO search, then gradient refinement | 0.75 | 30:45-31:30 | 75 | 100 |
 | 47 | Intuition: a swarm of layouts, then gradient refinement | 0.75 | 31:30-32:15 | 92 | 123 |
-| 48 | Compared methods and evaluation protocol | 0.5 | 32:15-32:45 | 66 | 132 |
+| 48 | Compared methods and evaluation protocol | 0.5 | 32:15-32:45 | 58 | 116 |
 | 49 | Convergence of a representative run | 0.75 | 32:45-33:30 | 88 | 117 |
 | 50 | At three APs, the reflector raises priority P5 by 4.8 dB | 1.25 | 33:30-34:45 | 136 | 109 |
 | 51 | Office: with the reflector, one fewer AP meets the target (seed mean) | 0.5 | 34:45-35:15 | 58 | 116 |
@@ -321,7 +321,7 @@ When the second phase lights up, only the best layout is being refined. Watch th
 
 ## 48. Compared methods and evaluation protocol  [0.5 min | 32:15-32:45]
 
-We test both floor plans with one to seven access points, with and without the reflector, using five random seeds per configuration. The comparisons isolate different choices. A genetic algorithm replaces the swarm. Swarm search alone removes refinement. Weighted k-means places access points by distance and priority, ignoring walls. We also compare random layouts with and without refinement. Each method runs at its own computational cost.
+We test both floor plans with one to seven access points, with and without the reflector, using five random seeds per configuration. The comparisons isolate different choices. A genetic algorithm replaces the swarm. Swarm search alone removes refinement. Weighted k-means places access points by distance and priority, ignoring walls. We also compare random layouts with and without refinement.
 
 ## 49. Convergence of a representative run  [0.75 min | 32:45-33:30]
 
