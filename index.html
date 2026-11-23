@@ -738,7 +738,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
       <div class="col"><img src="assets/img/crops/learning_ctde.png" alt="CTDE diagram: local actors exchange actions and observations with the ray-traced scene; a centralized critic sees the global state and reward during training only and supplies advantages."></div>
       <div class="col lr-panel">
         <ul class="small">
-          <li><b>CTDE</b> mitigates non-stationarity: global critic in training, local actors at deployment</li>
+          <li><b>MAPPO:</b> multi-agent proximal policy optimization</li>
+          <li><b>CTDE</b> (centralized training with decentralized execution) mitigates non-stationarity: global critic in training, local actors at deployment</li>
           <li><b>Execution:</b> each actor uses only its local observation; no inter-agent communication</li>
           <li>Actor and critic: small MLPs, Adam optimizer <span class="foot gray">(settings in backup)</span></li>
         </ul>
@@ -760,9 +761,9 @@ section[data-id="rob-size"] .midnum{font-size:25px}
     </div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.75 min | 14:45&ndash;15:30]</b></p>
-    <p>The agents are trained with MAPPO under centralized training with decentralized execution, which addresses non-stationarity.</p>
-    <p>In training, the centralized critic sees the global state and reward and supplies advantages to every actor. At deployment the critic is discarded; each actor maps its local observation to a focal-point move, with no communication.</p>
-    <p>The objective has three terms. The clipped surrogate takes the smaller of the ratio-weighted advantage and its clipped version, so one batch cannot move a policy far. The value loss fits the critic to the observed return, and the entropy bonus keeps the agents exploring focal points. The weights are in the backup.</p>
+    <p>The agents are trained with MAPPO, multi-agent proximal policy optimization, under centralized training with decentralized execution, which addresses non-stationarity.</p>
+    <p>In training, the centralized critic sees the global state and reward and supplies advantages. At deployment the critic is discarded; each actor maps its local observation to a focal-point move, with no communication.</p>
+    <p>The objective has three terms. The clipped surrogate takes the smaller of the ratio-weighted advantage and its clipped version, so one batch cannot move a policy far. The value loss fits the critic to the observed return, and the entropy bonus keeps the agents exploring focal points.</p>
   </aside>
 </section>
 

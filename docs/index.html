@@ -637,7 +637,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
       <div class="col"><img src="assets/img/crops/learning_ctde.png" alt="CTDE diagram: local actors exchange actions and observations with the ray-traced scene; a centralized critic sees the global state and reward during training only and supplies advantages."></div>
       <div class="col lr-panel">
         <ul class="small">
-          <li><b>CTDE</b> mitigates non-stationarity: global critic in training, local actors at deployment</li>
+          <li><b>MAPPO:</b> multi-agent proximal policy optimization</li>
+          <li><b>CTDE</b> (centralized training with decentralized execution) mitigates non-stationarity: global critic in training, local actors at deployment</li>
           <li><b>Execution:</b> each actor uses only its local observation; no inter-agent communication</li>
           <li>Actor and critic: small MLPs, Adam optimizer <span class="foot gray">(settings in backup)</span></li>
         </ul>

@@ -27,7 +27,7 @@ Total: 40.75 min, 63 timed slides (window 40-45 min, pace <= 140 wpm).
 | 21 | Focal-point abstraction: a segment is steered by 3 coordinates | 0.75 | 12:00-12:45 | 96 | 128 |
 | 22 | MA-MDP: each agent moves the focal point of one segment | 1.25 | 12:45-14:00 | 164 | 131 |
 | 23 | Flat MARL in motion: fixed columns, moving focal points | 0.75 | 14:00-14:45 | 94 | 125 |
-| 24 | Training with MAPPO under CTDE | 0.75 | 14:45-15:30 | 104 | 139 |
+| 24 | Training with MAPPO under CTDE | 0.75 | 14:45-15:30 | 99 | 132 |
 | 25 | Setup: 60 GHz L-shaped hallway with three users | 0.5 | 15:30-16:00 | 58 | 116 |
 | 26 | Multi-agent decomposition trains faster and higher | 0.5 | 16:00-16:30 | 57 | 114 |
 | 27 | Multi-agent focusing: +20.7 dB over a static flat reflector | 1.25 | 16:30-17:45 | 152 | 122 |
@@ -162,7 +162,7 @@ Here is the controller in motion. The access point has no direct path to the use
 
 ## 24. Training with MAPPO under CTDE  [0.75 min | 14:45-15:30]
 
-The agents are trained with MAPPO under centralized training with decentralized execution, which addresses non-stationarity. In training, the centralized critic sees the global state and reward and supplies advantages to every actor. At deployment the critic is discarded; each actor maps its local observation to a focal-point move, with no communication. The objective has three terms. The clipped surrogate takes the smaller of the ratio-weighted advantage and its clipped version, so one batch cannot move a policy far. The value loss fits the critic to the observed return, and the entropy bonus keeps the agents exploring focal points. The weights are in the backup.
+The agents are trained with MAPPO, multi-agent proximal policy optimization, under centralized training with decentralized execution, which addresses non-stationarity. In training, the centralized critic sees the global state and reward and supplies advantages. At deployment the critic is discarded; each actor maps its local observation to a focal-point move, with no communication. The objective has three terms. The clipped surrogate takes the smaller of the ratio-weighted advantage and its clipped version, so one batch cannot move a policy far. The value loss fits the critic to the observed return, and the entropy bonus keeps the agents exploring focal points.
 
 ## 25. Setup: 60 GHz L-shaped hallway with three users  [0.5 min | 15:30-16:00]
 
