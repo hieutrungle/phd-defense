@@ -49,7 +49,7 @@ Total: 41.50 min, 61 timed slides (window 40-45 min, pace <= 140 wpm).
 | 43 | Two floorplans with operator-defined priority maps | 0.5 | 29:00-29:30 | 62 | 124 |
 | 44 | Design vector: AP poses, wall position, focal points | 0.75 | 29:30-30:15 | 93 | 124 |
 | 45 | Objective: soft worst case plus floor-wide coverage | 0.5 | 30:15-30:45 | 62 | 124 |
-| 46 | Two-phase method: PSO search, then gradient refinement | 0.75 | 30:45-31:30 | 88 | 117 |
+| 46 | Two-phase method: PSO search, then gradient refinement | 0.75 | 30:45-31:30 | 85 | 113 |
 | 47 | Intuition: a swarm of layouts, then gradient refinement | 0.75 | 31:30-32:15 | 89 | 119 |
 | 48 | Compared methods and evaluation protocol | 0.5 | 32:15-32:45 | 62 | 124 |
 | 49 | Convergence of a representative run | 0.75 | 32:45-33:30 | 94 | 125 |
@@ -302,9 +302,9 @@ Imagine moving an access point from a strong corridor toward a weak priority roo
 
 ## 46. Two-phase method: PSO search, then gradient refinement  [0.75 min | 30:45-31:30]
 
-A small change in antenna direction might help a room. Moving the access point to a different doorway could help much more, but a local gradient may never lead us there. That's why we use two phases.
+Particle swarm optimization, or PSO, first compares complete layouts in different parts of the floor plan. We take the best layout it finds and refine it with Adam, following gradients through the ray tracer.
 
-Particle swarm optimization, or PSO, first compares complete layouts in different parts of the floor plan. We take the best layout it finds and refine it with Adam, following gradients through the ray tracer. The animation shows what changes when we hand one layout from the first phase to the second.
+Why start with a swarm? A small change in antenna direction might help a room. Moving the access point to a different doorway could help much more, but a local gradient may never lead us there. The animation shows how the swarm finds a layout and hands it over for refinement.
 
 ## 47. Intuition: a swarm of layouts, then gradient refinement  [0.75 min | 31:30-32:15]
 

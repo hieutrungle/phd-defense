@@ -1188,16 +1188,16 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
   <div class="body">
     <div class="cols" style="--cols:27% 1fr;align-items:center">
       <div class="col">
-        <p style="margin:0 0 4px 0;font-size:24px"><b>Why not gradients alone?</b></p>
+        <p style="margin:0 0 4px 0;font-size:24px"><b>PSO+GD</b></p>
+        <ul class="small">
+          <li>Phase 1: PSO; each particle is a full layout</li>
+          <li>Phase 2: Adam steps through differentiable Sionna RT</li>
+        </ul>
+        <p style="margin:14px 0 4px 0;font-size:24px"><b>Why not gradients alone?</b></p>
         <ul class="small">
           <li>The coverage landscape is <b>not convex</b>: many local minima</li>
           <li>Gradient descent alone settles at a nearby minimum and usually misses the best layout</li>
           <li><b>PSO</b> first finds a good coarse position</li>
-        </ul>
-        <p style="margin:14px 0 4px 0;font-size:24px"><b>PSO+GD</b></p>
-        <ul class="small">
-          <li>Phase 1: PSO; each particle is a full layout</li>
-          <li>Phase 2: Adam steps through differentiable Sionna RT</li>
         </ul>
       </div>
       <div class="col">
