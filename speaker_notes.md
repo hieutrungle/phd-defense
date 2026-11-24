@@ -7,7 +7,7 @@ Total: 41.50 min, 61 timed slides (window 40-45 min, pace <= 140 wpm).
 | 1 | Spatial Intelligence for Smart Radio Environments | 1.25 | 0:00-1:15 | 149 | 119 |
 | 2 | Outline | 0.25 | 1:15-1:30 | 33 | 132 |
 | 3 | About me | 0.5 | 1:30-2:00 | 62 | 124 |
-| 4 | Professional experience | 0.5 | 2:00-2:30 | 57 | 114 |
+| 4 | Professional experience | 0.5 | 2:00-2:30 | 58 | 116 |
 | 5 | Sponsored research | 0.25 | 2:30-2:45 | 31 | 124 |
 | 6 | Growing demand points to mmWave bandwidth | 0.5 | 2:45-3:15 | 54 | 108 |
 | 7 | More bandwidth at mmWave, but less coverage | 0.5 | 3:15-3:45 | 62 | 124 |
@@ -84,7 +84,7 @@ My research at Texas A&M brings together wireless communication, machine learnin
 
 ## 4. Professional experience  [0.5 min | 2:00-2:30]
 
-I've been a research assistant at Texas A&M since 2021. Along the way, I worked at the High Performance Computing Center, interned at Qualcomm, and then spent a summer on Uber's Rider Pricing and Incentives team. I'll return to Uber as a machine learning engineer in 2027. Two sponsors helped make the work at Texas A&M possible.
+I've been a research assistant at Texas A&M since 2021. Along the way, I worked at the High Performance Research Center (HPRC-TAMU), interned at Qualcomm, and then spent a summer on Uber's Rider Pricing and Incentives team. I'll return to Uber as a machine learning engineer in 2027. Two sponsors helped make the work at Texas A&M possible.
 
 ## 5. Sponsored research  [0.25 min | 2:30-2:45]
 
