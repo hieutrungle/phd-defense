@@ -10,8 +10,32 @@ section[data-id="geo-videos"] .vwrap video{position:absolute;height:473px;width:
 section[data-id="geo-videos"] figcaption{font-size:var(--fs-foot);color:var(--text)}
 section[data-id="bk-p2040"] table.bt td,section[data-id="bk-p2040"] table.bt th{padding:5px 14px}
 section[data-id="bk-bisector-3d"] img{height:390px}
+section[data-id="five-questions"] table.fq{border-collapse:collapse;width:100%;font-size:21px;line-height:1.28}
+section[data-id="five-questions"] table.fq tr{border-bottom:1px solid var(--rule)}
+section[data-id="five-questions"] table.fq{border-top:2px solid var(--text);border-bottom:2px solid var(--text)}
+section[data-id="five-questions"] table.fq td{padding:7px 10px;vertical-align:top;border:none}
+section[data-id="five-questions"] table.fq td.k{color:var(--maroon);font-weight:700;width:96px}
 </style>
 
+
+<section class="backup" data-id="five-questions">
+  <h2 class="title">Five questions, answered</h2>
+  <div class="body">
+    <table class="fq"><tbody>
+      <tr><td class="k">WHY</td><td><b>Spatial information suffices</b>: every part decides from user positions (run time) or a site model (planning), never from pilot-based CSI estimation; the cost is decimeter-level localization and site-model fidelity.</td></tr>
+      <tr><td class="k">WHAT</td><td><b>Focal points are the shared interface</b>: one abstraction steers the tiles in the geometric rule, both learned controllers, and the placement optimizer.</td></tr>
+      <tr><td class="k">HOW</td><td><b>Learned, decentralized policies</b> act within servo limits and are trained on received power for several moving users; when segments differ in geometry, learning the assignment beats a fixed split and the best geometric heuristic.</td></tr>
+      <tr><td class="k">WHERE</td><td><b>Where to install is a decision of its own</b>: a reflector configured once and placed jointly with the APs met the priority-coverage target with one fewer AP (seed mean, small margins).</td></tr>
+      <tr><td class="k">WHICH</td><td><b>Match the method to the problem.</b> Geometry for one static user or as a warm start; learned policies for run-time multi-user control; direct optimization (PSO + gradient refinement) for once-per-building placement.</td></tr>
+    </tbody></table>
+    <div class="takeaway">In ray-traced simulations, focal points let us use spatial information for both placement and steering, without estimating a channel for every tile.</div>
+  </div>
+  <aside class="notes">
+    <p>Think back to the person walking around a corner. Why use spatial information? A position estimate lets the controller respond without sounding a separate channel for every tile. That makes localization accuracy important, just as planning depends on the quality of the building model.</p>
+    <p>What connects the studies is the focal point, the place we ask the tiles to aim. For one stationary user, geometry gives us the angles directly. How do we serve several moving users? We learn where each segment should aim, then learn which user it should serve when different corners offer different paths.</p>
+    <p>Where we put the hardware matters just as much. In both simulated buildings the jointly planned reflector met the priority target with one fewer access point on average across seeds. I'd use geometry to aim at a known target or give a learner a head start. I'd use learning for repeated steering and direct optimization for installation. The next step is to test those ideas on a physical panel.</p>
+  </aside>
+</section>
 
 <section class="backup" data-id="limits-next">
   <h2 class="title">Limitations and next steps</h2>

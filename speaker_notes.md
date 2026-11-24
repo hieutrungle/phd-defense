@@ -1,6 +1,6 @@
 # Speaker notes and timing
 
-Total: 41.50 min, 61 timed slides (window 40-45 min, pace <= 140 wpm).
+Total: 40.25 min, 60 timed slides (window 40-45 min, pace <= 140 wpm).
 
 | # | slide | min | window | words | wpm |
 |---|---|---|---|---|---|
@@ -58,13 +58,12 @@ Total: 41.50 min, 61 timed slides (window 40-45 min, pace <= 140 wpm).
 | 52 | HRBB: the same one-AP shift, with a smaller margin | 0.5 | 35:15-35:45 | 60 | 120 |
 | 53 | Coverage maps: PSO+GD vs. weighted k-means | 0.75 | 35:45-36:30 | 89 | 119 |
 | 54 | The complete picture | 0.75 | 36:30-37:15 | 98 | 131 |
-| 55 | Five questions, answered | 1.25 | 37:15-38:30 | 166 | 133 |
-| 56 | What comes next: the FORMULA3 project | 0.75 | 38:30-39:15 | 95 | 127 |
-| 57 | The device FORMULA3 will use: a mechanical reflector array | 0.5 | 39:15-39:45 | 62 | 124 |
-| 58 | How this dissertation feeds into FORMULA3 | 0.75 | 39:45-40:30 | 91 | 121 |
-| 59 | Publications from this dissertation | 0.5 | 40:30-41:00 | 55 | 110 |
-| 60 | Other publications during the Ph.D. | 0.25 | 41:00-41:15 | 31 | 124 |
-| 61 | Thank you | 0.25 | 41:15-41:30 | 33 | 132 |
+| 55 | What comes next: the FORMULA3 project | 0.75 | 37:15-38:00 | 97 | 129 |
+| 56 | The device FORMULA3 will use: a mechanical reflector array | 0.5 | 38:00-38:30 | 62 | 124 |
+| 57 | How this dissertation feeds into FORMULA3 | 0.75 | 38:30-39:15 | 91 | 121 |
+| 58 | Publications from this dissertation | 0.5 | 39:15-39:45 | 55 | 110 |
+| 59 | Other publications during the Ph.D. | 0.25 | 39:45-40:00 | 31 | 124 |
+| 60 | Thank you | 0.25 | 40:00-40:15 | 33 | 132 |
 
 ## 1. Spatial Intelligence for Smart Radio Environments  [1.25 min | 0:00-1:15]
 
@@ -350,43 +349,43 @@ Read this diagram as an engineer making two decisions. Before installation, on t
 
 Underneath both is the same geometric operation. Given a focal point, turn the tiles toward it. The dashed arrow points to future work. We could use operating experience to revisit the original plan.
 
-## 55. Five questions, answered  [1.25 min | 37:15-38:30]
+## 55. What comes next: the FORMULA3 project  [0.75 min | 37:15-38:00]
+
+FORMULA3 takes these ideas from simulated rooms to a physical reflector. It's a collaboration among five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project asks how AI can manage wireless resources in the FR3 frequency range, when parts of the environment can be reconfigured.
+
+The connection to this dissertation is the panel on the right. The project combines electronic surfaces with mechanical reflector arrays. We can bring our tile model and focal-point controller to that effort. Here's the physical device the project will use.
+
+## 56. The device FORMULA3 will use: a mechanical reflector array  [0.5 min | 38:00-38:30]
+
+In the front photo you can see nineteen hexagonal metal tiles. In the back photo you can see the servos and wiring that turn them. The controller and panel share a rolling stand, so we can try different positions in a room. That makes both sides of the dissertation testable on the same device. Here's how the work maps onto the project.
+
+## 57. How this dissertation feeds into FORMULA3  [0.75 min | 38:30-39:15]
+
+Read each row from work we've completed on the left to a project task on the right. The ray tracer can generate channel data for rooms with metallic reflectors. The controllers give the resource-management team a starting point for steering beams and reassigning users. The position-noise results tell the sensing team how accurately it may need to locate people.
+
+Finally, we can take a layout chosen in simulation, move the prototype there, and measure the result. Those measurements are future work. The papers that follow document the studies I've presented today.
+
+## 58. Publications from this dissertation  [0.5 min | 39:15-39:45]
+
+The first paper, at VTC in 2024, established the geometric foundation. The journal article Signal Whisperers and the subsequent multi-agent papers develop the control work. The hierarchy also led to a paper accepted at GLOBECOM 2026. The joint-placement paper is under review. Alongside these six dissertation papers, I contributed to several collaborations in other areas.
+
+## 59. Other publications during the Ph.D.  [0.25 min | 39:45-40:00]
+
+These eight papers grew out of work on scientific data compression, machine-learning accelerators, battery materials, and public-safety applications. I'd like to close by thanking the people who made this work possible.
+
+## 60. Thank you  [0.25 min | 40:00-40:15]
+
+Thank you to Professors Ekin, Tao, Serpedin, and Menon, to my collaborators Mostafa Ibrahim and Oguz Bedir, and to our DOE and NSF sponsors. Thank you all for listening. I welcome your questions.
+
+## Backup slides for questions
+
+### 61. Five questions, answered
 
 Think back to the person walking around a corner. Why use spatial information? A position estimate lets the controller respond without sounding a separate channel for every tile. That makes localization accuracy important, just as planning depends on the quality of the building model.
 
 What connects the studies is the focal point, the place we ask the tiles to aim. For one stationary user, geometry gives us the angles directly. How do we serve several moving users? We learn where each segment should aim, then learn which user it should serve when different corners offer different paths.
 
 Where we put the hardware matters just as much. In both simulated buildings the jointly planned reflector met the priority target with one fewer access point on average across seeds. I'd use geometry to aim at a known target or give a learner a head start. I'd use learning for repeated steering and direct optimization for installation. The next step is to test those ideas on a physical panel.
-
-## 56. What comes next: the FORMULA3 project  [0.75 min | 38:30-39:15]
-
-FORMULA3 gives us a setting for that next step. It's a collaboration among five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project asks how AI can manage wireless resources in the FR3 frequency range, when parts of the environment can be reconfigured.
-
-The connection to this dissertation is the panel on the right. The project combines electronic surfaces with mechanical reflector arrays. We can bring our tile model and focal-point controller to that effort. Here's the physical device the project will use.
-
-## 57. The device FORMULA3 will use: a mechanical reflector array  [0.5 min | 39:15-39:45]
-
-In the front photo you can see nineteen hexagonal metal tiles. In the back photo you can see the servos and wiring that turn them. The controller and panel share a rolling stand, so we can try different positions in a room. That makes both sides of the dissertation testable on the same device. Here's how the work maps onto the project.
-
-## 58. How this dissertation feeds into FORMULA3  [0.75 min | 39:45-40:30]
-
-Read each row from work we've completed on the left to a project task on the right. The ray tracer can generate channel data for rooms with metallic reflectors. The controllers give the resource-management team a starting point for steering beams and reassigning users. The position-noise results tell the sensing team how accurately it may need to locate people.
-
-Finally, we can take a layout chosen in simulation, move the prototype there, and measure the result. Those measurements are future work. The papers that follow document the studies I've presented today.
-
-## 59. Publications from this dissertation  [0.5 min | 40:30-41:00]
-
-The first paper, at VTC in 2024, established the geometric foundation. The journal article Signal Whisperers and the subsequent multi-agent papers develop the control work. The hierarchy also led to a paper accepted at GLOBECOM 2026. The joint-placement paper is under review. Alongside these six dissertation papers, I contributed to several collaborations in other areas.
-
-## 60. Other publications during the Ph.D.  [0.25 min | 41:00-41:15]
-
-These eight papers grew out of work on scientific data compression, machine-learning accelerators, battery materials, and public-safety applications. I'd like to close by thanking the people who made this work possible.
-
-## 61. Thank you  [0.25 min | 41:15-41:30]
-
-Thank you to Professors Ekin, Tao, Serpedin, and Menon, to my collaborators Mostafa Ibrahim and Oguz Bedir, and to our DOE and NSF sponsors. Thank you all for listening. I welcome your questions.
-
-## Backup slides for questions
 
 ### 62. Limitations and next steps
 

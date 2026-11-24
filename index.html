@@ -1201,11 +1201,6 @@ section[data-id="fewer-ap-office"] .leg span,section[data-id="fewer-ap-hrbb"] .l
 section[data-id="coverage-limits"] .maps{display:grid;grid-template-columns:1fr 1fr 44px;gap:12px;align-items:start}
 section[data-id="coverage-limits"] .maps img.sc{height:200px;width:auto;margin-top:16px}
 section[data-id="coverage-limits"] .alertblock li{margin:.5em 0}
-section[data-id="five-questions"] table.fq{border-collapse:collapse;width:100%;font-size:21px;line-height:1.28}
-section[data-id="five-questions"] table.fq tr{border-bottom:1px solid var(--rule)}
-section[data-id="five-questions"] table.fq{border-top:2px solid var(--text);border-bottom:2px solid var(--text)}
-section[data-id="five-questions"] table.fq td{padding:7px 10px;vertical-align:top;border:none}
-section[data-id="five-questions"] table.fq td.k{color:var(--maroon);font-weight:700;width:96px}
 section[data-id="publications"] ol{font-size:18.5px;margin-left:1.3em}
 section[data-id="publications"] li{margin:.42em 0;line-height:1.3}
 section[data-id="publications"] .st{color:inherit;font-weight:400}
@@ -1593,26 +1588,6 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
   </aside>
 </section>
 
-<!-- old 49 -->
-<section data-id="five-questions" data-min="1.25">
-  <h2 class="title">Five questions, answered</h2>
-  <div class="body">
-    <table class="fq"><tbody>
-      <tr><td class="k">WHY</td><td><b>Spatial information suffices</b>: every part decides from user positions (run time) or a site model (planning), never from pilot-based CSI estimation; the cost is decimeter-level localization and site-model fidelity.</td></tr>
-      <tr><td class="k">WHAT</td><td><b>Focal points are the shared interface</b>: one abstraction steers the tiles in the geometric rule, both learned controllers, and the placement optimizer.</td></tr>
-      <tr><td class="k">HOW</td><td><b>Learned, decentralized policies</b> act within servo limits and are trained on received power for several moving users; when segments differ in geometry, learning the assignment beats a fixed split and the best geometric heuristic.</td></tr>
-      <tr><td class="k">WHERE</td><td><b>Where to install is a decision of its own</b>: a reflector configured once and placed jointly with the APs met the priority-coverage target with one fewer AP (seed mean, small margins).</td></tr>
-      <tr><td class="k">WHICH</td><td><b>Match the method to the problem.</b> Geometry for one static user or as a warm start; learned policies for run-time multi-user control; direct optimization (PSO + gradient refinement) for once-per-building placement.</td></tr>
-    </tbody></table>
-    <div class="takeaway">In ray-traced simulations, focal points let us use spatial information for both placement and steering, without estimating a channel for every tile.</div>
-  </div>
-  <aside class="notes"><p class="timing"><b>[1.25 min | 37:15&ndash;38:30]</b></p>
-    <p>Think back to the person walking around a corner. Why use spatial information? A position estimate lets the controller respond without sounding a separate channel for every tile. That makes localization accuracy important, just as planning depends on the quality of the building model.</p>
-    <p>What connects the studies is the focal point, the place we ask the tiles to aim. For one stationary user, geometry gives us the angles directly. How do we serve several moving users? We learn where each segment should aim, then learn which user it should serve when different corners offer different paths.</p>
-    <p>Where we put the hardware matters just as much. In both simulated buildings the jointly planned reflector met the priority target with one fewer access point on average across seeds. I'd use geometry to aim at a known target or give a learner a head start. I'd use learning for repeated steering and direct optimization for installation. The next step is to test those ideas on a physical panel.</p>
-  </aside>
-</section>
-
 <section data-id="formula3" data-min="0.75">
   <h2 class="title">What comes next: the FORMULA3 project</h2>
   <div class="body">
@@ -1631,8 +1606,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <div class="tiny gray" style="margin-top:8px">U.S. National Science Foundation (NSF) Award Nos. 2549087, 2549088 &middot; Research Council of Finland Decision Nos. 380594, 380600 &middot; <a href="https://vines-formula3.github.io/" target="_blank" rel="noopener">vines-formula3.github.io</a></div>
     </div></div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.75 min | 38:30&ndash;39:15]</b></p>
-    <p>FORMULA3 gives us a setting for that next step. It's a collaboration among five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project asks how AI can manage wireless resources in the FR3 frequency range, when parts of the environment can be reconfigured.</p>
+  <aside class="notes"><p class="timing"><b>[0.75 min | 37:15&ndash;38:00]</b></p>
+    <p>FORMULA3 takes these ideas from simulated rooms to a physical reflector. It's a collaboration among five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project asks how AI can manage wireless resources in the FR3 frequency range, when parts of the environment can be reconfigured.</p>
     <p>The connection to this dissertation is the panel on the right. The project combines electronic surfaces with mechanical reflector arrays. We can bring our tile model and focal-point controller to that effort. Here's the physical device the project will use.</p>
   </aside>
 </section>
@@ -1656,7 +1631,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       </div>
     </div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.5 min | 39:15&ndash;39:45]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.5 min | 38:00&ndash;38:30]</b></p>
     <p>In the front photo you can see nineteen hexagonal metal tiles. In the back photo you can see the servos and wiring that turn them. The controller and panel share a rolling stand, so we can try different positions in a room. That makes both sides of the dissertation testable on the same device. Here's how the work maps onto the project.</p>
   </aside>
 </section>
@@ -1677,7 +1652,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
     <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.75 min | 39:45&ndash;40:30]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.75 min | 38:30&ndash;39:15]</b></p>
     <p>Read each row from work we've completed on the left to a project task on the right. The ray tracer can generate channel data for rooms with metallic reflectors. The controllers give the resource-management team a starting point for steering beams and reassigning users. The position-noise results tell the sensing team how accurately it may need to locate people.</p>
     <p>Finally, we can take a layout chosen in simulation, move the prototype there, and measure the result. Those measurements are future work. The papers that follow document the studies I've presented today.</p>
   </aside>
@@ -1696,7 +1671,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <li><span class="me">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; <span class="st">submitted to <em>IEEE Open J. Commun. Soc.</em>, 2026 (under review)</span>.</li>
     </ol>
       </div>
-  <aside class="notes"><p class="timing"><b>[0.5 min | 40:30&ndash;41:00]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.5 min | 39:15&ndash;39:45]</b></p>
     <p>The first paper, at VTC in 2024, established the geometric foundation. The journal article <i>Signal Whisperers</i> and the subsequent multi-agent papers develop the control work. The hierarchy also led to a paper accepted at GLOBECOM 2026. The joint-placement paper is under review. Alongside these six dissertation papers, I contributed to several collaborations in other areas.</p>
   </aside>
 </section>
@@ -1715,7 +1690,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <li>A. Nasari, <span class="me">H. Le</span>, R. Lawrence, Z. He, X. Yang, M. Krell, A. Tsyplikhin, <em>et al.</em>, &ldquo;Benchmarking the performance of accelerators on national cyberinfrastructure resources for artificial intelligence/machine learning workloads,&rdquo; in <em>Proc. PEARC '22</em>, 2022, pp.&nbsp;1&ndash;9.</li>
     </ol>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.25 min | 41:00&ndash;41:15]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.25 min | 39:45&ndash;40:00]</b></p>
     <p>These eight papers grew out of work on scientific data compression, machine-learning accelerators, battery materials, and public-safety applications. I'd like to close by thanking the people who made this work possible.</p>
   </aside>
 </section>
@@ -1737,7 +1712,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       </div>
     </div>
   </div>
-  <aside class="notes"><p class="timing"><b>[0.25 min | 41:15&ndash;41:30]</b></p>
+  <aside class="notes"><p class="timing"><b>[0.25 min | 40:00&ndash;40:15]</b></p>
     <p>Thank you to Professors Ekin, Tao, Serpedin, and Menon, to my collaborators Mostafa Ibrahim and Oguz Bedir, and to our DOE and NSF sponsors. Thank you all for listening. I welcome your questions.</p>
   </aside>
 </section>
@@ -1756,8 +1731,32 @@ section[data-id="geo-videos"] .vwrap video{position:absolute;height:473px;width:
 section[data-id="geo-videos"] figcaption{font-size:var(--fs-foot);color:var(--text)}
 section[data-id="bk-p2040"] table.bt td,section[data-id="bk-p2040"] table.bt th{padding:5px 14px}
 section[data-id="bk-bisector-3d"] img{height:390px}
+section[data-id="five-questions"] table.fq{border-collapse:collapse;width:100%;font-size:21px;line-height:1.28}
+section[data-id="five-questions"] table.fq tr{border-bottom:1px solid var(--rule)}
+section[data-id="five-questions"] table.fq{border-top:2px solid var(--text);border-bottom:2px solid var(--text)}
+section[data-id="five-questions"] table.fq td{padding:7px 10px;vertical-align:top;border:none}
+section[data-id="five-questions"] table.fq td.k{color:var(--maroon);font-weight:700;width:96px}
 </style>
 
+
+<section class="backup" data-id="five-questions">
+  <h2 class="title">Five questions, answered</h2>
+  <div class="body">
+    <table class="fq"><tbody>
+      <tr><td class="k">WHY</td><td><b>Spatial information suffices</b>: every part decides from user positions (run time) or a site model (planning), never from pilot-based CSI estimation; the cost is decimeter-level localization and site-model fidelity.</td></tr>
+      <tr><td class="k">WHAT</td><td><b>Focal points are the shared interface</b>: one abstraction steers the tiles in the geometric rule, both learned controllers, and the placement optimizer.</td></tr>
+      <tr><td class="k">HOW</td><td><b>Learned, decentralized policies</b> act within servo limits and are trained on received power for several moving users; when segments differ in geometry, learning the assignment beats a fixed split and the best geometric heuristic.</td></tr>
+      <tr><td class="k">WHERE</td><td><b>Where to install is a decision of its own</b>: a reflector configured once and placed jointly with the APs met the priority-coverage target with one fewer AP (seed mean, small margins).</td></tr>
+      <tr><td class="k">WHICH</td><td><b>Match the method to the problem.</b> Geometry for one static user or as a warm start; learned policies for run-time multi-user control; direct optimization (PSO + gradient refinement) for once-per-building placement.</td></tr>
+    </tbody></table>
+    <div class="takeaway">In ray-traced simulations, focal points let us use spatial information for both placement and steering, without estimating a channel for every tile.</div>
+  </div>
+  <aside class="notes">
+    <p>Think back to the person walking around a corner. Why use spatial information? A position estimate lets the controller respond without sounding a separate channel for every tile. That makes localization accuracy important, just as planning depends on the quality of the building model.</p>
+    <p>What connects the studies is the focal point, the place we ask the tiles to aim. For one stationary user, geometry gives us the angles directly. How do we serve several moving users? We learn where each segment should aim, then learn which user it should serve when different corners offer different paths.</p>
+    <p>Where we put the hardware matters just as much. In both simulated buildings the jointly planned reflector met the priority target with one fewer access point on average across seeds. I'd use geometry to aim at a known target or give a learner a head start. I'd use learning for repeated steering and direct optimization for installation. The next step is to test those ideas on a physical panel.</p>
+  </aside>
+</section>
 
 <section class="backup" data-id="limits-next">
   <h2 class="title">Limitations and next steps</h2>
