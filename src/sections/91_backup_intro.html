@@ -32,7 +32,8 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>All the results I've shown come from ray tracing. We evaluated path gain or received power, and the tiles steer directions without controlling phase. Two comparisons would be particularly informative next. One is to run geometric tracking and learned control on the same moving users. The other is to operate a jointly planned layout on real hardware and measure rate under interference.</p>
+    <p>The results establish what the methods can do in the simulated scenes. We measured path gain and received power. An interference-aware rate measurement would answer a different question about service. The scenes, mounting walls, and user counts also limit how broadly we can generalize.</p>
+    <p>A direct next comparison would give geometric tracking and learned control the same moving users and servo limits. A hardware test could then close the dashed loop in the overview by running the controller on a panel at a site chosen by the placement optimizer.</p>
   </aside>
 </section>
 
@@ -67,7 +68,7 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>Four decisions connect the studies. Geometry tells us how to turn a tile. A local policy chooses where a segment aims. A higher-level policy decides which user that segment serves. The placement optimizer chooses where the access points and reflector go before operation begins. Focal points give all four methods a way to specify the reflection they want.</p>
+    <p>There are four contributions on this slide. The geometric rule turns a known target into tile angles. Flat multi-agent control learns where each group of tiles should aim. The hierarchy adds the choice of which user gets each group. Joint placement makes the earlier decision of where the hardware belongs in the building. The common feature is a focal point that a controller or a planner can move.</p>
   </aside>
 </section>
 
@@ -86,7 +87,8 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </table>
   </div>
   <aside class="notes">
-    <p>Backup: side-by-side comparison of an electronic RIS and the metallic reflector array: steering, band, control input, power and the main limitation. The main talk covers this in the narration of the CSI-bottleneck slide.</p>
+    <p>An electronic reconfigurable surface steers by adjusting the phase response of its elements. In the channel-estimation scheme shown here, sounding those elements for every user takes pilot time. Our array steers by turning metal tiles. With tiles large relative to the wavelength, the same reflection geometry works across bands and the controller can use user positions.</p>
+    <p>The trade-off shows up in the last two rows. The array expends energy moving its tiles and can hold their orientation afterward. The servos take time to turn, which makes slowly changing indoor links a better fit.</p>
   </aside>
 </section>
 
@@ -104,7 +106,7 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>The horizontal axis indexes nine receiver locations around the corner. The purple curve is geometric focusing, and the blue curve is the free-space reference for the same ten-watt transmitter. Focusing gives the strongest received signal at all nine locations. A plausible explanation is the size of the reflecting aperture. The tiles intercept energy over a 1.4 by 2 meter surface and redirect it toward one receiver.</p>
+    <p>Each point on the horizontal axis is a different receiver location in the L-shaped hallway. Geometric focusing gives the strongest received signal at all nine, even relative to the free-space reference at the same transmit power. A plausible reason is that the 1.4-by-2-meter panel intercepts power over a large area and directs it toward one receiver. The free-space curve gives us a reference at each of those nine points.</p>
   </aside>
 </section>
 
@@ -122,7 +124,7 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>At all nine positions in the T-shaped hallway, focusing gives the strongest signal among the reflector configurations. At positions two and five, the free-space reference is still higher. The bisector rule aligns the directions of the reflected paths. Their lengths can differ, so their phases can differ at the receiver. That's a possible explanation for the dips. A phase-resolved comparison would be needed to test it.</p>
+    <p>In the T-shaped hallway, focusing gives the highest received power of the reflector configurations at all nine locations. Positions two and five are the interesting exceptions when we compare with free space. Both fall below that reference. The bisector sets the direction of each reflected path. Different path lengths can still produce different phases at the receiver. That's a possible explanation for the dips, which would need a phase-resolved test.</p>
   </aside>
 </section>
 
@@ -151,7 +153,7 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>We use ITU Recommendation P.2040 to assign electrical properties to the scene materials. The two equations give relative permittivity and conductivity as functions of carrier frequency. For example, the concrete permittivity here is constant, while its conductivity increases with frequency. The first hallway uses concrete for its walls, ceiling, and floor. The 60 gigahertz study also models plasterboard, ceiling board, and a wooden obstacle.</p>
+    <p>The ray tracer needs to know how a wall or tile interacts with a wave at the frequency we're using. We take relative permittivity and conductivity from the ITU-R P.2040 model. Read across the concrete row. Its permittivity stays at 5.24, while its conductivity increases with frequency. That same procedure gives us material properties for the concrete hallway at 28 gigahertz and for materials such as the wooden obstacle in the 60 gigahertz scene.</p>
   </aside>
 </section>
 
@@ -171,6 +173,6 @@ section[data-id="bk-bisector-3d"] img{height:390px}
     </div>
   </div>
   <aside class="notes">
-    <p>Start at point A, the center of a tile. Form a unit vector toward the access point and another toward the receiver. Their sum points along the required surface normal. Its direction gives the two angles the tile needs. With focal-point control, we use the virtual target in place of the receiver when we form the second vector.</p>
+    <p>At A, the tile center, draw unit vectors toward B, the access point, and C, the receiver. Their sum gives the direction of the surface normal. From that normal, the first angle sets elevation and the second sets azimuth. For a segment with a virtual focal point, we simply use that point in place of C. In the flat controller we then clip the requested angles to the servo range.</p>
   </aside>
 </section>

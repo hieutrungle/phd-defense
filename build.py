@@ -18,7 +18,7 @@ def _plainmath(s):
     for k,v in rep.items(): s=s.replace(k,v)
     s=re.sub(r'\\([a-zA-Z]+)',r'\1',s)      # \alpha -> alpha
     s=s.replace('{','').replace('}','').replace('-','−') if re.fullmatch(r'\s*-?[\d.]+\s*',s) else s.replace('{','').replace('}','')
-    return ' '+' '.join(s.split())+' '
+    return ' '.join(s.split())
 
 def fmt(s): return f"{int(s//60)}:{int(round(s%60)):02d}"
 def text_of(h):
@@ -40,6 +40,8 @@ def main(check=True):
         sid=sid.group(1) if sid else f'slide{i+1}'
         nm=re.search(r'<aside class="notes">(.*?)</aside>',seg,re.S)
         title=re.search(r'<h2 class="title">(.*?)</h2>',seg,re.S)
+        if title is None:
+            title=re.search(r'<h1>(.*?)</h1>',seg,re.S)
         label=text_of(title.group(1)) if title else sid
         if mm:
             mins=float(mm.group(1)); a=t; t+=mins*60

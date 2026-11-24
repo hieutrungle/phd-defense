@@ -51,7 +51,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>The placement study uses 5.18 gigahertz, a wavelength of about 5.8 centimeters. The tile pitch is four to five wavelengths, and we model each tile as a specular facet. We trace one million rays per transmitter and evaluate received power on a one-meter grid at a height of 1.5 meters. The material table gives the electrical properties used for the tiles, walls, floor, and ceiling.</p>
+    <p>Placement uses a 5.18 gigahertz carrier and 20 dBm per access point. At that frequency the tile pitch is about four to five wavelengths. We trace a million rays per transmitter, to a maximum depth of ten interactions, and evaluate the map on a one-meter grid at receiver height, 1.5 meters. The wall thickness and material properties in the tables are part of what makes two equally distant rooms receive different powers.</p>
   </aside>
 </section>
 
@@ -92,7 +92,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>The swarm evaluates fifty layouts over 35 iterations. We then refine the best layout for thirty steps, giving 1,780 radio-map evaluations per run. Early in the search, particles favor their own best layouts. Later they put more weight on the swarm's best. The genetic algorithm uses the same population and generation counts. The random baselines use different budgets, so the comparison reflects each method at the operating cost shown here.</p>
+    <p>The weak-location term has weight one and the floor-wide coverage term has weight 0.2. For each run, the swarm evaluates fifty layouts over 35 iterations, then Adam refines the best for thirty steps. That's 1,780 radio-map evaluations. The refined genetic search has the same count. The random baselines use 650 evaluations and weighted k-means has a different budget. Those costs matter when interpreting the method rankings.</p>
   </aside>
 </section>
 
@@ -123,7 +123,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </table>
   </div>
   <aside class="notes">
-    <p>This table gives the mean and standard deviation across five runs. With three access points and the reflector, the proposed method reaches a priority P5 of minus 57.3 dBm, or 7.7 decibels above the target. The minimum varies more from run to run because one grid cell determines it. Bold type identifies the largest mean in a column. The statistical comparisons are a separate analysis.</p>
+    <p>Read the priority P5 column in the Office table. With three access points, swarm search plus refinement gives minus 62.1 dBm without the reflector and minus 57.3 with it. Across five seeds the standard deviations are 1.0 and 1.3 dB, respectively. The minimum varies more because it depends on a single grid cell. Bold type marks the highest mean in each column. The genetic search, for example, has the best priority minimum with the reflector.</p>
   </aside>
 </section>
 
@@ -141,7 +141,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>These distributions come from one Office run. Follow the dashed line at minus 65 dBm. With the reflector, at most two percent of priority locations fall below that line, compared with about three percent without it. The minimum gains roughly nine decibels while the median falls by about one. In this run the main benefit was to the weakest locations.</p>
+    <p>These curves are for one Office seed. Read the fraction below the dashed minus 65 dBm line in the priority panels. For swarm search plus refinement, at most two percent of locations fall below target with the reflector, compared with about three percent without it. The minimum rises by roughly nine decibels even though the median falls by about one. In this layout we can see exactly which part of the distribution benefited.</p>
   </aside>
 </section>
 
@@ -165,7 +165,8 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>We can isolate the effect of local refinement by starting with swarm search in both cases. Adding gradient steps improves priority P5 by 4.1 decibels with the reflector. Without it, the estimated gain is 1.6 decibels and the confidence interval includes zero. Comparing the two refined methods asks a different question. The swarm leads the genetic algorithm by 1.6 decibels, with a p-value of 0.10 across five runs. These data give limited evidence for choosing between the two global searches.</p>
+    <p>There are two comparisons here. Keep the swarm search fixed and add refinement. With the reflector, priority P5 improves by 4.1 dB, with a 95 percent confidence interval from 2.0 to 6.2. Without the reflector, the estimated gain is 1.6 dB and the interval includes zero.</p>
+    <p>Now keep refinement and change the global search. The swarm finishes 1.6 dB ahead of the genetic algorithm at priority P5, with a p-value of 0.10. The evidence for refinement with the reflector is stronger than the evidence for a particular global search.</p>
   </aside>
 </section>
 
@@ -183,7 +184,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>In the Office, the proposed method crosses the target at two access points with a reflector and three without. Genetic search followed by refinement also reaches it with two, although its margin is only 0.2 decibels. Swarm search alone needs three in both cases. Farther to the right, both layouts meet the target. There the reflector's benefit shows up as additional signal margin.</p>
+    <p>Use the right-hand panels to find the first access-point count where priority P5 clears minus 65 dBm. In the Office, both refined global searches cross at two access points with the reflector and three without. The genetic search clears the two-AP threshold by only 0.2 dB. Swarm search alone needs three in either case. At higher counts both designs can pass, and the reflector's benefit shows up as extra margin.</p>
   </aside>
 </section>
 
@@ -204,7 +205,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>The lab floor has one large priority block near the center. With one access point, the reflector adds about three decibels to priority P5. By four access points, that advantage is below one decibel. An access point placed inside the central room can already serve much of the priority area directly. If we score the entire floor, the mean crosses the target with two access points and a reflector, or three access points alone.</p>
+    <p>Which locations we score changes the answer in HRBB. For the central priority block, one access point plus a reflector clears the target on the seed mean, with only 0.7 dB to spare. Two access points are needed without it. Across the entire floor, P5 crosses at two access points with the reflector and three without. A transmitter inside the central room already reaches much of that priority area, so the reflector's priority gain shrinks as more access points are added.</p>
   </aside>
 </section>
 
@@ -228,7 +229,7 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </ul>
   </div>
   <aside class="notes">
-    <p>The red dots are access points. Compare the two corridor junctions used by swarm search on the left with the weaker southeast rooms under weighted k-means in the third map. A distance-based method can place an access point near a room while leaving a wall between them. All four layouts have a reflector on the north wall, but they choose different positions along it.</p>
+    <p>All four Office layouts use three access points and one reflector on the north wall. In the first map, the swarm puts two transmitters near corridor junctions and the reflector toward the west. In the other maps the reflectors sit east of center. Look at the weak rooms as well as the red transmitter markers. The genetic layout leaves weaker coverage in the west, weighted k-means leaves shadows in the southeast, and the random layout leaves weaker rooms in the east.</p>
   </aside>
 </section>
 
@@ -252,7 +253,8 @@ section[data-id="bk-other-pubs"] li{margin:.32em 0;line-height:1.28}
     </div>
   </div>
   <aside class="notes">
-    <p>For the placement maps, we sum the powers of the traced paths incoherently. That approximates power averaged over small-scale fading. A narrowband receiver at one exact point can measure a higher or lower value because path phases matter there. We also model each tile as a planar reflecting facet and omit diffraction at its edges. Measurements or a full-wave model would let us quantify those approximations. Computationally, we reuse each loaded scene across many radio-map evaluations.</p>
+    <p>The placement maps add path powers incoherently. That approximates a spatial average over small-scale fading. At a particular receiver, the phases can reinforce or cancel. We also approximate each tile as a planar reflector and omit diffraction at its edges. A full-wave comparison or measurements would let us quantify both effects.</p>
+    <p>On the implementation side, loading a scene takes about a second and a map takes about a tenth of a second. Reusing each worker's scene matters when one optimization run needs 1,780 maps.</p>
   </aside>
 </section>
 

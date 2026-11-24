@@ -80,8 +80,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Suppose we're planning Wi-Fi for a building before any hardware goes in. We can choose the access point locations, where to mount one reflector, and how to orient its tiles. The tile settings stay fixed after installation.</p>
-    <p>I'll ask two questions. With the same number of access points, can the reflector improve coverage in the rooms that need it most? And if it does, can we meet the coverage target with one fewer access point?</p>
+    <p>Consider a building before the access points go in. Each additional access point needs power, cabling, and a place in the channel plan. Could a passive panel cover a difficult room by redirecting power from an access point we already plan to install? Here we set the panel's aim once, at installation.</p>
+    <p>I'll test that in two stages. At a fixed access-point count, does adding one jointly placed reflector help the weakest priority locations while maintaining coverage elsewhere? Then, if coverage improves, is the margin large enough to remove an access point and still meet the target?</p>
   </aside>
 </section>
 
@@ -107,7 +107,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>In the Office floor plan, the high-priority rooms sit along the perimeter. In the HRBB lab, they form a central block. The colored maps tell the optimizer which rooms to emphasize. We evaluate the actual signal strength there. Our target is a fifth percentile, or P5, of minus 65 dBm. That means roughly 95 percent of priority locations reach that level or higher.</p>
+    <p>For planning, we move to 5.18 gigahertz and two floor plans. In the Office, priority rooms line the perimeter. In HRBB, they form a central block. The weights tell the optimizer where service matters most. We judge the result in dBm. A fifth percentile, or P5, of minus 65 dBm means roughly 95 percent of priority locations reach that level or better.</p>
   </aside>
 </section>
 
@@ -137,8 +137,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>A candidate layout specifies where each ceiling access point sits and which way it points. It also specifies where the reflector sits on a preselected wall. We can move the panel along that wall and change its aim.</p>
-    <p>The two blue points in the diagram determine that aim. For each tile, we use one point as a virtual source and the other as a virtual target. The tile normal bisects those two directions. Six coordinates specify the orientation of all 63 tiles, so the optimizer can search over the entire panel without choosing 126 angles individually.</p>
+    <p>What can the planner move to meet that target? Each access point gets a ceiling position and a pointing direction. The reflector can move along a preselected wall. The two focal points in the drawing determine its tile angles. From a tile, draw one arrow to the virtual source and one to the virtual target. The tile normal bisects those directions just as in the hallway.</p>
+    <p>Six coordinates therefore set 126 tile angles. We also enforce access-point separation and the thirty-degree servo limits. Now we need a way to rank those feasible layouts.</p>
   </aside>
 </section>
 
@@ -170,7 +170,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Imagine a layout with strong coverage in the corridor and a weak signal in a priority room. A floor average can hide that room. We take the strongest access point at each location, convert weak power into a penalty, and use a weighted, smooth approximation to the worst penalty. A smaller, floor-wide term rewards layouts that bring more locations above the service threshold.</p>
+    <p>Imagine moving an access point from a strong corridor toward a weak priority room. To score that move, we take the strongest access point at each grid cell. The first term puts more weight on weak locations and on priority rooms. The second rewards bringing more of the whole floor above threshold. We then search for layouts that reduce this combined loss.</p>
   </aside>
 </section>
 
@@ -198,8 +198,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>The coverage landscape is not convex. Walls and doorways create many local minima, so gradient descent alone settles at a nearby minimum and usually misses the best layout. That's why we start with a global search.</p>
-    <p>We use particle swarm optimization, or PSO. Each particle represents a complete layout, and a ray-traced power map gives it a score. Then we take the best layout and refine it with Adam, using gradients through the ray tracer.</p>
+    <p>A small change in antenna direction might help a room. Moving the access point to a different doorway could help much more, but a local gradient may never lead us there. That's why we use two phases.</p>
+    <p>Particle swarm optimization, or PSO, first compares complete layouts in different parts of the floor plan. We take the best layout it finds and refine it with Adam, following gradients through the ray tracer. The animation shows what changes when we hand one layout from the first phase to the second.</p>
   </aside>
 </section>
 
@@ -211,8 +211,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <p class="foot gray center">Schematic floorplan and toy propagation model, not simulation output. Each particle = one layout: three APs, reflector position, focal target.</p>
   </div>
   <aside class="notes">
-    <p>Follow one color on the floor plan. Its three access point markers belong to one candidate layout, together with a reflector position and a focal target. The hollow rings mark that particle's best positions so far. The large access point symbols show the swarm's best layout, and the heat map belongs to that layout.</p>
-    <p>When the second phase lights up, only the best layout is being refined. Watch the small movements on the map and the objective on the right. This animation uses a simplified propagation model to show the search process.</p>
+    <p>Follow the three markers of one color. Together with a reflector position and focal target, they're one candidate layout. In the swarm phase several layouts move at once. Each particle draws on its own best layout and the best the swarm has found. The heat map belongs to that best layout.</p>
+    <p>At the phase change, the other candidates drop away. Small adjustments refine the remaining layout. This illustration uses a simplified floor plan and propagation model. For the actual comparison, every method is evaluated on the two building models.</p>
   </aside>
 </section>
 
@@ -252,7 +252,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>We test both floor plans with one to seven access points, with and without the reflector, using five random seeds per configuration. The comparisons isolate different choices. A genetic algorithm replaces the swarm. Swarm search alone removes refinement. Weighted k-means places access points by distance and priority, ignoring walls. We also compare random layouts with and without refinement.</p>
+    <p>We test one to seven access points per building, with and without a reflector, across five seeds. Swarm search alone isolates refinement. A genetic algorithm tests the choice of global search. Weighted k-means and random layouts give us simpler comparisons. We record mean, fifth percentile, and minimum signal strength in priority rooms and across the floor. First, let's follow one Office run.</p>
   </aside>
 </section>
 
@@ -281,8 +281,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>This is one run in the Office with three access points and a reflector. On the left, a lower objective is better. The genetic algorithm leads early, then levels off. The swarm catches it around iteration 36.</p>
-    <p>On the right, higher is better because the vertical axis is the fifth percentile of received power. At the dotted line, the swarm search ends. Refining its best layout lifts P5 from about minus 61 to minus 57 dBm. The flat swarm-only trace shows where the same search would have stopped.</p>
+    <p>The two plots follow the same run with three access points and a reflector. On the left, lower loss is better. The genetic search leads early, then levels off. The swarm plus refinement overtakes it around iteration 36.</p>
+    <p>On the right, higher is better because we're looking at signal strength. At the dotted line, swarm search ends. Refining its best layout raises priority P5 from about minus 61 to minus 57 dBm. That isolates refinement in one run. To isolate the reflector itself, let's compare layouts with and without it across all five seeds.</p>
   </aside>
 </section>
 
@@ -325,9 +325,9 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="takeaway">The gain is largest at the weakest locations, and how much of it is realized depends on the planning method.</div>
   </div>
   <aside class="notes">
-    <p>Start with the priority rooms in the top half of the table. We keep three access points and average over five runs. With the access points alone, the fifth percentile is minus 62.1 dBm. When we optimize the reflector and access points together, it rises to minus 57.3. The gain is 4.8 decibels, with a 95 percent confidence interval from 3.1 to 6.5.</p>
-    <p>The weakest priority location gains even more, about 9.5 decibels. The floor-wide statistics below also improve. So the benefit reaches the locations we set out to help.</p>
-    <p>The bars on the right ask a different question. How much does the same reflector help under different planning methods? The two methods combining global search and gradient refinement show the largest gains. With five runs, the data don't establish a difference between those two methods.</p>
+    <p>Start with the priority P5 row. We use the same planning method and keep three access points in both columns. Adding the jointly optimized reflector raises P5 from minus 62.1 to minus 57.3 dBm. That's a 4.8 dB gain across five seeds, with a 95 percent confidence interval of 3.1 to 6.5 dB. The weakest priority location gains even more, 9.5 dB. The whole-floor statistics below improve as well.</p>
+    <p>The bars on the right show why placement matters. With weighted k-means the same reflector adds only 1.3 dB to priority P5. Both global searches followed by refinement realize larger gains, and the five runs leave their relative ranking uncertain.</p>
+    <p>That answers the fixed-count question. Both three-access-point layouts already clear minus 65 dBm. The practical question is what happens if we take one access point away.</p>
   </aside>
 </section>
 
@@ -350,7 +350,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>The dashed line is our coverage target. In the Office, follow the swarm-plus-refinement curve across the two panels. Without the reflector it takes three access points to cross that line. With the reflector, two are enough on average. At two access points, four of five runs met the target with the reflector. One of five met it without.</p>
+    <p>Follow the swarm-plus-refinement curve in each Office plot. Without the reflector the mean crosses minus 65 dBm at three access points. With the reflector it crosses at two, with 2.1 dB to spare. At two access points, four of five runs passed with the reflector and one passed without. Does that shift carry over to the lab floor?</p>
   </aside>
 </section>
 
@@ -375,7 +375,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="takeaway">In both buildings, adding the reflector lets <b>one fewer AP</b> meet the coverage target (seed mean).</div>
   </div>
   <aside class="notes">
-    <p>In the lab, one access point plus the reflector reaches minus 64.3 dBm on average. That's just 0.7 decibels above the target. Without the reflector, the mean crosses the line at two access points. At one access point, three of five runs succeeded with the reflector and none without. With five runs, that difference in success counts is statistically inconclusive. Still, in both buildings the reflector saves one access point.</p>
+    <p>In HRBB the seed mean crosses the same target with one access point and a reflector, or two access points alone. The margin is only 0.7 dB. At one access point, three of five runs passed with the reflector and none without. The success counts are statistically inconclusive. To see why the layout matters, let's return to the Office maps.</p>
   </aside>
 </section>
 
@@ -404,8 +404,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="transition"><div class="ans"><b>Answered (WHERE):</b> joint AP and reflector planning met the priority target with one fewer AP in both layouts (seed mean, small margins).</div><div class="arrow"></div><div class="opens"><b>Opens (WHICH):</b> how do placement and operation fit together, and which method fits which problem? &rarr; conclusions.</div></div>
   </div>
   <aside class="notes">
-    <p>The red dots show where the access points ended up. In the left map, from our method, two sit near corridor junctions, where paths can reach several rooms through doorways. Our method scores every candidate layout with the ray tracer, so it sees the walls.</p>
-    <p>The right map uses weighted k-means, which uses only distance and priority and ignores walls. A nearby access point can still be on the wrong side of a wall, as the darker southeast rooms illustrate.</p>
+    <p>Both Office maps have three access points and a reflector on the north wall. Follow the red markers on the left. Swarm search with refinement places two access points near corridor junctions, where doorways offer paths into several rooms. On the right, weighted k-means can put an access point close to a priority room with a wall still in the way. Look at the darker southeast rooms.</p>
+    <p>That explains why the building model matters at installation. We can now put placement back alongside the decision about how to steer.</p>
   </aside>
 </section>
 
@@ -419,8 +419,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
       <div class="which-ov"><div>Geometry: static user</div><div>RL: run-time control</div><div>PSO+GD: placement</div></div></figure>
   </div>
   <aside class="notes">
-    <p>Each method answers a different engineering question. At the bottom, geometry gives the tile angles for a stationary user. On the right, multi-agent RL learns where each segment should aim as its assigned user moves. Hierarchical MARL also learns who each segment should serve. With four users, that improved mean received power by nearly six decibels over a fixed assignment.</p>
-    <p>On the left, we plan the installation. Particle swarm optimization searches candidate layouts, then gradient descent refines the best one. In both buildings, adding the reflector let us meet the coverage target with one fewer access point, averaged across five runs.</p>
+    <p>Read this diagram as an engineer making two decisions. Before installation, on the left, use the building model to search for access-point and reflector locations, then refine the best layout. After installation, on the right, the decision depends on who is moving through the room. A segment can learn where to aim, and an allocator can learn when to hand a user to another segment.</p>
+    <p>Underneath both is the same geometric operation. Given a focal point, turn the tiles toward it. The dashed arrow points to future work. We could use operating experience to revisit the original plan.</p>
   </aside>
 </section>
 
@@ -438,9 +438,9 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="takeaway">In ray-traced simulations, focal points let us use spatial information for both placement and steering, without estimating a channel for every tile.</div>
   </div>
   <aside class="notes">
-    <p>I'll return to the user around the corner. If we know where that user is, the bisector rule tells us how to orient a tile. A focal point lets us use that same construction even when the best place to aim is a decision we need to learn.</p>
-    <p>With several users, we can learn a local steering policy for each segment. When the segments see the room from different angles, it also pays to learn their assignments. Before installation, when the building is known and the mounting sites are still open, we can optimize the layout directly.</p>
-    <p>My main conclusion is that spatial information can guide both decisions. In our simulations, a building model tells us where to install the hardware, and user positions tell us where to steer it. Focal points connect those two tasks. With an accurate model and reliable positions, we can do both without estimating a separate channel for every tile.</p>
+    <p>Think back to the person walking around a corner. Why use spatial information? A position estimate lets the controller respond without sounding a separate channel for every tile. That makes localization accuracy important, just as planning depends on the quality of the building model.</p>
+    <p>What connects the studies is the focal point, the place we ask the tiles to aim. For one stationary user, geometry gives us the angles directly. How do we serve several moving users? We learn where each segment should aim, then learn which user it should serve when different corners offer different paths.</p>
+    <p>Where we put the hardware matters just as much. In both simulated buildings the jointly planned reflector met the priority target with one fewer access point on average across seeds. I'd use geometry to aim at a known target or give a learner a head start. I'd use learning for repeated steering and direct optimization for installation. The next step is to test those ideas on a physical panel.</p>
   </aside>
 </section>
 
@@ -463,8 +463,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div></div>
   </div>
   <aside class="notes">
-    <p>FORMULA3 is a funded project that gives us an opportunity to take this work from simulation into a physical room. It's a collaboration across five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project combines electronic reconfigurable surfaces with mechanically steerable metal reflectors.</p>
-    <p>The hexagonal panel on the right is where this dissertation connects to that effort. We already have a way to convert a desired focal point into tile orientations. A physical panel lets us test how well that geometry predicts the signal in a room.</p>
+    <p>FORMULA3 gives us a setting for that next step. It's a collaboration among five universities in the United States and Finland, supported by the National Science Foundation and the Research Council of Finland. The project asks how AI can manage wireless resources in the FR3 frequency range, when parts of the environment can be reconfigured.</p>
+    <p>The connection to this dissertation is the panel on the right. The project combines electronic surfaces with mechanical reflector arrays. We can bring our tile model and focal-point controller to that effort. Here's the physical device the project will use.</p>
   </aside>
 </section>
 <section data-id="formula3-device" data-min="0.5">
@@ -488,7 +488,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>In the front photo you can see the nineteen hexagonal metal tiles. In the back photo you can see the wiring for the servos that turn them. The controller is mounted on the stand, so the array can be moved around a room. This is the prototype that FORMULA3 will use to test ideas evaluated here in simulation.</p>
+    <p>In the front photo you can see nineteen hexagonal metal tiles. In the back photo you can see the servos and wiring that turn them. The controller and panel share a rolling stand, so we can try different positions in a room. That makes both sides of the dissertation testable on the same device. Here's how the work maps onto the project.</p>
   </aside>
 </section>
 
@@ -509,8 +509,8 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     <div class="foot gray center" style="margin-top:12px">Thrusts as stated by the project; the project's own results are future work and are not reported here.</div>
   </div>
   <aside class="notes">
-    <p>The four rows show what the project can build on. The ray-tracing pipeline can generate channel data for scenes with metallic reflectors. The learned controllers can use that data to study when to redirect a beam or reassign a user. The localization experiments tell us what accuracy to aim for when sensing supplies the user positions.</p>
-    <p>The final row brings those pieces into a room. With a movable panel, we can test a planned mounting location and measure what happens when the controller actually turns the tiles.</p>
+    <p>Read each row from work we've completed on the left to a project task on the right. The ray tracer can generate channel data for rooms with metallic reflectors. The controllers give the resource-management team a starting point for steering beams and reassigning users. The position-noise results tell the sensing team how accurately it may need to locate people.</p>
+    <p>Finally, we can take a layout chosen in simulation, move the prototype there, and measure the result. Those measurements are future work. The papers that follow document the studies I've presented today.</p>
   </aside>
 </section>
 
@@ -528,7 +528,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </ol>
       </div>
   <aside class="notes">
-    <p>The geometric focusing study appeared at the 2024 Vehicular Technology Conference. Our multi-agent control study appeared in IEEE Transactions on Machine Learning in Communications and Networking. The hierarchical work also has a conference paper accepted at GLOBECOM. The slide lists the related submissions under review, including the joint placement study.</p>
+    <p>The first paper, at VTC in 2024, established the geometric foundation. The journal article <i>Signal Whisperers</i> and the subsequent multi-agent papers develop the control work. The hierarchy also led to a paper accepted at GLOBECOM 2026. The joint-placement paper is under review. Alongside these six dissertation papers, I contributed to several collaborations in other areas.</p>
   </aside>
 </section>
 
@@ -547,7 +547,7 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </ol>
   </div>
   <aside class="notes">
-    <p>During my Ph.D., I also contributed to eight papers beyond the reflector work. They include scientific data compression, machine-learning accelerators, and digital twins for first responders.</p>
+    <p>These eight papers grew out of work on scientific data compression, machine-learning accelerators, battery materials, and public-safety applications. I'd like to close by thanking the people who made this work possible.</p>
   </aside>
 </section>
 
@@ -569,6 +569,6 @@ section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon)
     </div>
   </div>
   <aside class="notes">
-    <p>Thank you to my committee, especially Professors Ekin and Tao, and to my collaborators, Mostafa Ibrahim and Oguz Bedir. Thank you all for your time. I'd be happy to take your questions.</p>
+    <p>Thank you to Professors Ekin, Tao, Serpedin, and Menon, to my collaborators Mostafa Ibrahim and Oguz Bedir, and to our DOE and NSF sponsors. Thank you all for listening. I welcome your questions.</p>
   </aside>
 </section>
