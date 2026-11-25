@@ -277,7 +277,7 @@ If we reassign every slot, the local agent can experience a new user as a sudden
 
 ## 41. What allocation buys, and what it cannot fix  [0.5 min | 27:45-28:15]
 
-Every ten slots, the high-level controller decides who each segment serves. While that assignment holds, each low-level controller adjusts its segment's focal point every slot to follow the moving user. For four users, learning the assignment gained nearly six decibels over a fixed split. Both approaches take the mounting sites as given. What if we could choose where to install the panels?
+Knowing where the users are lets us decide who each segment serves and keep its beam on that user as they move. The high-level controller revisits the assignment periodically. In between, the low-level controllers adjust their focal points every slot. Neither decision requires a channel estimate for each element. So far the mounting sites were fixed. What if we could choose them?
 
 ## 42. Can a passive reflector replace an access point?  [0.75 min | 28:15-29:00]
 

@@ -1155,13 +1155,13 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   <h2 class="title">What allocation buys, and what it cannot fix</h2>
   <div class="body">
     <ul class="small">
-      <li>The <b>high-level controller</b> assigns each reflector segment to a user <b>every $T$ slots</b> (10 slots in this experiment).</li>
+      <li>The <b>high-level controller</b> assigns each reflector segment to a user <b>every $T$ slots</b>.</li>
       <li>The <b>low-level controllers</b> adjust their segments' focal points <b>every slot</b> to focus each reflected beam on its assigned user.</li>
     </ul>
-    <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> The learned controllers use positions alone to decide which user each reflector segment serves and where to aim its beam. For four moving users in simulation, adapting the assignments raised mean received power by <b>5.84&nbsp;dB</b> over a fixed split.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
+    <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> User localization lets us assign each reflector segment to a user and steer its beam without estimating CSI for each element.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
   </div>
   <aside class="notes"><p class="timing"><b>[0.5 min | 27:45&ndash;28:15]</b></p>
-    <p>Every ten slots, the high-level controller decides who each segment serves. While that assignment holds, each low-level controller adjusts its segment's focal point every slot to follow the moving user. For four users, learning the assignment gained nearly six decibels over a fixed split. Both approaches take the mounting sites as given. What if we could choose where to install the panels?</p>
+    <p>Knowing where the users are lets us decide who each segment serves and keep its beam on that user as they move. The high-level controller revisits the assignment periodically. In between, the low-level controllers adjust their focal points every slot. Neither decision requires a channel estimate for each element. So far the mounting sites were fixed. What if we could choose them?</p>
   </aside>
 </section>
 
@@ -1216,7 +1216,7 @@ section[data-id="formula3-device"] .block li{margin:.45em 0}
 section[data-id="thanks"] .qq{font-size:66px;font-weight:700;color:var(--maroon);text-align:center;line-height:1.1;margin-bottom:28px}
 </style>
 
-<section class="divider" data-id="div-place" data-num="6" data-title="Joint AP and Reflector Placement" data-part="WHERE" data-question="Where should the access points and the reflector be installed?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; submitted to <i>IEEE Open J. Commun. Soc.</i>, 2026 (under review).</p></div><aside class="notes"></aside></section>
+<section class="divider" data-id="div-place" data-num="6" data-title="Joint Access Point and Reflector Placement" data-part="WHERE" data-question="Where should the access points and the reflector be installed?"><div class="dpapers"><div class="dph">Based on</div><p><span class="dme">H. Le</span>, M. Ibrahim, J. Tao, and S. Ekin, &ldquo;Can a passive reflector replace an access point? Joint indoor placement of access points and reflectors via differentiable ray tracing,&rdquo; submitted to <i>IEEE Open J. Commun. Soc.</i>, 2026 (under review).</p></div><aside class="notes"></aside></section>
 
 <!-- old 38 -->
 <section data-id="replace-ap" data-min="0.75">

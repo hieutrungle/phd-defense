@@ -578,12 +578,12 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   <h2 class="title">What allocation buys, and what it cannot fix</h2>
   <div class="body">
     <ul class="small">
-      <li>The <b>high-level controller</b> assigns each reflector segment to a user <b>every $T$ slots</b> (10 slots in this experiment).</li>
+      <li>The <b>high-level controller</b> assigns each reflector segment to a user <b>every $T$ slots</b>.</li>
       <li>The <b>low-level controllers</b> adjust their segments' focal points <b>every slot</b> to focus each reflected beam on its assigned user.</li>
     </ul>
-    <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> The learned controllers use positions alone to decide which user each reflector segment serves and where to aim its beam. For four moving users in simulation, adapting the assignments raised mean received power by <b>5.84&nbsp;dB</b> over a fixed split.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
+    <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> User localization lets us assign each reflector segment to a user and steer its beam without estimating CSI for each element.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
   </div>
   <aside class="notes">
-    <p>Every ten slots, the high-level controller decides who each segment serves. While that assignment holds, each low-level controller adjusts its segment's focal point every slot to follow the moving user. For four users, learning the assignment gained nearly six decibels over a fixed split. Both approaches take the mounting sites as given. What if we could choose where to install the panels?</p>
+    <p>Knowing where the users are lets us decide who each segment serves and keep its beam on that user as they move. The high-level controller revisits the assignment periodically. In between, the low-level controllers adjust their focal points every slot. Neither decision requires a channel estimate for each element. So far the mounting sites were fixed. What if we could choose them?</p>
   </aside>
 </section>
