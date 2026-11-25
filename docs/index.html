@@ -1011,10 +1011,8 @@ section[data-id="rob-size"] .midnum{font-size:25px}
   <h2 class="title">What allocation buys, and what it cannot fix</h2>
   <div class="body">
     <ul class="small">
-      <li>Allocator every $T$ slots, decentralized focusing every slot; <b>run time:</b> positions only, <b>training:</b> received power as the reward</li>
-      <li>Choosing the assignment within this scene: $-72.46\to-66.62$&nbsp;dBm vs. the fixed split (4 users); the geometric prior helps only as a warm start</li>
-      <li>Larger arrays at the same site saturate: 2.2&times; tiles &rarr; only &asymp;1.3&nbsp;dB median</li>
-      <li>The controllers take the AP and array sites as given, so their benefit is bounded by that geometry</li>
+      <li>The <b>high-level controller</b> assigns each reflector segment to a user <b>every $T$ slots</b> (10 slots in this experiment).</li>
+      <li>The <b>low-level controllers</b> adjust their segments' focal points <b>every slot</b> to focus each reflected beam on its assigned user.</li>
     </ul>
     <div class="transition" style="margin-top:28px"><div class="ans"><b>Answered (HOW):</b> learning the assignment raises 4-user mean RSSI from $-72.46$&nbsp;dBm (fixed split) to $-66.62$&nbsp;dBm, +1.88&nbsp;dB over the best geometric heuristic.</div><div class="arrow"></div><div class="opens"><b>Opens (WHERE):</b> more tiles at a fixed site saturate: where should the AP and the arrays be installed? &rarr; placement.</div></div>
   </div>

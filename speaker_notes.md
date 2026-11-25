@@ -44,7 +44,7 @@ Total: 40.25 min, 60 timed slides (window 40-45 min, pace <= 140 wpm).
 | 38 | Deployment with moving users (4 users) | 1.25 | 25:30-26:45 | 142 | 114 |
 | 39 | Where the energy goes (4 users) | 0.5 | 26:45-27:15 | 62 | 124 |
 | 40 | How often to reallocate? An interior optimum at T=10 slots (4 users) | 0.5 | 27:15-27:45 | 58 | 116 |
-| 41 | What allocation buys, and what it cannot fix | 0.5 | 27:45-28:15 | 64 | 128 |
+| 41 | What allocation buys, and what it cannot fix | 0.5 | 27:45-28:15 | 62 | 124 |
 | 42 | Can a passive reflector replace an access point? | 0.75 | 28:15-29:00 | 97 | 129 |
 | 43 | Two floorplans with operator-defined priority maps | 0.5 | 29:00-29:30 | 62 | 124 |
 | 44 | Design vector: AP poses, wall position, focal points | 0.75 | 29:30-30:15 | 93 | 124 |
@@ -277,7 +277,7 @@ If we reassign every slot, the local agent can experience a new user as a sudden
 
 ## 41. What allocation buys, and what it cannot fix  [0.5 min | 27:45-28:15]
 
-With ten slots between assignments, learning who serves whom gained nearly six decibels over a fixed split for four users. In a separate two-user test, more than doubling the tile count at the same site gained only about 1.3 dB at the median. So far we've asked how to use a panel where it stands. What if we could choose where to install it?
+Every ten slots, the high-level controller decides who each segment serves. While that assignment holds, each low-level controller adjusts its segment's focal point every slot to follow the moving user. For four users, learning the assignment gained nearly six decibels over a fixed split. Both approaches take the mounting sites as given. What if we could choose where to install the panels?
 
 ## 42. Can a passive reflector replace an access point?  [0.75 min | 28:15-29:00]
 
